@@ -1,10 +1,6 @@
 # shome-components
 
 <p align="center">
-  <img src="https://via.placeholder.com/1000x300?text=shome-components+Preview" alt="shome-components preview" />
-</p>
-
-<p align="center">
   <a href="#installation"><img alt="npm" src="https://img.shields.io/badge/install-npm-green" /></a>
   <img alt="types" src="https://img.shields.io/badge/TypeScript-ready-blue" />
   <img alt="css-modules" src="https://img.shields.io/badge/CSS%20Modules-yes-purple" />
@@ -14,7 +10,6 @@
 A small, modern **React + TypeScript** component library with **CSS Variable** theming.
 This README documents the **Button**, **Cards**, and **Tooltip** components in detail, including props, composition, and theming tokens.
 
-> Language: The docs are in **English** to make API naming consistent. If you prefer German docs, say the word and I’ll localize them.
 
 ---
 
