@@ -1,0 +1,173 @@
+.string-input-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: var(--border-radius);
+    background: transparent;
+    outline: none !important;
+}
+
+.string-input {
+    flex: 1;
+    padding: var(--spacing-sm);
+    padding-right: 2.5rem;
+    border: none;
+    font-size: var(--font-size-base);
+    background: var(--color-background);
+    border: 2px solid var(--color-gray-light);
+    color: var(--color-text);
+    outline: none;
+    border-radius: var(--border-radius);
+    z-index: 1;
+}
+
+.string-input:focus {
+    border-color: var(--color-secondary-light);
+    outline: none;
+    box-shadow: var(--shadow-medium);
+}
+
+.string-input-label {
+    z-index: 99;
+    position: absolute;
+    left: calc(var(--spacing-sm) - 5px);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--font-size-base);
+    color: var(--color-secondary-light);
+    padding: 0 var(--spacing-xs);
+    transition: all var(--transition-normal);
+}
+
+.string-input-label-icon-left {
+    z-index: 99;
+    position: absolute;
+    left: calc(var(--spacing-sm) - 5px);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--font-size-base);
+    color: var(--color-secondary-light);
+    padding: 0 var(--spacing-xs);
+    transition: all var(--transition-normal);
+}
+
+.string-input:focus+.string-input-label,
+.string-input:not(:placeholder-shown)+.string-input-label {
+    top: -10px;
+    font-size: var(--font-size-md);
+    color: var(--color-secondary-light);
+    border-radius: var(--border-radius-small);
+    padding: 0 var(--spacing-xs);
+    left: 0px;
+    z-index: 3;
+}
+
+.string-input:focus+.string-input-label-icon-left,
+.string-input:not(:placeholder-shown)+.string-input-label-icon-left {
+    top: -10px;
+    font-size: var(--font-size-md);
+    color: var(--color-secondary-light);
+    border-radius: var(--border-radius-small);
+    left: -30px;
+    z-index: 3;
+}
+
+/* Icons */
+.icon-left,
+.icon-right {
+    z-index: 99;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-secondary-light);
+    font-size: 1.2em;
+}
+
+.icon-left {
+    left: var(--spacing-md);
+}
+
+.icon-right {
+    right: var(--spacing-md);
+    cursor: pointer;
+    z-index: 5;
+}
+
+.no-border .string-input {
+    border: none;
+    border-bottom: 2px solid var(--color-secondary);
+    border-radius: 0;
+    background-color: var(--color-background);
+}
+
+.no-border .string-input:focus-visible {
+    outline: none !important;
+    box-shadow: none;
+}
+
+/* Live-Invalid-State für E-Mail */
+.string-input.invalid {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 .2rem rgba(var(--color-danger-rgb), .15);
+}
+
+.string-input.invalid:focus {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 .2rem rgba(var(--color-danger-rgb), .25);
+}
+
+.no-border .string-input.invalid {
+    border-bottom-color: var(--color-danger);
+}
+
+.string-input.invalid~.icon-right,
+.string-input.invalid~.icon-left {
+    color: var(--color-danger);
+}
+
+.string-input:disabled {
+    border-color: var(--color-gray-light);
+    color: var(--color-gray);
+    background-color: var(--color-background);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.string-input:disabled+.string-input-label,
+.string-input:disabled+.string-input-label-icon-left {
+    color: var(--color-gray-light);
+}
+
+.no-border .string-input:disabled {
+    border-bottom-color: var(--color-gray-light);
+}
+
+.is-disabled .icon-left,
+.is-disabled .icon-right {
+    color: var(--color-gray-light);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+
+.number-stepper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.number-stepper button {
+    color: var(--color-gray);
+    border: none;
+    background: transparent;
+    padding: 0;
+    line-height: 1;
+    cursor: pointer;
+    font-size: 0.7em;
+}
+
+.number-stepper button:focus-visible {
+    outline: 2px solid var(--color-secondary-light);
+    border-radius: 4px;
+}

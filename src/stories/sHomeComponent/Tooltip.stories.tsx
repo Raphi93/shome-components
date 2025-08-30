@@ -12,7 +12,7 @@ const placements: Placement[] = [
 ];
 
 const meta: Meta<typeof Tooltip> = {
-  title: "sHomeComponents/Tooltip",
+  title: "sHome Components/Tooltip",
   component: Tooltip,
   tags: ["autodocs"],
   parameters: { layout: "centered" },

@@ -14,7 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const meta: Meta<typeof Button> = {
-  title: 'sHomeComponents/Button',
+  title: 'sHome Components/Button',
   component: Button,
   tags: ['autodocs'],
   parameters: {
