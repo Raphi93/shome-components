@@ -51,7 +51,7 @@ This README documents the **Button**, **Cards**, and **Tooltip** components in d
 ## Installation
 
 ```bash
-npm i shome-components
+npm i @raphi93/shome-components
 # Icons (optional, used by Button/CardIcon examples)
 npm i @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/react-fontawesome
 # Tooltip peer
