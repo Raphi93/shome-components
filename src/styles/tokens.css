@@ -1,0 +1,119 @@
+/* Public design tokens for shome-components (defaults) */
+:root {
+    /* geometry */
+    --border-radius: 12px;
+
+    /* shadows */
+    --color-box-shadow: rgba(29, 34, 41, 0.1);
+
+    /* typography */
+    --font-size-smaller: 0.75rem;
+
+    /* spacing */
+    --spacing: .5rem;
+
+    /* base */
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-gray-light: #a9b3c0;
+    --color-gray: #6b7280;
+    --color-gray-dark: #1d2229;
+
+    /* primary / secondary */
+    --color-primary: #393c40;
+    --color-primary-dark: #303234;
+    --color-primary-rgb: 57, 60, 64;
+
+    --color-secondary: #0f766e;
+    --color-secondary-dark: #0a544e;
+    --color-secondary-rgb: 15, 118, 110;
+
+    /* states */
+    --color-success: #198754;
+    --color-success-dark: #166e3a;
+    --color-success-rgb: 25, 135, 84;
+
+    --color-danger: #dc3545;
+    --color-danger-dark: #b02a37;
+    --color-danger-rgb: 220, 53, 69;
+
+    --color-warning: #ffc107;
+    --color-warning-dark: #cc9a06;
+    --color-warning-rgb: 255, 193, 7;
+
+    --color-info: #0d6efd;
+    --color-info-dark: #0b5ed7;
+    --color-info-rgb: 13, 110, 253;
+
+    /* ---------------- Buttons: Primary ---------------- */
+    --button-color: var(--color-white, #ffffff);
+    --button-color-hover: var(--color-white, #ffffff);
+    --button-background-color: var(--color-primary, #393c40);
+    --button-background-color-hover: var(, #0a544e);
+
+    /* Primary Light */
+    --button-color-light: var(--color-primary-dark, #303234);
+    --button-color-hover-light: var(--color-white, #ffffff);
+    --button-background-color-light-rgb: var(--color-primary-rgb, 57, 60, 64);
+    --button-background-color-hover-light: var(--color-primary, #393c40);
+
+    /* ---------------- Buttons: Secondary ---------------- */
+    --button-color-secondary: var(--color-white, #ffffff);
+    --button-color-hover-secondary: var(--color-white, #ffffff);
+    --button-background-color-secondary: var(--color-secondary, #0f766e);
+    --button-background-color-hover-secondary: var(--color-primary, #393c40);
+
+    /* Secondary Light */
+    --button-color-light-secondary: var(--color-secondary-dark, #0a544e);
+    --button-color-hover-light-secondary: var(--color-white, #ffffff);
+    --button-background-color-light-rgb-secondary: var(--color-secondary-rgb, 15, 118, 110);
+    --button-background-color-hover-light-secondary: var(--color-secondary, #0f766e);
+
+    /* ---------------- Buttons: Success ---------------- */
+    --button-color-success: var(--color-white, #ffffff);
+    --button-color-hover-success: var(--color-white, #ffffff);
+    --button-background-color-success: var(--color-success, #198754);
+    --button-background-color-hover-success: var(--color-success-dark, #166e3a);
+
+    /* Success Light */
+    --button-color-light-success: var(--color-success-dark, #166e3a);
+    --button-color-hover-light-success: var(--color-white, #ffffff);
+    --button-background-color-light-rgb-success: var(--color-success-rgb, 25, 135, 84);
+    --button-background-color-hover-light-success: var(--color-success, #198754);
+
+    /* ---------------- Buttons: Warning ---------------- */
+    --button-color-warning: var(--color-white, #ffffff);
+    --button-color-hover-warning: var(--color-white, #ffffff);
+    --button-background-color-warning: var(--color-warning, #ffc107);
+    --button-background-color-hover-warning: var(--color-warning-dark, #cc9a06);
+
+    /* Warning Light */
+    --button-color-light-warning: var(--color-warning-dark, #cc9a06);
+    --button-color-hover-light-warning: var(--color-white, #ffffff);
+    --button-background-color-light-rgb-warning: var(--color-warning-rgb, 255, 193, 7);
+    --button-background-color-hover-light-warning: var(--color-warning, #ffc107);
+
+    /* ---------------- Buttons: Danger ---------------- */
+    --button-color-danger: var(--color-white, #ffffff);
+    --button-color-hover-danger: var(--color-white, #ffffff);
+    --button-background-color-danger: var(--color-danger, #dc3545);
+    --button-background-color-hover-danger: var(--color-danger-dark, #b02a37);
+
+    /* Danger Light */
+    --button-color-light-danger: var(--color-danger-dark, #b02a37);
+    --button-color-hover-light-danger: var(--color-white, #ffffff);
+    --button-background-color-light-rgb-danger: var(--color-danger-rgb, 220, 53, 69);
+    --button-background-color-hover-light-danger: var(--color-danger, #dc3545);
+
+    /* ---------------- Buttons: Info ---------------- */
+    --button-color-info: var(--color-white, #ffffff);
+    --button-color-hover-info: var(--color-white, #ffffff);
+    --button-background-color-info: var(--color-info, #0d6efd);
+    --button-background-color-hover-info: var(--color-info-dark, #0b5ed7);
+
+    /* Info Light */
+    --button-color-light-info: var(--color-info, #0d6efd);
+    --button-color-hover-light-info: var(--color-white, #ffffff);
+    --button-background-color-light-rgb-info: var(--color-info-rgb, 13, 110, 253);
+    --button-background-color-hover-light-info: var(--color-info, #0d6efd);
+}
