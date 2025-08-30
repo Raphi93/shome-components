@@ -1,7 +1,35 @@
 /* Public design tokens for shome-components (defaults) */
 :root {
+
+    /* === Minimal Reset für Buttons & Links === */
+
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"] {
+        -webkit-appearance: none;
+        appearance: none;
+        font: inherit;
+        border: none;
+        line-height: inherit;
+        text-align: inherit;
+    }
+
+    button:not(:disabled),
+    input[type="button"]:not(:disabled),
+    input[type="submit"]:not(:disabled),
+    input[type="reset"]:not(:disabled) {
+        cursor: pointer;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    font-family: 'Arial', Tahoma, Geneva, Verdana, sans-serif;
+
     /* geometry */
-    --border-radius: 12px;
+    --border-radius: 8px;
 
     /* shadows */
     --color-box-shadow: rgba(29, 34, 41, 0.1);
@@ -22,34 +50,46 @@
     /* primary / secondary */
     --color-primary: #393c40;
     --color-primary-dark: #303234;
-    --color-primary-rgb: 57, 60, 64;
+    --color-primary-rgb: 57,
+    60,
+    64;
 
     --color-secondary: #0f766e;
     --color-secondary-dark: #0a544e;
-    --color-secondary-rgb: 15, 118, 110;
+    --color-secondary-rgb: 15,
+    118,
+    110;
 
     /* states */
     --color-success: #198754;
     --color-success-dark: #166e3a;
-    --color-success-rgb: 25, 135, 84;
+    --color-success-rgb: 25,
+    135,
+    84;
 
     --color-danger: #dc3545;
     --color-danger-dark: #b02a37;
-    --color-danger-rgb: 220, 53, 69;
+    --color-danger-rgb: 220,
+    53,
+    69;
 
     --color-warning: #ffc107;
     --color-warning-dark: #cc9a06;
-    --color-warning-rgb: 255, 193, 7;
+    --color-warning-rgb: 255,
+    193,
+    7;
 
     --color-info: #0d6efd;
     --color-info-dark: #0b5ed7;
-    --color-info-rgb: 13, 110, 253;
+    --color-info-rgb: 13,
+    110,
+    253;
 
     /* ---------------- Buttons: Primary ---------------- */
     --button-color: var(--color-white, #ffffff);
     --button-color-hover: var(--color-white, #ffffff);
     --button-background-color: var(--color-primary, #393c40);
-    --button-background-color-hover: var(, #0a544e);
+    --button-background-color-hover: var(--color-secondary, #0a544e);
 
     /* Primary Light */
     --button-color-light: var(--color-primary-dark, #303234);

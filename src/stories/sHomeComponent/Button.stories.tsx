@@ -14,7 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Button',
+  title: 'sHomeComponents/Button',
   component: Button,
   tags: ['autodocs'],
   parameters: {
@@ -178,7 +178,6 @@ export const WithExpanderControlled: Story = {
         expanderValue={open}
         onClick={() => setOpen((v) => !v)}
         text={open ? 'Hide details' : 'Show details'}
-        icon={faChevronDown}
       />
     );
   },

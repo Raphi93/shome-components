@@ -107,48 +107,47 @@
 }
 
 
-
-.iconCard{
+.icon-card{
     color: var(--color-primary, #393c40);
 }
 
-.imageCard{
+.image-card{
     object-fit: fill;
 }
 
-.red{
+.red-card{
     color: var(--color-negative, #dc3545);
 }
 
-.green{
+.green-card{
     color: var(--color-positive, #198754);
 }
 
-.blue{
+.blue-card{
     color: var(--color-info, #0d6efd);
 }
 
-.orange{
+.orange-card{
     color: var(--color-warning, #ffc107);
 }
 
-.yellow{
+.yellow-card{
     color: var(--color-yellow, #f59e0b);
 }
 
-.secondary{
+.secondary-card{
     color: var(--color-secondary, #0f766e);
 }
 
-.primary{
+.primary-card{
     color: var(--color-primary, #393c40);
 }
 
-.black{
+.black-card{
     color: var(--color-black, #000000);
 }
 
-.white{
+.white-card{
     color: var(--color-white, #ffffff);
 }
 

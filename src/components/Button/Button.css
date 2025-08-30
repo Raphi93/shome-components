@@ -1,0 +1,315 @@
+/* ---------- Base ---------- */
+
+.action-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: var(--border-radius, 12px);
+}
+
+.icon-two {
+  position: relative;
+  top: -10px;
+  right: 5px;
+  z-index: 1;
+  margin-right: -5px;
+  font-size: .7rem;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.button-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+a.action-button {
+  text-decoration: none;
+}
+
+/* ---------- Solid Color Variants ---------- */
+.primary {
+  background-color: var(--button-background-color, #393c40);
+  color: var(--button-color, #ffffff);
+  cursor: pointer;
+}
+
+.primary:hover {
+  background-color: var(--button-background-color-hover, #303234);
+  color: var(--button-color-hover, #ffffff);
+}
+
+.primary:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+.secondary {
+  background-color: var(--button-background-color-secondary, #0f766e);
+  color: var(--button-color-secondary, #ffffff);
+  cursor: pointer;
+}
+
+.secondary:hover {
+  background-color: var(--button-background-color-hover-secondary, #0a544e);
+  color: var(--button-color-hover-secondary, #ffffff);
+}
+
+.secondary:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+.success {
+  background-color: var(--button-background-color-success, #198754);
+  color: var(--button-color-success, #ffffff);
+  cursor: pointer;
+}
+
+.success:hover {
+  background-color: var(--button-background-color-hover-success, #166e3a);
+  color: var(--button-color-hover-success, #ffffff);
+}
+
+.success:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+.danger {
+  background-color: var(--button-background-color-danger, #dc3545);
+  color: var(--button-color-danger, #ffffff);
+  cursor: pointer;
+}
+
+.danger:hover {
+  background-color: var(--button-background-color-hover-danger, #b02a37);
+  color: var(--button-color-hover-danger, #ffffff);
+}
+
+.danger:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+.warning {
+  background-color: var(--button-background-color-warning, #ffc107);
+  color: var(--button-color-warning, #ffffff);
+  cursor: pointer;
+}
+
+.warning:hover {
+  background-color: var(--button-background-color-hover-warning, #cc9a06);
+  color: var(--button-color-hover-warning, #ffffff);
+}
+
+.warning:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+.info {
+  background-color: var(--button-background-color-info, #0d6efd);
+  color: var(--button-color-info, #ffffff);
+  cursor: pointer;
+}
+
+.info:hover {
+  background-color: var(--button-background-color-hover-info, #0b5ed7);
+  color: var(--button-color-hover-info, #ffffff);
+}
+
+.info:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+.light {
+  background-color: var(--color-white, #ffffff);
+  color: var(--color-primary-dark, #303234);
+  cursor: pointer;
+}
+
+.action-button.light,
+.action-button.light,
+button.light {
+  border: 1px solid var(--color-primary, #393c40);
+}
+
+.light:hover {
+  background-color: var(--color-primary, #393c40);
+  color: var(--color-white, #ffffff);
+}
+
+.light:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+/* ---------- Light (Alpha) Variants ---------- */
+.primary-light {
+  background-color: rgba(var(--button-background-color-light-rgb, 57, 60, 64), .3);
+  color: var(--button-color-light, #303234);
+  cursor: pointer;
+}
+
+.primary-light:hover {
+  background-color: var(--button-background-color-hover-light, #393c40);
+  color: var(--button-color-hover-light, #ffffff);
+}
+
+.primary-light:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+.secondary-light {
+  background-color: rgba(var(--button-background-color-light-rgb-secondary, 15, 118, 110), .3);
+  color: var(--button-color-light-secondary, #0a544e);
+  cursor: pointer;
+}
+
+.secondary-light:hover {
+  background-color: var(--button-background-color-hover-light-secondary, #0f766e);
+  color: var(--button-color-hover-light-secondary, #ffffff);
+}
+
+.secondary-light:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+.success-light {
+  background-color: rgba(var(--button-background-color-light-rgb-success, 25, 135, 84), .3);
+  color: var(--button-color-light-success, #166e3a);
+  cursor: pointer;
+}
+
+.success-light:hover {
+  background-color: var(--button-background-color-hover-light-success, #198754);
+  color: var(--button-color-hover-light-success, #ffffff);
+}
+
+.success-light:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+.danger-light {
+  background-color: rgba(var(--button-background-color-light-rgb-danger, 220, 53, 69), .3);
+  color: var(--button-color-light-danger, #b02a37);
+  cursor: pointer;
+}
+
+.danger-light:hover {
+  background-color: var(--button-background-color-hover-light-danger, #dc3545);
+  color: var(--button-color-hover-light-danger, #ffffff);
+}
+
+.danger-light:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+.warning-light {
+  background-color: rgba(var(--button-background-color-light-rgb-warning, 255, 193, 7), .3);
+  color: var(--button-color-light-warning, #cc9a06);
+  cursor: pointer;
+}
+
+.warning-light:hover {
+  background-color: var(--button-background-color-hover-light-warning, #ffc107);
+  color: var(--button-color-hover-light-warning, #ffffff);
+}
+
+.warning-light:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+.info-light {
+  background-color: rgba(var(--button-background-color-light-rgb-info, 13, 110, 253), .3);
+  color: var(--button-color-light-info, #0d6efd);
+  cursor: pointer;
+}
+
+.info-light:hover {
+  background-color: var(--button-background-color-hover-light-info, #0d6efd);
+  color: var(--button-color-hover-light-info, #ffffff);
+}
+
+.info-light:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+.light-light {
+  background-color: var(--color-white, #ffffff);
+  color: var(--color-primary, #393c40);
+  cursor: pointer;
+}
+
+.light-light:hover {
+  background-color: var(--button-background-color-secondary, #0f766e);
+  color: var(--color-white, #ffffff);
+}
+
+.action-button.light-light,
+.action-button.light-light,
+button.light-light {
+  border: 1px solid var(--color-primary, #393c40);
+}
+
+.light-light:disabled {
+  background-color: var(--color-gray-light, #a9b3c0);
+  color: var(--color-white, #ffffff);
+  cursor: not-allowed;
+}
+
+/* ---------- Expander ---------- */
+.expander-icon {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  transition: transform .3s ease-in-out;
+}
+
+.expander-icon.animate-icon {
+  transform: rotate(180deg);
+}
+
+.expander-icon.animate-icon-back {
+  transform: rotate(0deg);
+}

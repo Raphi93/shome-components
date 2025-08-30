@@ -104,7 +104,7 @@ function CardIcon({
   return (
     <FontAwesomeIcon
       icon={icon}
-      className={`iconCard ${iconColor} ${className}`}
+      className={`icon-card ${iconColor}-card ${className}`}
       style={iconStyles}
     />
   );
