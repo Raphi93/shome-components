@@ -13,7 +13,7 @@ import {
 import { faCircleInfo, faCar, faUser, faFile, faFileCsv } from "@fortawesome/free-solid-svg-icons";
 
 const meta: Meta<typeof Cards> = {
-    title: "sHomeComponents/Cards",
+    title: "sHome Components/Cards",
     component: Cards,
     parameters: {
         layout: "centered",

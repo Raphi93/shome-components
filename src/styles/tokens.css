@@ -26,13 +26,17 @@
         text-decoration: none;
     }
 
-    font-family: 'Arial', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Arial',
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
 
     /* geometry */
     --border-radius: 8px;
 
     /* shadows */
-    --color-box-shadow: rgba(29, 34, 41, 0.1);
+    --color-box-shadow: rgba(42, 45, 49, 0.1);
 
     /* typography */
     --font-size-smaller: 0.75rem;
@@ -48,42 +52,32 @@
     --color-gray-dark: #1d2229;
 
     /* primary / secondary */
+    --color-primary-light: rgba(var(--color-primary-rgb), 0.8);
     --color-primary: #393c40;
     --color-primary-dark: #303234;
-    --color-primary-rgb: 57,
-    60,
-    64;
+    --color-primary-rgb: 57, 60, 64;
 
+    --color-secondary-light: rgba(var(--color-secondary-rgb), 0.8);
     --color-secondary: #0f766e;
     --color-secondary-dark: #0a544e;
-    --color-secondary-rgb: 15,
-    118,
-    110;
+    --color-secondary-rgb: 15, 118, 110;
 
     /* states */
     --color-success: #198754;
     --color-success-dark: #166e3a;
-    --color-success-rgb: 25,
-    135,
-    84;
+    --color-success-rgb: 25, 135, 84;
 
     --color-danger: #dc3545;
     --color-danger-dark: #b02a37;
-    --color-danger-rgb: 220,
-    53,
-    69;
+    --color-danger-rgb: 220, 53, 69;
 
     --color-warning: #ffc107;
     --color-warning-dark: #cc9a06;
-    --color-warning-rgb: 255,
-    193,
-    7;
+    --color-warning-rgb: 255, 193, 7;
 
     --color-info: #0d6efd;
     --color-info-dark: #0b5ed7;
-    --color-info-rgb: 13,
-    110,
-    253;
+    --color-info-rgb: 13, 110, 253;
 
     /* ---------------- Buttons: Primary ---------------- */
     --button-color: var(--color-white, #ffffff);
@@ -156,4 +150,28 @@
     --button-color-hover-light-info: var(--color-white, #ffffff);
     --button-background-color-light-rgb-info: var(--color-info-rgb, 13, 110, 253);
     --button-background-color-hover-light-info: var(--color-info, #0d6efd);
+
+    /* === minimal needed for .string-input === */
+    --font-size-base: 1rem;
+    /* Für das „schwebende“ Label kleiner als base */
+    --font-size-md: 0.875rem;
+
+    /* Spacing-Ableitungen aus deinem vorhandenen --spacing */
+    --spacing-xs: calc(var(--spacing) * .5);
+    --spacing-sm: var(--spacing);
+    --spacing-md: calc(var(--spacing) * 1.5);
+
+    /* Text-/Hintergrundfarben */
+    --color-text: var(--color-gray-dark);
+    --color-background: var(--color-white);
+
+    /* „Light“-Variante aus secondary (nutzt deine RGB-Angabe) */
+
+
+    /* Kleine Radius-Variante für das Label */
+    --border-radius-small: calc(var(--border-radius) - 2px);
+
+    /* Shadow & Transition (nutzen deine bestehenden Tokens) */
+    --shadow-medium: 0 1px 2px var(--color-box-shadow), 0 6px 18px var(--color-box-shadow);
+    --transition-normal: 160ms ease;
 }
