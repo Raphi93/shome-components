@@ -1,30 +1,51 @@
 {
   "name": "@raphi93/shome-components",
-  "version": "1.0.",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
-    "access": "public"
-  },
+  "version": "1.0.6",
+  "description": "Small React + TypeScript component library with CSS variable theming.",
   "author": "RHUG",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raphi93/shome-components.git"
+  },
+  "homepage": "https://shome-wiki.raphaelhug.ch/",
+  "bugs": {
+    "url": "https://github.com/raphi93/shome-components/issues"
+  },
+
+  "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/esm/index.js"
+    }
+  },
+  "sideEffects": false,
+
+  "files": ["dist"],
+
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "rollup": "rollup -c --bundleConfigAsCjs"
+    "build": "rollup -c --bundleConfigAsCjs",
+    "prepack": "npm run build",
+    "test": "echo \"no tests\" && exit 0"
   },
-  "keywords": [],
-  "description": "",
-  "type": "module",
-  "engines": {
-    "node": ">=20 <25"
+
+  "engines": { "node": ">=20 <25" },
+
+  "keywords": ["react", "components", "typescript", "css-variables"],
+
+  "peerDependencies": {
+    "react": ">=18 <20",
+    "react-dom": ">=18 <20"
   },
+
   "dependencies": {
     "@floating-ui/react": "^0.27.16",
     "@fortawesome/fontawesome-svg-core": "^7.0.0",
@@ -32,50 +53,45 @@
     "@fortawesome/free-regular-svg-icons": "^7.0.0",
     "@fortawesome/free-solid-svg-icons": "^7.0.0",
     "@fortawesome/react-fontawesome": "^3.0.1",
-    "@rollup/plugin-typescript": "^12.1.4",
-    "@types/react-router-dom": "^5.3.3",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
-    "react": ">=18 <20",
-    "react-dom": ">=18 <20",
-    "react-router-dom": "^7.8.2",
-    "rollup-plugin-dts": "^6.2.3",
-    "rollup-plugin-postcss": "^4.0.2"
+    "react-router-dom": "^7.8.2"
   },
+
   "devDependencies": {
     "@babel/core": "^7.28.3",
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
+    "@rollup/plugin-typescript": "^12.1.4",
+    "rollup-plugin-dts": "^6.2.3",
+    "rollup-plugin-postcss": "^4.0.2",
+
     "@storybook/addon-docs": "^9.1.3",
     "@storybook/react-webpack5": "^9.1.3",
+    "storybook": "^9.1.3",
+
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@types/jest": "^29.5.14",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
+
     "@typescript-eslint/eslint-plugin": "^8.41.0",
     "@typescript-eslint/parser": "^8.41.0",
-    "autoprefixer": "^10.4.21",
-    "babel-loader": "^10.0.0",
-    "css-loader": "^7.1.2",
     "eslint": "^9.34.0",
     "eslint-plugin-storybook": "^9.1.3",
-    "jest": "^29.7.0",
+
+    "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
     "postcss-modules": "^6.0.1",
     "sass": "^1.91.0",
     "sass-loader": "^16.0.5",
-    "storybook": "^9.1.3",
+    "css-loader": "^7.1.2",
     "style-loader": "^4.0.0",
-    "typescript": "5.9"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:storybook/recommended"
-    ]
-  },
-  "peerDependencies": {
-    "react": ">=18 <20",
-    "react-dom": ">=18 <20"
+
+    "babel-loader": "^10.0.0",
+    "typescript": "5.9",
+    "@types/react-router-dom": "^5.3.3",
+    "jest": "^29.7.0"
   }
 }
