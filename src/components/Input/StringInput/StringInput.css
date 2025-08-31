@@ -12,34 +12,28 @@
     flex: 1;
     padding: var(--spacing-sm);
     padding-right: 2.5rem;
-    border: none;
     font-size: var(--font-size-base);
     background: var(--color-background);
-    border: 2px solid var(--color-gray-light);
     color: var(--color-text);
     outline: none;
-    border-radius: var(--border-radius);
     z-index: 1;
+    border: 2px solid var(--color-gray-light);
+    border-radius: var(--border-radius);
 }
 
-.string-input:focus {
-    border-color: var(--color-secondary-light);
-    outline: none;
+/* rechtsbündig nur für NumberInput (inputMode="decimal") */
+.string-input[inputmode="decimal"] {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+}
+
+.string-input:focus:not(.invalid) {
+    border-color: var(--color-label-input-focus);
     box-shadow: var(--shadow-medium);
 }
 
-.string-input-label {
-    z-index: 99;
-    position: absolute;
-    left: calc(var(--spacing-sm) - 5px);
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: var(--font-size-base);
-    color: var(--color-secondary-light);
-    padding: 0 var(--spacing-xs);
-    transition: all var(--transition-normal);
-}
-
+.string-input-label,
 .string-input-label-icon-left {
     z-index: 99;
     position: absolute;
@@ -47,7 +41,7 @@
     top: 50%;
     transform: translateY(-50%);
     font-size: var(--font-size-base);
-    color: var(--color-secondary-light);
+    color: var(--color-label-input);
     padding: 0 var(--spacing-xs);
     transition: all var(--transition-normal);
 }
@@ -56,7 +50,7 @@
 .string-input:not(:placeholder-shown)+.string-input-label {
     top: -10px;
     font-size: var(--font-size-md);
-    color: var(--color-secondary-light);
+    color: var(--color-label-input-focus);
     border-radius: var(--border-radius-small);
     padding: 0 var(--spacing-xs);
     left: 0px;
@@ -67,20 +61,19 @@
 .string-input:not(:placeholder-shown)+.string-input-label-icon-left {
     top: -10px;
     font-size: var(--font-size-md);
-    color: var(--color-secondary-light);
+    color: var(--color-label-input-focus);
     border-radius: var(--border-radius-small);
     left: -30px;
     z-index: 3;
 }
 
-/* Icons */
 .icon-left,
 .icon-right {
     z-index: 99;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--color-secondary-light);
+    color: var(--color-label-input);
     font-size: 1.2em;
 }
 
@@ -94,6 +87,7 @@
     z-index: 5;
 }
 
+/* noBorder: nur Unterkante */
 .no-border .string-input {
     border: none;
     border-bottom: 2px solid var(--color-secondary);
@@ -101,12 +95,13 @@
     background-color: var(--color-background);
 }
 
-.no-border .string-input:focus-visible {
+.no-border .string-input:focus-visible:not(.invalid) {
     outline: none !important;
     box-shadow: none;
+    border-bottom-color: var(--color-label-input-focus);
 }
 
-/* Live-Invalid-State für E-Mail */
+/* Invalid */
 .string-input.invalid {
     border-color: var(--color-danger);
     box-shadow: 0 0 0 .2rem rgba(var(--color-danger-rgb), .15);
@@ -118,7 +113,16 @@
 }
 
 .no-border .string-input.invalid {
-    border-bottom-color: var(--color-danger);
+    border: none !important;
+    border-bottom: 2px solid var(--color-danger) !important;
+    border-radius: 0;
+    background-color: var(--color-background);
+    box-shadow: none !important;
+}
+
+.no-border .string-input.invalid:focus {
+    border-bottom-color: var(--color-danger) !important;
+    box-shadow: none !important;
 }
 
 .string-input.invalid~.icon-right,
@@ -126,6 +130,7 @@
     color: var(--color-danger);
 }
 
+/* Disabled */
 .string-input:disabled {
     border-color: var(--color-gray-light);
     color: var(--color-gray);
@@ -150,7 +155,7 @@
     pointer-events: none;
 }
 
-
+/* Number stepper */
 .number-stepper {
     display: flex;
     flex-direction: column;
@@ -168,6 +173,6 @@
 }
 
 .number-stepper button:focus-visible {
-    outline: 2px solid var(--color-secondary-light);
+    outline: 2px solid var(--color-label-input);
     border-radius: 4px;
 }

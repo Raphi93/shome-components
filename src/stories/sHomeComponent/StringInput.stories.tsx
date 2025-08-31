@@ -116,6 +116,28 @@ export const NoBorder: Story = {
   },
 };
 
+export const Email: Story = {
+  render: () => {
+    const [v, setV] = useState("");
+    return (
+      <div style={{ width: 360 }}>
+        <StringInput label="E-Mail" email value={v} onChange={setV} />
+      </div>
+    );
+  },
+};
+
+export const disabled: Story = {
+  render: () => {
+    const [v, setV] = useState("");
+    return (
+      <div style={{ width: 360 }}>
+        <StringInput label="E-Mail" email value={v} onChange={setV} disabled />
+      </div>
+    );
+  },
+};
+
 export const Prefilled: Story = {
   render: () => {
     const [v, setV] = useState("John Doe");

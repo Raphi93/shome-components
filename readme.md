@@ -8,43 +8,60 @@
 </p>
 
 A small, modern **React + TypeScript** component library with **CSS Variable** theming.
-This README documents the **Button**, **Cards**, and **Tooltip** components in detail, including props, composition, and theming tokens.
-
+This README documents the **Button**, **Cards**, **Tooltip**, **StringInput**, and **NumberInput** components in detail, including props, composition, and theming tokens.
 
 ---
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Project Setup](#project-setup)
-- [Design Tokens](#design-tokens)
-- [Button](#button)
+* [Installation](#installation)
+* [Project Setup](#project-setup)
+* [Design Tokens](#design-tokens)
+* [Button](#button)
 
-  - [Usage](#usage)
-  - [Props](#props)
-  - [Theming](#theming)
-  - [Accessibility](#accessibility)
-  - [Styling Hooks](#styling-hooks)
+  * [Usage](#usage)
+  * [Props](#props)
+  * [Theming](#theming)
+  * [Accessibility](#accessibility)
+  * [Styling Hooks](#styling-hooks)
+* [Cards](#cards)
 
-- [Cards](#cards)
+  * [Import](#import)
+  * [Quick Examples](#quick-examples)
+  * [Component API](#component-api)
+  * [Child Components](#child-components)
+  * [CSS Variables (Cards)](#css-variables-cards)
+  * [Class Name Hooks (Cards)](#class-name-hooks-cards)
+* [Tooltip](#tooltip)
 
-  - [Import](#import)
-  - [Quick Examples](#quick-examples)
-  - [Component API](#component-api)
-  - [Child Components](#child-components)
-  - [CSS Variables (Cards)](#css-variables-cards)
-  - [Class Name Hooks (Cards)](#class-name-hooks-cards)
+  * [Import](#import-1)
+  * [Quick Examples](#quick-examples-1)
+  * [API](#api)
+  * [Theming (Tooltip)](#theming-tooltip)
+  * [Accessibility](#accessibility-1)
+* [StringInput](#stringinput)
 
-- [Tooltip](#tooltip)
+  * [Import](#import-2)
+  * [Usage](#usage-1)
+  * [Props](#props-1)
+  * [Validation & Behavior](#validation--behavior)
+  * [Styling Hooks](#styling-hooks-1)
+* [NumberInput](#numberinput)
 
-  - [Import](#import-1)
-  - [Quick Examples](#quick-examples-1)
-  - [API](#api)
-  - [Theming (Tooltip)](#theming-tooltip)
-  - [Accessibility](#accessibility-1)
+  * [Import](#import-3)
+  * [Usage](#usage-2)
+  * [Props](#props-2)
+  * [Behavior](#behavior)
+  * [Styling Hooks](#styling-hooks-2)
+* [Switch](#switch)
 
-- [FAQ](#faq)
-- [License](#license)
+  * [Import](#import-4)
+  * [Usage](#usage-3)
+  * [Props](#props-3)
+  * [Accessibility](#accessibility-2)
+  * [Styling Hooks](#styling-hooks-3)
+  * [Theming](#theming-1)
+* [License](#license)
 
 ---
 
@@ -69,9 +86,9 @@ import "shome-components/styles/tokens.css"; // provides defaults for CSS variab
 
 ## Project Setup
 
-- **React 18+** and **TypeScript 5+** recommended
-- **CSS Modules** + **SCSS** supported out of the box
-- All components ship type definitions
+* **React 18+** and **TypeScript 5+** recommended
+* **CSS Modules** + **SCSS** supported out of the box
+* All components ship type definitions
 
 ---
 
@@ -248,17 +265,17 @@ Button SCSS reads tokens with fallbacks. Either define **base tokens** (minimal)
 
 ## Accessibility
 
-- Semantic `<button>` by default; switches to `<a>` when `link` is set (with `rel="noopener noreferrer"` for `_blank`).
-- Focus handling on click (removes focus ring after activation).
-- Ensure contrast when customizing tokens.
+* Semantic `<button>` by default; switches to `<a>` when `link` is set (with `rel="noopener noreferrer"` for `_blank`).
+* Focus handling on click (removes focus ring after activation).
+* Ensure contrast when customizing tokens.
 
 ## Styling Hooks
 
-- Root: `.actionButton`
-- Content: `.IconContainer`, `.IconTwo`, `.buttonText`
-- Expander: `.expandetIcon` + `.animateIcon` / `.animateIconBack`
-- Disabled fallback: `.notAllowed`
-- Variants: `.primary`, `.secondary`, `.success`, `.danger`, `.warning`, `.info`, `.light` (+ `*Light`)
+* Root: `.actionButton`
+* Content: `.IconContainer`, `.IconTwo`, `.buttonText`
+* Expander: `.expandetIcon` + `.animateIcon` / `.animateIconBack`
+* Disabled fallback: `.notAllowed`
+* Variants: `.primary`, `.secondary`, `.success`, `.danger`, `.warning`, `.info`, `.light` (+ `*Light`)
 
 ---
 
@@ -414,14 +431,14 @@ Content displayed in the expandable panel under the card.
 
 ## Class Name Hooks (Cards)
 
-- `.cards`, `.cards-expandet`, `.cards-link`
-- `.card-container`, `.cards-container-expandet`
-- `.image-container`, `.image-container-expandet`, `.image-container-expandet-is-right`
-- `.content-container`, `.content-container-image`
-- `.contents-container`
-- `.expander-container` (+ `.open`)
-- `.expandet-icon` (+ `.animate-icon` / `.animate-icon-back`)
-- `.iconCard`, `.imageCard`
+* `.cards`, `.cards-expandet`, `.cards-link`
+* `.card-container`, `.cards-container-expandet`
+* `.image-container`, `.image-container-expandet`, `.image-container-expandet-is-right`
+* `.content-container`, `.content-container-image`
+* `.contents-container`
+* `.expander-container` (+ `.open`)
+* `.expandet-icon` (+ `.animate-icon` / `.animate-icon-back`)
+* `.iconCard`, `.imageCard`
 
 ---
 
@@ -531,19 +548,211 @@ Low-level hook used by `<Tooltip />`. Exposes `open`, `setOpen`, positioning dat
 
 Where they apply:
 
-- Panel background: `var(--color-gray-dark)`
-- Panel text: `var(--color-white)`
-- Panel radius: `var(--border-radius)`
-- Font size: `var(--font-size-smaller)`
-- Max width: `calc(100vw - var(--spacing))`
-- Focus outline on trigger: `var(--color-gray)`
+* Panel background: `var(--color-gray-dark)`
+* Panel text: `var(--color-white)`
+* Panel radius: `var(--border-radius)`
+* Font size: `var(--font-size-smaller)`
+* Max width: `calc(100vw - var(--spacing))`
+* Focus outline on trigger: `var(--color-gray)`
 
 ## Accessibility
 
-- Opens on **hover and focus**, dismisses on **Esc** or outside click by default.
-- `TooltipContent` has `role="tooltip"`.
-- Trigger uses `:focus-visible` outline for keyboard users.
-- Keep sufficient contrast when customizing colors.
+* Opens on **hover and focus**, dismisses on **Esc** or outside click by default.
+* `TooltipContent` has `role="tooltip"`.
+* Trigger uses `:focus-visible` outline for keyboard users.
+* Keep sufficient contrast when customizing colors.
+
+---
+
+# StringInput
+
+Lightweight text input with floating label, optional **password toggle**, **live email validation**, **noBorder** variant, and **disabled** state.
+
+## Import
+
+```tsx
+import { StringInput } from "shome-components";
+```
+
+## Usage
+
+```tsx
+const [v, setV] = useState("");
+<StringInput label="Label" value={v} onChange={setV} />
+
+<StringInput label="Username" value={v} onChange={setV} iconLeft={faUser} />
+
+<StringInput label="Password" value={v} onChange={setV} password iconLeft={faLock} />
+
+<StringInput label="E‑mail" value={v} onChange={setV} email required />
+
+<StringInput label="E‑mail" value={v} onChange={setV} noBorder />
+
+<StringInput label="Read only" value={v} onChange={setV} disabled />
+```
+
+## Props
+
+| Prop           | Type                  |  Default | Description                                      |
+| -------------- | --------------------- | :------: | ------------------------------------------------ |
+| `label`        | `string`              |     —    | Floating label.                                  |
+| `value`        | `string`              |     —    | Controlled value.                                |
+| `onChange`     | `(v: string) => void` |     —    | Change handler.                                  |
+| `noBorder`     | `boolean`             |  `false` | Slim variant: bottom border only.                |
+| `defaultValue` | `string`              |   `""`   | Initial visual value.                            |
+| `type`         | `string`              | `"text"` | Fallback type when not using `password`/`email`. |
+| `iconLeft`     | `IconProp`            |     —    | FontAwesome icon on the left.                    |
+| `password`     | `boolean`             |  `false` | Show/hide toggle on the right.                   |
+| `email`        | `boolean`             |  `false` | Sets `type=email` and enables live validation.   |
+| `required`     | `boolean`             |  `false` | Native form validation.                          |
+| `disabled`     | `boolean`             |  `false` | Disables the field & interactions.               |
+
+## Validation & Behavior
+
+* Floating label relies on `placeholder=" "` and the `active`/`:placeholder-shown` mechanics.
+* **Live email validation**: While focused and non-empty, a simple email pattern is checked. When invalid, field/label/icons turn red (`.invalid`). Disabled state skips validation.
+* Password toggle switches the input between `password`/`text`.
+
+## Styling Hooks
+
+Shared classes (see `StringInput.css`):
+
+* Container & field: `.string-input-container`, `.string-input`
+* Label: `.string-input-label`, `.string-input-label-icon-left`
+* Icons: `.icon-left`, `.icon-right`
+* Variants: `.no-border`, `.invalid`, `.is-disabled`
+
+---
+
+# NumberInput
+
+Numeric input in the same layout. Supports **min/max/step**, **decimals**, **stepper (+/−)**, **clamping** on commit, **preventWheel**, and **disabled** state.
+
+## Import
+
+```tsx
+import { NumberInput } from "shome-components";
+```
+
+## Usage
+
+```tsx
+const [n, setN] = useState<number | null>(0);
+<NumberInput label="Amount" value={n} onChange={setN} />
+
+<NumberInput label="Order #" value={n} onChange={setN} iconLeft={faHashtag} />
+
+<NumberInput label="Qty (1..10)" value={n} onChange={setN} min={1} max={10} step={1} />
+
+<NumberInput label="Price" value={n} onChange={setN} step={0.25} decimals={2} min={0} max={999} />
+
+<NumberInput label="Value" value={n} onChange={setN} showStepper={false} preventWheel />
+
+<NumberInput label="Locked" value={n} onChange={setN} disabled />
+```
+
+## Props
+
+| Prop           | Type                          | Default | Description                             |
+| -------------- | ----------------------------- | :-----: | --------------------------------------- |
+| `label`        | `string`                      |    —    | Floating label.                         |
+| `value`        | `number \| null`              |    —    | Controlled value. `null` = empty.       |
+| `onChange`     | `(v: number \| null) => void` |    —    | Change handler.                         |
+| `noBorder`     | `boolean`                     | `false` | Slim variant.                           |
+| `defaultValue` | `number`                      |    —    | Initial value when `value == null`.     |
+| `iconLeft`     | `IconProp`                    |    —    | FontAwesome icon on the left.           |
+| `step`         | `number`                      |   `1`   | Stepper increment.                      |
+| `min`          | `number`                      |    —    | Lower bound (clamped on commit).        |
+| `max`          | `number`                      |    —    | Upper bound (clamped on commit).        |
+| `decimals`     | `number`                      |    —    | Rounds to this many decimals on commit. |
+| `showStepper`  | `boolean`                     |  `true` | Show +/− buttons on the right.          |
+| `preventWheel` | `boolean`                     |  `true` | Prevents scroll-based value changes.    |
+| `disabled`     | `boolean`                     | `false` | Disables field & stepper.               |
+
+## Behavior
+
+* Input uses `type="text"` + `inputMode="decimal"` for better mobile keypads.
+* Regex allows `-`, digits, and one decimal separator (`,` or `.`). Internally `,` is normalized to `.`.
+* **Commit** (on blur or via stepper): `round(decimals)` → `clamp(min/max)` → `onChange`.
+* Stepper increments/decrements from the current value (or `0`), respecting `decimals` and bounds.
+
+## Styling Hooks
+
+* Shares classes with StringInput: `.string-input-container`, `.string-input`, label & icon classes.
+* Extra wrapper for buttons: `.number-stepper` (inside the `.icon-right` slot).
+
+---
+
+# Switch
+
+Simple, themed toggle switch. Controlled via `checked`/`onChange`. Uses a hidden checkbox and a slider track.
+
+## Import
+
+```tsx
+import { Switch } from "shome-components";
+import "shome-components/Switch/Switch.css";
+```
+
+## Usage
+
+```tsx
+const [on, setOn] = useState(false);
+<Switch checked={on} onChange={setOn} />
+
+// With an accessible label
+<label style={{ display: 'inline-flex', gap: 8, alignItems: 'center' }}>
+  Dark mode
+  <Switch checked={on} onChange={setOn} />
+</label>
+```
+
+## Props
+
+| Prop       | Type                         | Default | Description                           |
+| ---------- | ---------------------------- | :-----: | ------------------------------------- |
+| `checked`  | `boolean`                    |    —    | Current on/off state.                 |
+| `onChange` | `(checked: boolean) => void` |    —    | Called with the next state on toggle. |
+
+## Accessibility
+
+* The underlying `input[type="checkbox"]` is present for semantics. Consider connecting a visible `<label>` as in the example, or set `aria-label` on the wrapper.
+* Recommended enhancement (keyboard support on the wrapper):
+
+```tsx
+<div
+  className="switch"
+  onClick={toggleSwitch}
+  role="switch"
+  aria-checked={checked}
+  tabIndex={0}
+  onKeyDown={(e) => (e.key === ' ' || e.key === 'Enter') && toggleSwitch()}
+>
+  <input type="checkbox" className="switch-input" checked={checked} readOnly />
+  <span className="switch-slider" />
+</div>
+```
+
+This preserves the current CSS while enabling Space/Enter toggling.
+
+## Styling Hooks
+
+* Root: `.switch`
+* Elements: `.switch-input` (hidden checkbox), `.switch-slider` (track/knob)
+* States: `.switch-input:checked + .switch-slider`, `.switch-input:checked + .switch-slider:before`, `.switch-input:focus + .switch-slider`
+
+## Theming
+
+Consumed tokens (with sensible fallbacks in your global tokens):
+
+```css
+:root {
+  --color-danger: #dc3545;   /* off background */
+  --color-success: #198754;  /* on background */
+  --color-primary-dark: #303234; /* knob + border */
+  --color-secondary-dark: #0a544e; /* knob when on */
+}
+```
 
 ---
 

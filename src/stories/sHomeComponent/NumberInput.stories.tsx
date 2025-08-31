@@ -150,6 +150,17 @@ export const NoStepper_PreventWheel: Story = {
   },
 };
 
+export const disabled: Story = {
+  render: () => {
+    const [n, setN] = useState<number | null>(42);
+    return (
+      <div style={{ width: 360 }}>
+        <NumberInput label="Value" value={n} onChange={setN} preventWheel disabled />
+      </div>
+    );
+  },
+};
+
 export const NegativeValues: Story = {
   render: () => {
     const [n, setN] = useState<number | null>(-2.5);

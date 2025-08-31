@@ -1,177 +1,271 @@
-/* Public design tokens for shome-components (defaults) */
+/* ─────────────────────────────────────────────────────────────
+   Public design tokens for shome-components (defaults)
+   ───────────────────────────────────────────────────────────── */
 :root {
 
-    /* === Minimal Reset für Buttons & Links === */
+  font-family: 'Arial', Tahoma, Geneva, Verdana, sans-serif;
 
-    button,
-    input[type="button"],
-    input[type="submit"],
-    input[type="reset"] {
-        -webkit-appearance: none;
-        appearance: none;
-        font: inherit;
-        border: none;
-        line-height: inherit;
-        text-align: inherit;
-    }
+  /* ───────────────────────────────────────────────────────────
+     Geometry
+     ─────────────────────────────────────────────────────────── */
+  --border-radius: 8px;
 
-    button:not(:disabled),
-    input[type="button"]:not(:disabled),
-    input[type="submit"]:not(:disabled),
-    input[type="reset"]:not(:disabled) {
-        cursor: pointer;
-    }
+  /* ───────────────────────────────────────────────────────────
+     Shadows
+     ─────────────────────────────────────────────────────────── */
+  --color-box-shadow: rgba(42, 45, 49, 0.1);
+  --nav-border-line: 1px solid var(--color-gray-light, #a9b3c0);
 
-    a {
-        text-decoration: none;
-    }
+  /* ───────────────────────────────────────────────────────────
+     Typography
+     ─────────────────────────────────────────────────────────── */
+  --font-size-smaller: 0.75rem;
 
-    font-family: 'Arial',
-    Tahoma,
-    Geneva,
-    Verdana,
-    sans-serif;
+  /* ───────────────────────────────────────────────────────────
+     Spacing
+     ─────────────────────────────────────────────────────────── */
+  --spacing: .5rem;
+  --spacing-xs: calc(var(--spacing) * .5);
+  --spacing-sm: var(--spacing);
+  --spacing-md: calc(var(--spacing) * 1.5);
+  --nav-height: 4rem;
 
-    /* geometry */
-    --border-radius: 8px;
+  /* ───────────────────────────────────────────────────────────
+     Base Palette
+     ─────────────────────────────────────────────────────────── */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray-light: #a9b3c0;
+  --color-gray: #6b7280;
+  --color-gray-dark: #1d2229;
 
-    /* shadows */
-    --color-box-shadow: rgba(42, 45, 49, 0.1);
+  /* ───────────────────────────────────────────────────────────
+     Brand Colors
+     ─────────────────────────────────────────────────────────── */
+  --color-primary-rgb: 57, 60, 64;
+  --color-primary: #393c40;
+  --color-primary-dark: #303234;
+  --color-primary-light: rgba(var(--color-primary-rgb), 0.8);
 
-    /* typography */
-    --font-size-smaller: 0.75rem;
+  --color-secondary-rgb: 15, 118, 110;
+  --color-secondary: #0f766e;
+  --color-secondary-dark: #0a544e;
+  --color-secondary-light: rgba(var(--color-secondary-rgb), 0.8);
 
-    /* spacing */
-    --spacing: .5rem;
+  /* ───────────────────────────────────────────────────────────
+     State Colors
+     ─────────────────────────────────────────────────────────── */
+  --color-success-rgb: 25, 135, 84;
+  --color-success: #198754;
+  --color-success-dark: #166e3a;
 
-    /* base */
-    --color-white: #ffffff;
-    --color-black: #000000;
-    --color-gray-light: #a9b3c0;
-    --color-gray: #6b7280;
-    --color-gray-dark: #1d2229;
+  --color-danger-rgb: 220, 53, 69;
+  --color-danger: #dc3545;
+  --color-danger-dark: #b02a37;
 
-    /* primary / secondary */
-    --color-primary-light: rgba(var(--color-primary-rgb), 0.8);
-    --color-primary: #393c40;
-    --color-primary-dark: #303234;
-    --color-primary-rgb: 57, 60, 64;
+  --color-warning-rgb: 255, 193, 7;
+  --color-warning: #ffc107;
+  --color-warning-dark: #cc9a06;
 
-    --color-secondary-light: rgba(var(--color-secondary-rgb), 0.8);
-    --color-secondary: #0f766e;
-    --color-secondary-dark: #0a544e;
-    --color-secondary-rgb: 15, 118, 110;
+  --color-info-rgb: 13, 110, 253;
+  --color-info: #0d6efd;
+  --color-info-dark: #0b5ed7;
 
-    /* states */
-    --color-success: #198754;
-    --color-success-dark: #166e3a;
-    --color-success-rgb: 25, 135, 84;
+  /* ───────────────────────────────────────────────────────────
+     Buttons
+     ─────────────────────────────────────────────────────────── */
+  --button-color: var(--color-white, #ffffff);
+  --button-color-hover: var(--color-white, #ffffff);
+  --button-background-color: var(--color-primary, #393c40);
+  --button-background-color-hover: var(--color-secondary, #0a544e);
 
-    --color-danger: #dc3545;
-    --color-danger-dark: #b02a37;
-    --color-danger-rgb: 220, 53, 69;
+  /* Primary Light */
+  --button-color-light: var(--color-primary-dark, #303234);
+  --button-color-hover-light: var(--color-white, #ffffff);
+  --button-background-color-light-rgb: var(--color-primary-rgb, 57, 60, 64);
+  --button-background-color-hover-light: var(--color-primary, #393c40);
 
-    --color-warning: #ffc107;
-    --color-warning-dark: #cc9a06;
-    --color-warning-rgb: 255, 193, 7;
+  /* Secondary */
+  --button-color-secondary: var(--color-white, #ffffff);
+  --button-color-hover-secondary: var(--color-white, #ffffff);
+  --button-background-color-secondary: var(--color-secondary, #0f766e);
+  --button-background-color-hover-secondary: var(--color-primary, #393c40);
 
-    --color-info: #0d6efd;
-    --color-info-dark: #0b5ed7;
-    --color-info-rgb: 13, 110, 253;
+  /* Secondary Light */
+  --button-color-light-secondary: var(--color-secondary-dark, #0a544e);
+  --button-color-hover-light-secondary: var(--color-white, #ffffff);
+  --button-background-color-light-rgb-secondary: var(--color-secondary-rgb, 15, 118, 110);
+  --button-background-color-hover-light-secondary: var(--color-secondary, #0f766e);
 
-    /* ---------------- Buttons: Primary ---------------- */
-    --button-color: var(--color-white, #ffffff);
-    --button-color-hover: var(--color-white, #ffffff);
-    --button-background-color: var(--color-primary, #393c40);
-    --button-background-color-hover: var(--color-secondary, #0a544e);
+  /* Success */
+  --button-color-success: var(--color-white, #ffffff);
+  --button-color-hover-success: var(--color-white, #ffffff);
+  --button-background-color-success: var(--color-success, #198754);
+  --button-background-color-hover-success: var(--color-success-dark, #166e3a);
 
-    /* Primary Light */
-    --button-color-light: var(--color-primary-dark, #303234);
-    --button-color-hover-light: var(--color-white, #ffffff);
-    --button-background-color-light-rgb: var(--color-primary-rgb, 57, 60, 64);
-    --button-background-color-hover-light: var(--color-primary, #393c40);
+  /* Success Light */
+  --button-color-light-success: var(--color-success-dark, #166e3a);
+  --button-color-hover-light-success: var(--color-white, #ffffff);
+  --button-background-color-light-rgb-success: var(--color-success-rgb, 25, 135, 84);
+  --button-background-color-hover-light-success: var(--color-success, #198754);
 
-    /* ---------------- Buttons: Secondary ---------------- */
-    --button-color-secondary: var(--color-white, #ffffff);
-    --button-color-hover-secondary: var(--color-white, #ffffff);
-    --button-background-color-secondary: var(--color-secondary, #0f766e);
-    --button-background-color-hover-secondary: var(--color-primary, #393c40);
+  /* Warning */
+  --button-color-warning: var(--color-white, #ffffff);
+  --button-color-hover-warning: var(--color-white, #ffffff);
+  --button-background-color-warning: var(--color-warning, #ffc107);
+  --button-background-color-hover-warning: var(--color-warning-dark, #cc9a06);
 
-    /* Secondary Light */
-    --button-color-light-secondary: var(--color-secondary-dark, #0a544e);
-    --button-color-hover-light-secondary: var(--color-white, #ffffff);
-    --button-background-color-light-rgb-secondary: var(--color-secondary-rgb, 15, 118, 110);
-    --button-background-color-hover-light-secondary: var(--color-secondary, #0f766e);
+  /* Warning Light */
+  --button-color-light-warning: var(--color-warning-dark, #cc9a06);
+  --button-color-hover-light-warning: var(--color-white, #ffffff);
+  --button-background-color-light-rgb-warning: var(--color-warning-rgb, 255, 193, 7);
+  --button-background-color-hover-light-warning: var(--color-warning, #ffc107);
 
-    /* ---------------- Buttons: Success ---------------- */
-    --button-color-success: var(--color-white, #ffffff);
-    --button-color-hover-success: var(--color-white, #ffffff);
-    --button-background-color-success: var(--color-success, #198754);
-    --button-background-color-hover-success: var(--color-success-dark, #166e3a);
+  /* Danger */
+  --button-color-danger: var(--color-white, #ffffff);
+  --button-color-hover-danger: var(--color-white, #ffffff);
+  --button-background-color-danger: var(--color-danger, #dc3545);
+  --button-background-color-hover-danger: var(--color-danger-dark, #b02a37);
 
-    /* Success Light */
-    --button-color-light-success: var(--color-success-dark, #166e3a);
-    --button-color-hover-light-success: var(--color-white, #ffffff);
-    --button-background-color-light-rgb-success: var(--color-success-rgb, 25, 135, 84);
-    --button-background-color-hover-light-success: var(--color-success, #198754);
+  /* Danger Light */
+  --button-color-light-danger: var(--color-danger-dark, #b02a37);
+  --button-color-hover-light-danger: var(--color-white, #ffffff);
+  --button-background-color-light-rgb-danger: var(--color-danger-rgb, 220, 53, 69);
+  --button-background-color-hover-light-danger: var(--color-danger, #dc3545);
 
-    /* ---------------- Buttons: Warning ---------------- */
-    --button-color-warning: var(--color-white, #ffffff);
-    --button-color-hover-warning: var(--color-white, #ffffff);
-    --button-background-color-warning: var(--color-warning, #ffc107);
-    --button-background-color-hover-warning: var(--color-warning-dark, #cc9a06);
+  /* Info */
+  --button-color-info: var(--color-white, #ffffff);
+  --button-color-hover-info: var(--color-white, #ffffff);
+  --button-background-color-info: var(--color-info, #0d6efd);
+  --button-background-color-hover-info: var(--color-info-dark, #0b5ed7);
 
-    /* Warning Light */
-    --button-color-light-warning: var(--color-warning-dark, #cc9a06);
-    --button-color-hover-light-warning: var(--color-white, #ffffff);
-    --button-background-color-light-rgb-warning: var(--color-warning-rgb, 255, 193, 7);
-    --button-background-color-hover-light-warning: var(--color-warning, #ffc107);
+  /* Info Light */
+  --button-color-light-info: var(--color-info, #0d6efd);
+  --button-color-hover-light-info: var(--color-white, #ffffff);
+  --button-background-color-light-rgb-info: var(--color-info-rgb, 13, 110, 253);
+  --button-background-color-hover-light-info: var(--color-info, #0d6efd);
 
-    /* ---------------- Buttons: Danger ---------------- */
-    --button-color-danger: var(--color-white, #ffffff);
-    --button-color-hover-danger: var(--color-white, #ffffff);
-    --button-background-color-danger: var(--color-danger, #dc3545);
-    --button-background-color-hover-danger: var(--color-danger-dark, #b02a37);
+  /* ───────────────────────────────────────────────────────────
+     Inputs / Text
+     ─────────────────────────────────────────────────────────── */
+  --font-size-base: 1rem;
+  --font-size-md: 0.875rem;
+  --color-label-input-focus: var(--color-secondary, #6c757d);
+  --color-label-input: var(--color-secondary, #6c757d);
 
-    /* Danger Light */
-    --button-color-light-danger: var(--color-danger-dark, #b02a37);
-    --button-color-hover-light-danger: var(--color-white, #ffffff);
-    --button-background-color-light-rgb-danger: var(--color-danger-rgb, 220, 53, 69);
-    --button-background-color-hover-light-danger: var(--color-danger, #dc3545);
+  --color-text: var(--color-gray-dark);
+  --color-background: var(--color-white);
 
-    /* ---------------- Buttons: Info ---------------- */
-    --button-color-info: var(--color-white, #ffffff);
-    --button-color-hover-info: var(--color-white, #ffffff);
-    --button-background-color-info: var(--color-info, #0d6efd);
-    --button-background-color-hover-info: var(--color-info-dark, #0b5ed7);
+  /* Kleine Radius-Variante für Labels */
+  --border-radius-small: calc(var(--border-radius) - 2px);
 
-    /* Info Light */
-    --button-color-light-info: var(--color-info, #0d6efd);
-    --button-color-hover-light-info: var(--color-white, #ffffff);
-    --button-background-color-light-rgb-info: var(--color-info-rgb, 13, 110, 253);
-    --button-background-color-hover-light-info: var(--color-info, #0d6efd);
+  /* Shadow & Transition */
+  --shadow-medium: 0 1px 2px var(--color-box-shadow), 0 6px 18px var(--color-box-shadow);
+  --transition-normal: 160ms ease;
 
-    /* === minimal needed for .string-input === */
-    --font-size-base: 1rem;
-    /* Für das „schwebende“ Label kleiner als base */
-    --font-size-md: 0.875rem;
+  /* ───────────────────────────────────────────────────────────
+     Switch
+     ─────────────────────────────────────────────────────────── */
+  --switch-track-off: var(--color-danger, #dc2626);
+  --switch-track-on: var(--color-success, #16a34a);
+  --switch-knob-off: var(--color-primary-dark, #303234);
+  --switch-knob-on: var(--color-secondary-dark, #0f766e);
+  --switch-border: var(--color-gray, #6b7280);
+  --switch-focus: var(--color-success, #16a34a);
 
-    /* Spacing-Ableitungen aus deinem vorhandenen --spacing */
-    --spacing-xs: calc(var(--spacing) * .5);
-    --spacing-sm: var(--spacing);
-    --spacing-md: calc(var(--spacing) * 1.5);
+  /* ───────────────────────────────────────────────────────────
+     Header
+     ─────────────────────────────────────────────────────────── */
+  --header-height: 3.5rem;
+  --header-gap: 0.5rem;
+  --header-margin-left: 1rem;
 
-    /* Text-/Hintergrundfarben */
-    --color-text: var(--color-gray-dark);
-    --color-background: var(--color-white);
+  --header-color-title: var(--color-secondary);
+  --header-color-subtitle: var(--color-black);
+  --header-color-env: var(--color-secondary);
+  --header-color-bg: var(--color-secondary);
 
-    /* „Light“-Variante aus secondary (nutzt deine RGB-Angabe) */
+  --header-title-font-size: 1.1rem;
+  --header-title-font-weight: bold;
+  --header-subtitle-font-size: 1rem;
+  --header-env-font-size: 1.1rem;
+  --header-env-font-weight: bold;
 
+  --header-title-font-size-sm: 1rem;
+  --header-subtitle-font-size-sm: 0.9rem;
+  --header-env-font-size-sm: 1rem;
 
-    /* Kleine Radius-Variante für das Label */
-    --border-radius-small: calc(var(--border-radius) - 2px);
+  /* ───────────────────────────────────────────────────────────
+     Sidebar
+     ─────────────────────────────────────────────────────────── */
+  --sidebar-height: 4rem;
+  --sidebar-height-compact: 48px;
+  --sidebar-gap: var(--spacing);
+  --sidebar-bg: var(--color-primary);
+  --sidebar-fg: var(--color-white);
+  --sidebar-accent-rgb: var(--color-secondary-rgb);
+  --sidebar-item-height: 3.25rem;
+  --sidebar-subitem-height: 38px;
+  --sidebar-padding-sm: 10px;
+  --sidebar-padding-md: 12px;
+  --sidebar-margin-sm: 1rem;
+  --sidebar-margin-md: 2rem;
+  --sidebar-icon-size: 1rem;
+  --sidebar-icon-size-compact: 0.8rem;
+  --sidebar-img-size: 1.8rem;
+  --sidebar-transition: 0.3s ease-in-out;
 
-    /* Shadow & Transition (nutzen deine bestehenden Tokens) */
-    --shadow-medium: 0 1px 2px var(--color-box-shadow), 0 6px 18px var(--color-box-shadow);
-    --transition-normal: 160ms ease;
+  --sidebar-mobile-nav-height: calc(var(--nav-height) + 1px);
+  --sidebar-mobile-icon-size: 1.1rem;
+  --sidebar-mobile-gap: 50px;
+
+  /* ───────────────────────────────────────────────────────────
+     App Layout
+     ─────────────────────────────────────────────────────────── */
+  --layout-sidebar-width-collapsed: calc(var(--spacing) * 8);
+  --layout-sidebar-width-expanded: calc(var(--spacing) * 37);
+  --layout-sidebar-bg: var(--color-primary);
+
+  --layout-header-height: calc(var(--nav-height) + 1px);
+  --layout-header-bg: var(--color-white);
+  --layout-header-border: var(--nav-border-line);
+
+  --layout-content-padding: calc(var(--spacing) * 3);
+  --layout-content-max-width: 80rem;
+  --layout-content-min-width: 0rem;
+
+  --layout-sidebar-height-mobile-collapsed: calc(var(--nav-height) + 1px);
+  --layout-sidebar-height-mobile-expanded: 80svh;
+
+}
+
+body {
+     /* === Minimal Reset für Buttons & Links === */
+  button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    -webkit-appearance: none;
+    appearance: none;
+    font: inherit;
+    border: none;
+    line-height: inherit;
+    text-align: inherit;
+    background-color: transparent;
+     color: inherit; 
+  }
+
+  button:not(:disabled),
+  input[type="button"]:not(:disabled),
+  input[type="submit"]:not(:disabled),
+  input[type="reset"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  box-sizing: border-box;
+  display: block;
 }

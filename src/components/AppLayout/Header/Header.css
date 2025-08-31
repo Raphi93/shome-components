@@ -1,0 +1,121 @@
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  min-width: 0;
+  width: 100%;
+}
+
+.header-titles-container {
+  display: flex;
+  align-items: center;
+  gap: var(--header-gap);
+  justify-content: flex-start;
+  min-width: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.header-titles-container-with-sidebar {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: var(--header-gap);
+  justify-content: flex-start;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.header-image-container {
+  height: var(--header-height);
+  width: calc(var(--header-height) + 1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--header-color-bg);
+  flex-shrink: 0;
+}
+
+.header-image {
+  height: calc(var(--header-height) - 25px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-title-wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  gap: var(--header-gap);
+  margin-left: var(--header-margin-left);
+}
+
+.header-title-wrapper-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.1rem;
+  min-width: 0;
+  overflow: hidden;
+  flex: 1 1 auto;
+  margin-left: var(--header-margin-left);
+  line-height: 1.2rem;
+}
+
+.header-title,
+.header-subtitles,
+.header-env-titles {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.header-title {
+  font-size: var(--header-title-font-size);
+  font-weight: var(--header-title-font-weight);
+  color: var(--header-color-title);
+}
+
+.header-subtitles {
+  font-size: var(--header-subtitle-font-size);
+  color: var(--header-color-subtitle);
+}
+
+.header-env-titles {
+  font-size: var(--header-env-font-size);
+  color: var(--header-color-env);
+  font-weight: var(--header-env-font-weight);
+  max-width: 100%;
+}
+
+.header-buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 1317px) {
+  .header-title {
+    font-size: var(--header-title-font-size-sm);
+  }
+
+  .header-subtitles {
+    font-size: var(--header-subtitle-font-size-sm);
+  }
+
+  .header-env-titles {
+    font-size: var(--header-env-font-size-sm);
+  }
+}

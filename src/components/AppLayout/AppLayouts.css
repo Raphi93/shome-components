@@ -1,0 +1,95 @@
+.app-layouts {
+  display: grid;
+  grid-template-columns: var(--sidebar-width, var(--layout-sidebar-width-collapsed)) 1fr;
+  grid-template-rows: var(--layout-header-height) auto;
+  grid-template-areas:
+    "sidebar headers"
+    "sidebar content";
+  min-height: 100vh;
+  transition: grid-template-columns 0.5s ease;
+  overflow: visible;
+}
+
+.app-layouts .sidebar {
+  display: flex;
+  flex-direction: column;
+  grid-area: sidebar;
+  background-color: var(--layout-sidebar-bg);
+  overflow-y: visible;
+  position: relative;
+  z-index: 10;
+  transition: width 0.5s ease;
+}
+
+.app-layouts .header {
+  grid-area: headers;
+  background-color: var(--layout-header-bg);
+  border-bottom: var(--layout-header-border);
+  align-items: center;
+  display: flex;
+  width: 100%;
+  z-index: 90;
+}
+
+.app-layouts .content {
+  padding: var(--layout-content-padding);
+  grid-area: content;
+  overflow-y: auto;
+  max-width: var(--layout-content-max-width);
+  min-width: var(--layout-content-min-width);
+  margin: 0 auto;
+  width: 100%;
+  z-index: 1;
+}
+
+/* State-Tokens */
+.app-layouts.collapsed {
+  --sidebar-width: var(--layout-sidebar-width-collapsed);
+}
+.app-layouts.expanded {
+  --sidebar-width: var(--layout-sidebar-width-expanded);
+}
+
+@media screen and (max-width: 575px) {
+  .app-layouts {
+    min-height: 0vh;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "sidebar"
+      "headers"
+      "content";
+  }
+
+  .app-layouts.collapsed {
+    --sidebar-height: var(--layout-sidebar-height-mobile-collapsed);
+    --isHidden: visible;
+    --position: relative;
+  }
+  .app-layouts.expanded {
+    --sidebar-height: var(--layout-sidebar-height-mobile-expanded);
+    --isHidden: hidden;
+    --position: fixed;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: var(--sidebar-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .header {
+    width: 100%;
+    height: var(--layout-header-height);
+    visibility: var(--isHidden);
+    position: var(--position);
+  }
+
+  .contentpdc {
+    width: 100%;
+    padding: 100%;
+    visibility: var(--isHidden);
+    position: var(--position);
+  }
+}

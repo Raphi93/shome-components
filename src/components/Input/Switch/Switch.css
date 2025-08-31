@@ -1,0 +1,107 @@
+.switch {
+  position: relative;
+  display: inline-block;
+}
+
+.switch-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--switch-track-off, var(--color-danger));
+  border-radius: 999px;
+  border: 1px solid var(--switch-border, var(--color-gray));
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.08), inset 0 -1px 1px rgba(255,255,255,0.12);
+}
+
+.switch-slider::after {
+  content: "";
+  position: absolute;
+  inset: 1px 1px 50% 1px;
+  border-radius: 999px 999px 0 0 / 999px 999px 0 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(255,255,255,0));
+}
+
+.switch-slider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  transform: translateY(-50%);
+  background-color: var(--switch-knob-off, var(--color-primary-dark));
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.20), 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1), background-color 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.switch-slider:hover {
+  border-color: var(--color-gray-dark, #1d2229);
+}
+
+.switch-input:checked + .switch-slider {
+  background-color: var(--switch-track-on, var(--color-success));
+  border-color: var(--switch-track-on, var(--color-success));
+  box-shadow: 0 0 0 2px rgba(var(--color-success-rgb, 25, 135, 84), 0.25), inset 0 1px 1px rgba(0,0,0,0.08), inset 0 -1px 1px rgba(255,255,255,0.12);
+}
+
+.switch-input:checked + .switch-slider::before {
+  background-color: var(--switch-knob-on, var(--color-secondary-dark));
+}
+
+.switch-input:focus + .switch-slider {
+  box-shadow: 0 0 0 3px var(--switch-focus, var(--color-success)), inset 0 1px 1px rgba(0,0,0,0.08), inset 0 -1px 1px rgba(255,255,255,0.20);
+}
+
+.switch-small {
+  width: 2rem;
+  height: 1.1rem;
+}
+.switch-small .switch-slider::before {
+  width: 0.9rem;
+  height: 0.9rem;
+  left: 1px;
+}
+.switch-small .switch-input:checked + .switch-slider::before {
+  transform: translate(0.9rem, -50%);
+}
+
+.switch-medium {
+  width: 3rem;
+  height: 1.6rem;
+}
+.switch-medium .switch-slider::before {
+  width: 1.4rem;
+  height: 1.3rem;
+  left: 1px;
+}
+.switch-medium .switch-input:checked + .switch-slider::before {
+  transform: translate(1.4rem, -50%);
+}
+
+.switch-large {
+  width: 3.7rem;
+  height: 2.1rem;
+}
+.switch-large .switch-slider::before {
+  width: 1.7rem;
+  height: 1.7rem;
+  left: 2px;
+}
+.switch-large .switch-input:checked + .switch-slider::before {
+  transform: translate(1.6rem, -50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switch-slider,
+  .switch-slider::before {
+    transition: none;
+  }
+}
