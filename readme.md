@@ -6,6 +6,7 @@
   <img alt="css-modules" src="https://img.shields.io/badge/CSS%20Modules-yes-purple" />
   <img alt="license" src="https://img.shields.io/badge/license-MIT-lightgrey" />
 </p>
+[Show Wiki](https://shome-wiki.raphaelhug.ch/)
 
 A small, modern **React + TypeScript** component library with **CSS Variable** theming.
 This README documents the **Button**, **Cards**, **Tooltip**, **StringInput**, and **NumberInput** components in detail, including props, composition, and theming tokens.
@@ -13,82 +14,8 @@ This README documents the **Button**, **Cards**, **Tooltip**, **StringInput**, a
 ---
 
 ## Table of Contents
-
-* [Installation](#installation)
-* [Project Setup](#project-setup)
 * [Design Tokens](#design-tokens)
-* [Button](#button)
-
-  * [Usage](#usage)
-  * [Props](#props)
-  * [Theming](#theming)
-  * [Accessibility](#accessibility)
-  * [Styling Hooks](#styling-hooks)
-* [Cards](#cards)
-
-  * [Import](#import)
-  * [Quick Examples](#quick-examples)
-  * [Component API](#component-api)
-  * [Child Components](#child-components)
-  * [CSS Variables (Cards)](#css-variables-cards)
-  * [Class Name Hooks (Cards)](#class-name-hooks-cards)
-* [Tooltip](#tooltip)
-
-  * [Import](#import-1)
-  * [Quick Examples](#quick-examples-1)
-  * [API](#api)
-  * [Theming (Tooltip)](#theming-tooltip)
-  * [Accessibility](#accessibility-1)
-* [StringInput](#stringinput)
-
-  * [Import](#import-2)
-  * [Usage](#usage-1)
-  * [Props](#props-1)
-  * [Validation & Behavior](#validation--behavior)
-  * [Styling Hooks](#styling-hooks-1)
-* [NumberInput](#numberinput)
-
-  * [Import](#import-3)
-  * [Usage](#usage-2)
-  * [Props](#props-2)
-  * [Behavior](#behavior)
-  * [Styling Hooks](#styling-hooks-2)
-* [Switch](#switch)
-
-  * [Import](#import-4)
-  * [Usage](#usage-3)
-  * [Props](#props-3)
-  * [Accessibility](#accessibility-2)
-  * [Styling Hooks](#styling-hooks-3)
-  * [Theming](#theming-1)
 * [License](#license)
-
----
-
-## Installation
-
-```bash
-npm i @raphi93/shome-components
-# Icons (optional, used by Button/CardIcon examples)
-npm i @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/react-fontawesome
-# Tooltip peer
-npm i @floating-ui/react
-```
-
-Add default tokens once in your app (optional but recommended):
-
-```ts
-// e.g. main.tsx / app.tsx
-import "shome-components/styles/tokens.css"; // provides defaults for CSS variables
-```
-
----
-
-## Project Setup
-
-* **React 18+** and **TypeScript 5+** recommended
-* **CSS Modules** + **SCSS** supported out of the box
-* All components ship type definitions
 
 ---
 
@@ -98,50 +25,243 @@ Override any token at `:root` (or a wrapper element) to theme the library. These
 
 ```css
 :root {
-  /* geometry */
-  --border-radius: 12px;
-
-  /* shadows */
-  --color-box-shadow: rgba(29, 34, 41, 0.1);
-
-  /* typography */
+  /* Typography */
+  font-family: 'Arial', Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-base: 1rem;
+  --font-size-md: 0.875rem;
   --font-size-smaller: 0.75rem;
 
-  /* spacing */
-  --spacing: 0.5rem;
+  /* Spacing / Radius / Motion / Shadows */
+  --spacing: .5rem;
+  --spacing-xs: calc(var(--spacing) * .5);
+  --spacing-sm: var(--spacing);
+  --spacing-md: calc(var(--spacing) * 1.5);
+  --border-radius: 8px;
+  --border-radius-small: calc(var(--border-radius) - 2px);
+  --transition-normal: 160ms ease;
+  --color-box-shadow: rgba(42, 45, 49, 0.1);
+  --shadow-medium: 0 1px 2px var(--color-box-shadow), 0 6px 18px var(--color-box-shadow);
 
-  /* base */
+  /* Base palette */
   --color-white: #ffffff;
   --color-black: #000000;
   --color-gray-light: #a9b3c0;
   --color-gray: #6b7280;
   --color-gray-dark: #1d2229;
 
-  /* primary / secondary */
+  /* Brand */
+  --color-primary-rgb: 57, 60, 64;
   --color-primary: #393c40;
   --color-primary-dark: #303234;
-  --color-primary-rgb: 57, 60, 64;
+  --color-primary-light: rgba(var(--color-primary-rgb), 0.8);
 
+  --color-secondary-rgb: 15, 118, 110;
   --color-secondary: #0f766e;
   --color-secondary-dark: #0a544e;
-  --color-secondary-rgb: 15, 118, 110;
+  --color-secondary-light: rgba(var(--color-secondary-rgb), 0.8);
 
-  /* states */
+  /* States */
+  --color-success-rgb: 25, 135, 84;
   --color-success: #198754;
   --color-success-dark: #166e3a;
-  --color-success-rgb: 25, 135, 84;
+  --color-success-light: rgba(var(--color-success-rgb), 0.6);
 
+  --color-danger-rgb: 220, 53, 69;
   --color-danger: #dc3545;
   --color-danger-dark: #b02a37;
-  --color-danger-rgb: 220, 53, 69;
+  --color-danger-light: rgba(var(--color-danger-rgb), 0.6);
 
+  --color-warning-rgb: 255, 193, 7;
   --color-warning: #ffc107;
   --color-warning-dark: #cc9a06;
-  --color-warning-rgb: 255, 193, 7;
+  --color-warning-light: rgba(var(--color-warning-rgb), 0.6);
 
+  --color-info-rgb: 13, 110, 253;
   --color-info: #0d6efd;
   --color-info-dark: #0b5ed7;
-  --color-info-rgb: 13, 110, 253;
+  --color-info-light: rgba(var(--color-info-rgb), 0.6);
+
+  /* Text / Background */
+  --color-text: var(--color-gray-dark);
+  --color-background: var(--color-white);
+
+  /* Header / Nav / Layout */
+  --nav-height: 3.5rem;
+  --nav-border-line: 1px solid var(--color-gray-light, #a9b3c0);
+
+  --header-height: var(--nav-height);
+  --header-gap: .5rem;
+  --header-margin-left: 1rem;
+  --header-color-title: var(--color-secondary);
+  --header-color-subtitle: var(--color-black);
+  --header-color-env: var(--color-secondary);
+  --header-color-bg: var(--color-secondary);
+  --header-title-font-size: 1.1rem;
+  --header-title-font-weight: bold;
+  --header-subtitle-font-size: 1rem;
+  --header-env-font-size: 1.1rem;
+  --header-env-font-weight: bold;
+  --header-title-font-size-sm: 1rem;
+  --header-subtitle-font-size-sm: 0.9rem;
+  --header-env-font-size-sm: 1rem;
+
+  --layout-sidebar-width-collapsed: calc(var(--spacing) * 8);
+  --layout-sidebar-width-expanded: calc(var(--spacing) * 37);
+  --layout-sidebar-bg: var(--color-primary);
+  --layout-header-height: calc(var(--nav-height) + 1px);
+  --layout-header-bg: var(--color-white);
+  --layout-header-border: var(--nav-border-line);
+  --layout-content-padding: calc(var(--spacing) * 3);
+  --layout-content-max-width: 80rem;
+  --layout-content-min-width: 0rem;
+  --layout-sidebar-height-mobile-collapsed: calc(var(--nav-height) + 1px);
+  --layout-sidebar-height-mobile-expanded: 7rem;
+
+  /* Sidebar */
+  --sidebar-height: 4rem;
+  --sidebar-height-compact: 48px;
+  --sidebar-gap: var(--spacing);
+  --sidebar-bg: var(--color-primary);
+  --sidebar-fg: var(--color-white);
+  --sidebar-accent-rgb: var(--color-secondary-rgb);
+  --sidebar-item-height: 3.25rem;
+  --sidebar-subitem-height: 38px;
+  --sidebar-padding-sm: 10px;
+  --sidebar-padding-md: 12px;
+  --sidebar-margin-sm: 1rem;
+  --sidebar-margin-md: 2rem;
+  --sidebar-icon-size: 1rem;
+  --sidebar-icon-size-compact: 0.8rem;
+  --sidebar-transition: 0.3s ease-in-out;
+  --sidebar-mobile-nav-height: calc(var(--nav-height) + 1px);
+  --sidebar-mobile-icon-size: 1.1rem;
+  --sidebar-mobile-gap: 50px;
+
+  /* Buttons */
+  --button-color: var(--color-white, #ffffff);
+  --button-color-hover: var(--color-white, #ffffff);
+  --button-background-color: var(--color-primary, #393c40);
+  --button-background-color-hover: var(--color-secondary, #0a544e);
+
+  --button-color-light: var(--color-primary-dark, #303234);
+  --button-color-hover-light: var(--color-white, #ffffff);
+  --button-background-color-light-rgb: var(--color-primary-rgb, 57, 60, 64);
+  --button-background-color-hover-light: var(--color-primary, #393c40);
+
+  --button-color-secondary: var(--color-white, #ffffff);
+  --button-color-hover-secondary: var(--color-white, #ffffff);
+  --button-background-color-secondary: var(--color-secondary, #0f766e);
+  --button-background-color-hover-secondary: var(--color-primary, #393c40);
+
+  --button-color-success: var(--color-white, #ffffff);
+  --button-color-hover-success: var(--color-white, #ffffff);
+  --button-background-color-success: var(--color-success, #198754);
+  --button-background-color-hover-success: var(--color-success-dark, #166e3a);
+
+  --button-color-warning: var(--color-white, #ffffff);
+  --button-color-hover-warning: var(--color-white, #ffffff);
+  --button-background-color-warning: var(--color-warning, #ffc107);
+  --button-background-color-hover-warning: var(--color-warning-dark, #cc9a06);
+
+  --button-color-danger: var(--color-white, #ffffff);
+  --button-color-hover-danger: var(--color-white, #ffffff);
+  --button-background-color-danger: var(--color-danger, #dc3545);
+  --button-background-color-hover-danger: var(--color-danger-dark, #b02a37);
+
+  --button-color-info: var(--color-white, #ffffff);
+  --button-color-hover-info: var(--color-white, #ffffff);
+  --button-background-color-info: var(--color-info, #0d6efd);
+  --button-background-color-hover-info: var(--color-info-dark, #0b5ed7);
+
+  /* Inputs / Labels */
+  --color-label-input: var(--color-secondary, #6c757d);
+  --color-label-input-focus: var(--color-secondary, #6c757d);
+
+  /* Switch */
+  --switch-track-off: var(--color-danger-light, #dc2626);
+  --switch-track-on: var(--color-success-light, #16a34a);
+  --switch-knob-off: var(--color-danger-dark, #303234);
+  --switch-knob-on: var(--color-success-dark, #0f766e);
+  --switch-border: var(--color-gray, #6b7280);
+  --switch-focus-ring: rgba(13, 110, 253, .35);
+  --switch-w: 44px;
+  --switch-h: 24px;
+  --switch-thumb: 20px;
+  --switch-pad: 2px;
+
+  /* Grid (Table) */
+  --grid-bg: var(--color-white);
+  --grid-fg: var(--color-text);
+  --grid-border: var(--color-gray-light);
+  --grid-header-bg: var(--color-primary);
+  --grid-header-fg: var(--color-white);
+  --grid-row-alt: rgba(var(--color-primary-rgb), 0.04);
+  --grid-row-hover: rgba(var(--color-secondary-rgb), 0.08);
+  --grid-radius: var(--border-radius);
+  --grid-shadow: var(--shadow-medium);
+  --grid-pad-y: .6rem;
+  --grid-pad-x: .75rem;
+  --grid-font-size: 1rem;
+  --grid-font-head-size: 1.125rem;
+  --grid-checkbox-accent: var(--color-secondary);
+  --grid-border-strong: var(--color-gray);
+
+  /* Grid (secondary scheme) */
+  --grid-font-size-secondary: 0.9rem;
+  --grid-font-head-size-secondary: 1rem;
+  --grid-header-bg-secondary: var(--color-secondary);
+  --grid-header-fg-secondary: var(--color-white);
+  --grid-row-alt-secondary: rgba(var(--color-secondary-rgb), 0.05);
+  --grid-row-hover-secondary: rgba(var(--color-secondary-rgb), 0.10);
+
+  /* PageGrid (pager) */
+  --pg-bg: var(--grid-bg);
+  --pg-fg: var(--grid-fg);
+  --pg-border: var(--grid-border);
+  --pg-hover: var(--grid-row-hover);
+  --pg-active-bg: var(--grid-header-bg);
+  --pg-active-fg: var(--grid-header-fg);
+  --pg-radius: var(--grid-radius);
+  --pg-pad-y: .4rem;
+  --pg-pad-x: .6rem;
+  --pg-gap: .25rem;
+  --pg-font: var(--grid-font-size);
+  --pg-card-bg: var(--grid-bg);
+  --pg-card-border: var(--grid-border);
+  --pg-card-radius: 10px;
+  --pg-card-shadow: var(--grid-shadow);
+  --pg-frame-outer: #c8d3e3;
+  --pg-frame-bg: #ffffff;
+  --pg-frame-radius: 12px;
+  --pg-frame-shadow: 0 1px 2px rgba(8, 24, 55, .06), 0 4px 18px rgba(8, 24, 55, .06);
+  --pg-size: 34px;
+
+  /* Select */
+  --select-bg: var(--color-white, #fff);
+  --select-fg: var(--color-gray-dark, #1d2229);
+  --select-border: var(--color-gray-light, #c5cfdd);
+  --select-border-focus: var(--color-secondary, #0f766e);
+  --select-placeholder: var(--color-gray, #6b7280);
+  --select-radius: var(--border-radius, 10px);
+  --select-shadow: var(--shadow-medium);
+  --select-pad-y: .5rem;
+  --select-pad-x: .75rem;
+  --select-tag-bg: rgba(15, 118, 110, .1);
+  --select-tag-fg: var(--color-secondary, #0f766e);
+  --select-tag-remove-fg: var(--color-gray, #6b7280);
+  --select-opt-hover: #f2f6fb;
+  --select-opt-selected-bg: rgba(15, 118, 110, .12);
+  --select-opt-selected-fg: var(--color-secondary, #0f766e);
+
+  /* Select (secondary theme) */
+  --select-bg-secondary: var(--color-white, #fff);
+  --select-fg-secondary: var(--color-gray-dark, #1d2229);
+  --select-border-secondary: var(--color-secondary, #0f766e);
+  --select-opt-selected-bg-secondary: rgba(15, 118, 110, .16);
+  --select-opt-selected-fg-secondary: var(--color-secondary, #0f766e);
+
+  /* Z-index */
+  --select-z: 20;
 }
 ```
 

@@ -81,12 +81,15 @@
 
   --layout-sidebar-width-collapsed: calc(var(--spacing) * 8);
   --layout-sidebar-width-expanded: calc(var(--spacing) * 37);
+  --layout-sidebar-bg: var(--color-primary);
   --layout-header-height: calc(var(--nav-height) + 1px);
   --layout-header-bg: var(--color-white);
   --layout-header-border: var(--nav-border-line);
   --layout-content-padding: calc(var(--spacing) * 3);
   --layout-content-max-width: 80rem;
-  --layout-content-min-width: 0;
+  --layout-content-min-width: 0rem;
+  --layout-sidebar-height-mobile-collapsed: calc(var(--nav-height) + 1px);
+  --layout-sidebar-height-mobile-expanded: 7rem;
 
   /* Sidebar */
   --sidebar-height: 4rem;
@@ -154,8 +157,11 @@
   --switch-knob-off: var(--color-danger-dark, #303234);
   --switch-knob-on: var(--color-success-dark, #0f766e);
   --switch-border: var(--color-gray, #6b7280);
-  --switch-focus-ring: rgba(13,110,253,.35);
-  --switch-w: 44px; --switch-h: 24px; --switch-thumb: 20px; --switch-pad: 2px;
+  --switch-focus-ring: rgba(13, 110, 253, .35);
+  --switch-w: 44px;
+  --switch-h: 24px;
+  --switch-thumb: 20px;
+  --switch-pad: 2px;
 
   /* Grid (Table) */
   --grid-bg: var(--color-white);
@@ -167,8 +173,10 @@
   --grid-row-hover: rgba(var(--color-secondary-rgb), 0.08);
   --grid-radius: var(--border-radius);
   --grid-shadow: var(--shadow-medium);
-  --grid-pad-y: .6rem; --grid-pad-x: .75rem;
-  --grid-font-size: 1rem; --grid-font-head-size: 1.125rem;
+  --grid-pad-y: .6rem;
+  --grid-pad-x: .75rem;
+  --grid-font-size: 1rem;
+  --grid-font-head-size: 1.125rem;
   --grid-checkbox-accent: var(--color-secondary);
   --grid-border-strong: var(--color-gray);
 
@@ -188,7 +196,9 @@
   --pg-active-bg: var(--grid-header-bg);
   --pg-active-fg: var(--grid-header-fg);
   --pg-radius: var(--grid-radius);
-  --pg-pad-y: .4rem; --pg-pad-x: .6rem; --pg-gap: .25rem;
+  --pg-pad-y: .4rem;
+  --pg-pad-x: .6rem;
+  --pg-gap: .25rem;
   --pg-font: var(--grid-font-size);
   --pg-card-bg: var(--grid-bg);
   --pg-card-border: var(--grid-border);
@@ -208,7 +218,8 @@
   --select-placeholder: var(--color-gray, #6b7280);
   --select-radius: var(--border-radius, 10px);
   --select-shadow: var(--shadow-medium);
-  --select-pad-y: .5rem; --select-pad-x: .75rem;
+  --select-pad-y: .5rem;
+  --select-pad-x: .75rem;
   --select-tag-bg: rgba(15, 118, 110, .1);
   --select-tag-fg: var(--color-secondary, #0f766e);
   --select-tag-remove-fg: var(--color-gray, #6b7280);
@@ -246,9 +257,14 @@ input[type="reset"] {
   background-color: transparent;
   color: inherit;
 }
+
 button:not(:disabled),
 input[type="button"]:not(:disabled),
 input[type="submit"]:not(:disabled),
-input[type="reset"]:not(:disabled) { cursor: pointer; }
+input[type="reset"]:not(:disabled) {
+  cursor: pointer;
+}
 
-a { text-decoration: none; }
+a {
+  text-decoration: none;
+}
