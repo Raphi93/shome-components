@@ -23,3 +23,5 @@ export type { HeaderProps } from './AppLayout/Header/Header';
 export type { NavigationItem } from './AppLayout/Sidebar/Sidebar';
 export type { AppPageWrapperProps } from './AppLayout/AppLayout';
 export type { AppMainProps } from './AppLayout/Main/Main';
+export type { ColumnDef, GridProps } from './Grid/Grid';
+export { Grid } from './Grid/Grid';

@@ -50,7 +50,7 @@
   --sidebar-width: var(--layout-sidebar-width-expanded);
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 800px) {
   .app-layouts {
     min-height: 0vh;
     grid-template-columns: 1fr;
@@ -61,12 +61,12 @@
   }
 
   .app-layouts.collapsed {
-    --sidebar-height: var(--layout-sidebar-height-mobile-collapsed);
+    --sidebar-height: calc(var(--nav-height) + 1px);
     --isHidden: visible;
     --position: relative;
   }
   .app-layouts.expanded {
-    --sidebar-height: var(--layout-sidebar-height-mobile-expanded);
+    --sidebar-height: 80svh;
     --isHidden: hidden;
     --position: fixed;
   }
@@ -81,12 +81,12 @@
 
   .header {
     width: 100%;
-    height: var(--layout-header-height);
+    height: calc(var(--nav-height) + 1px);
     visibility: var(--isHidden);
     position: var(--position);
   }
 
-  .contentpdc {
+  .content {
     width: 100%;
     padding: 100%;
     visibility: var(--isHidden);

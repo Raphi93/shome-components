@@ -28,7 +28,7 @@
   --spacing-xs: calc(var(--spacing) * .5);
   --spacing-sm: var(--spacing);
   --spacing-md: calc(var(--spacing) * 1.5);
-  --nav-height: 4rem;
+  --nav-height: 3.5rem;
 
   /* ───────────────────────────────────────────────────────────
      Base Palette
@@ -176,7 +176,7 @@
   /* ───────────────────────────────────────────────────────────
      Header
      ─────────────────────────────────────────────────────────── */
-  --header-height: 3.5rem;
+  --header-height: var(--nav-height);
   --header-gap: 0.5rem;
   --header-margin-left: 1rem;
 
@@ -235,12 +235,68 @@
   --layout-content-min-width: 0rem;
 
   --layout-sidebar-height-mobile-collapsed: calc(var(--nav-height) + 1px);
-  --layout-sidebar-height-mobile-expanded: 80svh;
+  --layout-sidebar-height-mobile-expanded: 7rem;
+  /* ───────────────────────────────────────────────────────────
+    Grid
+     ─────────────────────────────────────────────────────────── */
+  --grid-bg: var(--color-white);
+  --grid-fg: var(--color-text, var(--color-gray-dark));
+  --grid-border: var(--color-gray-light);
+  --grid-header-bg: var(--color-primary);
+  --grid-header-fg: var(--color-white);
+  --grid-row-alt: rgba(var(--color-primary-rgb), 0.04);
+  --grid-row-hover: rgba(var(--color-secondary-rgb), 0.08);
+  --grid-radius: var(--border-radius, 8px);
+  --grid-shadow: var(--shadow-medium, 0 1px 2px rgba(0, 0, 0, .06), 0 6px 18px rgba(0, 0, 0, .06));
+  --grid-pad-y: .6rem;
+  --grid-pad-x: .75rem;
+  --grid-font-size: 1rem;
+  --grid-font-head-size: 1.125rem;
+  --grid-checkbox-accent: var(--color-secondary, #0f766e);
+  --grid-border-strong: var(--color-gray, #6b7280);
 
+  /* Secondary Grid */
+  --grid-font-size-secondary: 0.9rem;
+  --grid-font-head-size-secondary: 1rem;
+  --grid-header-bg-secondary: var(--color-secondary);
+  --grid-header-fg-secondary: var(--color-white);
+  --grid-row-alt-secondary: rgba(var(--color-secondary-rgb), 0.05);
+  --grid-row-hover-secondary: rgba(var(--color-secondary-rgb), 0.10);
+  /* ───────────────────────────────────────────────────────────
+    PageGrid
+     ─────────────────────────────────────────────────────────── */
+  --pg-bg: var(--grid-bg);
+  --pg-fg: var(--grid-fg);
+  --pg-border: var(--grid-border);
+  --pg-hover: var(--grid-row-hover);
+  --pg-active-bg: var(--grid-header-bg);
+  --pg-active-fg: var(--grid-header-fg);
+  --pg-radius: var(--grid-radius, 8px);
+  --pg-pad-y: .4rem;
+  --pg-pad-x: .6rem;
+  --pg-gap: .4rem;
+  --pg-font: var(--grid-font-size, 1rem);
+  --pg-card-bg: var(--grid-bg, #fff);
+  --pg-card-border: var(--grid-border, #a9b3c0);
+  --pg-card-radius: 10px;
+  --pg-card-shadow: var(--grid-shadow, 0 1px 2px rgba(0,0,0,.06), 0 6px 18px rgba(0,0,0,.06));
+  --pg-frame-outer: #c8d3e3;      
+  --pg-frame-bg:    #ffffff;         
+  --pg-frame-radius: 12px;            
+  --pg-frame-shadow: 0 1px 2px rgba(8, 24, 55, .06), 0 4px 18px rgba(8, 24, 55, .06);
+  --pg-bg: var(--grid-bg, #fff);
+  --pg-fg: var(--grid-fg, #1d2229);
+  --pg-border: #c5cfdd;
+  --pg-hover: #f2f6fb;
+  --pg-active-bg: var(--grid-header-bg, #0d6efd);
+  --pg-active-fg: var(--grid-header-fg, #fff);
+  --pg-size: 34px;
+  --pg-gap: .25rem;
 }
 
 body {
-     /* === Minimal Reset für Buttons & Links === */
+
+  /* === Minimal Reset für Buttons & Links === */
   button,
   input[type="button"],
   input[type="submit"],
@@ -252,7 +308,7 @@ body {
     line-height: inherit;
     text-align: inherit;
     background-color: transparent;
-     color: inherit; 
+    color: inherit;
   }
 
   button:not(:disabled),
