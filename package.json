@@ -1,8 +1,9 @@
 {
   "name": "@raphi93/shome-components",
-  "version": "1.0.5",
+  "version": "1.0.",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
   },
   "author": "RHUG",
   "license": "ISC",
