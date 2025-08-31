@@ -1,47 +1,29 @@
-/* ─────────────────────────────────────────────────────────────
-   Public design tokens for shome-components (defaults)
-   ───────────────────────────────────────────────────────────── */
 :root {
-
+  /* Typography */
   font-family: 'Arial', Tahoma, Geneva, Verdana, sans-serif;
-
-  /* ───────────────────────────────────────────────────────────
-     Geometry
-     ─────────────────────────────────────────────────────────── */
-  --border-radius: 8px;
-
-  /* ───────────────────────────────────────────────────────────
-     Shadows
-     ─────────────────────────────────────────────────────────── */
-  --color-box-shadow: rgba(42, 45, 49, 0.1);
-  --nav-border-line: 1px solid var(--color-gray-light, #a9b3c0);
-
-  /* ───────────────────────────────────────────────────────────
-     Typography
-     ─────────────────────────────────────────────────────────── */
+  --font-size-base: 1rem;
+  --font-size-md: 0.875rem;
   --font-size-smaller: 0.75rem;
 
-  /* ───────────────────────────────────────────────────────────
-     Spacing
-     ─────────────────────────────────────────────────────────── */
+  /* Spacing / Radius / Motion / Shadows */
   --spacing: .5rem;
   --spacing-xs: calc(var(--spacing) * .5);
   --spacing-sm: var(--spacing);
   --spacing-md: calc(var(--spacing) * 1.5);
-  --nav-height: 3.5rem;
+  --border-radius: 8px;
+  --border-radius-small: calc(var(--border-radius) - 2px);
+  --transition-normal: 160ms ease;
+  --color-box-shadow: rgba(42, 45, 49, 0.1);
+  --shadow-medium: 0 1px 2px var(--color-box-shadow), 0 6px 18px var(--color-box-shadow);
 
-  /* ───────────────────────────────────────────────────────────
-     Base Palette
-     ─────────────────────────────────────────────────────────── */
+  /* Base palette */
   --color-white: #ffffff;
   --color-black: #000000;
   --color-gray-light: #a9b3c0;
   --color-gray: #6b7280;
   --color-gray-dark: #1d2229;
 
-  /* ───────────────────────────────────────────────────────────
-     Brand Colors
-     ─────────────────────────────────────────────────────────── */
+  /* Brand */
   --color-primary-rgb: 57, 60, 64;
   --color-primary: #393c40;
   --color-primary-dark: #303234;
@@ -52,152 +34,61 @@
   --color-secondary-dark: #0a544e;
   --color-secondary-light: rgba(var(--color-secondary-rgb), 0.8);
 
-  /* ───────────────────────────────────────────────────────────
-     State Colors
-     ─────────────────────────────────────────────────────────── */
+  /* States */
   --color-success-rgb: 25, 135, 84;
   --color-success: #198754;
   --color-success-dark: #166e3a;
+  --color-success-light: rgba(var(--color-success-rgb), 0.6);
 
   --color-danger-rgb: 220, 53, 69;
   --color-danger: #dc3545;
   --color-danger-dark: #b02a37;
+  --color-danger-light: rgba(var(--color-danger-rgb), 0.6);
 
   --color-warning-rgb: 255, 193, 7;
   --color-warning: #ffc107;
   --color-warning-dark: #cc9a06;
+  --color-warning-light: rgba(var(--color-warning-rgb), 0.6);
 
   --color-info-rgb: 13, 110, 253;
   --color-info: #0d6efd;
   --color-info-dark: #0b5ed7;
+  --color-info-light: rgba(var(--color-info-rgb), 0.6);
 
-  /* ───────────────────────────────────────────────────────────
-     Buttons
-     ─────────────────────────────────────────────────────────── */
-  --button-color: var(--color-white, #ffffff);
-  --button-color-hover: var(--color-white, #ffffff);
-  --button-background-color: var(--color-primary, #393c40);
-  --button-background-color-hover: var(--color-secondary, #0a544e);
-
-  /* Primary Light */
-  --button-color-light: var(--color-primary-dark, #303234);
-  --button-color-hover-light: var(--color-white, #ffffff);
-  --button-background-color-light-rgb: var(--color-primary-rgb, 57, 60, 64);
-  --button-background-color-hover-light: var(--color-primary, #393c40);
-
-  /* Secondary */
-  --button-color-secondary: var(--color-white, #ffffff);
-  --button-color-hover-secondary: var(--color-white, #ffffff);
-  --button-background-color-secondary: var(--color-secondary, #0f766e);
-  --button-background-color-hover-secondary: var(--color-primary, #393c40);
-
-  /* Secondary Light */
-  --button-color-light-secondary: var(--color-secondary-dark, #0a544e);
-  --button-color-hover-light-secondary: var(--color-white, #ffffff);
-  --button-background-color-light-rgb-secondary: var(--color-secondary-rgb, 15, 118, 110);
-  --button-background-color-hover-light-secondary: var(--color-secondary, #0f766e);
-
-  /* Success */
-  --button-color-success: var(--color-white, #ffffff);
-  --button-color-hover-success: var(--color-white, #ffffff);
-  --button-background-color-success: var(--color-success, #198754);
-  --button-background-color-hover-success: var(--color-success-dark, #166e3a);
-
-  /* Success Light */
-  --button-color-light-success: var(--color-success-dark, #166e3a);
-  --button-color-hover-light-success: var(--color-white, #ffffff);
-  --button-background-color-light-rgb-success: var(--color-success-rgb, 25, 135, 84);
-  --button-background-color-hover-light-success: var(--color-success, #198754);
-
-  /* Warning */
-  --button-color-warning: var(--color-white, #ffffff);
-  --button-color-hover-warning: var(--color-white, #ffffff);
-  --button-background-color-warning: var(--color-warning, #ffc107);
-  --button-background-color-hover-warning: var(--color-warning-dark, #cc9a06);
-
-  /* Warning Light */
-  --button-color-light-warning: var(--color-warning-dark, #cc9a06);
-  --button-color-hover-light-warning: var(--color-white, #ffffff);
-  --button-background-color-light-rgb-warning: var(--color-warning-rgb, 255, 193, 7);
-  --button-background-color-hover-light-warning: var(--color-warning, #ffc107);
-
-  /* Danger */
-  --button-color-danger: var(--color-white, #ffffff);
-  --button-color-hover-danger: var(--color-white, #ffffff);
-  --button-background-color-danger: var(--color-danger, #dc3545);
-  --button-background-color-hover-danger: var(--color-danger-dark, #b02a37);
-
-  /* Danger Light */
-  --button-color-light-danger: var(--color-danger-dark, #b02a37);
-  --button-color-hover-light-danger: var(--color-white, #ffffff);
-  --button-background-color-light-rgb-danger: var(--color-danger-rgb, 220, 53, 69);
-  --button-background-color-hover-light-danger: var(--color-danger, #dc3545);
-
-  /* Info */
-  --button-color-info: var(--color-white, #ffffff);
-  --button-color-hover-info: var(--color-white, #ffffff);
-  --button-background-color-info: var(--color-info, #0d6efd);
-  --button-background-color-hover-info: var(--color-info-dark, #0b5ed7);
-
-  /* Info Light */
-  --button-color-light-info: var(--color-info, #0d6efd);
-  --button-color-hover-light-info: var(--color-white, #ffffff);
-  --button-background-color-light-rgb-info: var(--color-info-rgb, 13, 110, 253);
-  --button-background-color-hover-light-info: var(--color-info, #0d6efd);
-
-  /* ───────────────────────────────────────────────────────────
-     Inputs / Text
-     ─────────────────────────────────────────────────────────── */
-  --font-size-base: 1rem;
-  --font-size-md: 0.875rem;
-  --color-label-input-focus: var(--color-secondary, #6c757d);
-  --color-label-input: var(--color-secondary, #6c757d);
-
+  /* Text / Background */
   --color-text: var(--color-gray-dark);
   --color-background: var(--color-white);
 
-  /* Kleine Radius-Variante für Labels */
-  --border-radius-small: calc(var(--border-radius) - 2px);
+  /* Header / Nav / Layout */
+  --nav-height: 3.5rem;
+  --nav-border-line: 1px solid var(--color-gray-light, #a9b3c0);
 
-  /* Shadow & Transition */
-  --shadow-medium: 0 1px 2px var(--color-box-shadow), 0 6px 18px var(--color-box-shadow);
-  --transition-normal: 160ms ease;
-
-  /* ───────────────────────────────────────────────────────────
-     Switch
-     ─────────────────────────────────────────────────────────── */
-  --switch-track-off: var(--color-danger, #dc2626);
-  --switch-track-on: var(--color-success, #16a34a);
-  --switch-knob-off: var(--color-primary-dark, #303234);
-  --switch-knob-on: var(--color-secondary-dark, #0f766e);
-  --switch-border: var(--color-gray, #6b7280);
-  --switch-focus: var(--color-success, #16a34a);
-
-  /* ───────────────────────────────────────────────────────────
-     Header
-     ─────────────────────────────────────────────────────────── */
   --header-height: var(--nav-height);
-  --header-gap: 0.5rem;
+  --header-gap: .5rem;
   --header-margin-left: 1rem;
-
   --header-color-title: var(--color-secondary);
   --header-color-subtitle: var(--color-black);
   --header-color-env: var(--color-secondary);
   --header-color-bg: var(--color-secondary);
-
   --header-title-font-size: 1.1rem;
   --header-title-font-weight: bold;
   --header-subtitle-font-size: 1rem;
   --header-env-font-size: 1.1rem;
   --header-env-font-weight: bold;
-
   --header-title-font-size-sm: 1rem;
   --header-subtitle-font-size-sm: 0.9rem;
   --header-env-font-size-sm: 1rem;
 
-  /* ───────────────────────────────────────────────────────────
-     Sidebar
-     ─────────────────────────────────────────────────────────── */
+  --layout-sidebar-width-collapsed: calc(var(--spacing) * 8);
+  --layout-sidebar-width-expanded: calc(var(--spacing) * 37);
+  --layout-header-height: calc(var(--nav-height) + 1px);
+  --layout-header-bg: var(--color-white);
+  --layout-header-border: var(--nav-border-line);
+  --layout-content-padding: calc(var(--spacing) * 3);
+  --layout-content-max-width: 80rem;
+  --layout-content-min-width: 0;
+
+  /* Sidebar */
   --sidebar-height: 4rem;
   --sidebar-height-compact: 48px;
   --sidebar-gap: var(--spacing);
@@ -212,116 +103,152 @@
   --sidebar-margin-md: 2rem;
   --sidebar-icon-size: 1rem;
   --sidebar-icon-size-compact: 0.8rem;
-  --sidebar-img-size: 1.8rem;
   --sidebar-transition: 0.3s ease-in-out;
-
   --sidebar-mobile-nav-height: calc(var(--nav-height) + 1px);
   --sidebar-mobile-icon-size: 1.1rem;
   --sidebar-mobile-gap: 50px;
 
-  /* ───────────────────────────────────────────────────────────
-     App Layout
-     ─────────────────────────────────────────────────────────── */
-  --layout-sidebar-width-collapsed: calc(var(--spacing) * 8);
-  --layout-sidebar-width-expanded: calc(var(--spacing) * 37);
-  --layout-sidebar-bg: var(--color-primary);
+  /* Buttons */
+  --button-color: var(--color-white, #ffffff);
+  --button-color-hover: var(--color-white, #ffffff);
+  --button-background-color: var(--color-primary, #393c40);
+  --button-background-color-hover: var(--color-secondary, #0a544e);
 
-  --layout-header-height: calc(var(--nav-height) + 1px);
-  --layout-header-bg: var(--color-white);
-  --layout-header-border: var(--nav-border-line);
+  --button-color-light: var(--color-primary-dark, #303234);
+  --button-color-hover-light: var(--color-white, #ffffff);
+  --button-background-color-light-rgb: var(--color-primary-rgb, 57, 60, 64);
+  --button-background-color-hover-light: var(--color-primary, #393c40);
 
-  --layout-content-padding: calc(var(--spacing) * 3);
-  --layout-content-max-width: 80rem;
-  --layout-content-min-width: 0rem;
+  --button-color-secondary: var(--color-white, #ffffff);
+  --button-color-hover-secondary: var(--color-white, #ffffff);
+  --button-background-color-secondary: var(--color-secondary, #0f766e);
+  --button-background-color-hover-secondary: var(--color-primary, #393c40);
 
-  --layout-sidebar-height-mobile-collapsed: calc(var(--nav-height) + 1px);
-  --layout-sidebar-height-mobile-expanded: 7rem;
-  /* ───────────────────────────────────────────────────────────
-    Grid
-     ─────────────────────────────────────────────────────────── */
+  --button-color-success: var(--color-white, #ffffff);
+  --button-color-hover-success: var(--color-white, #ffffff);
+  --button-background-color-success: var(--color-success, #198754);
+  --button-background-color-hover-success: var(--color-success-dark, #166e3a);
+
+  --button-color-warning: var(--color-white, #ffffff);
+  --button-color-hover-warning: var(--color-white, #ffffff);
+  --button-background-color-warning: var(--color-warning, #ffc107);
+  --button-background-color-hover-warning: var(--color-warning-dark, #cc9a06);
+
+  --button-color-danger: var(--color-white, #ffffff);
+  --button-color-hover-danger: var(--color-white, #ffffff);
+  --button-background-color-danger: var(--color-danger, #dc3545);
+  --button-background-color-hover-danger: var(--color-danger-dark, #b02a37);
+
+  --button-color-info: var(--color-white, #ffffff);
+  --button-color-hover-info: var(--color-white, #ffffff);
+  --button-background-color-info: var(--color-info, #0d6efd);
+  --button-background-color-hover-info: var(--color-info-dark, #0b5ed7);
+
+  /* Inputs / Labels */
+  --color-label-input: var(--color-secondary, #6c757d);
+  --color-label-input-focus: var(--color-secondary, #6c757d);
+
+  /* Switch */
+  --switch-track-off: var(--color-danger-light, #dc2626);
+  --switch-track-on: var(--color-success-light, #16a34a);
+  --switch-knob-off: var(--color-danger-dark, #303234);
+  --switch-knob-on: var(--color-success-dark, #0f766e);
+  --switch-border: var(--color-gray, #6b7280);
+  --switch-focus-ring: rgba(13,110,253,.35);
+  --switch-w: 44px; --switch-h: 24px; --switch-thumb: 20px; --switch-pad: 2px;
+
+  /* Grid (Table) */
   --grid-bg: var(--color-white);
-  --grid-fg: var(--color-text, var(--color-gray-dark));
+  --grid-fg: var(--color-text);
   --grid-border: var(--color-gray-light);
   --grid-header-bg: var(--color-primary);
   --grid-header-fg: var(--color-white);
   --grid-row-alt: rgba(var(--color-primary-rgb), 0.04);
   --grid-row-hover: rgba(var(--color-secondary-rgb), 0.08);
-  --grid-radius: var(--border-radius, 8px);
-  --grid-shadow: var(--shadow-medium, 0 1px 2px rgba(0, 0, 0, .06), 0 6px 18px rgba(0, 0, 0, .06));
-  --grid-pad-y: .6rem;
-  --grid-pad-x: .75rem;
-  --grid-font-size: 1rem;
-  --grid-font-head-size: 1.125rem;
-  --grid-checkbox-accent: var(--color-secondary, #0f766e);
-  --grid-border-strong: var(--color-gray, #6b7280);
+  --grid-radius: var(--border-radius);
+  --grid-shadow: var(--shadow-medium);
+  --grid-pad-y: .6rem; --grid-pad-x: .75rem;
+  --grid-font-size: 1rem; --grid-font-head-size: 1.125rem;
+  --grid-checkbox-accent: var(--color-secondary);
+  --grid-border-strong: var(--color-gray);
 
-  /* Secondary Grid */
+  /* Grid (secondary scheme) */
   --grid-font-size-secondary: 0.9rem;
   --grid-font-head-size-secondary: 1rem;
   --grid-header-bg-secondary: var(--color-secondary);
   --grid-header-fg-secondary: var(--color-white);
   --grid-row-alt-secondary: rgba(var(--color-secondary-rgb), 0.05);
   --grid-row-hover-secondary: rgba(var(--color-secondary-rgb), 0.10);
-  /* ───────────────────────────────────────────────────────────
-    PageGrid
-     ─────────────────────────────────────────────────────────── */
+
+  /* PageGrid (pager) */
   --pg-bg: var(--grid-bg);
   --pg-fg: var(--grid-fg);
   --pg-border: var(--grid-border);
   --pg-hover: var(--grid-row-hover);
   --pg-active-bg: var(--grid-header-bg);
   --pg-active-fg: var(--grid-header-fg);
-  --pg-radius: var(--grid-radius, 8px);
-  --pg-pad-y: .4rem;
-  --pg-pad-x: .6rem;
-  --pg-gap: .4rem;
-  --pg-font: var(--grid-font-size, 1rem);
-  --pg-card-bg: var(--grid-bg, #fff);
-  --pg-card-border: var(--grid-border, #a9b3c0);
+  --pg-radius: var(--grid-radius);
+  --pg-pad-y: .4rem; --pg-pad-x: .6rem; --pg-gap: .25rem;
+  --pg-font: var(--grid-font-size);
+  --pg-card-bg: var(--grid-bg);
+  --pg-card-border: var(--grid-border);
   --pg-card-radius: 10px;
-  --pg-card-shadow: var(--grid-shadow, 0 1px 2px rgba(0,0,0,.06), 0 6px 18px rgba(0,0,0,.06));
-  --pg-frame-outer: #c8d3e3;      
-  --pg-frame-bg:    #ffffff;         
-  --pg-frame-radius: 12px;            
+  --pg-card-shadow: var(--grid-shadow);
+  --pg-frame-outer: #c8d3e3;
+  --pg-frame-bg: #ffffff;
+  --pg-frame-radius: 12px;
   --pg-frame-shadow: 0 1px 2px rgba(8, 24, 55, .06), 0 4px 18px rgba(8, 24, 55, .06);
-  --pg-bg: var(--grid-bg, #fff);
-  --pg-fg: var(--grid-fg, #1d2229);
-  --pg-border: #c5cfdd;
-  --pg-hover: #f2f6fb;
-  --pg-active-bg: var(--grid-header-bg, #0d6efd);
-  --pg-active-fg: var(--grid-header-fg, #fff);
   --pg-size: 34px;
-  --pg-gap: .25rem;
+
+  /* Select */
+  --select-bg: var(--color-white, #fff);
+  --select-fg: var(--color-gray-dark, #1d2229);
+  --select-border: var(--color-gray-light, #c5cfdd);
+  --select-border-focus: var(--color-secondary, #0f766e);
+  --select-placeholder: var(--color-gray, #6b7280);
+  --select-radius: var(--border-radius, 10px);
+  --select-shadow: var(--shadow-medium);
+  --select-pad-y: .5rem; --select-pad-x: .75rem;
+  --select-tag-bg: rgba(15, 118, 110, .1);
+  --select-tag-fg: var(--color-secondary, #0f766e);
+  --select-tag-remove-fg: var(--color-gray, #6b7280);
+  --select-opt-hover: #f2f6fb;
+  --select-opt-selected-bg: rgba(15, 118, 110, .12);
+  --select-opt-selected-fg: var(--color-secondary, #0f766e);
+
+  /* Select (secondary theme) */
+  --select-bg-secondary: var(--color-white, #fff);
+  --select-fg-secondary: var(--color-gray-dark, #1d2229);
+  --select-border-secondary: var(--color-secondary, #0f766e);
+  --select-opt-selected-bg-secondary: rgba(15, 118, 110, .16);
+  --select-opt-selected-fg-secondary: var(--color-secondary, #0f766e);
+
+  /* Z-index */
+  --select-z: 20;
 }
 
 body {
-
-  /* === Minimal Reset für Buttons & Links === */
-  button,
-  input[type="button"],
-  input[type="submit"],
-  input[type="reset"] {
-    -webkit-appearance: none;
-    appearance: none;
-    font: inherit;
-    border: none;
-    line-height: inherit;
-    text-align: inherit;
-    background-color: transparent;
-    color: inherit;
-  }
-
-  button:not(:disabled),
-  input[type="button"]:not(:disabled),
-  input[type="submit"]:not(:disabled),
-  input[type="reset"]:not(:disabled) {
-    cursor: pointer;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
   box-sizing: border-box;
   display: block;
 }
+
+/* Minimal button/input reset */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  -webkit-appearance: none;
+  appearance: none;
+  font: inherit;
+  border: none;
+  line-height: inherit;
+  text-align: inherit;
+  background-color: transparent;
+  color: inherit;
+}
+button:not(:disabled),
+input[type="button"]:not(:disabled),
+input[type="submit"]:not(:disabled),
+input[type="reset"]:not(:disabled) { cursor: pointer; }
+
+a { text-decoration: none; }

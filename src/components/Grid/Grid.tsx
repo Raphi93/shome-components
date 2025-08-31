@@ -58,7 +58,6 @@ export const Grid: React.FC<GridProps> = ({
     const selected = isControlled ? (selectedKeys as Array<string | number>) : internalSelected;
     useEffect(() => {
         if (isControlled) return;
-        // reset Auswahl wenn rows wechseln
         setInternalSelected([]);
     }, [rows, isControlled]);
 

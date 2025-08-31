@@ -1,3 +1,4 @@
+// stories/Switch.stories.tsx
 import React, { useEffect, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Switch } from "../../components";
@@ -23,33 +24,45 @@ const meta: Meta<typeof Switch> = {
     size: {
       description: "Size of the switch.",
       control: { type: "select" },
-      options: ["small", "medium", "large"],
+      options: ["sm", "md", "lg"],
+      table: { category: "Props" },
+    },
+    disabled: {
+      description: "Disable interactions.",
+      control: "boolean",
+      table: { category: "Props" },
+    },
+    label: {
+      description: "Optional label text / node.",
+      control: "text",
+      table: { category: "Props" },
+    },
+    labelPosition: {
+      description: "Label position relative to the switch.",
+      control: { type: "select" },
+      options: ["left", "right"],
       table: { category: "Props" },
     },
   },
   args: {
     checked: false,
-    size: "medium",
+    size: "md",
+    disabled: false,
+    label: "",
+    labelPosition: "right",
   },
 };
 export default meta;
 
 type Story = StoryObj<typeof Switch>;
 
-/** Controlled template that stays in sync with Storybook args */
-function ControlledSwitchTemplate(args: SwitchProps) {
+function ControlledTemplate(args: SwitchProps) {
   const [on, setOn] = useState<boolean>(!!args.checked);
-
-  // keep local state in sync when the control panel changes
-  useEffect(() => {
-    setOn(!!args.checked);
-  }, [args.checked]);
-
+  useEffect(() => setOn(!!args.checked), [args.checked]);
   const handleToggle = (next: boolean) => {
     setOn(next);
-    args.onChange?.(next); // emit to SB actions panel
+    args.onChange?.(next);
   };
-
   return (
     <div style={{ display: "grid", gap: 12, placeItems: "center", width: 360 }}>
       <Switch {...args} checked={on} onChange={handleToggle} />
@@ -59,71 +72,36 @@ function ControlledSwitchTemplate(args: SwitchProps) {
 }
 
 export const Basic: Story = {
-  render: (args) => <ControlledSwitchTemplate {...args} />,
+  render: (args) => <ControlledTemplate {...args} />,
 };
 
-export const WithLabel: Story = {
-  render: (args) => {
-    const [on, setOn] = useState(true);
-    useEffect(() => { if (typeof args.checked === "boolean") setOn(args.checked); }, [args.checked]);
-    return (
-      <label style={{ display: "inline-flex", gap: 8, alignItems: "center", width: 360, justifyContent: "center" }}>
-        <span>Dark mode</span>
-        <Switch
-          {...args}
-          checked={on}
-          onChange={(v) => {
-            setOn(v);
-            args.onChange?.(v);
-          }}
-        />
-      </label>
-    );
-  },
+export const WithLabelRight: Story = {
+  args: { label: "Dark mode" },
+  render: (args) => <ControlledTemplate {...args} />,
 };
 
-/** Keyboard accessible wrapper example */
-export const KeyboardAccessibleWrapper: Story = {
-  name: "Keyboard Accessible (role = switch)",
-  render: (args) => {
-    const [on, setOn] = useState(false);
-    const toggle = () => {
-      const next = !on;
-      setOn(next);
-      args.onChange?.(next);
-    };
-    return (
-      <div
-        role="switch"
-        aria-checked={on}
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === " " || e.key === "Enter") {
-            e.preventDefault();
-            toggle();
-          }
-        }}
-        style={{ display: "inline-flex", alignItems: "center", gap: 8, outline: "none" }}
-      >
-        <span style={{ fontFamily: "sans-serif" }}>Notifications</span>
-        <Switch {...args} checked={on} onChange={(v) => { setOn(v); args.onChange?.(v); }} />
-      </div>
-    );
-  },
+export const WithLabelLeft: Story = {
+  args: { label: "Notifications", labelPosition: "left" },
+  render: (args) => <ControlledTemplate {...args} />,
 };
 
-/** Themed via your public tokens (use --switch-* instead of base colors) */
+export const Disabled: Story = {
+  args: { disabled: true, label: "Disabled" },
+  render: (args) => <ControlledTemplate {...args} />,
+};
+
 export const Themed: Story = {
   render: (args) => {
     const [on, setOn] = useState(false);
     return (
       <div
         style={{
-          ["--switch-track-off" as any]: "#8b5cf6",      // off track (violett)
-          ["--switch-track-on" as any]: "#22c55e",       // on track (green)
-          ["--switch-knob-off" as any]: "#111827",       // knob/border off
-          ["--switch-knob-on" as any]: "#0f766e",        // knob on
+          ["--switch-track-off" as any]: "#8b5cf6",
+          ["--switch-track-on" as any]: "#22c55e",
+          ["--switch-knob-off" as any]: "#111827",
+          ["--switch-knob-on" as any]: "#0f766e",
           ["--switch-border" as any]: "#111827",
+          ["--switch-focus" as any]: "rgba(34,197,94,.35)",
           padding: 24,
           borderRadius: 12,
           background: "#f8fafc",
@@ -140,6 +118,7 @@ export const Themed: Story = {
             setOn(v);
             args.onChange?.(v);
           }}
+          label="Custom themed"
         />
         <div style={{ fontFamily: "sans-serif", color: "#111827" }}>
           Customized tokens — {on ? "On" : "Off"}
@@ -149,20 +128,19 @@ export const Themed: Story = {
   },
 };
 
-/** Show all sizes using the size prop */
 export const Sizes: Story = {
   render: (args) => {
-    const [states, setStates] = useState({ small: false, medium: true, large: false });
+    const [s, setS] = useState({ sm: false, md: true, lg: false });
     return (
       <div style={{ display: "grid", gap: 16, placeItems: "center", width: 360 }}>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
           <span>Small</span>
           <Switch
             {...args}
-            size="small"
-            checked={states.small}
+            size="sm"
+            checked={s.sm}
             onChange={(v) => {
-              setStates((s) => ({ ...s, small: v }));
+              setS((x) => ({ ...x, sm: v }));
               args.onChange?.(v);
             }}
           />
@@ -171,10 +149,10 @@ export const Sizes: Story = {
           <span>Medium</span>
           <Switch
             {...args}
-            size="medium"
-            checked={states.medium}
+            size="md"
+            checked={s.md}
             onChange={(v) => {
-              setStates((s) => ({ ...s, medium: v }));
+              setS((x) => ({ ...x, md: v }));
               args.onChange?.(v);
             }}
           />
@@ -183,10 +161,10 @@ export const Sizes: Story = {
           <span>Large</span>
           <Switch
             {...args}
-            size="large"
-            checked={states.large}
+            size="lg"
+            checked={s.lg}
             onChange={(v) => {
-              setStates((s) => ({ ...s, large: v }));
+              setS((x) => ({ ...x, lg: v }));
               args.onChange?.(v);
             }}
           />

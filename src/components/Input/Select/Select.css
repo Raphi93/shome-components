@@ -1,0 +1,147 @@
+.select.select--secondary {
+  --select-border: var(--select-border-secondary);
+  --select-opt-selected-bg: var(--select-opt-selected-bg-secondary);
+  --select-opt-selected-fg: var(--select-opt-selected-fg-secondary);
+}
+
+.notranslate { unicode-bidi: plaintext; }
+
+.select {
+  position: relative;
+  width: 100%;
+  font: inherit;
+  color: var(--select-fg);
+  user-select: none;
+  outline: none;
+}
+
+.select.is-disabled { opacity: .6; pointer-events: none; }
+
+.select__control {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: .5rem;
+  background: var(--select-bg);
+  border: 1px solid var(--select-border);
+  border-radius: var(--select-radius);
+  padding: var(--select-pad-y) var(--select-pad-x);
+  box-shadow: 0 0 0 0 rgba(0,0,0,0);
+  transition: box-shadow .15s ease, border-color .15s ease, background .15s ease;
+  cursor: pointer;
+}
+.select.is-open .select__control {
+  border-color: var(--select-border-focus);
+  box-shadow: 0 0 0 3px rgba(15,118,110,.15);
+}
+
+.select__value {
+  min-height: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+  flex-wrap: wrap;
+}
+
+.select__placeholder {
+  color: var(--select-placeholder);
+  opacity: .9;
+}
+
+.select__single {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.select.has-query .select__single { display: none; }
+
+.select__input {
+  flex: 1 1 auto;
+  min-width: 2ch;
+  border: 0;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: var(--select-fg);
+  transition: width .15s ease, opacity .15s ease;
+}
+.select__input::placeholder {
+  color: var(--select-placeholder);
+  opacity: .9;
+}
+
+.select:not(.is-open) .select__input {
+  width: 0;
+  min-width: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.select:not(.is-open):hover .select__input {
+  width: auto;
+  min-width: 6ch;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.select.is-open .select__placeholder { display: none; }
+.select:not(.is-open):hover .select__placeholder { display: none; }
+
+.select__actions { display: inline-flex; align-items: center; gap: .25rem; }
+.select__clear {
+  border: 0; background: transparent; color: var(--select-placeholder);
+  font-size: 1rem; line-height: 1; width: 1.5rem; height: 1.5rem;
+  border-radius: .375rem; cursor: pointer;
+}
+.select__clear:hover { background: #f3f4f6; }
+
+.select__arrow {
+  width: .65rem; height: .65rem; display: inline-block;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg); opacity: .7; margin-right: .25rem; transition: transform .2s ease;
+}
+.select.is-open .select__arrow { transform: rotate(-135deg); }
+
+.select__tags { display: inline-flex; gap: .35rem; flex-wrap: wrap; }
+.select__tag {
+  display: inline-flex; align-items: center; gap: .35rem;
+  background: var(--select-tag-bg); color: var(--select-tag-fg);
+  padding: .15rem .45rem; border-radius: 999px; font-size: .9em; line-height: 1.2;
+}
+.select__tag-remove {
+  border: 0; background: transparent; color: var(--select-tag-remove-fg);
+  font-weight: 700; line-height: 1; width: 1rem; height: 1rem;
+  display: inline-grid; place-items: center; border-radius: 999px; cursor: pointer;
+}
+.select__tag-remove:hover { background: rgba(0,0,0,.08); }
+
+.select__menu {
+  position: absolute; z-index: var(--select-z);
+  left: 0; right: 0; margin-top: .35rem;
+  background: var(--select-bg); border: 1px solid var(--select-border);
+  border-radius: var(--select-radius); box-shadow: var(--select-shadow); overflow: hidden;
+}
+
+.select__list {
+  list-style: none; margin: 0; padding: .25rem;
+  max-height: 280px; overflow: auto;
+}
+.select__option {
+  display: grid; grid-template-columns: 1.25rem 1fr;
+  align-items: center; gap: .5rem; padding: .5rem .5rem;
+  border-radius: .5rem; cursor: pointer; color: var(--select-fg);
+}
+.select__option:hover:not(.is-disabled),
+.select__option.is-focused { background: var(--select-opt-hover); }
+.select__option.is-selected {
+  background: var(--select-opt-selected-bg);
+  color: var(--select-opt-selected-fg);
+}
+.select__option.is-disabled { opacity: .5; cursor: not-allowed; }
+.select__check { text-align: center; width: 1.25rem; }
+.select__empty { padding: .75rem; text-align: center; color: var(--select-placeholder); }
+
+.select__hidden { display: none !important; }

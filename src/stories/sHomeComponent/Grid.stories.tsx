@@ -144,7 +144,7 @@ export const Secondary: Story = {
     secondary: true,
   },
   render: (args) => (
-    <div style={{ width: "90vw", margin: "0 auto", ["--layout-content-max-width" as any]: "90vw" }}>
+    <div>
       <Grid {...args} />
     </div>
   ),
@@ -159,7 +159,7 @@ export const SecondaryCustomized: Story = {
   },
   render: (args) => {
     const style = {
-      width: "90vw",
+      maxWidth: "80%",
       margin: "0 auto",
     } as React.CSSProperties & Record<string, string>;
     return (
