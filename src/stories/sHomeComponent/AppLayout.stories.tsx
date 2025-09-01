@@ -1,30 +1,14 @@
+// stories/AppLayout.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { MemoryRouter } from "react-router-dom";
 import { PageProvider } from "../../context/PageContext";
 
-// Komponenten & Typen (Barrel-Export)
 import { AppLayout } from "../../components";
 import type { NavigationItem } from "../../components";
 
-// FontAwesome Icons
 import { faChartBar, faCog, faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 
-const meta: Meta<typeof AppLayout> = {
-  title: "sHome Components/Layout/AppLayout",
-  component: AppLayout,
-  parameters: { layout: "fullscreen" },
-  argTypes: {
-    showSidebar: { control: "boolean" },
-    showHeader: { control: "boolean" },
-    expanded: { control: "boolean" },
-  },
-};
-export default meta;
-
-type Story = StoryObj<typeof AppLayout>;
-
-// Menü mit Unterpunkten
 const sampleMenu: NavigationItem[] = [
   { label: "Reports", icon: faChartBar, link: "/reports", isFontAwesome: true },
   {
@@ -39,10 +23,78 @@ const sampleMenu: NavigationItem[] = [
   },
 ];
 
+const meta: Meta<typeof AppLayout> = {
+  title: "sHome Components/Layout/AppLayout",
+  component: AppLayout,
+  tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <PageProvider>
+        <Story />
+      </PageProvider>
+    ),
+  ],
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      description: {
+        component: `
+High-level layout shell with **Sidebar**, **Header**, and **Content** area.
+Use it to wrap pages and drive navigation (desktop + mobile).
+
+### Composition
+- \`<AppLayout>\` wraps your page content (children).
+- Provide \`menu: NavigationItem[]\` to render sidebar items (supports nested children).
+- Toggle layout modes via \`expanded\`, \`isMobile\`, \`showSidebar\`, \`showHeader\`.
+
+### Props (key)
+- **title / subtitle / envTitle**: text in the header.
+- **showSidebar / showHeader**: show/hide major regions.
+- **expanded**: controls sidebar open/closed (desktop or mobile).
+- **isMobile**: forces the mobile layout behavior.
+- **image / imageLong**: logos for square and wide space.
+- **menu**: navigation model (see story source for example).
+- **upperComponent**: optional element above main content.
+
+### Theming tokens
+Reads your global CSS variables:
+- \`--layout-content-max-width\`, \`--layout-content-padding\`
+- \`--layout-sidebar-width-collapsed\`, \`--layout-sidebar-width-expanded\`
+- \`--layout-header-bg\`, \`--layout-header-border\`
+- \`--sidebar-*\\\` and brand color tokens
+
+Override them at \`:root\` or a wrapper to theme the shell.
+        `.trim(),
+      },
+    },
+  },
+  argTypes: {
+    title: { control: "text", description: "Header title." },
+    subtitle: { control: "text", description: "Header subtitle." },
+    envTitle: { control: "text", description: "Environment label in header." },
+    showSidebar: { control: "boolean", description: "Show/hide the sidebar." },
+    showHeader: { control: "boolean", description: "Show/hide the header." },
+    isMobile: { control: "boolean", description: "Force mobile layout behavior." },
+    expanded: { control: "boolean", description: "Sidebar expanded/collapsed state." },
+    reset: { control: "boolean", description: "Optional reset flag used by layout." },
+    image: { control: "text", description: "Square logo (URL)." },
+    imageLong: { control: "text", description: "Wide logo (URL)." },
+    menu: { control: false, description: "Navigation model for the sidebar." },
+    upperComponent: { control: false, description: "Optional node above content." },
+    handleImageClick: { action: "imageClick", description: "Logo click handler." },
+    handleGenerateImage: { control: false, description: "Optional SVG transform hook." },
+    handleContentClick: { action: "contentClick", description: "Content wrapper click." },
+    children: { control: false, description: "Your page content." },
+  },
+};
+export default meta;
+
+type Story = StoryObj<typeof AppLayout>;
+
 export const Basic: Story = {
   args: {
     title: "Dashboard",
-    subtitle: "Willkommen zurück",
+    subtitle: "Welcome back",
     envTitle: "Development",
     showSidebar: true,
     showHeader: true,
@@ -76,9 +128,16 @@ export const Basic: Story = {
       </AppLayout>
     );
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Default desktop layout with sidebar expanded. Resize or toggle `expanded` to see the behavior.",
+      },
+    },
+  },
 };
 
-// ——— zweite Story: Mobile/kompakter Zustand (erzwingt Mobile-Layout, unabhängig von max-width: 800px)
 export const Mobile: Story = {
   args: {
     title: "Dashboard",
@@ -101,9 +160,8 @@ export const Mobile: Story = {
         className="sb-force-mobile"
         style={{ width: 390, height: 844, border: "1px solid #333", margin: "0 auto" }}
       >
-        {/* Story-spezifischer CSS-Override */}
+        {/* Story-local CSS to force the mobile grid template */}
         <style>{`
-          /* Erzwinge Mobile-Layout immer in dieser Story */
           .sb-force-mobile .app-layouts {
             min-height: 0vh;
             grid-template-columns: 1fr;
@@ -137,7 +195,7 @@ export const Mobile: Story = {
           }
           .sb-force-mobile .app-layouts .content {
             width: 100%;
-            max-width: 390px !important;   /* überschreibt 100rem */
+            max-width: 390px !important;
             padding: var(--layout-content-padding);
             visibility: var(--isHidden);
             position: var(--position);
@@ -156,10 +214,18 @@ export const Mobile: Story = {
         >
           <div style={{ padding: "1rem" }}>
             <h2>Mobile Content</h2>
-            <p>Simulierter „Phone“-Viewport (390×844).</p>
+            <p>Simulated phone viewport (390×844).</p>
           </div>
         </AppLayout>
       </div>
     );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Forced mobile layout regardless of viewport. The story injects a scoped CSS override to preview the one-column template.",
+      },
+    },
   },
 };

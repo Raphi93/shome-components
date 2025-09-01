@@ -236,6 +236,18 @@
 
   /* Z-index */
   --select-z: 20;
+
+  /* Spinner */
+  --spinner-center-bg: var(--color-background, #fff);
+  --spinner-color-1: var(--color-primary-light, rgba(var(--color-primary-rgb, 57, 60, 64), .6));
+  --spinner-color-2: var(--color-secondary-light, #0f766e);
+  --spinner-color-3: var(--color-secondary-light, #0f766e);
+  --spinner-color-4: var(--color-primary-light, rgba(var(--color-primary-rgb, 57, 60, 64), .6));
+
+  /* Screw */
+  --screw-face-light: #7a7a7a;
+  --screw-face-dark: #2a2e34;
+  --screw-slot: #0b0d10;
 }
 
 body {
