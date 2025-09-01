@@ -248,6 +248,39 @@
   --screw-face-light: #7a7a7a;
   --screw-face-dark: #2a2e34;
   --screw-slot: #0b0d10;
+
+  /* Text Area */
+  --text-field-fg: var(--color-gray-dark, #1d2229);
+  --text-field-background: var(--color-white, #fff);
+  --text-field-border: var(--color-gray-light, #c5cfdd);
+  --text-field-placeholder: var(--color-gray, #6b7280);
+  --text-field-focus-border: var(--color-primary, #0f766e);
+  --text-field-focus-shadow: var(--shadow-outline, 0 0 0 3px rgba(13,110,253,.18));
+
+  --text-field-radius: var(--border-radius, 10px);
+  --text-field-pad-x: .75rem;
+  --text-field-line: 1.25rem;
+  --text-field-disabled-bg: rgba(0,0,0,.03);
+  --text-field-disabled-fg: var(--color-gray, #6b7280);
+  --ta-label-offset: 1rem;
+
+  /* Choice */
+  --choice-radius: 4px;
+  --choice-gap: .5rem;
+  --choice-size-base: 16px;
+  --choice-dot-base: 10px;
+  --choice-font-size-base: 1rem;
+
+  --choice-bg: var(--text-field-background, #fff);
+  --choice-fg: var(--color-text, #1d2229);
+  --choice-border: var(--text-field-border, #c5cfdd);
+
+  --choice-checked-bg: var(--color-primary, #0f766e);
+  --choice-checked-border: var(--color-primary, #0f766e);
+  --choice-checked-fg: #fff;
+
+  --choice-hover: rgba(8,24,55,.04);
+  --choice-focus: var(--switch-focus-ring, rgba(13,110,253,.35));
 }
 
 body {
