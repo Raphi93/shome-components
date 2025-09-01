@@ -6,7 +6,7 @@
   background:var(--text-field-background);
   border:1px solid var(--text-field-border);
   border-radius:var(--text-field-radius);
-  padding: calc(var(--ta-label-offset) + .25rem) var(--text-field-pad-x) .5rem var(--text-field-pad-x);
+  padding: calc(var(--ta-label-offset)) var(--text-field-pad-x) .5rem var(--text-field-pad-x);
   line-height:var(--text-field-line);
   min-height:1.2rem;
   resize:vertical;

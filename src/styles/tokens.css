@@ -1,11 +1,15 @@
 :root {
-  /* Typography */
+  /* =========================
+     CHAPTER 1 · TYPOGRAPHY
+     ========================= */
   font-family: 'Arial', Tahoma, Geneva, Verdana, sans-serif;
   --font-size-base: 1rem;
   --font-size-md: 0.875rem;
   --font-size-smaller: 0.75rem;
 
-  /* Spacing / Radius / Motion / Shadows */
+  /* ==========================================
+     CHAPTER 2 · SPACING / RADIUS / MOTION / SHADOWS
+     ========================================== */
   --spacing: .5rem;
   --spacing-xs: calc(var(--spacing) * .5);
   --spacing-sm: var(--spacing);
@@ -16,25 +20,34 @@
   --color-box-shadow: rgba(42, 45, 49, 0.1);
   --shadow-medium: 0 1px 2px var(--color-box-shadow), 0 6px 18px var(--color-box-shadow);
 
-  /* Base palette */
+  /* =========================
+     CHAPTER 3 · BASE PALETTE
+     ========================= */
   --color-white: #ffffff;
   --color-black: #000000;
   --color-gray-light: #a9b3c0;
   --color-gray: #6b7280;
   --color-gray-dark: #1d2229;
 
-  /* Brand */
+  /* =========================
+     CHAPTER 4 · BRAND (PRIMARY)
+     ========================= */
   --color-primary-rgb: 57, 60, 64;
   --color-primary: #393c40;
   --color-primary-dark: #303234;
   --color-primary-light: rgba(var(--color-primary-rgb), 0.8);
 
+  /* =========================
+     CHAPTER 5 · BRAND (SECONDARY)
+     ========================= */
   --color-secondary-rgb: 15, 118, 110;
   --color-secondary: #0f766e;
   --color-secondary-dark: #0a544e;
   --color-secondary-light: rgba(var(--color-secondary-rgb), 0.8);
 
-  /* States */
+  /* =========================
+     CHAPTER 6 · STATE COLORS
+     ========================= */
   --color-success-rgb: 25, 135, 84;
   --color-success: #198754;
   --color-success-dark: #166e3a;
@@ -55,11 +68,15 @@
   --color-info-dark: #0b5ed7;
   --color-info-light: rgba(var(--color-info-rgb), 0.6);
 
-  /* Text / Background */
+  /* =========================
+     CHAPTER 7 · TEXT & BACKGROUND
+     ========================= */
   --color-text: var(--color-gray-dark);
   --color-background: var(--color-white);
 
-  /* Header / Nav / Layout */
+  /* =========================
+     CHAPTER 8 · NAV / HEADER / LAYOUT
+     ========================= */
   --nav-height: 3.5rem;
   --nav-border-line: 1px solid var(--color-gray-light, #a9b3c0);
 
@@ -91,7 +108,9 @@
   --layout-sidebar-height-mobile-collapsed: calc(var(--nav-height) + 1px);
   --layout-sidebar-height-mobile-expanded: 7rem;
 
-  /* Sidebar */
+  /* =========================
+     CHAPTER 9 · SIDEBAR
+     ========================= */
   --sidebar-height: 4rem;
   --sidebar-height-compact: 48px;
   --sidebar-gap: var(--spacing);
@@ -111,7 +130,9 @@
   --sidebar-mobile-icon-size: 1.1rem;
   --sidebar-mobile-gap: 50px;
 
-  /* Buttons */
+  /* =========================
+     CHAPTER 10 · BUTTONS
+     ========================= */
   --button-color: var(--color-white, #ffffff);
   --button-color-hover: var(--color-white, #ffffff);
   --button-background-color: var(--color-primary, #393c40);
@@ -147,11 +168,15 @@
   --button-background-color-info: var(--color-info, #0d6efd);
   --button-background-color-hover-info: var(--color-info-dark, #0b5ed7);
 
-  /* Inputs / Labels */
+  /* =========================
+     CHAPTER 11 · INPUTS / LABELS
+     ========================= */
   --color-label-input: var(--color-secondary, #6c757d);
   --color-label-input-focus: var(--color-secondary, #6c757d);
 
-  /* Switch */
+  /* =========================
+     CHAPTER 12 · SWITCH
+     ========================= */
   --switch-track-off: var(--color-danger-light, #dc2626);
   --switch-track-on: var(--color-success-light, #16a34a);
   --switch-knob-off: var(--color-danger-dark, #303234);
@@ -163,7 +188,9 @@
   --switch-thumb: 20px;
   --switch-pad: 2px;
 
-  /* Grid (Table) */
+  /* =========================
+     CHAPTER 13 · GRID (TABLE)
+     ========================= */
   --grid-bg: var(--color-white);
   --grid-fg: var(--color-text);
   --grid-border: var(--color-gray-light);
@@ -180,7 +207,9 @@
   --grid-checkbox-accent: var(--color-secondary);
   --grid-border-strong: var(--color-gray);
 
-  /* Grid (secondary scheme) */
+  /* ===================================
+     CHAPTER 14 · GRID (SECONDARY SCHEME)
+     =================================== */
   --grid-font-size-secondary: 0.9rem;
   --grid-font-head-size-secondary: 1rem;
   --grid-header-bg-secondary: var(--color-secondary);
@@ -188,7 +217,9 @@
   --grid-row-alt-secondary: rgba(var(--color-secondary-rgb), 0.05);
   --grid-row-hover-secondary: rgba(var(--color-secondary-rgb), 0.10);
 
-  /* PageGrid (pager) */
+  /* =========================
+     CHAPTER 15 · PAGEGRID (PAGER)
+     ========================= */
   --pg-bg: var(--grid-bg);
   --pg-fg: var(--grid-fg);
   --pg-border: var(--grid-border);
@@ -210,7 +241,9 @@
   --pg-frame-shadow: 0 1px 2px rgba(8, 24, 55, .06), 0 4px 18px rgba(8, 24, 55, .06);
   --pg-size: 34px;
 
-  /* Select */
+  /* =========================
+     CHAPTER 16 · SELECT
+     ========================= */
   --select-bg: var(--color-white, #fff);
   --select-fg: var(--color-gray-dark, #1d2229);
   --select-border: var(--color-gray-light, #c5cfdd);
@@ -227,29 +260,39 @@
   --select-opt-selected-bg: rgba(15, 118, 110, .12);
   --select-opt-selected-fg: var(--color-secondary, #0f766e);
 
-  /* Select (secondary theme) */
+  /* ==================================
+     CHAPTER 17 · SELECT (SECONDARY THEME)
+     ================================== */
   --select-bg-secondary: var(--color-white, #fff);
   --select-fg-secondary: var(--color-gray-dark, #1d2229);
   --select-border-secondary: var(--color-secondary, #0f766e);
   --select-opt-selected-bg-secondary: rgba(15, 118, 110, .16);
   --select-opt-selected-fg-secondary: var(--color-secondary, #0f766e);
 
-  /* Z-index */
+  /* =========================
+     CHAPTER 18 · Z-INDEX
+     ========================= */
   --select-z: 20;
 
-  /* Spinner */
+  /* =========================
+     CHAPTER 19 · SPINNER
+     ========================= */
   --spinner-center-bg: var(--color-background, #fff);
   --spinner-color-1: var(--color-primary-light, rgba(var(--color-primary-rgb, 57, 60, 64), .6));
   --spinner-color-2: var(--color-secondary-light, #0f766e);
   --spinner-color-3: var(--color-secondary-light, #0f766e);
   --spinner-color-4: var(--color-primary-light, rgba(var(--color-primary-rgb, 57, 60, 64), .6));
 
-  /* Screw */
+  /* =========================
+     CHAPTER 20 · SCREW
+     ========================= */
   --screw-face-light: #7a7a7a;
   --screw-face-dark: #2a2e34;
   --screw-slot: #0b0d10;
 
-  /* Text Area */
+  /* =========================
+     CHAPTER 21 · TEXT AREA
+     ========================= */
   --text-field-fg: var(--color-gray-dark, #1d2229);
   --text-field-background: var(--color-white, #fff);
   --text-field-border: var(--color-gray-light, #c5cfdd);
@@ -264,7 +307,9 @@
   --text-field-disabled-fg: var(--color-gray, #6b7280);
   --ta-label-offset: 1rem;
 
-  /* Choice */
+  /* =========================
+     CHAPTER 22 · CHOICE (CHECKBOX/RADIO)
+     ========================= */
   --choice-radius: 4px;
   --choice-gap: .5rem;
   --choice-size-base: 16px;
@@ -283,12 +328,17 @@
   --choice-focus: var(--switch-focus-ring, rgba(13,110,253,.35));
 }
 
+/* =========================
+   CHAPTER 23 · BASE ELEMENTS
+   ========================= */
 body {
   box-sizing: border-box;
   display: block;
 }
 
-/* Minimal button/input reset */
+/* =========================
+   CHAPTER 24 · MINIMAL RESETS
+   ========================= */
 button,
 input[type="button"],
 input[type="submit"],
