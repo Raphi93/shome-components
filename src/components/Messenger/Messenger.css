@@ -113,7 +113,7 @@
 .message-bubble {
     width: 100%;
     padding: var(--msg-space-sm);
-    margin: var(--msg-space-sm) auto;
+    margin: var(--msg-space-sm);
     border-radius: var(--msg-card-radius);
     color: var(--msg-card-fg);
     background-color: var(--msg-card-bg);
