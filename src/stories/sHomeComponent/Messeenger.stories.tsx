@@ -25,6 +25,12 @@ const demoSettings: SettingField[] = [
     ], defaultValue: "gpt-pro" },
   { id: "temp", label: "Temperature", type: "number", defaultValue: 0.8, min: 0, max: 2, step: 0.1 },
   { id: "safeMode", label: "Safe Mode", type: "checkbox", defaultValue: true },
+    { id: "model", label: "Model", type: "select", options: [
+      { value: "gpt-small", label: "GPT Small" },
+      { value: "gpt-pro", label: "GPT Pro" },
+    ], defaultValue: "gpt-pro" },
+  { id: "temp", label: "Temperature", type: "number", defaultValue: 0.8, min: 0, max: 2, step: 0.1 },
+  { id: "safeMode", label: "Safe Mode", type: "checkbox", defaultValue: true },
 ];
 
 const demoFilters: FilterSpec[] = [
@@ -49,14 +55,15 @@ const meta: Meta<typeof Messenger> = {
   args: {
     isLoading: false,
     persist: false,
-    enableTTS: false, // nur Anzeige
-    enableSTT: false, // nur Anzeige
+    enableTTS: true, // nur Anzeige
+    enableSTT: true, // nur Anzeige
     inputPlaceholder: "Nachricht eingeben…",
     initialMessages: demoMessages,
     settingsSchema: demoSettings,
     filters: demoFilters,
-    ttsDefaultOn: false,
+    ttsDefaultOn: true,
     LabelDeleteHistory: "Verlauf löschen",
+    isLightColor: true,
   },
 };
 export default meta;

@@ -18,27 +18,28 @@ type MessengerInputProps = {
     childrenButtons?: React.ReactNode;
     labelSendButton?: string;
     settingsOpen: boolean;
+    isLightColor?: boolean;
 };
 
 export function MessengerInput({
     input, setInput, inputPlaceholder, isLoading,
     enableSTT, enableTTS, recording, ttsMuted, setTtsMuted,
     onToggleRecord, onToggleSettings, onSend, childrenButtons, labelSendButton = "Send",
-    settingsOpen
+    settingsOpen, isLightColor
 }: MessengerInputProps) {
 
     return (
         <div className="input-area">
             <div className="input-function">
                 {childrenButtons}
-                <Button isLightColor icon={recording ? faStop : faMicrophone} onClick={onToggleRecord} disabled={isLoading || !enableSTT} />
-                {enableTTS && <Button isLightColor icon={ttsMuted ? faVolumeMute : faVolumeHigh} onClick={() => setTtsMuted(v => !v)} />}
+                <Button isLightColor={isLightColor} icon={recording ? faStop : faMicrophone} onClick={onToggleRecord} disabled={isLoading || !enableSTT} />
+                {enableTTS && <Button isLightColor={isLightColor} icon={ttsMuted ? faVolumeMute : faVolumeHigh} onClick={() => setTtsMuted(v => !v)} />}
             </div>
             <div className="input-chat-mode">
                 <Button
                     icon={faGear}
                     color="info"
-                    isLightColor
+                    isLightColor={isLightColor}
                     expander
                     expanderValue={settingsOpen}
                     onClick={onToggleSettings}
@@ -50,7 +51,7 @@ export function MessengerInput({
                     icon={faPaperPlane}
                     color="success"
                     text={labelSendButton}
-                    isLightColor
+                    isLightColor={isLightColor}
                     isLoading={isLoading}
                     onClick={onSend}
                     disabled={isLoading}

@@ -16,7 +16,7 @@ export const Messenger = forwardRef<MessengerHandle, MessengerProps>(function Me
         setShowSettings, showSettings, handleSend,
         settingsSchema, settings, setSettings, deleteHistoryAll,
         getTextValue, getNumberValue, getBooleanValue, ttsDefaultOn,
-        labelUser, labelSendButton, childrenButtons
+        labelUser, labelSendButton, childrenButtons, isLightColor
     } = s;
 
     return (
@@ -71,6 +71,7 @@ export const Messenger = forwardRef<MessengerHandle, MessengerProps>(function Me
                 onSend={handleSend}
                 labelSendButton={labelSendButton}
                 childrenButtons={childrenButtons}
+                isLightColor={isLightColor}
             />
         </div>
     );

@@ -1,6 +1,6 @@
 {
   "name": "@raphi93/shome-components",
-  "version": "1.0.7",
+  "version": "1.0.12",
   "description": "Small React + TypeScript component library with CSS variable theming.",
   "author": "RHUG",
   "license": "MIT",
@@ -32,7 +32,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build": "rollup -c --bundleConfigAsCjs",
-    "prepack": "npm run build",
+    "prepack": "npm publish --ignore-scripts --access public",
     "test": "echo \"no tests\" && exit 0"
   },
   "engines": {

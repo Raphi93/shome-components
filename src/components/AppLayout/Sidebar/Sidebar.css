@@ -54,8 +54,9 @@
   cursor: pointer;
   color: var(--sidebar-fg);
   transition: 0.4s ease;
-  margin-left: 20px;
+  margin-left: var(--sidebar-margin-left-icon-bars);
 }
+
 
 .bars-icons-expandet {
   font-size: var(--sidebar-icon-size-compact);
@@ -68,12 +69,9 @@
   margin-top: var(--sidebar-margin-sm);
 }
 
-ul { margin: 0; padding: 0; }
-
-.tooltip-menu {
-  align-items: center;
-  justify-content: left;
-  margin-left: 18px;
+ul {
+  margin: 0;
+  padding: 0;
 }
 
 .menu-items {
@@ -88,6 +86,7 @@ ul { margin: 0; padding: 0; }
   height: var(--sidebar-item-height);
   position: relative;
 }
+
 .menu-items:hover {
   background-color: rgba(var(--sidebar-accent-rgb), 0.5);
 }
@@ -105,7 +104,10 @@ ul { margin: 0; padding: 0; }
   color: var(--sidebar-fg);
 }
 
-.menu-item > * { position: relative; z-index: 1; }
+.menu-item>* {
+  position: relative;
+  z-index: 1;
+}
 
 .expander {
   background-color: transparent;
@@ -118,13 +120,19 @@ ul { margin: 0; padding: 0; }
   transition: transform var(--sidebar-transition);
   transform: rotate(0deg);
 }
-.expander.selected { transform: rotate(180deg); }
+
+.expander.selected {
+  transform: rotate(180deg);
+}
 
 .submenu {
   overflow: hidden;
   max-height: 0;
 }
-.submenu.expanded { max-height: 100rem; }
+
+.submenu.expanded {
+  max-height: 100rem;
+}
 
 .submenu-items {
   transition: all var(--sidebar-transition);
@@ -141,11 +149,15 @@ ul { margin: 0; padding: 0; }
   padding-left: calc(var(--sidebar-gap) * 7.5);
   background-color: rgba(var(--sidebar-accent-rgb), 0.2);
 }
+
 .submenu-items:hover {
   background-color: rgba(var(--sidebar-accent-rgb), 0.5);
 }
 
-.submenu-items > * { position: relative; z-index: 1; }
+.submenu-items>* {
+  position: relative;
+  z-index: 1;
+}
 
 .submenu-items.selected-child {
   background-color: rgba(var(--sidebar-accent-rgb), 0.5);
@@ -162,6 +174,7 @@ ul { margin: 0; padding: 0; }
   text-decoration: none;
   color: var(--sidebar-fg);
 }
+
 .menu-link:hover {
   text-decoration: none;
   color: var(--sidebar-fg);
@@ -174,7 +187,9 @@ ul { margin: 0; padding: 0; }
   color: var(--sidebar-fg);
 }
 
-.menu-icon { margin-left: 15px; }
+.menu-icon {
+  margin-left: var(--sidebar-margin-left-icon);
+}
 
 /* Mobile */
 .logo-container-mobile {
@@ -258,4 +273,6 @@ ul { margin: 0; padding: 0; }
   cursor: pointer;
 }
 
-.close-icon { font-size: 0.9rem; }
+.close-icon {
+  font-size: 0.9rem;
+}

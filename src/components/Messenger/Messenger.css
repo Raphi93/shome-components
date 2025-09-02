@@ -1,6 +1,3 @@
-:root {
-
-}
 
 /* LAYOUT */
 .chat-container {
@@ -190,21 +187,14 @@
 }
 
 .image-settings-content{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(280px, 50%), 1fr));
-    gap: var(--msg-space-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: var(--msg-space-md);
+  row-gap: calc(var(--msg-space-md) * 1.5);
 }
 
 .image-settings {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.image-settings-label{
-    color: var(--color-label-input);
-    font-size: 0.9rem;
-    position: relative;
-    margin-top: -1rem;
-    margin-left: 0.5rem;
 }

@@ -25,7 +25,7 @@ export const PageProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
     </PageContext.Provider>
   );
 };
-
+  
 export const usePageContext = () => {
   const ctx = useContext(PageContext);
   if (!ctx) throw new Error("usePageContext must be used inside <PageProvider>");

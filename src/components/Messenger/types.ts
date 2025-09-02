@@ -66,4 +66,5 @@ export type MessengerProps = {
     labelSendButton?: string;
     childrenButtons?: React.ReactNode;
     setUserInput?: MessengerMessage;
+    isLightColor?: boolean;
 };

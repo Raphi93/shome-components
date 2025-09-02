@@ -20,6 +20,7 @@ export { Screw, ScrewCircle } from './Screw/Screw';
 export { TextArea } from './Input/TextArea/TextArea';
 export { Checkbox } from './Input/Choice/Checkbox';
 export { Radio } from './Input/Choice/Radio';
+export * from './Messenger/index';
 
 export type { PageGridProps } from './Grid/PageGrid';
 export type { SidebarProps } from './AppLayout/Sidebar/Sidebar';
