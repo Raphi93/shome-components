@@ -6,7 +6,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import './StringInput.css';
 
 export interface StringInputProps {
-    label: string;
+    label?: string;
     value: string;
     onChange: (value: string) => void;
     noBorder?: boolean;

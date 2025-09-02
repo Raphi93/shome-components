@@ -145,3 +145,34 @@
 .select__empty { padding: .75rem; text-align: center; color: var(--select-placeholder); }
 
 .select__hidden { display: none !important; }
+
+.select__control {
+  position: relative;
+}
+
+.select__label {
+  position: absolute;
+  left: calc(var(--select-pad-x, .75rem) - 5px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--font-size-base, 1rem);
+  color: var(--color-label-input, #6b7280);
+  padding: 0 var(--spacing-xs, .25rem);
+  transition: all var(--transition-normal, .15s ease);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.select__label.is-active {
+  top: -17px;
+  transform: none;
+  font-size: var(--font-size-md, .875rem);
+  color: var(--color-label-input-focus, var(--select-border-focus));
+  padding: 0 var(--spacing-xs, .25rem);
+}
+
+.select.is-disabled .select__label {
+  color: var(--color-gray-light, #cbd5e1);
+}
+
+.select__label-txt { display: inline-block; }

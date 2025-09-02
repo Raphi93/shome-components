@@ -7,7 +7,7 @@ import '../StringInput/StringInput.css';
 type NullableNumber = number | null;
 
 export interface NumberInputProps {
-    label: string;
+    label?: string;
     value: NullableNumber;
     onChange: (value: NullableNumber) => void;
     noBorder?: boolean;

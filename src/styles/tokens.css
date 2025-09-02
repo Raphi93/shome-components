@@ -326,19 +326,46 @@
 
   --choice-hover: rgba(8,24,55,.04);
   --choice-focus: var(--switch-focus-ring, rgba(13,110,253,.35));
+
+
+  /* =========================
+     CHAPTER 23 · Messenger
+     ========================= */
+
+      --msg-radius-main: 15px;
+    --msg-shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --msg-space-xs: 0.25rem;
+    --msg-space-sm: 0.5rem;
+    --msg-space-md: 1rem;
+
+    /* container & list */
+    --msg-bg-container: rgba(var(--color-primary-rgb, 0, 128, 128), 0.1);
+    --msg-bg-list: var(--color-background, #fff);
+    --msg-radius-list: 10px;
+
+    /* bubble */
+    --msg-bubble-maxw: 52%;
+    --msg-header-fs: 1.2rem;
+
+    /* role backgrounds (weichere Variante) */
+    --msg-user-bg: rgba(var(--color-secondary-rgb, 99, 102, 241), .16);
+    --msg-bot-bg: rgba(var(--color-primary-rgb, 16, 185, 129), .16);
+    --msg-user-fg: var(--color-primary, #0f766e);
+    --msg-bot-fg: var(--color-secondary, #475569);
+
+    /* content card */
+    --msg-card-bg: rgba(253, 253, 253, 0.764);
+    --msg-card-fg: var(--color-text, #111827);
+    --msg-card-radius: 8px;
+    --msg-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-/* =========================
-   CHAPTER 23 · BASE ELEMENTS
-   ========================= */
+
 body {
   box-sizing: border-box;
   display: block;
 }
 
-/* =========================
-   CHAPTER 24 · MINIMAL RESETS
-   ========================= */
 button,
 input[type="button"],
 input[type="submit"],
