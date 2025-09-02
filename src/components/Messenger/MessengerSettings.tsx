@@ -13,11 +13,12 @@ type Props = {
     getTextValue: (f: SettingField) => string;
     getNumberValue: (f: SettingField) => number;
     getBooleanValue: (f: SettingField) => boolean;
+    isLightColor?: boolean;
 };
 
 export function MessengerSettings({
     settingsSchema, settings, setSettings, isIndexDb, onDeleteHistory, labelDeleteHistory,
-    getTextValue, getNumberValue, getBooleanValue
+    getTextValue, getNumberValue, getBooleanValue, isLightColor
 }: Props) {
     function renderField(f: SettingField) {
         switch (f.type) {
@@ -36,7 +37,7 @@ export function MessengerSettings({
             case "select":
                 return (
                     <div key={f.id} className="image-settings">
-                            <Select label={f.label} options={(f as any).options} value={(settings[f.id] as string) ?? null} onChange={(v) => setSettings(s => ({ ...s, [f.id]: v as string }))} searchable={false} placeholder={f.label} />
+                        <Select label={f.label} options={(f as any).options} value={(settings[f.id] as string) ?? null} onChange={(v) => setSettings(s => ({ ...s, [f.id]: v as string }))} searchable={false} placeholder={f.label} />
                     </div>
                 );
             case "checkbox":
@@ -64,17 +65,13 @@ export function MessengerSettings({
                 </div>
                 {isIndexDb && (
                     <div className="image-settings-index-db">
-                        <div className="image-settings-delete-history">
-                            <Button
-                                color="danger"
-                                icon={faTrash}
-                                isLightColor
-                                onClick={onDeleteHistory}
-                                width="2rem"
-                                height="2rem"
-                                tooltip={labelDeleteHistory}
-                            />
-                        </div>
+                        <Button
+                            color="danger"
+                            icon={faTrash}
+                            isLightColor={isLightColor}
+                            onClick={onDeleteHistory}
+                            text={labelDeleteHistory}
+                        />
                     </div>
                 )}
             </div>

@@ -13,7 +13,7 @@
   background-color: var(--sidebar-bg);
   justify-content: space-between;
   height: var(--sidebar-height);
-  margin-bottom: calc(var(--sidebar-margin-sm) - 0.2rem);
+  margin-bottom: calc(var(--sidebar-margin-sm) + var(--sidebar-margin-sm-add));
 }
 
 .logo-new-sidebar {
@@ -25,6 +25,7 @@
   width: auto;
   padding: var(--sidebar-padding-md);
   margin-left: 1px;
+  object-fit: contain;
 }
 
 .logo-long-new-sidebar {

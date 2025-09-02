@@ -52,6 +52,7 @@ export const Messenger = forwardRef<MessengerHandle, MessengerProps>(function Me
                     getTextValue={getTextValue}
                     getNumberValue={getNumberValue}
                     getBooleanValue={getBooleanValue}
+                    isLightColor={isLightColor}
                 />
             )}
 

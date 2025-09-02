@@ -176,6 +176,7 @@
     padding: var(--msg-space-md);
     background: var(--msg-bg-container);
     border-radius: var(--msg-radius-list);
+    gap: var(--msg-space-md);
 }
 
 .image-settings-container{
@@ -197,4 +198,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.image-settings-index-db{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }

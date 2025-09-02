@@ -111,7 +111,8 @@
   /* =========================
      CHAPTER 9 · SIDEBAR
      ========================= */
-     --sidebar-margin-left-icon-bars: 20px;
+  --sidebar-margin-left-icon-bars: 20px;
+  --sidebar-margin-sm-add: 1rem;
   --sidebar-margin-left-icon: 15px;
   --sidebar-height: 4rem;
   --sidebar-height-compact: 48px;
