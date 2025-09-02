@@ -35,7 +35,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000;
+    z-index: 9999999;
 }
 
 .fullscreen-content {
@@ -99,7 +99,7 @@
     gap: var(--msg-space-sm);
     font-size: var(--msg-header-fs);
     padding: var(--msg-space-sm) var(--msg-space-sm) 0;
-    width: calc(100% - var(--msg-space-sm) * 2);
+    width: 100%;
 }
 
 .message-bubble-label {
@@ -111,7 +111,7 @@
 }
 
 .message-bubble {
-    width: calc(100% - var(--msg-space-sm) * 4);
+    width: 100%;
     padding: var(--msg-space-sm);
     margin: var(--msg-space-sm) auto;
     border-radius: var(--msg-card-radius);

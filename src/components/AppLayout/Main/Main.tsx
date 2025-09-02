@@ -15,7 +15,7 @@ export interface AppMainProps {
 export function Main({
   children,
   upperComponent,
-  hideTitle = false,
+  hideTitle = true,
   className,
   onClick = () => {},
 }: AppMainProps) {

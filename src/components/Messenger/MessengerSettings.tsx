@@ -31,7 +31,7 @@ export function MessengerSettings({
             case "number":
                 return (
                     <div key={f.id} className="image-settings">
-                        <NumberInput label={f.label} value={getNumberValue(f)} onChange={(val: number | null) => setSettings(s => ({ ...s, [f.id]: val ?? 0 }))} min={(f as any).min} max={(f as any).max} step={(f as any).step} />
+                        <NumberInput  label={f.label} value={getNumberValue(f)} onChange={(val: number | null) => setSettings(s => ({ ...s, [f.id]: val ?? 0 }))} min={(f as any).min} max={(f as any).max} step={1} />
                     </div>
                 );
             case "select":

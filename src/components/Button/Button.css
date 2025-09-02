@@ -148,15 +148,9 @@ a.action-button {
 }
 
 .light {
-  background-color: var(--color-white, #ffffff);
-  color: var(--color-primary-dark, #303234);
+  color: var(--color-primary-dark, hsl(210, 4%, 20%));
+  background-color: transparent;
   cursor: pointer;
-}
-
-.action-button.light,
-.action-button.light,
-button.light {
-  border: 1px solid var(--color-primary, #393c40);
 }
 
 .light:hover {
@@ -274,20 +268,14 @@ button.light {
 }
 
 .light-light {
-  background-color: var(--color-white, #ffffff);
-  color: var(--color-primary, #393c40);
+  background-color: transparent;
+  color: var(--color-white);
   cursor: pointer;
 }
 
 .light-light:hover {
   background-color: var(--button-background-color-secondary, #0f766e);
   color: var(--color-white, #ffffff);
-}
-
-.action-button.light-light,
-.action-button.light-light,
-button.light-light {
-  border: 1px solid var(--color-primary, #393c40);
 }
 
 .light-light:disabled {
