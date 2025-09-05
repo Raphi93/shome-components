@@ -55,7 +55,7 @@
 }
 
 .fullscreen-image {
-    z-index: 2000;
+    z-index: 9999999;
     max-width: 90vw;
     max-height: 90vh;
     border-radius: var(--msg-radius-main);
@@ -111,7 +111,7 @@
 }
 
 .message-bubble {
-    width: 100%;
+    width: calc(100% - var(--msg-space-sm) * 2);
     padding: var(--msg-space-sm);
     margin: var(--msg-space-sm);
     border-radius: var(--msg-card-radius);

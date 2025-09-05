@@ -342,7 +342,7 @@
     --msg-space-md: 1rem;
 
     /* container & list */
-    --msg-bg-container: rgba(var(--color-primary-rgb, 0, 128, 128), 0.1);
+    --msg-bg-container: rgba(var(--color-primary-rgb, 0, 128, 128), 0.2);
     --msg-bg-list: var(--color-background, #fff);
     --msg-radius-list: 10px;
 
@@ -351,8 +351,8 @@
     --msg-header-fs: 1.2rem;
 
     /* role backgrounds (weichere Variante) */
-    --msg-user-bg: rgba(var(--color-secondary-rgb, 99, 102, 241), .16);
-    --msg-bot-bg: rgba(var(--color-primary-rgb, 16, 185, 129), .16);
+    --msg-user-bg: rgba(var(--color-secondary-rgb, 99, 102, 241), .5);
+    --msg-bot-bg: rgba(var(--color-primary-rgb, 16, 185, 129), .5);
     --msg-user-fg: var(--color-primary, #0f766e);
     --msg-bot-fg: var(--color-secondary, #475569);
 

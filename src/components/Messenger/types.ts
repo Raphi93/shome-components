@@ -67,4 +67,5 @@ export type MessengerProps = {
     childrenButtons?: React.ReactNode;
     setUserInput?: MessengerMessage;
     isLightColor?: boolean;
+    imageBackGroundStyle?: React.CSSProperties;
 };
