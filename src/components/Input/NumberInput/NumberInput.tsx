@@ -12,7 +12,6 @@ export interface NumberInputProps {
     onChange: (value: NullableNumber) => void;
     noBorder?: boolean;
     defaultValue?: number;
-    iconLeft?: IconProp;
     step?: number;
     min?: number;
     max?: number;
@@ -40,7 +39,6 @@ export const NumberInput: React.FC<NumberInputProps> = ({
     onChange,
     noBorder = false,
     defaultValue,
-    iconLeft,
     step = 1,
     min,
     max,
@@ -49,6 +47,8 @@ export const NumberInput: React.FC<NumberInputProps> = ({
     preventWheel = true,
     disabled = false,
 }) => {
+
+    const iconLeft = false; // not used for now
     const initialString = useMemo(() => {
         if (value == null) return defaultValue?.toString() ?? '';
         return value.toString();

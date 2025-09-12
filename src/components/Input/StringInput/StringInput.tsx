@@ -12,7 +12,7 @@ export interface StringInputProps {
     noBorder?: boolean;
     defaultValue?: string;
     type?: string;
-    iconLeft?: IconProp;
+    //iconLeft?: IconProp;
     password?: boolean;
     email?: boolean;
     required?: boolean;
@@ -26,12 +26,13 @@ export const StringInput: React.FC<StringInputProps> = ({
     noBorder = false,
     defaultValue = '',
     type = 'text',
-    iconLeft,
+    //iconLeft,
     password = false,
     email = false,
     required = false,
     disabled = false,
 }) => {
+    const iconLeft = false; // not used for now
     const [isFocused, setIsFocused] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
 

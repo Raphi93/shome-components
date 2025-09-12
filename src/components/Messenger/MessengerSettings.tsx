@@ -31,7 +31,7 @@ export function MessengerSettings({
             case "number":
                 return (
                     <div key={f.id} className="image-settings">
-                        <NumberInput showStepper={false}  label={f.label} value={getNumberValue(f)} onChange={(val: number | null) => setSettings(s => ({ ...s, [f.id]: val ?? 0 }))} min={(f as any).min} max={(f as any).max} step={1} />
+                        <NumberInput showStepper={false} label={f.label} value={getNumberValue(f)} onChange={(val: number | null) => setSettings(s => ({ ...s, [f.id]: val ?? 0 }))} min={(f as any).min} max={(f as any).max} step={1} />
                     </div>
                 );
             case "select":
@@ -56,6 +56,13 @@ export function MessengerSettings({
                 return null;
         }
     }
+    function handleDeleteBackground() {
+        localStorage.removeItem("messenger:bgImage");
+    }
+
+    function handleDeleteAvatar() {
+        localStorage.removeItem("messenger:avatarImage");
+    }
 
     return (
         <div className="image-settings-wrapper">
@@ -71,6 +78,20 @@ export function MessengerSettings({
                             isLightColor={isLightColor}
                             onClick={onDeleteHistory}
                             text={labelDeleteHistory}
+                        />
+                        <Button
+                            color="danger"
+                            icon={faTrash}
+                            isLightColor={isLightColor}
+                            onClick={handleDeleteBackground}
+                            text={'Delete Background Image'}
+                        />
+                        <Button
+                            color="danger"
+                            icon={faTrash}
+                            isLightColor={isLightColor}
+                            onClick={handleDeleteAvatar}
+                            text={'Delete User Icon'}
                         />
                     </div>
                 )}

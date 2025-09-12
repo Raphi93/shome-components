@@ -7,13 +7,13 @@
     max-height: 78dvh;
     padding: var(--msg-space-md);
     z-index: 999;
-    max-width: 100rem;
-    margin: 0 auto;
     background: var(--msg-bg-container);
     border-radius: var(--msg-radius-main);
     box-shadow: var(--msg-shadow-soft);
     overflow: hidden;
+    min-height: 20rem;
     --msg-bubble-maxw: var(--msg-bubble-maxw-default, 58%);
+        position: relative;
 }
 
 .messages {
@@ -66,6 +66,7 @@
 .message {
     display: flex;
     margin: .35rem 0;
+    z-index: 999;
 }
 
 .message.user {
@@ -205,3 +206,59 @@
     justify-content: flex-end;
     align-items: center;
 }
+
+
+/* Container für mehrere Bilder */
+.image-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .5rem;
+}
+
+.image-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: var(--shadow-medium, 0 1px 2px rgba(0,0,0,.06), 0 6px 18px rgba(0,0,0,.06));
+}
+
+.image-hero img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Responsives Grid (2–4 Bilder oder der "Rest" nach dem Hero) */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: .5rem;
+}
+
+.image-tile {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-medium, 0 1px 2px rgba(0,0,0,.06), 0 6px 18px rgba(0,0,0,.06));
+}
+
+.image-tile img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Hover Effekt */
+.image-tile:hover img,
+.image-hero:hover img {
+  transform: scale(1.02);
+  transition: transform 160ms ease;
+}
+

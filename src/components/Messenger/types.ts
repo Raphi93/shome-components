@@ -5,8 +5,8 @@ export type UserType = "user" | "bot";
 export type MessengerMessage = {
     id?: string;
     type: UserType;
-    content?: string;
-    image?: string | null;  // base64
+    content?: string | null;
+    image?: string[] | null;  // base64
     createdAt?: number;
     [key: string]: unknown;
 };
