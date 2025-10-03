@@ -68,4 +68,6 @@ export type MessengerProps = {
     setUserInput?: MessengerMessage;
     isLightColor?: boolean;
     imageBackGroundStyle?: React.CSSProperties;
+    image?: string;
+    setImage?: (b64: string) => void;
 };

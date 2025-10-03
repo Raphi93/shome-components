@@ -1,6 +1,6 @@
 {
   "name": "@raphi93/shome-components",
-  "version": "1.0.37",
+  "version": "1.0.45",
   "description": "Small React + TypeScript component library with CSS variable theming.",
   "author": "RHUG",
   "license": "MIT",

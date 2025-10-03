@@ -28,7 +28,7 @@ export const Messenger = forwardRef<MessengerHandle, MessengerProps>(function Me
         setShowSettings, showSettings, handleSend,
         settingsSchema, settings, setSettings, deleteHistoryAll,
         getTextValue, getNumberValue, getBooleanValue, imageBackGroundStyle,
-        labelUser, labelSendButton, childrenButtons, isLightColor
+        labelUser, labelSendButton, childrenButtons, isLightColor, image, setImage
     } = s;
 
     // ----- Fullscreen-QuickActions -----
@@ -68,6 +68,7 @@ export const Messenger = forwardRef<MessengerHandle, MessengerProps>(function Me
                 }}
                 labelUser={labelUser}
                 imageBackGroundStyle={imageBackGroundStyle}
+                image={image}
             />
 
             {fullscreenImage && (
@@ -153,6 +154,8 @@ export const Messenger = forwardRef<MessengerHandle, MessengerProps>(function Me
                 labelSendButton={labelSendButton}
                 childrenButtons={childrenButtons}
                 isLightColor={isLightColor}
+                image={image}       
+                setImage={setImage ? (b64: string | null) => setImage(b64 ?? "") : () => {}}         
             />
         </div>
     );

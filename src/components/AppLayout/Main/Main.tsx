@@ -23,7 +23,7 @@ export function Main({
 
   return (
     <main onClick={onClick} className={className}>
-      {upperComponent}
+      {/* {upperComponent} */}
       {pageTitle && !hideTitle && <h1>{pageTitle}</h1>}
       {message && <MessageBox {...message} setMessage={setMessage} />}
       {children}

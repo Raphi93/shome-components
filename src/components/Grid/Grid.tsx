@@ -44,7 +44,7 @@ export const Grid: React.FC<GridProps> = ({
     rowKey = "id",
     zebra = true,
     dense = false,
-    minTableWidth = 980,
+    minTableWidth = 10,
     onRowClick,
     borders = "row",
     selectable = false,
@@ -117,7 +117,7 @@ export const Grid: React.FC<GridProps> = ({
                                 <th
                                     key={c.key}
                                     className={`grid__th ${c.hideOn ? `grid-hide-${c.hideOn}` : ""}`}
-                                    style={{ width: c.width }}
+                                    style={{ width: c.width, textAlign: cellAlign(c) as any }}
                                     title={c.label}
                                 >
                                     {c.label}
@@ -147,9 +147,10 @@ export const Grid: React.FC<GridProps> = ({
                                     )}
                                     {columns.map((c) => {
                                         const raw = row[c.key];
-                                        const base = c.format ? c.format(raw, row) : byType[c.type ?? "string"](raw);
+                                        const typed = byType[c.type ?? "string"](raw);
+                                        const rendered = c.format ? c.format(typed, row) : typed;
                                         const percent =
-                                            c.percentKey && row[c.percentKey] != null ? `${row[c.percentKey]}%` : null;
+                                            c.percentKey != null && row[c.percentKey] != null ? `${row[c.percentKey]}%` : null;
                                         return (
                                             <td
                                                 key={`${key}-${c.key}`}
@@ -160,7 +161,7 @@ export const Grid: React.FC<GridProps> = ({
                                                 ].join(" ")}
                                                 style={{ width: c.width }}
                                             >
-                                                {base}
+                                                {rendered}
                                                 {percent && <span className="grid__percent">{percent}</span>}
                                             </td>
                                         );

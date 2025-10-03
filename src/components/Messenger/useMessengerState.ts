@@ -144,6 +144,8 @@ export function useMessengerState(props: MessengerProps, ref: React.Ref<Messenge
     labelSendButton,
     isLightColor,
     imageBackGroundStyle,
+    image,
+    setImage,
   } = props;
 
   const [messages, setMessages] = useState<MessengerMessage[]>([]);
@@ -320,7 +322,9 @@ export function useMessengerState(props: MessengerProps, ref: React.Ref<Messenge
 
   // Autoscroll
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messages[messages.length - 1]?.content !== '...') {
+      endRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages]);
 
   // TTS stummschalten
@@ -411,8 +415,7 @@ export function useMessengerState(props: MessengerProps, ref: React.Ref<Messenge
   }));
 
   async function handleSend() {
-    if (!input.trim()) return;
-    const u: MessengerMessage = { type: "user", content: input, createdAt: Date.now() };
+    const u: MessengerMessage = { type: "user", content: input, createdAt: Date.now(), image: image ? [image] : null };
     setMessages((p) => [...p, u]);
     const txt = input;
     setInput("");
@@ -466,7 +469,7 @@ export function useMessengerState(props: MessengerProps, ref: React.Ref<Messenge
     const msg = sanitizeForTTS(text);
     if (!msg) return;
 
-    cancelTTS(); // neue Antwort ersetzt alte
+    cancelTTS(); 
     ttsQueueRef.current = chunkText(msg, 220);
     if (ttsQueueRef.current.length === 0) return; // nichts Sinnvolles zu sagen
     playNextChunk(60);
@@ -547,5 +550,7 @@ export function useMessengerState(props: MessengerProps, ref: React.Ref<Messenge
     labelSendButton,
     isLightColor,
     imageBackGroundStyle,
+        image,
+    setImage,
   };
 }

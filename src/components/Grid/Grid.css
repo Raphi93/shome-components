@@ -38,12 +38,16 @@
   padding: var(--grid-pad-y) var(--grid-pad-x);
   border-bottom: 1px solid var(--grid-border);
   white-space: nowrap;
+    margin-right: 1rem;
 }
 
 .grid .grid__td {
   padding: var(--grid-pad-y) var(--grid-pad-x);
   border-bottom: 1px solid var(--grid-border);
   vertical-align: middle;
+  margin-right: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .grid.grid--zebra tbody tr:nth-child(even) .grid__td {
@@ -102,6 +106,6 @@
 }
 
 /* Responsive hides (optional) */
-.grid .grid-hide-all { display: none; }
-@media (max-width: 1200px) { .grid .grid-hide-tablet { display: none; } }
-@media (max-width: 800px)  { .grid .grid-hide-mobile { display: none; } }
+.grid .grid-hide-all { display: none; width: 0; }
+@media (max-width: 1200px) { .grid .grid-hide-tablet { display: none; width: 0; } }
+@media (max-width: 800px)  { .grid .grid-hide-mobile { display: none; width: 0; } }

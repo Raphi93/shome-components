@@ -13,6 +13,7 @@ type MessageListProps = {
   labelUser?: Record<UserType, string> | undefined;
   iconUser?: Record<UserType, React.ReactNode> | undefined; // Fallback
   imageBackGroundStyle?: React.CSSProperties;
+  image?: string | null;
 };
 
 // LocalStorage Keys
@@ -82,6 +83,7 @@ export function MessageList({
   labelUser = { user: "User", bot: "Bot" },
   iconUser = { user: <FontAwesomeIcon icon={faUser} />, bot: <FontAwesomeIcon icon={faRobot} /> },
   imageBackGroundStyle,
+  image
 }: MessageListProps) {
   const [bgUrl, setBgUrl] = useState<string | null>(null);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);

@@ -88,8 +88,8 @@
 
   .content {
     width: 100%;
-    padding: 100%;
     visibility: var(--isHidden);
     position: var(--position);
+    padding: calc(var(--layout-content-padding) / 2);
   }
 }
