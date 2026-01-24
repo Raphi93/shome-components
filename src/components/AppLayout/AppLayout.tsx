@@ -1,10 +1,9 @@
-import React from "react";
-import { ReactNode } from "react";
+import React, { ReactNode, CSSProperties } from "react";
 import { NavigationItem, Sidebar } from "./Sidebar/Sidebar";
 import { Header } from "./Header/Header";
 import { Main } from "./Main/Main";
 
-import "./AppLayouts.css";
+import "./AppLayouts.mudule.scss";
 
 export interface AppPageWrapperProps {
   children: ReactNode;
@@ -51,38 +50,41 @@ export function AppLayout({
   handleContentClick,
   reset
 }: AppPageWrapperProps) {
-
   const layoutClass = [
     "app-layouts",
     expanded ? "expanded" : "collapsed",
     showSidebar ? "" : "no-sidebar",
     showHeader ? "" : "no-header"
-  ].join(" ");
+  ]
+    .filter(Boolean)
+    .join(" ");
 
-  const layoutStyle = isMobile
+  const layoutStyle: CSSProperties = isMobile
     ? {
-      gridTemplateColumns: "1fr",
-      gridTemplateRows: "auto auto auto",
-      gridTemplateAreas: `
-        ${showSidebar ? '"sidebar"' : ''}
-        ${showHeader ? '"headers"' : ''}
-        "content"
-      `
-    }
+        gridTemplateColumns: "1fr",
+        gridTemplateRows: "auto auto auto",
+        gridTemplateAreas: `
+          ${showSidebar ? '"sidebar"' : ""}
+          ${showHeader ? '"headers"' : ""}
+          "content"
+        `
+      }
     : {
-      gridTemplateColumns: showSidebar ? undefined : "1fr",
-      gridTemplateRows: showHeader ? undefined : "auto",
-      gridTemplateAreas: `
-        ${showSidebar && showHeader
-          ? '"sidebar headers"'
-          : showSidebar
-            ? '"sidebar content"'
-            : showHeader
+        gridTemplateColumns: showSidebar ? undefined : "1fr",
+        gridTemplateRows: showHeader ? undefined : "auto",
+        gridTemplateAreas: `
+          ${
+            showSidebar && showHeader
+              ? '"sidebar headers"'
+              : showSidebar
+              ? '"sidebar content"'
+              : showHeader
               ? '"headers"'
-              : '"content"'}
-        ${showSidebar && !showHeader ? '"sidebar content"' : !showSidebar ? '"content"' : '"sidebar content"'}
-      `
-    };
+              : '"content"'
+          }
+          ${showSidebar ? '"sidebar content"' : '"content"'}
+        `
+      };
 
   return (
     <div className={layoutClass} style={layoutStyle}>
@@ -102,6 +104,7 @@ export function AppLayout({
           envTitle={envTitle}
         />
       )}
+
       {showHeader && (
         <Header
           envTitle={envTitle}
@@ -111,17 +114,13 @@ export function AppLayout({
           className="header"
           isMobile={isMobile}
           image={image}
-          noSidebar={showSidebar}
+          noSidebar={!showSidebar}
         />
       )}
-      <Main
-        upperComponent={upperComponent}
-        className="content"
-        onClick={handleContentClick}
-      >
+
+      <Main upperComponent={upperComponent} className="content" onClick={handleContentClick}>
         {children}
       </Main>
     </div>
   );
-
 }
