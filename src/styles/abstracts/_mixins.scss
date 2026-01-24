@@ -1,0 +1,220 @@
+@use './variables' as *;
+@use './functions' as *;
+
+// Typography mixins ----------------------------------------------
+
+// Headings
+@mixin main-heading($offset: false, $content: null) {
+  font-size: $font-size-main-heading $content;
+  line-height: $line-height-main-heading $content;
+
+  @if $offset {
+    transform: translateY($baseline-offset-main-heading);
+  }
+
+  // Phone portrait and down - up to 575px
+  @include phoneP() {
+    font-size: $font-size-subheading $content;
+    line-height: $line-height-subheading $content;
+
+    @if $offset {
+      transform: translateY($baseline-offset-subheading);
+    }
+  }
+}
+
+@mixin subheading($offset: false, $content: null) {
+  font-size: $font-size-subheading $content;
+  line-height: $line-height-subheading $content;
+
+  @if $offset {
+    transform: translateY($baseline-offset-subheading);
+  }
+
+  // Phone portrait and down - up to 575px
+  @include phoneP() {
+    font-size: $font-size-sub-subheading $content;
+    line-height: $line-height-sub-subheading $content;
+
+    @if $offset {
+      transform: translateY($baseline-offset-sub-subheading);
+    }
+  }
+}
+
+@mixin sub-subheading($offset: false, $content: null) {
+  font-size: $font-size-sub-subheading $content;
+  line-height: $line-height-sub-subheading $content;
+
+  @if $offset {
+    transform: translateY($baseline-offset-sub-subheading);
+  }
+}
+
+@mixin smallest-subheading($offset: false, $content: null) {
+  font-size: $font-size-base $content;
+  line-height: $line-height-base $content;
+  font-weight: 600;
+
+  @if $offset {
+    transform: translateY($baseline-offset-base);
+  }
+}
+
+// Basic text
+@mixin base-text($offset: false, $content: null) {
+  font-size: $font-size-base $content;
+  line-height: $line-height-base $content;
+
+  @if $offset {
+    transform: translateY($baseline-offset-base);
+  }
+}
+
+@mixin large-text($offset: false, $content: null) {
+  font-size: $font-size-large $content;
+  line-height: $line-height-large $content;
+
+  @if $offset {
+    transform: translateY($baseline-offset-large);
+  }
+}
+
+@mixin smaller-text($offset: false, $content: null) {
+  font-size: $font-size-smaller $content;
+  line-height: $line-height-smaller $content;
+
+  @if $offset {
+    transform: translateY($baseline-offset-smaller);
+  }
+}
+
+@mixin small-text($offset: false, $content: null) {
+  font-size: $font-size-small $content;
+  line-height: $line-height-small $content;
+
+  @if $offset {
+    transform: translateY($baseline-offset-small);
+  }
+}
+
+// Oversized text
+@mixin oversized-text-01($offset: false, $content: null) {
+  font-size: $font-size-oversized-01 $content;
+  line-height: $line-height-oversized-01 $content;
+
+  @if $offset {
+    transform: translateY($baseline-offset-oversized-01);
+  }
+}
+
+@mixin oversized-text-02($offset: false, $content: null) {
+  font-size: $font-size-oversized-02 $content;
+  line-height: $line-height-oversized-02 $content;
+
+  @if $offset {
+    transform: translateY($baseline-offset-oversized-02);
+  }
+}
+
+@mixin oversized-text-03($offset: false, $content: null) {
+  font-size: $font-size-oversized-03 $content;
+  line-height: $line-height-oversized-03 $content;
+
+  @if $offset {
+    transform: translateY($baseline-offset-oversized-03);
+  }
+}
+
+@mixin oversized-text-04($offset: false, $content: null) {
+  font-size: $font-size-oversized-04 $content;
+  line-height: $line-height-oversized-04 $content;
+
+  @if $offset {
+    transform: translateY($baseline-offset-oversized-04);
+  }
+}
+// Media query mixins ----------------------------------------------
+
+// Large desktop and up - from 1408px up
+@mixin desktopXLUp() {
+  @media (min-width: $breakpoint-xxl) {
+    @content;
+  }
+}
+
+// Desktop and down - up to 1408px
+@mixin desktop() {
+  @media (max-width: calc($breakpoint-xxl - em(1px))) {
+    @content;
+  }
+}
+
+// Desktop and up - from 1200px up
+@mixin desktopAndUp() {
+  @media (min-width: $breakpoint-xl) {
+    @content;
+  }
+}
+
+// Desktop - from 1200px to 1408px
+@mixin desktopOnly() {
+  @media (min-width: $breakpoint-xl) and (max-width: 1399px) {
+    @content;
+  }
+}
+
+// Tablet landscape and down - up to 1199px
+@mixin tabletL() {
+  @media (max-width: calc($breakpoint-xl - em(1px))) {
+    @content;
+  }
+}
+
+// Tablet landscape - from 992px to 1199px
+@mixin tabletLOnly() {
+  @media (min-width: $breakpoint-lg) and (max-width: calc($breakpoint-xl - em(1px))) {
+    @content;
+  }
+}
+
+// Tablet portrait and down - up to 991px
+@mixin tabletP() {
+  @media (max-width: calc($breakpoint-lg - em(1px))) {
+    @content;
+  }
+}
+
+// Tablet portrait - from 768px to 991px
+@mixin tabletPOnly() {
+  @media (min-width: $breakpoint-md) and (max-width: calc($breakpoint-lg - em(1px))) {
+    @content;
+  }
+}
+
+// Phone landscape and down - up to 767px
+@mixin phoneL() {
+  @media (max-width: calc($breakpoint-md - em(1px))) {
+    @content;
+  }
+}
+
+// Phone landscape - from 576px to 767px
+@mixin phoneLOnly() {
+  @media (min-width: $breakpoint-sm) and (max-width: calc($breakpoint-md - em(1px))) {
+    @content;
+  }
+}
+
+// Phone portrait and down - up to 575px
+@mixin phoneP() {
+  @media (max-width: calc($breakpoint-sm - em(1px))) {
+    @content;
+  }
+}
+
+@mixin phonePAndUp() {
+  @media (min-width: calc($breakpoint-sm - em(1px))) {
+    @content;
+  }
+}

@@ -1,0 +1,366 @@
+/* =============================================================================
+   GLOBAL DESIGN TOKENS
+   Override this file in consumer applications
+   ============================================================================= */
+
+:root {
+   /* ==========================================================================
+     SPACING & LAYOUT BASICS
+     ========================================================================== */
+   --spacing: .5rem;
+
+   --content-max-width: 93.75rem;
+   --content-padding: 2rem;
+   --content-padding-md: 1.5rem;
+   --content-padding-sm: 1rem;
+
+   --main-max-width: 1600px;
+   --main-min-width: 200px;
+   --main-width: 100%;
+
+
+   /* ==========================================================================
+     TYPOGRAPHY – FONTS
+     ========================================================================== */
+   --font-primary: Segoe UI, Helvetica, sans-serif;
+   --font-code: Consolas, Courier New, monospace;
+   --font-ico: ionicons;
+   --font-meninx-ico: meninxicons;
+
+   --font-family: 'Outfit-VariableFont_wght';
+   --font-weight: 400;
+
+   --editor-font-size: 14px;
+
+
+   /* ==========================================================================
+     TYPOGRAPHY – FONT SIZES
+     ========================================================================== */
+   --font-size-base: 1rem;
+   --font-size-large: 1.125rem;
+   --font-size-smaller: .875rem;
+   --font-size-small: .75rem;
+
+   --font-size-main-heading: 1.875rem;
+   --font-size-subheading: 1.375rem;
+   --font-size-sub-subheading: 1.125rem;
+
+   --font-size-oversized-01: 1.875rem;
+   --font-size-oversized-02: 2.8125rem;
+   --font-size-oversized-03: 3.75rem;
+   --font-size-oversized-04: 5rem;
+
+
+   /* ==========================================================================
+     TYPOGRAPHY – LINE HEIGHTS
+     ========================================================================== */
+   --line-height-base: 1.5rem;
+   --line-height-large: 1.5rem;
+   --line-height-smaller: 1rem;
+   --line-height-small: 1rem;
+
+   --line-height-main-heading: 2.5rem;
+   --line-height-subheading: 2rem;
+   --line-height-sub-subheading: 1.5rem;
+
+   --line-height-oversized-01: 2rem;
+   --line-height-oversized-02: 2.5rem;
+   --line-height-oversized-03: 3.5rem;
+   --line-height-oversized-04: 4.5rem;
+
+
+   /* ==========================================================================
+     BASELINE OFFSETS
+     ========================================================================== */
+   --baseline-offset-base: .34375rem;
+   --baseline-offset-large: .3125rem;
+   --baseline-offset-smaller: .125rem;
+   --baseline-offset-small: .1875rem;
+
+   --baseline-offset-main-heading: 0rem;
+   --baseline-offset-subheading: .4375rem;
+   --baseline-offset-sub-subheading: .3125rem;
+
+   --baseline-offset-oversized-01: .25rem;
+   --baseline-offset-oversized-02: .125rem;
+   --baseline-offset-oversized-03: .1875rem;
+   --baseline-offset-oversized-04: .1875rem;
+
+
+   /* ==========================================================================
+     SHADOWS
+     ========================================================================== */
+   --shadow-00: 0 .1875rem .3125rem 0 #2f365c1a;
+   --shadow-01: 0 .0625rem .3125rem 0 #2f365c33;
+   --shadow-02: 0 .1875rem .625rem .1875rem #2f365c33;
+   --shadow-03: 0 .3125rem 1.4375rem .4375rem #2f365c33;
+
+   --color-box-shadow: rgba(29, 34, 41, 0.26);
+
+
+   /* ==========================================================================
+     TRANSITIONS
+     ========================================================================== */
+   --transition-duration-base: .2s;
+   --transition-duration-long: .4s;
+
+
+   /* ==========================================================================
+     BREAKPOINTS
+     ========================================================================== */
+   --breakpoint-xxl: 88em;
+   --breakpoint-xl: 75em;
+   --breakpoint-lg: 62em;
+   --breakpoint-md: 48em;
+   --breakpoint-sm: 36em;
+
+
+   /* ==========================================================================
+     COLORS – BASE
+     ========================================================================== */
+   --color-white: #fff;
+   --color-black: #212121;
+
+   --color-gray-100: #fafafa;
+   --color-gray-200: #f7f7f7;
+   --color-gray-250: #f2f2f2;
+   --color-gray-275: #e5e5e5;
+   --color-gray-300: #e0e0e0;
+   --color-gray-400: #bdbdbd;
+   --color-gray-500: #9e9e9e;
+   --color-gray-600: #707070;
+   --color-gray-700: #616161;
+   --color-gray-800: #424242;
+   --color-gray-900: #212121;
+
+   --color-text: var(--color-black);
+   --color-text-light: var(--color-gray-600);
+   --color-text-inverted: var(--color-white);
+
+
+   /* ==========================================================================
+     BRAND & PRIMARY
+     ========================================================================== */
+   --color-brand: #6592CC;
+   --color-brand-rgb: 31, 106, 156;
+   --color-brand-contrast: #fefeff;
+
+   --color-primary-base: #0072c6;
+   --color-primary-darkest: #00467a;
+   --color-primary-dark: #044680;
+   --color-primary-semidark: #0072c6;
+   --color-primary: #6592CC;
+   --color-primary-light: #B7D2EC;
+   --color-primary-rgb: 0, 114, 198;
+   --color-primary-contrast: #e5f2ff;
+
+   --color-press-effect: var(--color-primary-semidark);
+
+
+   /* ==========================================================================
+     STATE COLORS
+     ========================================================================== */
+   --color-positive: #82bc3c;
+   --color-positive-dark: #5a8229;
+   --color-positive-light: #93c853;
+   --color-positive-rgb: 130, 188, 60;
+
+   --color-negative: #d64856;
+   --color-negative-dark: #ab2633;
+   --color-negative-light: #dd6571;
+   --color-negative-rgb: 214, 72, 86;
+
+   --color-warning: #ffc000;
+   --color-warning-dark: #e6ad00;
+   --color-warning-light: #ffd34d;
+   --color-warning-rgb: 255, 192, 0;
+
+
+   /* ==========================================================================
+     NAMED COLORS
+     ========================================================================== */
+   --color-red: #db111d;
+   --color-blue: #0f89dc;
+   --color-blue-dark: #0d6efd;
+   --color-green: #00a368;
+   --color-purple: #884dd3;
+   --color-orange: #ffc000;
+   --color-yellow: #ffd966;
+   --color-peach: #feb8a4;
+
+
+   /* ==========================================================================
+     OVERLAYS
+     ========================================================================== */
+   --color-overlay-dark: #00000080;
+   --color-overlay-dar-opaque: #999;
+   --color-overlay-light: #ffffff80;
+
+
+   /* ==========================================================================
+     NAVIGATION
+     ========================================================================== */
+   --nav-height: 3rem;
+   --nav-width: 20.5rem;
+   --nav-module-width: 4rem;
+
+   --nav-border-radius: .5rem;
+   --nav-line-color: var(--color-gray-275);
+   --nav-border-line: .0625rem solid var(--nav-line-color);
+
+   --nav-actions-color: var(--color-gray-800);
+   --nav-toggle-color: var(--color-primary-dark);
+   --nav-toggle-border-radius: 0;
+   --nav-current-module-color: var(--color-primary-dark);
+
+   --color-mod-nav-theme: var(--color-primary-dark);
+   --color-mod-nav-theme-variant-1: var(--color-brand);
+   --color-mod-nav-theme-variant-2: var(--color-white);
+   --color-mod-nav-theme-contrast: var(--color-white);
+
+
+   /* ==========================================================================
+     SIDEBAR
+     ========================================================================== */
+   --sidebar-collapsed-width: calc(var(--spacing) * 8);
+   --sidebar-extended-width: calc(var(--spacing) * 34);
+   --sidebar-nav-height: 90svh;
+
+   --sidebar-menu-item-height: 2.5rem;
+   --sidebar-submenu-header-height: 2.5rem;
+   --sidebar-submenu-item-height: 2.5rem;
+   --sidebar-submenu-indent: calc(var(--spacing) * 6);
+   --sidebar-submenu-width: calc(var(--spacing) * 26);
+
+   --sidebar-selected-submenu-hover: var(--color-primary-dark);
+
+   --color-sidebar-selected: var(--color-brand);
+   --color-sidebar-selected-text: var(--color-white);
+   --color-sidebar-sub-menu: #023468;
+   --color-sidebar-text: var(--color-white);
+   --color-sidebar-env-text: var(--color-white);
+
+
+   /* ==========================================================================
+     GRID
+     ========================================================================== */
+   --grid-head-color: var(--color-white);
+   --grid-head-color-secondary: var(--color-black);
+
+   --grid-head-background: var(--color-primary-dark);
+   --grid-head-background-secondary: var(--color-gray-300);
+   --grid-head-background-active: var(--color-brand);
+   --grid-head-hover: var(--color-primary-semidark);
+
+   --color-grid-hover: var(--color-gray-250);
+   --color-grid-selected-hover: var(--color-brand);
+   --color-grid-selected: var(--color-brand);
+
+
+   /* ==========================================================================
+     BUTTONS
+     ========================================================================== */
+
+   /* ========================= Button – Primary (Dark) ========================= */
+   --button-color: var(--color-white, #ffffff);
+   --button-color-hover: var(--color-white, #ffffff);
+   --button-background-color: var(--color-primary-dark, #044680);
+   --button-background-color-hover: var(--color-brand, #6592CC);
+
+   /* ========================= Button – Primary (Light / Alpha) ========================= */
+   --button-color-light: var(--color-primary-dark, #044680);
+   --button-color-hover-light: var(--color-white, #ffffff);
+   --button-background-color-light-rgb: rgba(var(--color-primary-rgb, 101, 146, 204), 0.3);
+   --button-background-color-hover-light: var(--color-primary, #6592CC);
+
+   /* ========================= Button – Secondary (Solid) ========================= */
+   --button-color-secondary: var(--color-white, #ffffff);
+   --button-color-hover-secondary: var(--color-white, #ffffff);
+   --button-background-color-secondary: var(--color-brand, #6592CC);
+   --button-background-color-hover-secondary: var(--color-primary-dark, #044680);
+
+   /* ========================= Button – Secondary (Light / Alpha) ========================= */
+   --button-background-color-light-rgb-secondary: rgba(var(--color-brand-rgb, 101, 146, 204), 0.3);
+   --button-color-light-secondary: var(--color-brand, #6592CC);
+   --button-color-hover-light-secondary: var(--color-white, #ffffff);
+   --button-background-color-hover-light-secondary: var(--color-brand, #6592CC);
+
+   /* ========================= Button – Success (Solid) ========================= */
+   --button-color-success: var(--color-white, #ffffff);
+   --button-color-hover-success: var(--color-white, #ffffff);
+   --button-background-color-success: var(--color-positive, #198754);
+   --button-background-color-hover-success: var(--color-positive-dark, #166e3a);
+
+   /* ========================= Button – Success (Light / Alpha) ========================= */
+   --button-background-color-light-rgb-success: rgba(var(--color-positive-rgb, 25, 135, 84), 0.3);
+   --button-color-light-success: var(--color-positive-dark, #146c43);
+   --button-color-hover-light-success: var(--color-white, #ffffff);
+   --button-background-color-hover-light-success: var(--color-positive, #198754);
+
+   /* ========================= Button – Warning (Solid) ========================= */
+   --button-color-warning: var(--color-white, #ffffff);
+   --button-color-hover-warning: var(--color-white, #ffffff);
+   --button-background-color-warning: var(--color-warning, #ffc107);
+   --button-background-color-hover-warning: var(--color-warning-dark, #cc9a06);
+
+   /* ========================= Button – Warning (Light / Alpha) ========================= */
+   --button-background-color-light-rgb-warning: rgba(var(--color-warning-rgb, 255, 193, 7), 0.3);
+   --button-color-light-warning: var(--color-warning-dark, #997404);
+   --button-color-hover-light-warning: var(--color-white, #ffffff);
+   --button-background-color-hover-light-warning: var(--color-warning, #ffc107);
+
+   /* ========================= Button – Danger (Solid) ========================= */
+   --button-color-danger: var(--color-white, #ffffff);
+   --button-color-hover-danger: var(--color-white, #ffffff);
+   --button-background-color-danger: var(--color-negative, #dc3545);
+   --button-background-color-hover-danger: var(--color-negative-dark, #b02a37);
+
+   /* ========================= Button – Danger (Light / Alpha) ========================= */
+   --button-background-color-light-rgb-danger: rgba(var(--color-negative-rgb, 220, 53, 69), 0.3);
+   --button-color-light-danger: var(--color-negative-dark, #842029);
+   --button-color-hover-light-danger: var(--color-white, #ffffff);
+   --button-background-color-hover-light-danger: var(--color-negative, #dc3545);
+
+   /* ========================= Button – Info (Solid) ========================= */
+   --button-color-info: var(--color-white, #ffffff);
+   --button-color-hover-info: var(--color-white, #ffffff);
+   --button-background-color-info: var(--color-info, #0d6efd);
+   --button-background-color-hover-info: var(--color-info-dark, #0b5ed7);
+
+   /* ========================= Button – Info (Light / Alpha) ========================= */
+   --button-background-color-light-rgb-info: rgba(var(--color-info-rgb, 13, 110, 253), 0.3);
+   --button-color-light-info: var(--color-info-dark, #084298);
+   --button-color-hover-light-info: var(--color-white, #ffffff);
+   --button-background-color-hover-light-info: var(--color-info, #0d6efd);
+
+
+   /* ========================= Button – Border Tokens ========================= */
+   --button-border-color: var(--color-gray-275, #e5e5e5);
+   --button-border-color-disabled: var(--color-gray-300, #e0e0e0);
+
+   /* solid */
+   --button-border-color-primary: rgba(var(--color-primary-rgb, 0, 114, 198), .35);
+   --button-border-color-secondary: rgba(var(--color-brand-rgb, 31, 106, 156), .35);
+   --button-border-color-success: rgba(var(--color-positive-rgb, 130, 188, 60), .35);
+   --button-border-color-warning: rgba(var(--color-warning-rgb, 255, 192, 0), .45);
+   --button-border-color-danger: rgba(var(--color-negative-rgb, 214, 72, 86), .35);
+   --button-border-color-info: rgba(var(--color-blue-dark, 13, 110, 253), .35);
+
+   /* light (alpha variants) */
+   --button-border-color-primary-light: rgba(var(--color-primary-rgb, 0, 114, 198), .35);
+   --button-border-color-secondary-light: rgba(var(--color-brand-rgb, 31, 106, 156), .35);
+   --button-border-color-success-light: rgba(var(--color-positive-rgb, 130, 188, 60), .35);
+   --button-border-color-warning-light: rgba(var(--color-warning-rgb, 255, 192, 0), .45);
+   --button-border-color-danger-light: rgba(var(--color-negative-rgb, 214, 72, 86), .35);
+   --button-border-color-info-light: rgba(var(--color-info-rgb, 13, 110, 253), .35);
+
+
+   /* ==========================================================================
+     SCROLLBAR
+     ========================================================================== */
+   --scrollbar-size: .375rem;
+   --scrollbar-color: var(--color-gray-400);
+   --scrollbar-color-hover: var(--color-gray-500);
+   --scrollbar-color-active: var(--color-primary);
+
+}

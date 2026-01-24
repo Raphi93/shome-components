@@ -1,0 +1,245 @@
+@use './functions' as *;
+
+// 8px grid baseline spacing
+$spacing: 0.5rem;
+
+// Fonts
+$font-primary: 'Segoe UI', Helvetica, sans-serif;
+$font-code: 'Consolas', 'Courier New', monospace;
+$font-ico: 'ionicons';
+$font-meninx-ico: 'meninxicons';
+
+// Typography -----------------------------------
+
+// Font size
+$font-size-base: rem(16px);
+$font-size-large: rem(18px);
+$font-size-smaller: rem(14px);
+$font-size-small: rem(12px);
+
+$font-size-main-heading: rem(30px);
+$font-size-subheading: rem(22px);
+$font-size-sub-subheading: rem(18px);
+
+$font-size-oversized-01: rem(30px);
+$font-size-oversized-02: rem(45px);
+$font-size-oversized-03: rem(60px);
+$font-size-oversized-04: rem(80px);
+
+// Line height
+$line-height-base: $spacing * 3;
+$line-height-large: $spacing * 3;
+$line-height-smaller: $spacing * 2;
+$line-height-small: $spacing * 2;
+
+$line-height-main-heading: $spacing * 5;
+$line-height-subheading: $spacing * 4;
+$line-height-sub-subheading: $spacing * 3;
+
+$line-height-oversized-01: $spacing * 4;
+$line-height-oversized-02: $spacing * 5;
+$line-height-oversized-03: $spacing * 7;
+$line-height-oversized-04: $spacing * 9;
+
+// Baseline offset
+$baseline-offset-base: rem(5.5px);
+$baseline-offset-large: rem(5px);
+$baseline-offset-smaller: rem(2px);
+$baseline-offset-small: rem(3px);
+
+$baseline-offset-main-heading: rem(0px);
+$baseline-offset-subheading: rem(7px);
+$baseline-offset-sub-subheading: rem(5px);
+
+$baseline-offset-oversized-01: rem(4px);
+$baseline-offset-oversized-02: rem(2px);
+$baseline-offset-oversized-03: rem(3px);
+$baseline-offset-oversized-04: rem(3px);
+
+// Other visuals ---------------------------------
+// Box shadow
+$shadow-00: 0 rem(3px) rem(5px) 0 rgba(47, 54, 92, 0.1);
+$shadow-01: 0 rem(1px) rem(5px) 0 rgba(47, 54, 92, 0.2);
+$shadow-02: 0 rem(3px) rem(10px) rem(3px) rgba(47, 54, 92, 0.2);
+$shadow-03: 0 rem(5px) rem(23px) rem(7px) rgba(47, 54, 92, 0.2);
+
+// Transitions
+$transition-duration-base: 0.2s;
+$transition-duration-long: 0.4s;
+
+//Layout -----------------------------------------
+
+// Responsive breakpoints
+$breakpoint-xxl: em(1408px);
+$breakpoint-xl: em(1200px);
+$breakpoint-lg: em(992px);
+$breakpoint-md: em(768px);
+$breakpoint-sm: em(576px);
+
+// Layout partials sizes
+
+$navigation-width: calc($spacing * 30); // Abstraction for use in @media
+
+// Content padding
+$content-padding: $spacing * 4;
+$content-padding-md: $spacing * 3;
+$content-padding-sm: $spacing * 2;
+
+// Icons symbols -----------------------------------------
+$waitingSymbol: '\F38B';
+$errorSymbol: '\f268';
+$messageSymbol: '\f311';
+$successSymbol: '\f14a';
+$warningSymbol: '\f276';
+
+$clickableDownSymbol: '\F123';
+$clickableUpSymbol: '\F126';
+
+// Navigation variables
+$nav-height: $spacing * 6;
+$nav-width: 20.5rem;
+$nav-module-width: 4rem;
+
+//border radius 8px
+$nav-border-radius: $spacing;
+
+//line in navigations
+$nav-line-color: var(--color-gray-275);
+$nav-border-line: rem(1px) solid var(--nav-line-color);
+
+//header actions svg color
+$nav-actions-color: var(--color-gray-800);
+
+//header toggle svg color, button style
+
+$nav-toggle-color: var(--color-mod-nav-theme-contrast);
+$nav-toggle-border-radius: var(--nav-border-radius) rem(20px) rem(20px) var(--nav-border-radius);
+
+//module nav current item svg color
+
+$nav-current-module-color: var(--color-mod-nav-theme-contrast);
+
+:root {
+  // 8px grid baseline spacing
+  --spacing: #{$spacing};
+
+  // Fonts
+  --font-primary: #{$font-primary};
+  --font-code: #{$font-code};
+  --font-ico: #{$font-ico};
+  --font-meninx-ico: #{$font-meninx-ico};
+
+  --editor-font-size: 14px;
+
+  // Typography -----------------------------------
+
+  // Font size
+  --font-size-base: #{$font-size-base};
+  --font-size-large: #{$font-size-large};
+  --font-size-smaller: #{$font-size-smaller};
+  --font-size-small: #{$font-size-small};
+
+  --font-size-main-heading: #{$font-size-main-heading};
+  --font-size-subheading: #{$font-size-subheading};
+  --font-size-sub-subheading: #{$font-size-sub-subheading};
+
+  --font-size-oversized-01: #{$font-size-oversized-01};
+  --font-size-oversized-02: #{$font-size-oversized-02};
+  --font-size-oversized-03: #{$font-size-oversized-03};
+  --font-size-oversized-04: #{$font-size-oversized-04};
+
+  // Line height
+  --line-height-base: #{$line-height-base};
+  --line-height-large: #{$line-height-large};
+  --line-height-smaller: #{$line-height-smaller};
+  --line-height-small: #{$line-height-small};
+
+  --line-height-main-heading: #{$line-height-main-heading};
+  --line-height-subheading: #{$line-height-subheading};
+  --line-height-sub-subheading: #{$line-height-sub-subheading};
+
+  --line-height-oversized-01: #{$line-height-oversized-01};
+  --line-height-oversized-02: #{$line-height-oversized-02};
+  --line-height-oversized-03: #{$line-height-oversized-03};
+  --line-height-oversized-04: #{$line-height-oversized-04};
+
+  // Baseline offset
+  --baseline-offset-base: #{$baseline-offset-base};
+  --baseline-offset-large: #{$baseline-offset-large};
+  --baseline-offset-smaller: #{$baseline-offset-smaller};
+  --baseline-offset-small: #{$baseline-offset-small};
+
+  --baseline-offset-main-heading: #{$baseline-offset-main-heading};
+  --baseline-offset-subheading: #{$baseline-offset-subheading};
+  --baseline-offset-sub-subheading: #{$baseline-offset-sub-subheading};
+
+  --baseline-offset-oversized-01: #{$baseline-offset-oversized-01};
+  --baseline-offset-oversized-02: #{$baseline-offset-oversized-02};
+  --baseline-offset-oversized-03: #{$baseline-offset-oversized-03};
+  --baseline-offset-oversized-04: #{$baseline-offset-oversized-04};
+
+  // Other visuals ---------------------------------
+  // Box shadow
+  --shadow-00: #{$shadow-00};
+  --shadow-01: #{$shadow-01};
+  --shadow-02: #{$shadow-02};
+  --shadow-03: #{$shadow-03};
+
+  // Transitions
+  --transition-duration-base: #{$transition-duration-base};
+  --transition-duration-long: #{$transition-duration-long};
+
+  //Layout -----------------------------------------
+
+  // Layout partials sizes
+  --module-header-height: #{$spacing * 7};
+  --navigation-width: #{$navigation-width};
+  --content-max-width: #{rem(1500px)};
+
+  // Content padding
+  --content-padding: #{$content-padding};
+  --content-padding-md: #{$content-padding-md};
+  --content-padding-sm: #{$content-padding-sm};
+
+  --clickableDownSymbol: #{$clickableDownSymbol};
+  --clickableUpSymbol: #{$clickableUpSymbol};
+
+  // Responsive breakpoints
+  --breakpoint-xxl: #{$breakpoint-xxl};
+  --breakpoint-xl: #{$breakpoint-xl};
+  --breakpoint-lg: #{$breakpoint-lg};
+  --breakpoint-md: #{$breakpoint-md};
+  --breakpoint-sm: #{$breakpoint-sm};
+
+  // Screen overlay color
+  --color-overlay-dark: rgba(0, 0, 0, 0.5);
+  --color-overlay-dar-opaque: #999999;
+  --color-overlay-light: rgba(255, 255, 255, 0.5);
+
+  // Border radius
+  --border-radius: 0.313rem;
+
+  // Navigation variables
+  --nav-height: #{$nav-height};
+  --nav-width: #{$nav-width};
+  --nav-module-width: #{$nav-module-width};
+
+  //border radius 8px
+  --nav-border-radius: #{$nav-border-radius};
+  //line in navigations
+  --nav-line-color: #{$nav-line-color};
+  --nav-border-line: #{$nav-border-line};
+  //header actions svg color
+  --nav-actions-color: #{$nav-actions-color};
+  //header toggle svg color, button style
+  --nav-toggle-color: #{$nav-toggle-color};
+  --nav-toggle-border-radius: #{$nav-toggle-border-radius};
+  //module nav current item svg color
+  --nav-current-module-color: #{$nav-current-module-color};
+
+  // scrollbars
+  --scrollbar-size: 0.375rem;
+  --scrollbar-color: var(--color-gray-400);
+  --scrollbar-color-hover: var(--color-gray-500);
+  --scrollbar-color-active: var(--color-primary);
+}
