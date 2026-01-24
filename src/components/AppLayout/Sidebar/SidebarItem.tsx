@@ -1,14 +1,16 @@
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-import "./Sidebar.css";
-import React, { useEffect, useState } from "react";
-import { NavigationItem } from "./Sidebar";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../../Tooltip/Tooltip";
+import { LabelNameWithTooltip } from "./Sidebar";
 import { SidebarChildItem } from "./SidebarChildItem";
+import { PdcTooltipSelf } from "../PdcTooltip/PdcTooltipSelf";
+import { NavigationItem } from "../Breadcrumbs/AppBreadcrumbs";
+import { TooltipTrigger } from "@meninxgroup/react-components";
+import { PdcTooltip, PdcTooltipContent, PdcTooltipTrigger } from "../PdcTooltip/PdcTooltip";
 
 interface SidebarItemProps {
   item: NavigationItem;
@@ -16,63 +18,142 @@ interface SidebarItemProps {
   parentClick: string;
   parentExpander: boolean;
   childClick: string;
+  leafClick: string;
+  pathClicks: string[];
   handleParentClick: (item: NavigationItem) => void;
   handleParentClickNotExpanded: (item: NavigationItem) => void;
   handleChildClick: (child: NavigationItem) => void;
   handleGenerateImage?: (svg: string) => string | null;
+  isMobile?: boolean;
+  childrenRef: React.RefObject<HTMLUListElement>;
+  t: (key: string) => string;
 }
 
 export function SidebarItem({
-  item,
+  item: itemParent,
   expanded,
   parentClick,
   parentExpander,
   childClick,
+  leafClick,
+  pathClicks,
   handleParentClick,
   handleParentClickNotExpanded,
   handleChildClick,
   handleGenerateImage,
+  childrenRef,
+  t,
 }: SidebarItemProps) {
-  const [showContent, setShowContent] = useState(false);
+  const item = useMemo(
+    () => ({
+      ...itemParent,
+      icon: itemParent.icon ?? "",
+      isFontAwesome: itemParent.isFontAwesome ?? false,
+      link: itemParent.link ?? "",
+      svg: itemParent.svg ?? undefined,
+      tooltip: itemParent.tooltip ?? "",
+      children: itemParent.children ?? [],
+    }),
+    [itemParent]
+  );
 
+  const itemName = item.name;
+
+  const iconImage =
+    !item.isFontAwesome && typeof item.icon === "string"
+      ? handleGenerateImage?.(item.icon ?? "")
+      : "";
+
+  const isSelected = parentClick === item.name;
+  const isSubmenuOpen = parentExpander && isSelected;
+  const hasChildren = !!item.children?.length;
+
+const isChildSelected = isSelected && !!pathClicks[1];
+const isSubChildSelected = isSelected && !!pathClicks[2];
+
+  const cssSelected = `${isSelected && !isChildSelected && !isSubChildSelected ? " selected" : 
+  isSelected && isChildSelected && !isSubChildSelected ? " selectedChild" : 
+  isSelected && isChildSelected && isSubChildSelected ? " selectedSubChild" : ""}`;
+
+  const className = `menu-items${expanded ? " expanded" : ""}${cssSelected}`;
+
+  const [expanderDelayed, setExpanderDelayed] = useState(false);
   useEffect(() => {
     if (expanded) {
-      const timeout = setTimeout(() => setShowContent(true), 300);
-      return () => clearTimeout(timeout); 
-    } else {
-      setShowContent(false); 
+      const t = window.setTimeout(() => setExpanderDelayed(true), 300);
+      return () => window.clearTimeout(t);
     }
+    setExpanderDelayed(false);
   }, [expanded]);
 
-  const iconImage = !item.isFontAwesome && typeof item.icon === "string"
-    ? handleGenerateImage?.(item.svg ?? "")
-    : "";
+  const [expanderDelayedChild, setExpanderDelayedChild] = useState(false);
+  useEffect(() => {
+    if (!expanderDelayed) {
+      setExpanderDelayedChild(false);
+      return;
+    }
+    setExpanderDelayedChild(isSubmenuOpen);;
 
-  const handleClick = () => {
-    !expanded ? handleParentClickNotExpanded(item) : handleParentClick(item);
+  }, [expanderDelayed, isSubmenuOpen]);
+
+  const [openChildName, setOpenChildName] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!isSubmenuOpen) setOpenChildName(null);
+  }, [isSubmenuOpen]);
+
+  useEffect(() => {
+    if (!isSubmenuOpen) return;
+    setOpenChildName(pathClicks[1] ?? null);
+  }, [isSubmenuOpen, pathClicks]);
+
+  const toggleParent = () => {
+    if (!expanded) {
+      handleParentClickNotExpanded(item);
+    }
+    handleParentClick(item);
   };
 
-  const isSelected = parentClick === item.label;
+  const iconElement =
+    item.isFontAwesome && (item.icon as IconProp) ? (
+      <FontAwesomeIcon icon={item.icon as IconProp} className="menu-icon" onClick={() => toggleParent()} />
+    ) : (
+      <img src={iconImage ?? ""} alt={itemName} className="menu-icon-image" onClick={() => toggleParent()} />
+    );
 
-  const iconElement = item.isFontAwesome && item.icon as IconProp
-    ? <FontAwesomeIcon icon={item.icon as IconProp} className="menu-icon" />
-    : <img src={iconImage ?? ""} alt={item.label} className="menu-icon-image" />;
-
-  const wrappedIcon = !expanded
-      ? <Tooltip>
-          <TooltipTrigger>{iconElement}</TooltipTrigger>
-          <TooltipContent>{item.label}</TooltipContent>
-        </Tooltip>
-    : iconElement;
+  const wrappedIcon = !expanded ? (
+    <PdcTooltip>
+      <PdcTooltipTrigger asChild className="tooltip-menus" onClick={() => toggleParent()}>{iconElement}</PdcTooltipTrigger>
+      <PdcTooltipContent>{item.tooltip || itemName}</PdcTooltipContent>
+    </PdcTooltip>
+  ) : (
+    iconElement
+  );
 
   return (
-    <div key={item.label}>
-      <div
-        className={`menu-items${expanded ? " expandet" : ""}${isSelected ? " selected" : ""}`}
-        onClick={handleClick}
-      >
-        {wrappedIcon}
-        {showContent && (
+    <>
+      <div className={className} onClick={() => toggleParent()}>
+        {item.link ? (
+          item.link.startsWith("http") ? (
+
+            <a href={item.link} target="_blank" rel="noopener noreferrer" onClick={(e) => {
+              toggleParent();
+            }}>
+              {item.icon && item.icon !== "" && wrappedIcon}
+            </a>
+          ) : (
+            <Link to={item.link} onClick={(e) => {
+              toggleParent();
+            }}>
+              {item.icon && item.icon !== "" && wrappedIcon}
+            </Link>
+          )
+        ) : (
+      
+          item.icon && item.icon !== "" && wrappedIcon
+        )}
+
+        {expanderDelayed && (
           <>
             {item.link ? (
               item.link.startsWith("http") ? (
@@ -82,18 +163,32 @@ export function SidebarItem({
                   rel="noopener noreferrer"
                   className="menu-link"
                 >
-                  <span className="menu-name">{item.label}</span>
+                  <LabelNameWithTooltip itemName={itemName} rights={item.svg} t={t} />
                 </a>
               ) : (
                 <Link to={item.link} className="menu-link">
-                  <span className="menu-name">{item.label}</span>
+                  <LabelNameWithTooltip itemName={itemName} rights={item.svg} t={t} />
                 </Link>
               )
             ) : (
-              <span className="menu-name">{item.label}</span>
+              <div
+                className="menu-link"
+                onClick={(e) => {
+                  toggleParent();
+                }}
+              >
+                <LabelNameWithTooltip itemName={itemName} rights={item.svg} t={t} />
+              </div>
             )}
-            {item.children && (
-              <button className={`expander${isSelected ? " selected" : ""}`}>
+
+            {hasChildren && expanded && (
+              <button
+                className={`expander${isSelected ? " selected" : ""}`}
+                type="button"
+                onClick={(e) => {
+                  toggleParent();
+                }}
+              >
                 <FontAwesomeIcon icon={faChevronDown} />
               </button>
             )}
@@ -101,18 +196,30 @@ export function SidebarItem({
         )}
       </div>
 
-      {item.children && isSelected && parentExpander && (
-        <ul className="submenu expanded other-ul">
-          {item.children.map((child) => (
-            <SidebarChildItem
-              key={child.label}
-              child={child}
-              isSelected={childClick === child.label}
-              onClick={() => handleChildClick(child)}
-            />
-          ))}
+      {hasChildren && expanderDelayedChild && (
+        <ul className={`submenu${isSubmenuOpen ? " selected" : ""}`} aria-hidden={!isSubmenuOpen} ref={childrenRef}>
+          {item.children.map((child) => {
+            const childIsOpen = openChildName === child.name;
+
+            return (
+              <SidebarChildItem
+                key={child.name}
+                node={child}
+                level={0}
+                leafClick={leafClick}
+                pathClicks={pathClicks}
+                isOpen={childIsOpen}
+                onToggleOpen={() => {
+                  setOpenChildName((prev) => (prev === child.name ? null : child.name));
+                }}
+                onSelect={() => handleChildClick(child)}
+                handleGenerateImage={handleGenerateImage}
+                t={t}
+              />
+            );
+          })}
         </ul>
       )}
-    </div>
+    </>
   );
 }

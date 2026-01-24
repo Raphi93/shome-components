@@ -1,6 +1,6 @@
 /* Container – das Floating-Element */
 .tooltip-content {
-  background-color: var(--color-gray-dark, #1d2229);
+  background-color: var(--color-gray-400, #1d2229);
   color: var(--color-white, #ffffff);
   font-size: var(--font-size-smaller, 0.75rem);
   border-radius: var(--border-radius, 12px);
@@ -9,8 +9,6 @@
   width: max-content;
   max-width: calc(100vw - var(--spacing, 1rem));
   z-index: 110;
-  /* optional: */
-  /* box-shadow: 0 6px 24px rgba(0,0,0,.2); */
 }
 .tooltip-trigger { cursor: pointer; }
 
