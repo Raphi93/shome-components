@@ -1,0 +1,122 @@
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+  min-width: 0;
+  width: 100%;
+}
+
+.header-titles-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing);
+  justify-content: flex-start;
+  min-width: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.header-titles-container-with-sidebar {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: var(--spacing);
+  justify-content: flex-start;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.header-image-container {
+  height: var(--nav-height);
+  width: calc(var(--nav-height) + 1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-mod-nav-theme-header-color);
+  flex-shrink: 0;
+}
+
+.header-image {
+  height: var(--icon-sidebar-height);
+  width: var(--icon-sidebar-width);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-title-wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.header-title-wrapper-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.1rem;
+  min-width: 0;
+  overflow: hidden;
+  flex: 1 1 auto;
+  margin-left: 1rem;
+  line-height: 1.2rem;
+}
+
+.header-title,
+.header-subtitles,
+.header-env-titles {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.header-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--color-mod-nav-theme-header-color);
+}
+
+.header-subtitles {
+  font-size: 1rem;
+  color: var(--color-black);
+}
+
+.header-env-titles {
+  font-size: 1.1rem;
+  color: var(--color-brand);
+  font-weight: bold;
+  max-width: 100%;
+}
+
+.header-buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 1317px) {
+  .header-title {
+    font-size: 1rem;
+  }
+
+  .header-subtitles {
+    font-size: 0.9rem;
+  }
+
+  .header-env-titles {
+    font-size: 1rem;
+  }
+}

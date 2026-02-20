@@ -1,0 +1,384 @@
+// Imports
+@use '../../Styles/abstracts' as *;
+
+// Partials
+@use './Datetime';
+@use './Checkbox';
+@use './Select';
+
+// Variables
+:root {
+  --input-focus-outline-color: var(--color-primary-light);
+}
+
+// Form mixins
+@mixin input {
+  @include base-text;
+
+  border-radius: var(--border-radius);
+  border: rem(1px) solid var(--color-gray-400);
+  appearance: none;
+
+  height: calc(var(--spacing) * 5);
+  transition:
+    border-color var(--transition-duration-base),
+    box-shadow var(--transition-duration-base);
+  padding: var(--spacing) calc(var(--spacing) * 1.5);
+  flex-grow: 1;
+  vertical-align: top;
+  background-color: var(--color-white);
+
+  &:focus {
+    outline: none;
+
+    border-color: var(--color-primary-dark);
+    box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    color: var(--color-text-light);
+    background: var(--color-gray-200);
+  }
+
+  &.percent {
+    padding-right: 25px;
+  }
+}
+
+.inputNumberWrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.percentText {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5px;
+  font-weight: 600;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+// Field wrapper
+.field-wrapper {
+  width: 100%;
+  border: none;
+  margin-bottom: var(--spacing);
+}
+
+// Field label
+.field-label {
+  margin-bottom: var(--spacing);
+  display: flex;
+
+  label {
+    @include base-text($offset: true);
+
+    display: block;
+    color: var(--color-gray-800);
+  }
+
+  .required {
+    color: var(--color-negative);
+    font-weight: 600;
+    margin-left: calc(var(--spacing) * 0.5);
+  }
+
+  .dirty {
+    margin-left: calc(var(--spacing) * 0.5);
+  }
+
+  .dirtyTrigger {
+    cursor: pointer;
+  }
+
+  .dirtyIcon {
+    height: 20px;
+  }
+}
+
+// Field Content
+.field-content {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+
+  & > a,
+  & > button {
+    margin-left: var(--spacing);
+    min-width: 0;
+  }
+}
+
+// Field description
+.field-description {
+  color: var(--color-text-light);
+  font-style: italic;
+  width: 100%;
+  transform: translateY(var(--baseline-offset-base));
+}
+
+// Fieldset only view
+.fieldset-read-only {
+  // Field wrapper read only
+  .read-only {
+    display: flex;
+
+    label {
+      &::after {
+        content: '\003A';
+      }
+    }
+  }
+
+  .field-content {
+    word-break: break-all;
+  }
+
+  .field-description {
+    color: var(--color-text-light);
+    font-style: italic;
+    width: 100%;
+    transform: translateY(var(--baseline-offset-base));
+  }
+}
+
+// Row read only
+.read-only {
+  .field-label {
+    margin-right: calc(var(--spacing) * 1);
+    margin-bottom: var(--spacing);
+    max-width: 100%;
+    flex-shrink: 0;
+  }
+
+  .field-content {
+    @include large-text($offset: true);
+    width: auto;
+    margin-bottom: var(--spacing);
+    flex-grow: 1;
+  }
+
+  a {
+    margin-left: 0;
+  }
+
+  a:focus {
+    outline: rem(2px) solid var(--input-focus-outline-color);
+    outline-offset: rem(2px);
+    border-radius: var(--border-radius);
+  }
+}
+
+// Input - text, number, email,...
+.input {
+  @include input;
+  width: 100%;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.borderLabelInputWrapper {
+  position: relative;
+  width: 100%;
+  margin: 1rem 0 0.5rem 0;
+
+  &:focus-within .staticBorderLabel {
+    color: var(--color-label-active);
+  }
+
+  .borderLabel {
+    @include base-text;
+    z-index: 1;
+
+    position: absolute;
+    background-color: var(--color-white);
+    color: var(--color-text-light);
+    opacity: 0.6;
+    transform: translateY(-50%);
+    top: 50%;
+    padding: 0 5px;
+    left: var(--spacing);
+    pointer-events: none;
+    transition: all 200ms ease-in-out;
+  }
+
+  .textAreaBorderLabel {
+    top: rem(20px);
+  }
+
+  .disabledBorderLabel {
+    background-color: var(--color-gray-200);
+  }
+
+  .staticBorderLabel {
+    z-index: 1;
+    position: absolute;
+    background-color: var(--color-white);
+    color: var(--color-gray-400);
+    top: -6px;
+    padding: 0 5px;
+    left: var(--spacing);
+    pointer-events: none;
+    transition: all 200ms ease-in-out;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .borderLabelInput {
+    @include input;
+    width: 100%;
+
+    &.active + .borderLabel {
+      line-height: 12px;
+      opacity: 1;
+      top: 0;
+      font-size: 12px;
+      padding: 0 5px;
+      color: var(--color-gray-400);
+    }
+
+    &:focus + .borderLabel {
+      line-height: 12px;
+      opacity: 1;
+      top: 0;
+      font-size: 12px;
+      padding: 0 5px;
+      color: var(--color-label-active);
+    }
+
+    &:focus + .staticBorderLabel {
+      color: var(--color-label-active);
+    }
+  }
+
+  .required {
+    color: var(--color-negative);
+    font-weight: 600;
+    margin-left: calc(var(--spacing) * 0.5);
+  }
+}
+
+.childrenWrapper {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+
+  .children {
+    margin-top: calc($spacing * 2);
+    margin-left: $spacing;
+  }
+}
+
+.dirtyInputIcon {
+  position: absolute;
+  z-index: 1;
+  top: rem(8px);
+  right: rem(8px);
+  width: 26px;
+  height: 26px;
+
+  .dirtyTrigger {
+    cursor: pointer;
+  }
+}
+
+.dirtyIconWithOtherIcon {
+  right: 28px;
+}
+
+.paddingForIcon {
+  padding-right: 37px !important;
+}
+
+.paddingForTwoIcons {
+  padding-right: 55px !important;
+}
+
+// Textarea
+.textarea {
+  @include base-text;
+
+  border-radius: var(--border-radius);
+  border: rem(1px) solid var(--color-gray-400);
+  appearance: none;
+
+  height: calc(var(--spacing) * 26);
+  transition:
+    border-color var(--transition-duration-base),
+    box-shadow var(--transition-duration-base);
+  padding: var(--spacing) calc(var(--spacing) * 1.5);
+
+  vertical-align: top;
+  resize: vertical;
+  flex-grow: 1;
+
+  &:focus {
+    outline: none;
+
+    border-color: var(--color-primary-dark);
+    box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    color: var(--color-text-light);
+    background: var(--color-gray-200);
+  }
+
+  &.textarea-autoheight {
+    height: auto;
+    overflow-y: hidden;
+    resize: none;
+  }
+}
+
+// Phone portrait and down - up to 575px
+@include phoneP() {
+  // Read only view
+  .read-only-view {
+    .read-only {
+      flex-wrap: wrap;
+
+      .field-label {
+        width: 100% !important;
+
+        label {
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.passwordInputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.passwordInput {
+  width: 100%;
+  padding-right: 35px;
+}
+
+.passwordInputBtn {
+  right: 10px;
+  top: var(--spacing);
+  position: absolute;
+  cursor: pointer;
+}
+
+:global(.react-datepicker-popper) {
+  z-index: 4 !important;
+}
+
+

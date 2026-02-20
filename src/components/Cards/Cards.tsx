@@ -1,9 +1,12 @@
+"use client";
+
 import React, { useEffect, useRef } from "react";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 
 import { CardsProps } from "./Cards.type";
+
 import "./Cards.css";
 
 const checkIsValidCSSLengthUnit = (value: string) => {

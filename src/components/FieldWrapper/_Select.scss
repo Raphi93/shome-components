@@ -1,0 +1,38 @@
+@use '../../Styles/abstracts' as *;
+
+@mixin select-arrow() {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 17px;
+
+  width: 0;
+  height: 0;
+  align-self: flex-start;
+  transform: translate(rem(-19px), rem(17px));
+  border-width: rem(4px) rem(4px) 0;
+  border-style: solid;
+  border-color: #6c7a86 transparent transparent;
+
+  margin-right: rem(-8px);
+  pointer-events: none;
+}
+
+.select {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  &::after {
+    @include select-arrow;
+  }
+
+  select {
+    cursor: pointer;
+
+    &::-ms-expand {
+      display: none;
+    }
+  }
+}

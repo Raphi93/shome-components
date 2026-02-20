@@ -1,0 +1,727 @@
+/* =============================================================================
+   TABLE OF CONTENTS
+   01) LOGO / HEADER (Desktop)
+   02) GLOBAL ICONS / TOGGLES (Desktop)
+   03) RESETS & SMALL UTILS
+   04) MENU ITEMS (Desktop)
+   05) EXPANDER / CHEVRON
+   06) SUBMENU (Accordion – Desktop)
+   07) LINKS / TYPO STYLES
+   08) ICON SIZES
+   09) DESKTOP SUBMENU LAYOUT HELPERS
+   10) SUBMENU FULL SIDE PANEL (Desktop)
+   11) SUBMENU FULL CONTENT
+   12) SUBMENU FULL TITLES & LINKS
+   13) SUBMENU ARROW
+   14) LAYOUT WRAPPERS
+   15) SUBMENU (Animated open/close – Desktop)
+   16) MOBILE: HEADER / ICONS
+   17) MOBILE: MENU ITEMS & STATES
+   18) MOBILE: SUBMENU FULL PANEL
+   19) OPTIONAL: REDUCED MOTION (commented)
+   ============================================================================= */
+
+/* ============================================================================
+   01) LOGO / HEADER (Desktop)
+   ============================================================================ */
+
+.logo-container-main {
+  width: 100%;
+  height: var(--sidebar-logo-expanded-height);
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.logo-container-expandet {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.logo-sidebar-image {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  height: var(--icon-sidebar-height);
+  width: var(--icon-sidebar-width);
+  margin-left: var(--sidebar-logo-left);
+  margin-top: var(--sidebar-logo-top);
+}
+
+.logo-long-sidebar-image {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: var(--icon-sidebar-long-height);
+  width: var(--icon-sidebar-long-width);
+  margin-left: var(--sidebar-logo-long-left);
+  margin-top: var(--sidebar-logo-expanded-top);
+  cursor: pointer;
+}
+
+.logo-sidebar-image,
+.logo-long-sidebar-image {
+  transition: all 0.3s ease-in-out;
+}
+
+.logo-sidebar-image img,
+.logo-long-sidebar-image img {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* ============================================================================
+   02) GLOBAL ICONS / TOGGLES (Desktop)
+   ============================================================================ */
+
+.bars-icons-toggler {
+  font-size: var(--sidebar-font-size);
+   color: var(--color-white);
+}
+
+.bars-icons {
+  cursor: pointer;
+  transition: 0.4s ease;
+  margin-left: var(--sidebar-bars-left);
+  margin-bottom: var(--sidebar-bars-bottom);
+  width: var(--sidebar-font-size);
+}
+
+.bars-icons-expandet {
+  cursor: pointer;
+  color: var(--color-white);
+  transition: 0.4s ease;
+  margin-right: 0.25rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+}
+
+/* ============================================================================
+   03) RESETS & SMALL UTILS
+   ============================================================================ */
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.tooltip-menu-fa {
+  align-items: center;
+  margin-left: calc(var(--sidebar-menu-icon-margin) - 0rem);
+  display: flex;
+}
+
+.tooltip-menu {
+  align-items: center;
+  margin-left: calc(var(--sidebar-menu-icon-margin));
+  display: flex;
+}
+
+.tooltip-menus {
+  align-items: center;
+  margin-left: calc(var(--sidebar-menu-icon-margin));
+  display: flex;
+}
+
+.menu-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ============================================================================
+   04) MENU ITEMS (Desktop)
+   ============================================================================ */
+
+.app-layouts {
+  --sidebar-anim-dur: 0.3s;
+}
+
+.app-layouts.expanded {
+  --sidebar-anim-dur: 0.5s;
+}
+
+.menu-items {
+  display: grid;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0;
+  color: var(--color-sidebar-text);
+  font-weight: 400;
+  text-decoration: none;
+  height: var(--sidebar-menu-item-height);
+  margin: 0;
+  position: relative;
+  font-size: var(--sidebar-font-size);
+  width: calc(var(--sidebar-width));
+  cursor: pointer;
+
+  transition: width var(--sidebar-anim-dur) ease;
+
+  will-change: width;
+
+  &:hover {
+    background-color: var(--color-sidebar-selected);
+    color: var(--color-sidebar-selected-text);
+
+    .menu-icon-image {
+      filter: var(--filter-icon-selected);
+    }
+  }
+
+  .menu-icon-image {
+    filter: var(--filter-icon);
+  }
+}
+
+.submenu-items.level-0 {
+  background-color: var(--sidebar-level-0-color);
+}
+
+.submenu-items.level-1 {
+  background-color: var(--sidebar-level-1-color);
+}
+
+.submenu-items.level-0:hover {
+  background-color: var(--color-sidebar-selected);
+  color: var(--color-sidebar-selected-text);
+
+  .menu-icon-image {
+    filter: var(--filter-icon-selected);
+  }
+}
+
+.submenu-items.level-1:hover {
+  background-color: var(--color-sidebar-selected);
+  color: var(--color-sidebar-selected-text);
+
+  .menu-icon-image {
+    filter: var(--filter-icon-selected);
+  }
+}
+
+
+.menu-items.expanded {
+  grid-template-columns: var(--sidebar-expanded-grid);
+  padding-left: var(--sidebar-menu-icon-margin);
+}
+
+
+.menu-items.is-subchild {
+  width: var(--icon-sidebar-width-subchild);
+}
+
+.menu-items.selected {
+  background-color: var(--color-sidebar-selected);
+  font-weight: 500;
+  color: var(--color-sidebar-selected-text);
+
+  .menu-icon-image {
+    filter: var(--filter-icon-selected);
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: var(--color-sidebar-selected-text);
+    background-color: var(--color-sidebar-selected);
+  }
+}
+
+.menu-items.selectedChild {
+  background-color: var(--color-sidebar-selected-child);
+  font-weight: 500;
+  color: var(--color-sidebar-selected-subchild-text);
+
+  .menu-icon-image {
+    filter: var(--filter-icon);
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: var(--color-sidebar-selected-text);
+    background-color: var(--color-sidebar-selected);
+  }
+
+}
+
+.menu-items.selectedSubChild {
+  background-color: var(--color-sidebar-selected-subchild);
+  font-weight: 500;
+  color: var(--color-sidebar-selected-subchild-text);
+
+  .menu-icon-image {
+    filter: var(--filter-icon);
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: var(--color-sidebar-selected-text);
+    background-color: var(--color-sidebar-selected);
+  }
+}
+
+.menu-item>* {
+  position: relative;
+  z-index: 1;
+}
+
+
+.menu-name {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.expander-containerChild {
+  width: 1.75rem;
+}
+
+/* ============================================================================
+   05) EXPANDER / CHEVRON
+   ============================================================================ */
+
+.expander {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--sidebar-font-size-arrow);
+  transition: transform 0.3s ease-in-out;
+  transform: rotate(0deg);
+  color: inherit;
+  width: 1rem;
+}
+
+.expander.selected {
+  transform: rotate(180deg);
+  color: inherit;
+}
+
+/* ============================================================================
+   06) SUBMENU (Accordion – Desktop)
+   ============================================================================ */
+
+.child-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+
+  & svg {
+    margin-left: 0;
+  }
+}
+
+.submenu {
+  overflow: hidden;
+  max-height: 0;
+  gap: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.submenu-items {
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 0;
+  height: var(--sidebar-submenu-item-height);
+  cursor: pointer;
+  font-weight: 400;
+  color: var(--color-sidebar-text);
+  overflow: hidden;
+  font-size: var(--sidebar-font-size);
+  margin: 0;
+  max-width: calc(var(--sidebar-width));
+  padding-left: 3.7rem;
+  will-change: width, grid-template-columns, padding-left;
+
+
+  .menu-icon-image {
+    filter: var(--filter-icon);
+  }
+
+  &:hover {
+    background-color: var(--color-sidebar-selected);
+    color: var(--color-sidebar-selected-text);
+
+    .menu-icon-image {
+      filter: var(--filter-icon-selected);
+    }
+  }
+}
+
+.submenu-items a {
+  color: inherit;
+}
+
+.submenu-items>* {
+  position: relative;
+  z-index: 1;
+}
+
+.submenu-items.selected-child {
+  font-weight: 500;
+  color: var(--color-sidebar-selected-text);
+  background-color: var(--color-sidebar-selected);
+
+
+  &:hover {
+    text-decoration: none;
+    color: var(--color-sidebar-selected-text);
+  }
+}
+
+.submenu-items.selected-subchild {
+  font-weight: 500;
+  color: var(--color-sidebar-selected-child-text);
+  background-color: var(--color-sidebar-selected-child);
+
+
+  &:hover {
+    text-decoration: none;
+    color: var(--color-sidebar-selected-text);
+  }
+}
+
+
+/* ============================================================================
+   07) LINKS / TYPO STYLES
+   ============================================================================ */
+
+.menu-link {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+
+}
+
+/* ============================================================================
+   08) ICON SIZES
+   ============================================================================ */
+
+.menu-icon-image {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ============================================================================
+   09) DESKTOP SUBMENU LAYOUT HELPERS
+   ============================================================================ */
+
+.submenu-desktop-header {
+  display: grid;
+  max-height: 800dvh;
+
+}
+
+.submenu-desktop-footer {
+  display: grid;
+  margin-top: auto;
+  height: fit-content;
+  transition: opacity 0.5ms linear;
+}
+
+
+/* ============================================================================
+   14) LAYOUT WRAPPERS
+   ============================================================================ */
+
+.sidebar-navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  flex: 2 0;
+}
+
+.special-menu-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  gap: 0.25rem;
+}
+
+/* ============================================================================
+   15) SUBMENU (Animated open/close – Desktop)
+   ============================================================================ */
+
+.submenu {
+  overflow: hidden;
+  animation: submenuFadeInReverse ease 0.15s forwards;
+  pointer-events: none;
+  margin-top: 0;
+}
+
+.submenu.selected {
+  animation: submenuFadeIn ease 0.8s forwards;
+  pointer-events: auto;
+  margin: 0;
+}
+
+@keyframes submenuFadeIn {
+  from {
+    max-height: 0;
+  }
+
+  to {
+    max-height: 50rem;
+  }
+}
+
+@keyframes submenuFadeInReverse {
+  from {
+    max-height: 50rem;
+  }
+
+  to {
+    max-height: 0;
+  }
+}
+
+/* ============================================================================
+   16) MOBILE: HEADER / ICONS
+   ============================================================================ */
+
+.logo-container-mobile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-bars-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(var(--nav-height) + 1px);
+  width: auto;
+}
+
+.logo-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  height: calc(var(--nav-height) + 1px);
+  width: auto;
+  padding: 10px;
+}
+
+.logo-long-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 35px;
+  width: auto;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.logo-mobile,
+.logo-long-mobile {
+  transition: all 0.3s ease-in-out;
+}
+
+.logo-mobile img,
+.logo-long-mobile img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.bars-icons-mobile {
+  font-size: 1.1rem;
+  display: flex;
+  cursor: pointer;
+  color: var(--color-white);
+  margin-left: 10px;
+  transition: 0.4s ease;
+}
+
+.env-title-mobile {
+  font-size: 1rem;
+  display: flex;
+  cursor: pointer;
+  color: var(--color-sidebar-env-text);
+  margin-right: 10px;
+  transition: 0.4s ease;
+}
+
+.sidebar-container-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.close-icon-mobile {
+  margin-bottom: 20px;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  color: var(--color-white);
+  gap: 10px;
+  cursor: pointer;
+  z-index: 15;
+}
+
+.close-icon {
+  font-size: 0.9rem;
+}
+
+/* ============================================================================
+   18) MOBILE: SUBMENU FULL PANEL
+   ============================================================================ */
+
+.submenu-full-mobile {
+  position: fixed;
+  top: calc(var(--nav-height) + 1px);
+  left: auto;
+  right: calc(100% - var(--sidebar-width));
+  width: 0;
+  height: 100dvh;
+  pointer-events: none;
+  background: var(--color-sidebar-sub-menu);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  transition: width 0.3s ease-in-out;
+  will-change: width;
+  z-index: 10;
+  width: var(--submenu-full-width-mobile);
+}
+
+.submenu-full-mobile.is-visible {
+  pointer-events: auto;
+}
+
+.submenu-full-mobile.not-visible {
+  width: 0;
+  pointer-events: none;
+}
+
+/* ============================================================================
+   19) OPTIONAL: REDUCED MOTION (commented)
+   Enable by uncommenting if needed; keeps opacity at 1 and removes transitions.
+   ============================================================================ */
+
+
+.menu-items {
+  .flag-icon-parent {
+    margin-left: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--color-sidebar-text);
+  }
+
+  &:hover .flag-icon-parent {
+    color: var(--color-sidebar-selected-text);
+  }
+}
+
+.menu-items.selected {
+  .flag-icon-parent {
+    margin-left: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--color-sidebar-selected-text);
+  }
+}
+
+.submenu-items {
+  .flag-icon-child {
+    margin-left: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--color-sidebar-text);
+  }
+
+  &:hover .flag-icon-child {
+    color: var(--color-sidebar-selected-text);
+  }
+}
+
+.submenu-items.selected-child {
+  .flag-icon-child {
+    margin-left: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--color-sidebar-selected-text);
+  }
+}
+
+
+.submenu-full-title {
+  .flag-icon-subchild {
+    margin-left: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--color-sidebar-text);
+  }
+
+  &:hover .flag-icon-subchild {
+    color: var(--color-sidebar-selected-text);
+  }
+}
+
+.submenu-full-title.selected {
+  .flag-icon-subchild {
+    margin-left: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--color-sidebar-selected-text);
+  }
+}
+
+.submenu-full-link {
+  .flag-icon-subchild {
+    margin-left: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--color-sidebar-text);
+  }
+
+  &:hover .flag-icon-subchild {
+    color: var(--color-sidebar-selected-text);
+  }
+}
+
+.submenu-full-link.selected {
+  .flag-icon-subchild {
+    margin-left: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--color-sidebar-selected-text);
+  }
+}
+
+.parent-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 55rem;
+}
+
+
+.sidebar-relative {
+  position: relative;
+  width: var(--sidebar-width);
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tooltip-rights{
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.tooltip-item-name{
+  font-size: 1rem;
+  font-weight: 600;
+}

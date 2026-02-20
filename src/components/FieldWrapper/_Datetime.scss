@@ -1,0 +1,113 @@
+@use '../../Styles/abstracts' as *;
+
+.datetime-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+
+  input {
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      z-index: 1;
+    }
+  }
+}
+
+.datetime-wrap[data-type='date'] {
+  input {
+    &::-webkit-calendar-picker-indicator {
+      width: 11px;
+      height: 11px;
+      position: absolute;
+      right: 13px;
+      top: 9px;
+    }
+  }
+}
+
+.js-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Single calendar icon */
+.calendarIcon {
+  position: absolute;
+  top: 11px;
+  right: 13px;
+}
+
+/* When filter enabled you were reusing this slot */
+.filterIcon {
+  position: absolute;
+  top: 11px;
+  right: 90px;
+}
+
+/* Filter select wrapper (absolut rechts oben) */
+.filterPicklist {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 10;
+}
+
+/* --- BETWEEN layout: two inputs side-by-side --- */
+.betweenRow {
+  display: flex;
+  flex-direction: row;
+  gap: 0px; /* wenn du eine Linie willst -> 0, sonst z.B. 8px */
+  width: calc(100% - 75px);
+  gap: 0.5rem;
+}
+
+/* each column must be relative because we place absolute labels/icons inside */
+.betweenCol {
+  position: relative;
+  flex: 1;
+}
+
+.betweenColFirst {
+  position: relative;
+  flex: 1;
+}
+
+/* react-datepicker wraps input in .react-datepicker-wrapper -> make it stretch */
+.betweenCol :global(.react-datepicker-wrapper) {
+  width: 100%;
+}
+
+.betweenColFirst :global(.react-datepicker-wrapper) {
+  width: 100%;
+}
+
+/* Overlay labels inside each input (absolut, wie du’s wolltest) */
+.betweenLabelFrom {
+  position: absolute;
+  left: 105px;
+  top: 8px;
+  pointer-events: none;
+}
+
+.betweenLabelTo {
+  position: absolute;
+  left: 105px;
+  top: 8px;
+  pointer-events: none;
+}
+
+/* Calendar icons inside each between input */
+.calendarIconBetweenFrom {
+  position: absolute;
+  top: 11px;
+  right: 13px;
+  cursor: pointer;
+}
+
+.calendarIconBetweenTo {
+  position: absolute;
+  top: 11px;
+  right: 90px;
+  cursor: pointer;
+}

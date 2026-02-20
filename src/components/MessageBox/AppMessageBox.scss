@@ -1,0 +1,39 @@
+.message-box {
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius, 6px);
+  margin-bottom: 1rem;
+  color: var(--color-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-base, 1rem);
+}
+
+/* Typen via Variablen */
+.message-info {
+  background-color: var(--color-info);
+}
+
+.message-success {
+  background-color: var(--color-success);
+}
+
+.message-warning {
+  background-color: var(--color-warning);
+  color: var(--color-black);
+}
+
+.message-error {
+  background-color: var(--color-danger);
+}
+
+/* Close-Button */
+.message-close {
+  margin-left: 1rem;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}

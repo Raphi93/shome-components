@@ -5,7 +5,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: .5rem;
+  gap: .35rem;
   padding-left: 1rem;
   padding-right: 1rem;
   border-radius: var(--border-radius, 12px);
@@ -57,7 +57,7 @@ a.action-button {
 }
 
 .primary:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }
@@ -74,7 +74,7 @@ a.action-button {
 }
 
 .secondary:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }
@@ -91,7 +91,7 @@ a.action-button {
 }
 
 .success:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }
@@ -108,7 +108,7 @@ a.action-button {
 }
 
 .danger:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }
@@ -125,7 +125,7 @@ a.action-button {
 }
 
 .warning:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }
@@ -142,7 +142,7 @@ a.action-button {
 }
 
 .info:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }
@@ -154,19 +154,19 @@ a.action-button {
 }
 
 .light:hover {
-  background-color: var(--color-primary, #393c40);
+  background-color: var(--color-primary-dark, #393c40);
   color: var(--color-white, #ffffff);
 }
 
 .light:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }
 
 /* ---------- Light (Alpha) Variants ---------- */
 .primary-light {
-  background-color: rgba(var(--button-background-color-light-rgb, 57, 60, 64), .3);
+  background-color: var(--button-background-color-light-rgb);
   color: var(--button-color-light, #303234);
   cursor: pointer;
 }
@@ -177,13 +177,13 @@ a.action-button {
 }
 
 .primary-light:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }
 
 .secondary-light {
-  background-color: rgba(var(--button-background-color-light-rgb-secondary, 15, 118, 110), .3);
+  background-color: var(--button-background-color-light-rgb-secondary);
   color: var(--button-color-light-secondary, #0a544e);
   cursor: pointer;
 }
@@ -194,13 +194,13 @@ a.action-button {
 }
 
 .secondary-light:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }
 
 .success-light {
-  background-color: rgba(var(--button-background-color-light-rgb-success, 25, 135, 84), .3);
+  background-color: var(--button-background-color-light-rgb-success);
   color: var(--button-color-light-success, #166e3a);
   cursor: pointer;
 }
@@ -211,13 +211,13 @@ a.action-button {
 }
 
 .success-light:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }
 
 .danger-light {
-  background-color: rgba(var(--button-background-color-light-rgb-danger, 220, 53, 69), .3);
+  background-color: var(--button-background-color-light-rgb-danger);
   color: var(--button-color-light-danger, #b02a37);
   cursor: pointer;
 }
@@ -228,13 +228,13 @@ a.action-button {
 }
 
 .danger-light:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }
 
 .warning-light {
-  background-color: rgba(var(--button-background-color-light-rgb-warning, 255, 193, 7), .3);
+  background-color: var(--button-background-color-light-rgb-warning);
   color: var(--button-color-light-warning, #cc9a06);
   cursor: pointer;
 }
@@ -245,13 +245,13 @@ a.action-button {
 }
 
 .warning-light:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }
 
 .info-light {
-  background-color: rgba(var(--button-background-color-light-rgb-info, 13, 110, 253), .3);
+  background-color: var(--button-background-color-light-rgb-info);
   color: var(--button-color-light-info, #0d6efd);
   cursor: pointer;
 }
@@ -262,7 +262,7 @@ a.action-button {
 }
 
 .info-light:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }
@@ -279,7 +279,7 @@ a.action-button {
 }
 
 .light-light:disabled {
-  background-color: var(--color-gray-light, #a9b3c0);
+  background-color: var(--color-gray-300, #a9b3c0);
   color: var(--color-white, #ffffff);
   cursor: not-allowed;
 }

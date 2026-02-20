@@ -1,0 +1,94 @@
+@use '../../Styles/abstracts' as *;
+
+// Checkbox
+.checkbox {
+  cursor: pointer;
+  position: relative;
+  flex-grow: 1;
+  min-height: calc(var(--spacing) * 3);
+  display: block;
+
+  th &,
+  td & {
+    margin-top: rem(2px);
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:focus-visible + .text::before {
+      outline: rem(2px) solid var(--input-focus-outline-color);
+      outline-offset: rem(2px);
+    }
+
+    &:checked + .text::after {
+      display: block;
+    }
+
+    &:checked + .text::before {
+      background-color: var(--color-primary-dark);
+      border-color: var(--color-primary-dark);
+    }
+
+    &:disabled + .text {
+      cursor: default;
+      color: var(--color-text-light);
+    }
+
+    &:disabled + .text::before {
+      background: var(--color-gray-200);
+      border-color: var(--color-gray-300);
+    }
+
+    &:checked:disabled + .text::before {
+      background-color: var(--color-gray-400);
+      border-color: var(--color-gray-400);
+    }
+  }
+
+  .text {
+    @include base-text;
+
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    display: block;
+    padding-left: calc(var(--spacing) * 4);
+
+    &::before {
+      content: '';
+      display: block;
+      width: rem(20px);
+      height: rem(20px);
+      border: rem(1px) solid var(--color-gray-400);
+      border-radius: rem(2px);
+      background: var(--color-white);
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: none;
+      left: rem(7px);
+      top: rem(3px);
+      width: rem(6px);
+      height: rem(11px);
+      border: solid var(--color-white);
+      border-width: 0 rem(2px) rem(2px) 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  &.checked {
+    .text::before {
+      background-color: var(--color-text-light);
+    }
+  }
+}
