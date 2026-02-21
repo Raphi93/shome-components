@@ -1,0 +1,20 @@
+.column-resizer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background-color: var(--color-gray-400);
+  cursor: col-resize;
+  transition:
+    background-color 0.2s,
+    width 0.2s;
+
+  &:hover {
+    width: 4px;
+  }
+}
+
+.active {
+  width: 4px;
+}

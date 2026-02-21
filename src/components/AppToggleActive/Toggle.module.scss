@@ -1,0 +1,218 @@
+@use 'sass:math';
+$html-font-size: 16px;
+
+@function stripUnit($value) {
+  @return math.div($value, ($value * 0 + 1));
+}
+
+@function rem($pxValue) {
+  @return #{math.div(stripUnit($pxValue), stripUnit($html-font-size))}rem;
+}
+
+// PX to EM
+@function em($pxValue) {
+  @return #{math.div(stripUnit($pxValue), stripUnit($html-font-size))}em;
+}
+
+// Toggle
+.toggle-wrapper {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  position: relative;
+  width: auto;
+
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  .toggleDirtyIcon {
+    position: static;
+    margin-right: -6px;
+  }
+
+  .borderLabel {
+    margin-right: var(--spacing);
+    display: flex;
+  }
+
+  // Focus
+  input:focus-visible + .inner {
+    .toggle {
+      box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
+    }
+  }
+
+  // Checked
+  input:checked + .inner {
+    .left {
+      color: var(--color-gray-500);
+    }
+
+    .right {
+      color: var(--color-text);
+    }
+
+    .toggle {
+      &::before {
+        left: auto;
+        right: rem(2px);
+      }
+    }
+  }
+
+  // Disabled
+  input:disabled + .inner {
+    cursor: default;
+    opacity: 0.65;
+  }
+
+  // Mock input
+  .inner {
+    display: flex;
+    min-height: 32px;
+    cursor: pointer;
+    user-select: none;
+    width: auto;
+
+    span {
+      //white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+
+  .right {
+    color: var(--color-gray-500);
+  }
+
+  .toggle {
+    display: block;
+    height: calc(var(--spacing) * 3);
+    width: calc(var(--spacing) * 6);
+    border-radius: calc(var(--spacing) * 8);
+    margin-left: var(--spacing);
+    margin-right: var(--spacing);
+    position: relative;
+    border: rem(2px) solid var(--color-positive);
+    background: var(--color-positive);
+
+    &::before {
+      content: '';
+      display: block;
+      height: calc(var(--spacing) * 2.25);
+      width: calc(var(--spacing) * 2.25);
+      background: var(--color-white);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: rem(2px);
+      right: auto;
+      border-radius: 100%;
+    }
+  }
+}
+
+// Toggle but different
+.toggle-active {
+  // Checked
+  input:checked + .inner {
+    .disabled {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .toggle {
+      border: rem(2px) solid var(--color-positive);
+      background: var(--color-positive);
+    }
+  }
+
+  // Mock input
+  .active {
+    display: none;
+  }
+
+  .toggle {
+    margin-left: 0;
+    margin-right: var(--spacing);
+    border: rem(2px) solid var(--color-negative-light);
+    background: var(--color-negative-light);
+  }
+}
+
+.text-left {
+  .toggle {
+    order: 1;
+    margin-left: var(--spacing);
+    margin-right: 0;
+  }
+}
+
+.no-text {
+  .toggle {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.secondary {
+  input + .inner {
+    .toggle {
+      border: rem(2px) solid var(--color-gray-800);
+      background: var(--color-white);
+
+      &::before {
+        background: var(--color-brand, var(--color-primary));
+      }
+    }
+  }
+
+  &.toggle-active {
+    input + .inner {
+      .toggle {
+        border: rem(2px) solid var(--color-negative-light);
+        background: var(--color-white);
+
+        &::before {
+          background: var(--color-negative-light);
+        }
+      }
+    }
+    input:checked + .inner {
+      .toggle {
+        border: rem(2px) solid var(--color-positive);
+        &::before {
+          background: var(--color-positive);
+        }
+      }
+    }
+  }
+}
+
+.small {
+  .toggle-wrapper {
+    .inner {
+      min-height: 24px;
+    }
+
+    .toggle {
+      height: calc(var(--spacing) * 2);
+      width: calc(var(--spacing) * 4);
+      border-radius: calc(var(--spacing) * 6);
+
+      &::before {
+        height: calc(var(--spacing) * 1.5);
+        width: calc(var(--spacing) * 1.5);
+      }
+    }
+  }
+}
+
+.borderLabelWrapper {
+  margin-top: 1rem;
+}

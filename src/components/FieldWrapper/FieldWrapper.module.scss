@@ -11,26 +11,36 @@
   --input-focus-outline-color: var(--color-primary-light);
 }
 
-// Form mixins
-@mixin input {
+/* =============================================================================
+   Base control styles (keeps all existing class names)
+   - less duplication
+   - colors via --input-background / --input-color
+   ============================================================================= */
+
+@mixin controlBase {
   @include base-text;
 
   border-radius: var(--border-radius);
-  border: rem(1px) solid var(--color-gray-400);
+  border: rem(1px) solid var(--input-border, var(--color-gray-400));
   appearance: none;
 
-  height: calc(var(--spacing) * 5);
   transition:
     border-color var(--transition-duration-base),
     box-shadow var(--transition-duration-base);
+
   padding: var(--spacing) calc(var(--spacing) * 1.5);
   flex-grow: 1;
   vertical-align: top;
-  background-color: var(--color-white);
+
+  background-color: var(--input-background, var(--color-white));
+  color: var(--input-color, var(--color-gray-900));
+
+  &::placeholder {
+    color: var(--input-placeholder-color, var(--color-text-light));
+  }
 
   &:focus {
     outline: none;
-
     border-color: var(--color-primary-dark);
     box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
   }
@@ -40,11 +50,59 @@
     color: var(--color-text-light);
     background: var(--color-gray-200);
   }
+}
+
+/* =============================================================================
+   Autofill override (Chrome/WebKit)
+   - forces YOUR theme variables instead of browser autofill colors
+   ============================================================================= */
+
+@mixin autofillFix {
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--input-color, var(--color-gray-900)) !important;
+    caret-color: var(--input-color, var(--color-gray-900)) !important;
+
+    /* overwrite Chrome's internal autofill background */
+    -webkit-box-shadow: 0 0 0 1000px var(--input-background, var(--color-white)) inset !important;
+    box-shadow: 0 0 0 1000px var(--input-background, var(--color-white)) inset !important;
+
+    border-color: var(--input-border, var(--color-gray-400)) !important;
+
+    /* keeps it stable (prevents color flash) */
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+/* =============================================================================
+   Input (text, number, email, ...)
+   ============================================================================= */
+
+@mixin input {
+  @include controlBase;
+  @include autofillFix;
+
+  height: calc(var(--spacing) * 5);
 
   &.percent {
     padding-right: 25px;
   }
 }
+
+.input {
+  @include input;
+  width: 100%;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* =============================================================================
+   Percent helper
+   ============================================================================= */
 
 .inputNumberWrapper {
   position: relative;
@@ -62,23 +120,24 @@
   pointer-events: none;
 }
 
-// Field wrapper
+/* =============================================================================
+   Field wrapper / label / content / description
+   ============================================================================= */
+
 .field-wrapper {
   width: 100%;
   border: none;
   margin-bottom: var(--spacing);
 }
 
-// Field label
 .field-label {
   margin-bottom: var(--spacing);
   display: flex;
 
   label {
     @include base-text($offset: true);
-
     display: block;
-    color: var(--color-gray-800);
+    color: var(--input-label-color, var(--color-gray-800));
   }
 
   .required {
@@ -100,7 +159,6 @@
   }
 }
 
-// Field Content
 .field-content {
   width: 100%;
   display: flex;
@@ -114,7 +172,6 @@
   }
 }
 
-// Field description
 .field-description {
   color: var(--color-text-light);
   font-style: italic;
@@ -122,9 +179,11 @@
   transform: translateY(var(--baseline-offset-base));
 }
 
-// Fieldset only view
+/* =============================================================================
+   Read-only variants
+   ============================================================================= */
+
 .fieldset-read-only {
-  // Field wrapper read only
   .read-only {
     display: flex;
 
@@ -147,7 +206,6 @@
   }
 }
 
-// Row read only
 .read-only {
   .field-label {
     margin-right: calc(var(--spacing) * 1);
@@ -174,15 +232,10 @@
   }
 }
 
-// Input - text, number, email,...
-.input {
-  @include input;
-  width: 100%;
-}
-
-.fullWidth {
-  width: 100%;
-}
+/* =============================================================================
+   Border label input wrapper (floating label)
+   - same markup, less duplication
+   ============================================================================= */
 
 .borderLabelInputWrapper {
   position: relative;
@@ -196,10 +249,11 @@
   .borderLabel {
     @include base-text;
     z-index: 1;
-
     position: absolute;
-    background-color: var(--color-white);
-    color: var(--color-text-light);
+
+    background-color: var(--input-background, var(--color-white));
+    color: var(--input-label-color, var(--color-text-light));
+
     opacity: 0.6;
     transform: translateY(-50%);
     top: 50%;
@@ -220,8 +274,10 @@
   .staticBorderLabel {
     z-index: 1;
     position: absolute;
-    background-color: var(--color-white);
-    color: var(--color-gray-400);
+
+    background-color: var(--input-background, var(--color-white));
+    color: var(--input-color, var(--color-gray-900));
+
     top: -6px;
     padding: 0 5px;
     left: var(--spacing);
@@ -241,7 +297,7 @@
       top: 0;
       font-size: 12px;
       padding: 0 5px;
-      color: var(--color-gray-400);
+      color: var(--input-border, var(--color-gray-400));
     }
 
     &:focus + .borderLabel {
@@ -264,6 +320,10 @@
     margin-left: calc(var(--spacing) * 0.5);
   }
 }
+
+/* =============================================================================
+   Children wrapper + dirty icon helpers
+   ============================================================================= */
 
 .childrenWrapper {
   display: flex;
@@ -302,36 +362,16 @@
   padding-right: 55px !important;
 }
 
-// Textarea
-.textarea {
-  @include base-text;
+/* =============================================================================
+   Textarea
+   ============================================================================= */
 
-  border-radius: var(--border-radius);
-  border: rem(1px) solid var(--color-gray-400);
-  appearance: none;
+.textarea {
+  @include controlBase;
+  @include autofillFix;
 
   height: calc(var(--spacing) * 26);
-  transition:
-    border-color var(--transition-duration-base),
-    box-shadow var(--transition-duration-base);
-  padding: var(--spacing) calc(var(--spacing) * 1.5);
-
-  vertical-align: top;
   resize: vertical;
-  flex-grow: 1;
-
-  &:focus {
-    outline: none;
-
-    border-color: var(--color-primary-dark);
-    box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
-  }
-
-  &:disabled {
-    pointer-events: none;
-    color: var(--color-text-light);
-    background: var(--color-gray-200);
-  }
 
   &.textarea-autoheight {
     height: auto;
@@ -340,9 +380,11 @@
   }
 }
 
-// Phone portrait and down - up to 575px
+/* =============================================================================
+   Responsive
+   ============================================================================= */
+
 @include phoneP() {
-  // Read only view
   .read-only-view {
     .read-only {
       flex-wrap: wrap;
@@ -360,6 +402,10 @@
   }
 }
 
+/* =============================================================================
+   Password helpers
+   ============================================================================= */
+
 .passwordInputWrapper {
   position: relative;
   width: 100%;
@@ -372,13 +418,17 @@
 
 .passwordInputBtn {
   right: 10px;
-  top: var(--spacing);
+  top: 50%;
+  transform: translateY(-50%);
   position: absolute;
   cursor: pointer;
+  color: var(--input-color);
 }
+
+/* =============================================================================
+   Datepicker overlay
+   ============================================================================= */
 
 :global(.react-datepicker-popper) {
   z-index: 4 !important;
 }
-
-

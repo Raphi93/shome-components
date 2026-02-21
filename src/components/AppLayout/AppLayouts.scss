@@ -18,7 +18,7 @@
 
 .app-layouts .sidebar {
   grid-area: sidebar;
-  background-color: var(--color-mod-nav-theme);
+  background: var(--color-mod-nav-theme);
   z-index: 10;
   transition: width 0.5s ease, min-height 0.5s ease;
   display: flex;
@@ -27,7 +27,7 @@
 
 .app-layouts .header {
   grid-area: headers;
-  background-color: var(--color-mod-nav-theme-header);
+  background: var(--color-mod-nav-theme-header);
   border-bottom: var(--nav-border-line);
   align-items: center;
   display: flex;
@@ -46,7 +46,7 @@
   margin: 0 auto;
   width: 100%;
   z-index: 1;
-  background: var(--color-background);
+  position: relative;
 }
 
 .app-layouts.collapsed {
@@ -159,7 +159,6 @@
     grid-area: headers;
     width: 100%;
     height: calc(var(--nav-height) + 1px);
-    position: relative;
   }
 
   .app-layouts .contentpdc {

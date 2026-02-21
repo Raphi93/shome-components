@@ -10,7 +10,7 @@ import { parseISO } from 'date-fns';
 
 import ErrorText from '../ErrorText/ErrorText';
 import { BorderInputLabel, DirtyIconWithBorderLabel, TLabelInputWithDirtyState } from '../FieldWrapper/hooks/useLabelInput';
-import { PdcSelect, TSelectOption } from '../Select/Select';
+import { PdcSelect, TSelectOption } from '../Select';
 
 import style from '../FieldWrapper/FieldWrapper.module.scss';
 import React from 'react';

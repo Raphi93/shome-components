@@ -3,8 +3,9 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faChevronDown, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
-import './PdcButton.css';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../Tooltip';
+
+import './Button.css';
 
 export type ButtonColor =
   | 'primary'
@@ -74,7 +75,7 @@ const ensureCssLength = (value: string) => {
  * 
  * @returns A button element that can render as button, anchor, or div based on props
  */
-function Button({
+export function Button({
   icon = null,
   onClick,
   tooltip = null,
@@ -245,4 +246,3 @@ function Button({
   );
 }
 
-export default Button;

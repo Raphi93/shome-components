@@ -1,2 +1,2 @@
-export * from './components/index';
+export * from './Components/index';
 export { PageProvider, usePageContext} from './context/PageContext';
