@@ -2,13 +2,17 @@
   font-size: 1rem;
   line-height: 1.5rem;
   display: block;
-  color: var(--color-gray-800);
+
+  /* theme aware (wie FieldWrapper/Input) */
+  color: var(--input-label-color, var(--color-gray-800));
+
   margin-bottom: 5px;
 }
 
 .required {
   color: var(--color-negative);
-  margin-left: 0.25rem;
+  font-weight: 600;
+  margin-left: calc(var(--spacing) * 0.5);
 }
 
 .selectDirtyIcon {
@@ -24,7 +28,8 @@
 .description {
   color: var(--color-text-light);
   font-style: italic;
-  transform: translateY(0.34375rem);
+  width: 100%;
+  transform: translateY(var(--baseline-offset-base));
 }
 
 .chevronDown {
@@ -38,8 +43,11 @@
     width: 8px;
     height: 8px;
     display: block;
-    border-bottom: 2px solid var(--color-text-light);
-    border-left: 2px solid var(--color-text-light);
+
+    /* theme aware */
+    border-bottom: 2px solid var(--input-label-color, var(--color-text-light));
+    border-left: 2px solid var(--input-label-color, var(--color-text-light));
+
     transform: rotate(-45deg);
     opacity: 0.6;
     transition: all 300ms ease-in-out;
@@ -56,7 +64,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   color: inherit;
 }
 
@@ -64,5 +71,3 @@
   color: inherit;
   fill: currentColor;
 }
-
-

@@ -14,12 +14,14 @@
     z-index: 1;
 
     position: absolute;
-    background-color: var(--color-white);
-    color: var(--color-text-light);
+    background-color: var(--input-background, var(--color-white));
+    color: var(--input-placeholder-color, var(--color-text-light));
     opacity: 0.6;
+
     transform: translateY(-50%);
     top: 50%;
     left: calc(var(--spacing) * 2);
+
     pointer-events: none;
     transition: all 200ms ease-in-out;
 
@@ -39,29 +41,60 @@
   input[type='search'] {
     @include base-text;
 
-    appearance: none;
-
     border-radius: var(--border-radius);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 
-    border: rem(1px) solid var(--color-gray-400);
-    height: calc(var(--spacing) * 5);
+    border: rem(1px) solid var(--input-border, var(--color-gray-400));
+    border-right: 0;
+
+    appearance: none;
+
     transition:
       border-color var(--transition-duration-base),
       box-shadow var(--transition-duration-base);
+
     padding: var(--spacing) calc(var(--spacing) * 5) var(--spacing) calc(var(--spacing) * 2);
+    height: calc(var(--spacing) * 5);
     width: 100%;
+    flex-grow: 1;
     vertical-align: top;
-    border-right: 0;
+
+    background-color: var(--input-background, var(--color-white));
+    color: var(--input-color, var(--color-gray-900));
     box-shadow: none;
+
+    &::placeholder {
+      color: var(--input-placeholder-color, var(--color-text-light));
+    }
 
     &:focus,
     &:focus-visible {
       outline: none;
-
       border-color: var(--color-primary-dark);
       box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
+    }
+
+    &:disabled {
+      pointer-events: none;
+      color: var(--color-text-light);
+      background: var(--color-gray-200);
+    }
+
+    /* Autofill override (Chrome/WebKit) */
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-text-fill-color: var(--input-color, var(--color-gray-900)) !important;
+      caret-color: var(--input-color, var(--color-gray-900)) !important;
+
+      -webkit-box-shadow: 0 0 0 1000px var(--input-background, var(--color-white)) inset !important;
+      box-shadow: 0 0 0 1000px var(--input-background, var(--color-white)) inset !important;
+
+      border-color: var(--input-border, var(--color-gray-400)) !important;
+
+      transition: background-color 5000s ease-in-out 0s;
     }
 
     &.active + .borderLabel {
@@ -70,8 +103,9 @@
       top: 0;
       font-size: 12px;
       padding: 0 5px;
-      color: var(--color-gray-400);
+      color: var(--input-border, var(--color-gray-400));
       left: var(--spacing);
+      background-color: var(--input-background, var(--color-white));
     }
 
     &:focus + .borderLabel {
@@ -82,36 +116,42 @@
       padding: 0 5px;
       color: var(--color-label-active);
       left: var(--spacing);
+      background-color: var(--input-background, var(--color-white));
     }
 
     &.hasLeftIcon {
       border-top-right-radius: var(--border-radius);
       border-bottom-right-radius: var(--border-radius);
-      border-right: rem(1px) solid var(--color-gray-400);
+
+      border-right: rem(1px) solid var(--input-border, var(--color-gray-400));
       padding: var(--spacing) calc(var(--spacing) * 5) var(--spacing) calc(var(--spacing) * 5);
     }
   }
 
   .close {
+    position: absolute;
+    right: 15px;
+    top: 5px;
+
     color: var(--button-background-color);
 
     &:hover {
       color: var(--button-background-color-hover);
     }
-
-    position: absolute;
-    right: 15px;
-    top: 5px;
   }
 
   .searchButton {
     position: relative;
+
     font-family: var(--font-ico);
     margin-left: calc(var(--border-radius) * -1);
+
     font-size: rem(25px);
     min-width: calc(var(--spacing) * 7);
+
     margin-right: 0 !important;
     margin-bottom: 0 !important;
+
     cursor: auto;
     pointer-events: none;
 
@@ -125,6 +165,7 @@
     left: calc(var(--spacing) * 2);
     top: 50%;
     transform: translateY(-50%);
+
     font-size: rem(20px);
     color: var(--color-gray-500);
   }

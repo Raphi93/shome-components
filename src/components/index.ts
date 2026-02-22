@@ -18,3 +18,4 @@ export * from "./Pager";
 export * from "./Grid";
 export * from "./Icon/Icon";
 export * from "./Search";
+export * from "./HideElement/HideElement";

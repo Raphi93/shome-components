@@ -1,3 +1,5 @@
+'use client';
+
 import React, { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faChevronDown, faSpinner } from '@fortawesome/free-solid-svg-icons';

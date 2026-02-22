@@ -317,6 +317,7 @@ export type PagedGridProps = {
   data?: any[];
   onSelect?: (items: any) => void;
   hasTableTag?: boolean;
+  culture: string;
   /**
    * Additional CSS class name for pagination styling
    */
@@ -338,6 +339,7 @@ export function PagedGrid({
   onSelect,
   hasTableTag = true,
   pagerClassName,
+  culture,
 }: PagedGridProps) {
   const pageCount = Math.ceil(totalCount / pagination.pageSize);
 
@@ -367,7 +369,7 @@ export function PagedGrid({
     <PaginationContext.Provider value={pagination}>
       {paginationTopInfoVariant !== 'none' && (
         <div className={style['top-pagination-info']}>
-          <ShownPaginationInfo variant={paginationTopInfoVariant} pageCount={pageCount} entryCount={totalCount} />
+          <ShownPaginationInfo variant={paginationTopInfoVariant} pageCount={pageCount} entryCount={totalCount} culture={culture} />
         </div>
       )}
       <Grid

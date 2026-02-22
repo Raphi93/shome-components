@@ -182,7 +182,7 @@ export const PdcSelect: FC<TSelectProps> = ({
             label={label}
             isRequired={isRequired}
             className={clx(style.borderLabel, { [style.disabledBorderLabel]: isDisabled })}
-            styles={isActiveLabel ? getMultiselectBorderLabelStyles(isFocused, colorActive) : {}}
+            styles={isActiveLabel ? getMultiselectBorderLabelStyles() : {}}
           />
 
           {isDirty && (

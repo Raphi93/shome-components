@@ -71,7 +71,7 @@ export const CreatableAsyncSelect = ({
             isRequired={isRequired}
             id={id}
             className={clx(style.borderLabel, { [style.disabledBorderLabel]: rest.isDisabled })}
-            styles={isFocused || rest.value ? getMultiselectBorderLabelStyles(isFocused, colorActive) : {}}
+            styles={isFocused || rest.value ? getMultiselectBorderLabelStyles() : {}}
           />
         )}
 
