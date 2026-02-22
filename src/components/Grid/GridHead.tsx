@@ -21,8 +21,8 @@ import { hideShowClone, setWidths, syncHorizontalScroll } from './Grid.functions
 // TODO: move to separate
 import style from './Grid.module.scss';
 import { GridContext } from '../../context/gridContext';
-import { Pagination } from '../Pager';
 import { PaginationContext } from '../../context/paginationContext';
+import { Pagination } from '../../types';
 
 export function GridHeader({ children }: { children?: ReactNode }) {
   return <div className={[style.header, 'branding-grid-header'].join(' ')}>{children}</div>;

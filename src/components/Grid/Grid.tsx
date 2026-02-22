@@ -5,12 +5,13 @@ import clx from 'classnames';
 import { GridColumnContext, GridContext } from '../../context/gridContext';
 import { PaginationContext } from '../../context/paginationContext';
 import { ActionButton, ButtonAttributes, ButtonContainer } from '../Button';
-import { Pager, Pagination, ShownPaginationInfo, TPaginationInfoVariant } from '../Pager/Pager';
+import { Pager, ShownPaginationInfo, TPaginationInfoVariant } from '../Pager/Pager';
 
 
 import style from './Grid.module.scss';
 import { useGetColumnFieldsMaxWidth } from './ColumnResizer/ColumnResizer';
 import { ActionReducer, checkedReducer, checkedSingleReducer } from './stateReducer';
+import { Pagination } from '../../types';
 
 export const TableEmptyImage = () => {
   return (

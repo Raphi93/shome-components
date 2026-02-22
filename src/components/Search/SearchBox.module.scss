@@ -1,0 +1,135 @@
+@use '../../Styles/abstracts' as *;
+@use '../MessageBox/MessageBox.module' as message;
+
+.container {
+  margin-bottom: calc(var(--spacing) * 2);
+}
+
+.inputWrapper {
+  width: 100%;
+  position: relative;
+
+  .borderLabel {
+    @include base-text;
+    z-index: 1;
+
+    position: absolute;
+    background-color: var(--color-white);
+    color: var(--color-text-light);
+    opacity: 0.6;
+    transform: translateY(-50%);
+    top: 50%;
+    left: calc(var(--spacing) * 2);
+    pointer-events: none;
+    transition: all 200ms ease-in-out;
+
+    &.hasLeftIcon {
+      left: calc(var(--spacing) * 5);
+      padding: 0;
+    }
+  }
+}
+
+.searchBox {
+  display: flex;
+  box-shadow: var(--shadow-00);
+  position: relative;
+
+  input[type='text'],
+  input[type='search'] {
+    @include base-text;
+
+    appearance: none;
+
+    border-radius: var(--border-radius);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    border: rem(1px) solid var(--color-gray-400);
+    height: calc(var(--spacing) * 5);
+    transition:
+      border-color var(--transition-duration-base),
+      box-shadow var(--transition-duration-base);
+    padding: var(--spacing) calc(var(--spacing) * 5) var(--spacing) calc(var(--spacing) * 2);
+    width: 100%;
+    vertical-align: top;
+    border-right: 0;
+    box-shadow: none;
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+
+      border-color: var(--color-primary-dark);
+      box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
+    }
+
+    &.active + .borderLabel {
+      line-height: 12px;
+      opacity: 1;
+      top: 0;
+      font-size: 12px;
+      padding: 0 5px;
+      color: var(--color-gray-400);
+      left: var(--spacing);
+    }
+
+    &:focus + .borderLabel {
+      line-height: 12px;
+      opacity: 1;
+      top: 0;
+      font-size: 12px;
+      padding: 0 5px;
+      color: var(--color-label-active);
+      left: var(--spacing);
+    }
+
+    &.hasLeftIcon {
+      border-top-right-radius: var(--border-radius);
+      border-bottom-right-radius: var(--border-radius);
+      border-right: rem(1px) solid var(--color-gray-400);
+      padding: var(--spacing) calc(var(--spacing) * 5) var(--spacing) calc(var(--spacing) * 5);
+    }
+  }
+
+  .close {
+    color: var(--button-background-color);
+
+    &:hover {
+      color: var(--button-background-color-hover);
+    }
+
+    position: absolute;
+    right: 15px;
+    top: 5px;
+  }
+
+  .searchButton {
+    position: relative;
+    font-family: var(--font-ico);
+    margin-left: calc(var(--border-radius) * -1);
+    font-size: rem(25px);
+    min-width: calc(var(--spacing) * 7);
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+    cursor: auto;
+    pointer-events: none;
+
+    :global .icon {
+      font-size: rem(25px);
+    }
+  }
+
+  .searchIcon {
+    position: absolute;
+    left: calc(var(--spacing) * 2);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: rem(20px);
+    color: var(--color-gray-500);
+  }
+
+  .queryButtonIcon::before {
+    content: '\f375';
+  }
+}

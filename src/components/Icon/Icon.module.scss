@@ -1,0 +1,66 @@
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 1em;
+  height: 1em;
+
+  font-size: 1em;
+  line-height: 1;
+
+  /* wichtig */
+  font-family: "Ionicons";
+  font-style: normal;
+  font-weight: normal;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  color: currentColor;
+}
+/* Größen */
+.sm {
+  font-size: 0.875rem;
+}
+
+.md {
+  font-size: 1rem;
+}
+
+.lg {
+  font-size: 1.25rem;
+}
+
+.xl {
+  font-size: 1.5rem;
+}
+
+/* States */
+.clickable {
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.brand {
+  color: var(--color-brand);
+}
+
+.muted {
+  opacity: 0.6;
+}
+
+.danger {
+  color: var(--color-danger);
+}
+
+.success {
+  color: var(--color-success);
+}

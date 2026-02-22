@@ -1,12 +1,14 @@
-import { CSSProperties, MouseEventHandler } from 'react';
+'use client';
 
-import './Icon.module.scss';
+import { CSSProperties, MouseEventHandler } from 'react';
+import clx from 'classnames';
+import styles from './Icon.module.scss';
 
 type IProps = {
   icon: Icons;
   style?: CSSProperties;
   className?: string;
-  onClick?: MouseEventHandler;
+  onClick?: MouseEventHandler<HTMLSpanElement>;
   id?: string;
   'data-testid'?: string;
 };
@@ -16,7 +18,7 @@ export function Icon({ icon, style, className, onClick, id, 'data-testid': dataT
     <span
       id={id}
       onClick={onClick}
-      className={`icon ${className || ''}`}
+      className={clx(styles.icon, className)}
       style={style}
       dangerouslySetInnerHTML={{ __html: icon }}
       data-testid={dataTestId}

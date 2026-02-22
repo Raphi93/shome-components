@@ -1,3 +1,3 @@
-export * as Pagination from './Grid/Pagination';
-export * as Layout from './Layout/Layout';
-export * as FormRegister from './Register/FormRegister';
+export type * from './Grid/Pagination';
+export type * from './Layout/Layout';
+export type * from './Register/FormRegister';

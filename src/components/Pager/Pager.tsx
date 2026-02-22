@@ -8,21 +8,11 @@ import style from './Pager.module.scss';
 import { ActionButton } from '../Button';
 import { useNumberFormat } from '../../hooks/numberFormat';
 import { PaginationContext } from '../../context/paginationContext';
+import { Pagination } from '../../types';
 
 const supportedPageSizes = [5, 10, 25, 50, 100];
 
 export type TPaginationInfoVariant = 'both' | 'pages' | 'items' | 'none';
-
-export type Pagination = {
-    pageNumber: number;
-    pageSize: number;
-    filter: string;
-    sort: string;
-    setPageSize: (newPageSize: number) => void;
-    setPageNumber: (newPageNumber: number) => void;
-    setFilter: (newFilter: string | undefined) => void;
-    setSort: (newSort: string | undefined) => void;
-};
 
 export function Pager({
   pageNumber,

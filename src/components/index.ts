@@ -16,3 +16,5 @@ export * from "./Tooltip";
 export * from "./AppToggleActive/AppToggleActive";
 export * from "./Pager";
 export * from "./Grid";
+export * from "./Icon/Icon";
+export * from "./Search";
