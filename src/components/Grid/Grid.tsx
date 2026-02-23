@@ -322,6 +322,7 @@ export type PagedGridProps = {
    * Additional CSS class name for pagination styling
    */
   pagerClassName?: string;
+  isCard?: boolean;
 };
 
 export function PagedGrid({
@@ -340,6 +341,7 @@ export function PagedGrid({
   hasTableTag = true,
   pagerClassName,
   culture,
+  isCard = false,
 }: PagedGridProps) {
   const pageCount = Math.ceil(totalCount / pagination.pageSize);
 
@@ -372,6 +374,7 @@ export function PagedGrid({
           <ShownPaginationInfo variant={paginationTopInfoVariant} pageCount={pageCount} entryCount={totalCount} culture={culture} />
         </div>
       )}
+      {isCard ? children : (
       <Grid
         hasPagination={true}
         multiSelect={multiSelect}
@@ -381,7 +384,8 @@ export function PagedGrid({
         hasTableTag={hasTableTag}
       >
         {children}
-      </Grid>
+        </Grid>
+      )}
 
       {isPaginationShown && (
         <Pager

@@ -1,7 +1,4 @@
-"use client";
-
-import { useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useMemo } from 'react';
 
 import { BaseDatePicker, TDatePickerProps } from './BaseDatePicker';
 import {
@@ -12,12 +9,11 @@ import {
   timeFormatsByLangCode,
   timeFormatToSave,
 } from './date-helpers';
-import React from 'react';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 export const LangDatePicker = (props: TDatePickerProps) => {
   const dateAllowedFormat = /^\d{4}-\d{2}-\d{2}$/;
-  const [hasError, setHasError] = useState(false);
-  const { t } = useTranslation();
 
   return (
     <BaseDatePicker
@@ -25,8 +21,6 @@ export const LangDatePicker = (props: TDatePickerProps) => {
       dateAllowedFormatRegex={dateAllowedFormat}
       dateFormatToSave={dateFormatToSave}
       formatsByLangCode={dateFormatsByLangCode}
-      setErrorStatus={setHasError}
-      errorText={hasError ? t('Invalid date') : props.errorText}
     />
   );
 };

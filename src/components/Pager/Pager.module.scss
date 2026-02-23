@@ -1,4 +1,19 @@
-@use '../../Styles/abstracts' as *;
+@use '../../styles/abstracts' as *;
+
+:root {
+  /* Pager tokens (theme override friendly) */
+  --pager-surface: var(--color-gray-200);
+  --pager-border: var(--color-gray-300);
+  --pager-text: var(--color-gray-900);
+  --pager-muted-text: var(--color-gray-700);
+  --pager-current-surface: var(--color-primary-dark);
+  --pager-current-text: var(--color-text-inverted);
+
+  --pager-select-surface: var(--input-background, var(--color-white));
+  --pager-select-text: var(--input-color, var(--color-gray-900));
+  --pager-select-border: var(--input-border, var(--color-gray-300));
+  --pager-select-chevron: var(--input-placeholder-color, #6c7a86);
+}
 
 // Pagination
 .pagination {
@@ -8,7 +23,7 @@
   flex-wrap: wrap;
   width: 100%;
   box-shadow: inset 0 0 0 rem(1px) var(--color-gray-300);
-  background-color: var(--color-gray-200);
+  background-color: var(--pager-surface);
   border-radius: var(--border-radius);
   padding: 0 calc(var(--spacing) * 0.5);
 
@@ -70,8 +85,8 @@
 .current,
 .current:hover {
   cursor: default;
-  background-color: var(--color-primary-dark);
-  color: var(--color-text-inverted);
+  background-color: var(--pager-current-surface);
+  color: var(--pager-current-text);
   box-shadow: none;
 }
 
@@ -101,7 +116,7 @@
     height: 0;
     border-width: calc(var(--spacing) * 0.5) calc(var(--spacing) * 0.5) 0;
     border-style: solid;
-    border-color: #6c7a86 transparent transparent;
+    border-color: var(--pager-select-chevron) transparent transparent;
     pointer-events: none;
     position: absolute;
     top: rem(19px);

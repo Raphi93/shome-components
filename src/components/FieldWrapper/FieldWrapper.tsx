@@ -1,28 +1,38 @@
-"use client";
-import { ChangeEventHandler, CSSProperties, FocusEventHandler, JSX, ReactNode, useState } from 'react';
+import { ChangeEventHandler, CSSProperties, FocusEventHandler, JSX, ReactNode, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { faCheckSquare, faEye, faEyeSlash, faSquare, faUndo } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clx from 'classnames';
+import { debounce } from 'lodash';
 
-import { useDateFormat } from '../../hooks/dateFormat';
-
+import { ActionWrapper } from '../Actions/ActionElement';
+import ErrorText from '../ErrorText/ErrorText';
+import { Icon, Icons } from '../Icon/Icon';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../Tooltip/Tooltip';
 
 import { useDebouncedInput } from './hooks/useDebouncedInput';
 import { TLabelInputWithDirtyState, useLabelInput } from './hooks/useLabelInput';
 
 import style from './FieldWrapper.module.scss';
-import React from 'react';
-import ErrorText from '../ErrorText/ErrorText';
-import { UseFormRegister } from '../../types/Register/FormRegister';
-import { ActionWrapper } from '../Actions/ActionElement';
+import { UseFormRegister } from '../../types';
+import { useDateFormat } from '../../hooks/dateFormat';
 
 export type FieldSetCommonFields = {
+  /**
+   *  Label for the input
+   */
   label?: string;
+  /**
+   *  Sets it as required
+   */
   isRequired?: boolean;
+  /**
+   *  Description for the input
+   */
   description?: string;
+  /**
+   *  Sets input to read-only variant
+   */
   readOnly?: boolean;
+
   errorText?: string;
   cssClass?: string;
 };
@@ -42,6 +52,9 @@ export function FieldWrapper({
 }: FieldSetCommonFields & {
   children?: ReactNode;
   readOnly?: boolean;
+  /**
+   * ID of the input element inside
+   */
   labelFor?: string;
   isDirty?: boolean;
   onClearDirty?: (arg: any) => void;
@@ -64,7 +77,7 @@ export function FieldWrapper({
             })}
             onClick={onClearDirty}
           >
-            <FontAwesomeIcon className={style.dirtyIcon} icon={faUndo} />
+            <Icon className={style.dirtyIcon} icon={Icons.Undo} />
           </TooltipTrigger>
           <TooltipContent>{dirtyText || t('Click to reset input value to initial state')}</TooltipContent>
         </Tooltip>
@@ -102,7 +115,9 @@ export function FieldWrapper({
   );
 }
 
-
+/**
+ * Input for string types
+ */
 export function StringInput({
   type = 'text',
   label,
@@ -129,13 +144,35 @@ export function StringInput({
   autoComplete,
   withDebounce = false,
   debounceDelay = 300,
+  maxLength,
 }: {
+  /**
+   * Type of the StringInput
+   */
   type?: 'text' | 'password' | 'email' | 'tel' | 'search' | 'url';
+  /**
+   * Default value of the Input
+   */
   defaultValue?: string;
+  /**
+   * Input value
+   */
   value?: string;
+  /**
+   * Input id
+   */
   id?: string;
+  /**
+   * Input placeholder
+   */
   placeholder?: string;
+  /**
+   *  Allows to disable the input
+   */
   disabled?: boolean;
+  /**
+   * Element is wrapped by FieldWrapper component for usage inside FieldSet form component
+   */
   isWrapped?: boolean;
   register?: UseFormRegister;
   onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -148,6 +185,7 @@ export function StringInput({
   autoComplete?: string;
   withDebounce?: boolean;
   debounceDelay?: number;
+  maxLength?: number;
 } & TLabelInputWithDirtyState &
   FieldSetCommonFields) {
   const { internalValue, handleChange } = useDebouncedInput({
@@ -181,6 +219,7 @@ export function StringInput({
       style={styles}
       autoFocus={autofocus}
       autoComplete={autoComplete}
+      maxLength={maxLength}
     />
   );
 
@@ -311,7 +350,7 @@ export function PasswordInput({
 
   const passwordIcon = (
     <button type="button" className={style.passwordInputBtn} onClick={() => setIsShowPassword((show) => !show)}>
-      {isShowPassword ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
+      {isShowPassword ? <Icon icon={Icons.EyeOff} /> : <Icon icon={Icons.Eye} />}
     </button>
   );
 
@@ -558,11 +597,29 @@ export function Textarea({
   hasBorderLabel,
   autoComplete,
 }: {
+  /**
+   *  `TextArea` default value
+   */
   defaultValue?: string;
+  /**
+   *  `TextArea`  value
+   */
   value?: string;
+  /**
+   *  Input ID
+   */
   id?: string;
+  /**
+   *  Input placeholder
+   */
   placeholder?: string;
+  /**
+   * Sets input disabled
+   */
   disabled?: boolean;
+  /**
+   * Element is wrapped by FieldWrapper component for usage inside FieldSet form component
+   */
   isWrapped?: boolean;
   onChange?: ChangeEventHandler<HTMLTextAreaElement>;
   children?: ReactNode;
@@ -643,6 +700,9 @@ export function Textarea({
   return textarea;
 }
 
+/**
+ * Read only - value, missing 'size option'
+ */
 export type ValueType = 'dateTime' | 'boolean' | 'date' | 'time' | 'text';
 
 export function Value({
@@ -672,7 +732,7 @@ export function Value({
    * checkbox for readonly mode without wrapper
    */
   function ValueCheckbox({ checked }: { checked?: boolean }) {
-    return <FontAwesomeIcon icon={checked ? faCheckSquare : faSquare} />;
+    return <Icon icon={checked ? Icons.Checkbox : Icons.SquareOutline} />;
   }
 
   if (hideEmpty && !value && value !== false) {

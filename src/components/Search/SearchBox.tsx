@@ -2,7 +2,6 @@ import { ChangeEvent, ReactNode, useCallback, useRef, useState } from 'react';
 import clx from 'classnames';
 import { debounce } from 'lodash';
 
-import { Button } from '../Button/Button';
 import ErrorText from '../ErrorText/ErrorText';
 import { BorderInputLabel } from '../FieldWrapper/hooks/useLabelInput';
 import { Icon, Icons } from '../Icon/Icon';

@@ -1,6 +1,4 @@
-"use client";
-
-import { CSSProperties, FocusEvent, FocusEventHandler, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { CSSProperties, FocusEvent, FocusEventHandler, useCallback, useEffect, useMemo, useState } from 'react';
 import { DatePickerProps } from 'react-datepicker';
 import clx from 'classnames';
 import { format, isValid, parse, parseISO } from 'date-fns';
@@ -8,34 +6,10 @@ import { format, isValid, parse, parseISO } from 'date-fns';
 import { TLabelInputWithDirtyState } from '../FieldWrapper/hooks/useLabelInput';
 
 import { DatePickerLanguages, dateTimePickerLanguageByCode, timeFormatToSave } from './date-helpers';
-import { FilterMode, StyledReactDatepicker } from './StyledReactDatepicker';
+import { StyledReactDatepicker } from './StyledReactDatepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
 import style from '../FieldWrapper/FieldWrapper.module.scss';
-import React from 'react';
-
-type ParsedFilterValue =
-  | { kind: 'empty' }
-  | { kind: 'single'; mode: 'eq' | 'gt' | 'lt'; raw: string }
-  | { kind: 'between'; from: string; to: string };
-
-function parseFilterValue(value: string | null | undefined): ParsedFilterValue {
-  if (value == null || value === '') return { kind: 'empty' };
-
-  if (value.startsWith('>')) return { kind: 'single', mode: 'gt', raw: value.slice(1) };
-  if (value.startsWith('<')) return { kind: 'single', mode: 'lt', raw: value.slice(1) };
-
-  if (value.includes('|')) {
-    const [from = '', to = ''] = value.split('|');
-    return { kind: 'between', from, to };
-  }
-
-  return { kind: 'single', mode: 'eq', raw: value };
-}
-
-function parseDateOrNull(dateString: string, dateFormatToSave: string) {
-  if (!dateString) return null;
-  const d = parse(dateString, dateFormatToSave, new Date());
-  return isValid(d) ? d : null;
-}
 
 export type TBaseDatePickerProps = {
   dateAllowedFormatRegex: RegExp;
@@ -58,8 +32,6 @@ export type TDatePickerProps = {
   description?: string;
   pickersProps?: Partial<DatePickerProps>;
   setValueOnCalendarClose?: (value: string | null) => void;
-  filter?: boolean;
-  setErrorStatus?: (hasError: boolean) => void;
 } & TLabelInputWithDirtyState;
 
 export const BaseDatePicker = ({
@@ -78,7 +50,7 @@ export const BaseDatePicker = ({
   isDirty,
   dirtyText,
   onClearDirty,
-  languageCode = 'D',
+  languageCode = 'E',
   placeholder,
   dateAllowedFormatRegex,
   formatsByLangCode,
@@ -86,8 +58,6 @@ export const BaseDatePicker = ({
   pickersProps,
   description,
   setValueOnCalendarClose,
-  filter = false,
-  setErrorStatus,
 }: TBaseDatePickerProps) => {
   const { datePickerLocale, datePickerFormat, onDateChange, selectedDate } = useDatePickerActions({
     languageCode,
@@ -98,93 +68,15 @@ export const BaseDatePicker = ({
 
   const [renderKey, setRenderKey] = useState(0);
   const [dateResult, setDateResult] = useState<string | null>(value || null);
-  const [dateResultTo, setDateResultTo] = useState<Date | null>(null);
-  const [selectedDateTo, setSelectedDateTo] = useState<Date | null>(null);
-  const [filterMode, setFilterMode] = useState<FilterMode>('eq');
 
   const handleDateChange = (date: Date | null) => {
-    if (!date) {
-      setDateResult(null);
-      setDateResultTo(null);
-      setSelectedDateTo(null);
-      setErrorStatus?.(isRequired ? true : false);
-      onChange?.(null);
-      return;
-    }
-
     const stringDate = onDateChange(date);
-    if (!stringDate) {
-      setErrorStatus?.(isRequired ? true : false);
-      onChange?.(null);
-      return;
-    }
 
-    const isValidFormat = dateAllowedFormatRegex.test(stringDate);
-    if (!isValidFormat) {
-      setErrorStatus?.(isRequired ? true : false);
-      onChange?.(null);
-      return;
-    }
-
-    setErrorStatus?.(false);
-    setDateResult(stringDate);
-    setDateResultTo(date);
-
-    if (filter && filterMode === 'between') {
-      const to = selectedDateTo ? onDateChange(selectedDateTo) : null;
-      onChange?.(to ? `${stringDate}|${to}` : null);
-      return;
-    }
-
-    const out =
-      filter && filterMode === 'gt'
-        ? `>${stringDate}`
-        : filter && filterMode === 'lt'
-          ? `<${stringDate}`
-          : stringDate;
-
-    onChange?.(out);
-  };
-
-  function handleDateChangeToDate(date: Date | null) {
-    setSelectedDateTo(date);
-
-    if (filter && filterMode === 'between' && dateResult) {
-      const to = date ? onDateChange(date) : null;
-      onChange?.(to ? `${dateResult}|${to}` : null);
-      return;
-    }
-
-    const stringDate = onDateChange(date);
     const inputValue = stringDate || '';
     const isValidFormat = dateAllowedFormatRegex.test(inputValue);
     const dateStringResult = isValidFormat ? stringDate : null;
+    setDateResult(dateStringResult);
     onChange?.(dateStringResult);
-  }
-
-  const manualModeRef = useRef(false);
-
-  function emitValueForMode(m: FilterMode, from: string | null, toDate: Date | null) {
-    if (!filter) return from;
-
-    if (!from) return null;
-
-    if (m === 'between') {
-      const to = toDate ? onDateChange(toDate) : null;
-      return to ? `${from}|${to}` : null;
-    }
-
-    if (m === 'gt') return `>${from}`;
-    if (m === 'lt') return `<${from}`;
-    return from; // eq
-  }
-
-  const handleSetMode = (m: FilterMode) => {
-    manualModeRef.current = true;
-    setFilterMode(m);
-
-    const out = emitValueForMode(m, dateResult, selectedDateTo);
-    onChange?.(out);
   };
 
   const onDateBlur = (e: FocusEvent<HTMLInputElement>) => {
@@ -197,46 +89,6 @@ export const BaseDatePicker = ({
     setValueOnCalendarClose?.(dateResult);
   };
 
-  useEffect(() => {
-    // Wenn der Mode gerade manuell gesetzt wurde, NICHT sofort wieder aus value rekonstruieren
-    if (manualModeRef.current) {
-      manualModeRef.current = false;
-      return;
-    }
-
-    const parsed = parseFilterValue(value);
-
-    if (parsed.kind === 'empty') {
-      setDateResult(null);
-      setDateResultTo(null);
-      setSelectedDateTo(null);
-      setFilterMode('eq');
-      return;
-    }
-
-    if (!filter) {
-      const raw = parsed.kind === 'between' ? parsed.from : parsed.raw;
-      setFilterMode('eq');
-      setDateResult(raw);
-      setDateResultTo(parseDateOrNull(raw, dateFormatToSave));
-      setSelectedDateTo(null);
-      return;
-    }
-
-    if (parsed.kind === 'single') {
-      setFilterMode(parsed.mode);
-      setDateResult(parsed.raw);
-      setDateResultTo(parseDateOrNull(parsed.raw, dateFormatToSave));
-      setSelectedDateTo(null);
-      return;
-    }
-
-    setFilterMode('between');
-    setDateResult(parsed.from);
-    setDateResultTo(parseDateOrNull(parsed.from, dateFormatToSave));
-    setSelectedDateTo(parseDateOrNull(parsed.to, dateFormatToSave));
-  }, [value, filter, dateFormatToSave]);
-
   return (
     <StyledReactDatepicker
       id={id}
@@ -245,7 +97,7 @@ export const BaseDatePicker = ({
       onChange={handleDateChange}
       onBlur={onDateBlur}
       className={clx(style.input, style.borderLabelInput)}
-      selected={dateResultTo || selectedDate}
+      selected={selectedDate}
       dateFormat={datePickerFormat}
       locale={datePickerLocale}
       onCalendarClose={onCalendarClose}
@@ -262,13 +114,6 @@ export const BaseDatePicker = ({
       isDirty={isDirty}
       dirtyText={dirtyText}
       onClearDirty={onClearDirty}
-      filter={filter}
-      setMode={handleSetMode}
-      setToDate={handleDateChangeToDate}
-      value={dateResultTo}
-      filterModes={filterMode}
-      selectedDateTo={selectedDateTo}
-      setErrorStatus={setErrorStatus}
       {...(pickersProps as any)}
     />
   );

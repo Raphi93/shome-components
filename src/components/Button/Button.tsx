@@ -51,7 +51,7 @@ const ensureCssLength = (value: string) => {
 
 /**
  * A versatile button component that supports various configurations including icons, tooltips, loading states, and different rendering modes.
- * 
+ *
  * @param icon - Primary FontAwesome icon to display
  * @param onClick - Click handler function that can be async
  * @param tooltip - Tooltip text to display on hover
@@ -74,7 +74,7 @@ const ensureCssLength = (value: string) => {
  * @param loadingTimeoutMs - Duration in milliseconds for the loading state, defaults to 1500
  * @param children - Custom content to render instead of default button content
  * @param props - Additional HTML attributes passed to the underlying element
- * 
+ *
  * @returns A button element that can render as button, anchor, or div based on props
  */
 export function Button({
@@ -117,10 +117,10 @@ export function Button({
 
   useEffect(() => {
     const isTrue = isLoading === true;
-    if (isTrue){
+    if (isTrue) {
       setIsLoadings(true);
       setDisabledButton(true);
-    } else if (isLoading === false){
+    } else if (isLoading === false) {
       setIsLoadings(false);
       setDisabledButton(disabled);
     }
@@ -181,18 +181,8 @@ export function Button({
     style: { ...buttonStyle, ...props.style },
   };
 
-  const innerRaw = children ?? renderContent();
-
-
-  let inner = innerRaw;
-
-  if (Array.isArray(innerRaw)) {
-    inner = innerRaw.map((child, index) =>
-      React.isValidElement(child)
-        ? React.cloneElement(child, { key: child.key ?? `auto-key-${index}` })
-        : child
-    );
-  }
+  // FIX: avoid cloneElement() (triggers React 19 "element.ref" warning in some setups)
+  const inner = children ? React.Children.toArray(children) : renderContent();
 
   let buttonEl: ReactNode;
 
@@ -247,4 +237,3 @@ export function Button({
     buttonEl
   );
 }
-

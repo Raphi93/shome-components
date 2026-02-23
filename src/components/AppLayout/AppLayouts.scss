@@ -40,7 +40,6 @@
 .app-layouts .contentpdc {
   padding: calc(var(--spacing) * 3);
   grid-area: content;
-  overflow-y: auto;
   max-width: 100rem;
   min-width: 0rem;
   margin: 0 auto;
