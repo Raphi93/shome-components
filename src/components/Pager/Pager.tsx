@@ -12,7 +12,7 @@ import { Pagination } from '../../types';
 
 const supportedPageSizes = [5, 10, 25, 50, 100];
 
-export type TPaginationInfoVariant = 'both' | 'pages' | 'items' | 'none';
+export type TPaginationInfoVariant = 'both' | 'pages' | 'items' | 'none' | string; 
 
 export function Pager({
   pageNumber,
@@ -204,30 +204,34 @@ export function ShownPaginationInfo({
     return <></>;
   }
 
-  if (variant === 'both') {
-    content = (
-      <>
-        <strong>{numberFormat(entryCount)}</strong> {t('Items in')} <strong>{numberFormat(pageCount)}</strong>{' '}
-        {t('Pages')}
-      </>
-    );
-  }
+  // if (variant === 'both') {
+  //   content = (
+  //     <>
+  //       <strong>{numberFormat(entryCount)}</strong> {t('Items in')} <strong>{numberFormat(pageCount)}</strong>{' '}
+  //       {t('Pages')}
+  //     </>
+  //   );
+  // }
 
-  if (variant === 'items') {
-    content = (
-      <>
-        <strong>{numberFormat(entryCount)}</strong> {t('Items')}
-      </>
-    );
-  }
+  // if (variant === 'items') {
+  //   content = (
+  //     <>
+  //       <strong>{numberFormat(entryCount)}</strong> {t('Items')}
+  //     </>
+  //   );
+  // }
 
-  if (variant === 'pages') {
-    content = (
-      <>
-        <strong>{numberFormat(pageCount)}</strong> {t('Pages')}
-      </>
-    );
-  }
+  // if (variant === 'pages') {
+  //   content = (
+  //     <>
+  //       <strong>{numberFormat(pageCount)}</strong> {t('Pages')}
+  //     </>
+  //   );
+  // }
+
+  content = `${numberFormat(entryCount)} ${t('Items')}`;
+
+  
 
   return <div className={style.info}>{content}</div>;
 }

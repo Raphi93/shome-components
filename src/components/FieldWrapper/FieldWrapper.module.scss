@@ -1,10 +1,10 @@
 // Imports
-@use '../../Styles/abstracts' as *;
+@use "../../Styles/abstracts" as *;
 
 // Partials
-@use './Datetime';
-@use './Checkbox';
-@use './Select';
+@use "./Datetime";
+@use "./Checkbox";
+@use "./Select";
 
 // Variables
 :root {
@@ -62,11 +62,15 @@
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
-    -webkit-text-fill-color: var(--input-color, var(--color-gray-900)) !important;
+    -webkit-text-fill-color: var(
+      --input-color,
+      var(--color-gray-900)
+    ) !important;
     caret-color: var(--input-color, var(--color-gray-900)) !important;
 
     /* overwrite Chrome's internal autofill background */
-    -webkit-box-shadow: 0 0 0 1000px var(--input-background, var(--color-white)) inset !important;
+    -webkit-box-shadow: 0 0 0 1000px var(--input-background, var(--color-white))
+      inset !important;
     box-shadow: 0 0 0 1000px var(--input-background, var(--color-white)) inset !important;
 
     border-color: var(--input-border, var(--color-gray-400)) !important;
@@ -189,7 +193,7 @@
 
     label {
       &::after {
-        content: '\003A';
+        content: "\003A";
       }
     }
   }
@@ -248,19 +252,32 @@
 
   .borderLabel {
     @include base-text;
-    z-index: 1;
     position: absolute;
+    z-index: 2;
 
-    background-color: var(--input-background, var(--color-white));
     color: var(--input-label-color, var(--color-text-light));
-
     opacity: 0.6;
+
     transform: translateY(-50%);
     top: 50%;
-    padding: 0 5px;
     left: var(--spacing);
+    padding: 0 5px;
+
     pointer-events: none;
     transition: all 200ms ease-in-out;
+
+    // kein normales background mehr hier
+    background: transparent;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+
+      background: var(--input-background, var(--color-white));
+      border-radius: 4px; // optional
+    }
   }
 
   .textAreaBorderLabel {
@@ -344,6 +361,7 @@
   right: rem(8px);
   width: 26px;
   height: 26px;
+  color: var(--input-color);
 
   .dirtyTrigger {
     cursor: pointer;
