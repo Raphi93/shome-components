@@ -15,7 +15,7 @@ export const getMultiSelectStyles = (
     menu: (provided: CSSObjectWithLabel) => ({
       ...provided,
       zIndex: 9999,
-      backgroundColor: 'var(--color-card-background, var(--color-background))',
+      backgroundColor: 'var(--input-background, var(--color-background))',
       border: '1px solid var(--input-border, var(--color-gray-400))',
       boxShadow: 'var(--shadow-02, 0 10px 30px rgba(0,0,0,0.35))',
       overflow: 'hidden',
@@ -102,12 +102,12 @@ export const getMultiSelectStyles = (
       cursor: 'pointer',
       minHeight: '40px',
       backgroundColor: state?.isSelected
-        ? `rgba(var(--color-brand-rgb, 0, 230, 255), 0.55)`
+        ? `var(--color-primary-dark)`
         : state?.isFocused
-          ? `rgba(var(--color-brand-rgb, 0, 230, 255), 0.18)`
+          ? `rgba(var(--color-brand-rgb, 0, 230, 255), 0.6)`
           : 'transparent',
       color: state?.isSelected
-        ? 'var(--color-brand-contrast, #0b0d10)'
+        ? 'var(--color-primary-contrast, #0b0d10)'
         : 'var(--input-color, var(--color-gray-900))',
     }),
 

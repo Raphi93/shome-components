@@ -11,11 +11,8 @@ import style from './Breadcrumbs.module.scss';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { NavigationItem } from '../../types/Layout';
 import { usePageContext } from '../../context/PageContext';
+import { BreadCrumb } from '../..';
 
-export type BreadCrumb = {
-  link: string;
-  name: string;
-};
 
 export function AppBreadcrumbs({ crumbs, menu}: { crumbs: BreadCrumb[], menu: NavigationItem[] }) {
     const { pageTitle } = usePageContext();

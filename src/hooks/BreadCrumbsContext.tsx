@@ -3,16 +3,11 @@
 import React, { createContext, Dispatch, ReactNode, SetStateAction, useContext, useLayoutEffect, useState } from 'react';
 import { usePathname } from "next/navigation";
 import { usePageContext } from '../context/PageContext';
+import { NavigationItem } from '..';
 
 export type BreadCrumb = {
   name: string;
   link?: string;
-};
-
-export type NavigationItem = {
-  name: string;
-  link: string;
-  children?: NavigationItem[];
 };
 
 export type PdcNavigationItem = NavigationItem;

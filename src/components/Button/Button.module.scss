@@ -72,7 +72,7 @@
 
   &.secondary {
     color: var(--color-disabled-dark);
-    background: var(--color-white);
+    background: var(--input-background, var(--color-white));
     box-shadow: inset 0 0 0 rem(1px) var(--color-disabled);
   }
 }

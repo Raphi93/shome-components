@@ -45,6 +45,7 @@ export function Main({
   return (
     <main onClick={onClick} className={className}>
       {upperComponent}
+      {pageTitle && !hideTitle && <h1>{pageTitle}</h1>}
       {message && <AppMessageBox type={message.type as any} text={message.text} />}
       {children}
     </main>

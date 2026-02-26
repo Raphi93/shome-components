@@ -353,6 +353,10 @@
   }
 }
 
+.row{
+  background-color: var(--input-background, var(--color-white));
+}
+
 // Grid head clone
 .grid-head-clone {
   position: fixed;

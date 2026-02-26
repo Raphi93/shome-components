@@ -85,7 +85,7 @@ export const DirtyIconWithBorderLabel = ({
           })}
           onClick={onClearDirty}
         >
-        <Icon icon={Icons.Undo} />
+        <Icon icon={Icons.Undo} style={{color: "var(--input-color)"}} />
         </TooltipTrigger>
         <TooltipContent>{dirtyText || t('Click to reset input value to initial state')}</TooltipContent>
       </Tooltip>

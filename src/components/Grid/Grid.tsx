@@ -240,6 +240,7 @@ export function GridDataBody({
               <tr
                 onClick={() => handleRowClick?.(item)}
                 className={clx({
+                  [style.row]: true,
                   [style.pointer]: !!handleRowClick,
                   [style.checked]: checkedList?.find((id) => id === item.id),
                 })}

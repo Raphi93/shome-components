@@ -1,19 +1,40 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import clx from 'classnames';
 
+import { Icon, Icons } from '../Icon/Icon';
+
 import styles from './MessageBox.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faX } from '@fortawesome/free-solid-svg-icons';
 
 export type NotificationType = 'error' | 'warning' | 'message' | 'success';
 
 export type Message = {
+  /**
+   * Type of message
+   */
   type: NotificationType;
+  /**
+   * Header of the message
+   */
   header?: string;
+  /**
+   * Text of the message
+   */
   text?: string;
+  /**
+   * Link for the header if applicable
+   */
   headerLink?: string;
+  /**
+   * User can close the message
+   */
   closable?: boolean;
+  /**
+   * Callback function when the message is closed
+   */
   onClose?: (e: React.MouseEvent) => void;
+  /**
+   * Auto-scroll viewport to the message
+   */
   autoScroll?: boolean;
 };
 
@@ -27,6 +48,9 @@ export function MessageBox({
   onClose,
   autoScroll,
 }: Message & {
+  /**
+   * Children of the message - e.g. paragraph or list
+   */
   children?: ReactNode;
 }) {
   const [display, setDisplay] = useState<'show' | 'hide' | 'hiding'>('show');
@@ -59,7 +83,7 @@ export function MessageBox({
       {headerNode}
       {closable && (
         <button onClick={handleClose} className={styles.close} type="button">
-          <FontAwesomeIcon icon={faX} />
+          <Icon icon={Icons.Close} />
         </button>
       )}
       {text}

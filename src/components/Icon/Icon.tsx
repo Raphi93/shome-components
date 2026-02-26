@@ -72,6 +72,8 @@ export enum Icons {
   // "Light" gibts in react-icons so nicht -> wir nehmen die normalen
   ArrowBackLight = 'IoMdArrowBack',
   ArrowForwardLight = 'IoMdArrowForward',
+  ArrowCarbetBack = 'IoCaretBack',
+  ArrowCarbetForward = 'IoCaretForward',
 
   ArrowBack = 'IoMdArrowBack',
   ArrowDown = 'IoMdArrowDown',

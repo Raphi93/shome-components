@@ -77,7 +77,7 @@ export function Pager({
           disabled={isFirstPage}
           small={true}
           secondary={true}
-          icon={Icons.SkipForward}
+          icon={Icons.SkipBackward}
           onClick={() => onPaginationFinal(1)}
         />
         <ActionButton
@@ -86,7 +86,7 @@ export function Pager({
           disabled={isFirstPage}
           small={true}
           secondary={true}
-          icon={Icons.Play}
+          icon={Icons.ArrowCarbetBack}
           onClick={() => onPaginationFinal(pageNumberFinal - 1)}
         />
 
@@ -114,7 +114,7 @@ export function Pager({
           disabled={isLastPage}
           small={true}
           secondary={true}
-          icon={Icons.Play}
+          icon={Icons.ArrowCarbetForward}
           onClick={() => onPaginationFinal(pageNumberFinal + 1)}
         />
 
