@@ -1,85 +1,78 @@
-"use client";
-
 import React from 'react';
-import { usePathname } from "next/navigation";
+import { Link, useLocation } from 'react-router-dom';
 
-import { useBreadCrumbsContext } from '../../hooks/BreadCrumbsContext';
+import { NavigationItem, usePageContext } from '../..';
 
-import { AppBreadcrumbs } from './AppBreadcrumbs';
-import { NavigationItem } from '../../types/Layout/Layout';
+import style from './Breadcrumbs.module.scss';
 
-
-export const BreadcrumbsComponent = ({
-  menu,
-  normalLength,
-  skipFirstSegment = false,
-}: {
-  menu: NavigationItem[];
-  normalLength?: number;
-  skipFirstSegment?: boolean;
-}) => {
-  const pathname = usePathname() ?? "";
-  const { specialBreadCrumbs } = useBreadCrumbsContext();
-
-  const crumbs =
-    specialBreadCrumbs?.filter((crumb) => crumb.link !== undefined).map(crumb => ({ ...crumb, link: crumb.link as string })) ||
-    generateBreadcrumbsFromMenu(pathname, menu, skipFirstSegment);
-
-  return (
-    <AppBreadcrumbs
-      crumbs={crumbs}
-      menu={menu}
-    />
-  );
+export type BreadCrumb = {
+  link: string;
+  name: string;
 };
 
-
-function generateBreadcrumbsFromMenu(
-  originalPathname: string,
-  menu: NavigationItem[],
-  skipFirstSegment: boolean
-): { name: string; link: string }[] {
-  let pathname = originalPathname;
-  const crumbs: { name: string; link: string }[] = [];
-
-  const firstSegment = pathname.split('/')[1];
-  const dashboardLink = menu.find(
-    (item) => item.name.toLowerCase() === 'dashboard'
-  )?.link;
-
-  if (skipFirstSegment && `/${firstSegment}` === dashboardLink) {
-    pathname = pathname.split('/').slice(2).join('/');
-    pathname = '/' + pathname;
-  }
-
-  const segments = pathname.split('/').filter(Boolean);
-
-  let currentMenu = menu;
-  let pathAccumulator = dashboardLink && dashboardLink !== '/' ? dashboardLink : '';
-
-  for (let i = 0; i < segments.length; i++) {
-    const segment = segments[i];
-
-    if (/^\d+$/.test(segment)) {
-      continue;
-    }
-
-    pathAccumulator += `/${segment}`;
-
-    const match = currentMenu.find((item) => item.link === `/${segment}`);
-
-    if (match) {
-      crumbs.push({ name: match.name, link: pathAccumulator });
-      currentMenu = (match.children as NavigationItem[]) || [];
-    } else {
-      const autoLabel = segment
-        .replace(/[-_]/g, ' ')
-        .replace(/\b\w/g, (c) => c.toUpperCase());
-      crumbs.push({ name: autoLabel, link: pathAccumulator });
-    }
-  }
-
-  return crumbs;
+export function Breadcrumbs({ crumbs }: { crumbs: BreadCrumb[] }) {
+  return (
+    <div className={style.breadcrumbs}>
+      {crumbs.map((crumb, index) => {
+        return (
+          <span key={index}>
+            {crumb.link ? (
+              <Link to={crumb.link}>{crumb.name}</Link>
+            ) : (
+              <span className={style.currentItem}>{crumb.name}</span>
+            )}
+          </span>
+        );
+      })}
+    </div>
+  );
 }
 
+export function useAutomaticBreadcrumbs(
+  navigationItems: NavigationItem[],
+  currentPageName?: string,
+  rootPageName?: string
+): BreadCrumb[] {
+  const location = useLocation();
+  const { pageTitle } = usePageContext();
+  currentPageName ??= pageTitle ?? undefined;
 
+  let link = '';
+
+  let crumbs = location.pathname
+    .split('/')
+    .filter((crumb) => crumb)
+    .map((crumb) => {
+      link += `/${crumb}`;
+      if (location.pathname === link) {
+        return { name: currentPageName };
+      }
+      const name = findNavigationItemName(link, navigationItems);
+      return name ? { link, name } : undefined;
+    })
+    .filter((crumb) => crumb);
+
+  if (rootPageName) {
+    crumbs.unshift({ link: '/', name: rootPageName });
+  }
+
+  return crumbs as BreadCrumb[];
+}
+
+export function findNavigationItemName(link: string, navigationItems?: NavigationItem[]): string | undefined {
+  if (!link || !navigationItems) {
+    return undefined;
+  }
+  const found = navigationItems.find((a) => a.link === link);
+  if (found) {
+    return found.name;
+  } else {
+    for (const item of navigationItems) {
+      const foundName = findNavigationItemName(link, item.children);
+      if (foundName) {
+        return foundName;
+      }
+    }
+    return undefined;
+  }
+}

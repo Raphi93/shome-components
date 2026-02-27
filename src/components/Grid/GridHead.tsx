@@ -219,7 +219,7 @@ export function GridHeadColumnPaged({
   title?: string;
   sortKey: string;
   sortedBy?: string;
-  onSort?: (sortKey: string) => void;
+  onSort?: (sort?: string) => void;
   pagination?: Pagination;
   sticky?: boolean;
   children?: ReactNode;
@@ -229,62 +229,81 @@ export function GridHeadColumnPaged({
 }) {
   const contextPagination = useContext(PaginationContext);
   const { setSortedKeys } = useContext(GridContext);
+
   if (!pagination && contextPagination) {
     pagination = contextPagination;
   }
 
-  sortedBy = sortedBy ?? pagination?.sort;
-  onSort = onSort ?? pagination?.setSort;
+  const effectiveSortedBy = sortedBy ?? pagination?.sort ?? '';
+  const effectiveOnSort = onSort ?? pagination?.setSort;
 
   const handleMultiSort = () => {
-    const sortedKeys = sortedBy ? sortedBy.split(',') : [];
+    const sortedKeys = effectiveSortedBy ? effectiveSortedBy.split(',').filter(Boolean) : [];
     const currentSortIndex = sortedKeys.findIndex((key) => key.startsWith(sortKey));
     const isSortedBy = currentSortIndex !== -1;
-    let isSortedDesc = false;
 
+    let isSortedDesc = false;
     if (isSortedBy) {
       isSortedDesc = sortedKeys[currentSortIndex].endsWith(' DESC');
     }
 
-    let newSortKeys = [...sortedKeys];
+    const newSortKeys = [...sortedKeys];
 
     if (isSortedBy) {
       if (isSortedDesc) {
+        // DESC -> remove
         newSortKeys.splice(currentSortIndex, 1);
       } else {
+        // ASC -> DESC
         newSortKeys[currentSortIndex] = `${sortKey} DESC`;
       }
     } else {
+      // not sorted -> ASC
       newSortKeys.push(sortKey);
     }
 
-    onSort && onSort(newSortKeys.join(','));
+    const nextSort = newSortKeys.join(',');
+    effectiveOnSort?.(nextSort ? nextSort : undefined);
   };
 
   const handleSingleSort = () => {
-    let updatedSortKey = sortKey;
-    const isSortedDesc = sortedBy?.endsWith(' DESC');
-    const isSortedBy = sortKey === (isSortedDesc ? sortedBy!.substring(0, sortedBy!.length - 5) : sortedBy);
+    const current = (effectiveSortedBy ?? '').trim();
 
-    if (isSortedBy && !isSortedDesc) {
-      updatedSortKey += ' DESC';
+    const isAsc = current === sortKey;
+    const isDesc = current === `${sortKey} DESC`;
+
+    // ASC -> DESC
+    if (isAsc) {
+      effectiveOnSort?.(`${sortKey} DESC`);
+      return;
     }
 
-    onSort && onSort(updatedSortKey);
+    // DESC -> NONE (sort löschen)
+    if (isDesc) {
+      effectiveOnSort?.(undefined);
+      return;
+    }
+
+    // NONE oder anderer Key -> ASC
+    effectiveOnSort?.(sortKey);
   };
 
   const isSorted = hasMultiSort
-    ? sortedBy?.split(',').some((key) => key.startsWith(sortKey))
-    : sortKey === (sortedBy?.endsWith(' DESC') ? sortedBy.substring(0, sortedBy.length - 5) : sortedBy);
+    ? effectiveSortedBy
+        ?.split(',')
+        .filter(Boolean)
+        .some((key) => key.startsWith(sortKey))
+    : sortKey === (effectiveSortedBy?.endsWith(' DESC') ? effectiveSortedBy.substring(0, effectiveSortedBy.length - 5) : effectiveSortedBy);
 
   const isSortedDesc = hasMultiSort
-    ? sortedBy
+    ? effectiveSortedBy
         ?.split(',')
+        .filter(Boolean)
         .find((key) => key.startsWith(sortKey))
         ?.endsWith(' DESC')
-    : sortedBy?.endsWith(' DESC') && isSorted;
+    : effectiveSortedBy?.endsWith(' DESC') && isSorted;
 
-  const classes = [style.sortable, className];
+  const classes = [style.sortable, className].filter(Boolean);
 
   useEffect(() => {
     if (isSorted) {
@@ -292,17 +311,21 @@ export function GridHeadColumnPaged({
     } else {
       setSortedKeys?.((prev) => prev.filter((key) => key !== sortKey));
     }
-  }, [isSorted]);
+  }, [isSorted, setSortedKeys, sortKey]);
 
   if (isSorted) {
     classes.push(isSortedDesc ? style['sorted-desc'] : style.sorted);
   }
 
   return (
-    <th style={styles} className={classes.join(' ')} onClick={hasMultiSort ? handleMultiSort : handleSingleSort}>
+    <th
+      style={styles}
+      className={classes.join(' ')}
+      onClick={hasMultiSort ? handleMultiSort : handleSingleSort}
+    >
       {title}
       {children}
-      <Icon icon={Icons.ArrowUp} />
+      {isSorted && <Icon icon={isSortedDesc ? Icons.ArrowDown : Icons.ArrowUp} />}
     </th>
   );
 }

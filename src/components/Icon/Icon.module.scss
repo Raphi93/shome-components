@@ -9,8 +9,6 @@
   font-size: 1em;
   line-height: 1;
 
-  /* wichtig */
-  font-family: "Ionicons";
   font-style: normal;
   font-weight: normal;
 
@@ -34,33 +32,4 @@
 
 .xl {
   font-size: 1.5rem;
-}
-
-/* States */
-.clickable {
-  cursor: pointer;
-
-  &:hover {
-    transform: scale(1.08);
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
-}
-
-.brand {
-  color: var(--color-brand);
-}
-
-.muted {
-  opacity: 0.6;
-}
-
-.danger {
-  color: var(--color-danger);
-}
-
-.success {
-  color: var(--color-success);
 }

@@ -1,4 +1,7 @@
-"use client";
+import { useEffect, useRef } from "react";
+import React from "react";
+
+import { Message, MessageBox } from "../MessageBox/MessageBox";
 
 /**
  * AppMessageBox
@@ -18,9 +21,6 @@
  * @example
  * <AppMessageBox title="Saved" body="Your changes were saved." level="info" setMessage={setMessage} />
  */
-import React, { useEffect, useRef } from 'react';
-import { Message, MessageBox } from '../MessageBox';
-
 type TAppMessageBoxProps = { hideTimeout?: number; setMessage?: (msg?: Message) => void } & Message;
 export const AppMessageBox = (props: TAppMessageBoxProps) => {
   const { hideTimeout = 8000, setMessage, autoScroll = true, ...rest } = props;

@@ -1,3 +1,5 @@
+@use '../../Styles/abstracts' as *;
+
 // Breadcrumbs
 .breadcrumbs {
   margin-bottom: calc(var(--spacing) * 2);
@@ -11,29 +13,36 @@
         text-decoration: none;
       }
     }
+    &::after {
+      content: '';
+      display: inline-block;
+      width: rem(10px);
+      height: rem(10px);
+
+      background-image: url('../../../public/Assets/Images/Ico/chevron-left.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: rotate(180deg);
+      opacity: 0.6;
+      margin-left: rem(4px);
+      margin-right: rem(4px);
+    }
   }
 
   a {
     color: var(--color-gray-600);
-    padding: 4px;
-    text-decoration: none;
+    padding: rem(4px);
     &:hover {
       background-color: var(--color-gray-275);
       border-radius: var(--nav-border-radius);
     }
     &:focus {
-      outline: 2px solid var(--button-background-color-hover);
+      outline: rem(2px) solid var(--button-background-color-hover);
       border-radius: var(--nav-border-radius);
     }
   }
 
   .currentItem {
-    font-size: var(--font-size-main-heading);
-    line-height: var(--line-height-main-heading);
-
-    @media (max-width: calc(36em - 1px)) {
-      font-size: var(--font-size-subheading);
-      line-height: var(--line-height-subheading);
-    }
+    @include main-heading($offset: true);
   }
 }

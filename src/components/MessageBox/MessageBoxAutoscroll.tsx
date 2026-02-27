@@ -1,22 +1,12 @@
-// MessageBox.tsx
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+// MessageBoxAutoscroll.tsx
+import React, { useEffect, useRef, useState } from 'react';
 import clx from 'classnames';
 
 import { Icon, Icons } from '../Icon/Icon';
 
+import { Message, NotificationType } from './MessageBox';
+
 import styles from './MessageBox.module.scss';
-
-export type NotificationType = 'error' | 'warning' | 'message' | 'success';
-
-export type Message = {
-  type: NotificationType;
-  header?: string;
-  text?: string;
-  headerLink?: string;
-  closable?: boolean;
-  onClose?: (e: React.MouseEvent) => void;
-  autoScroll?: boolean;
-};
 
 const typeIcon: Record<NotificationType, (typeof Icons)[keyof typeof Icons]> = {
   message: Icons.InformationCircleOutline ?? Icons.InformationCircle ?? Icons.Information,
@@ -25,26 +15,22 @@ const typeIcon: Record<NotificationType, (typeof Icons)[keyof typeof Icons]> = {
   error: Icons.Alert,
 };
 
-export function MessageBox({
-  type,
-  header,
-  children,
-  text,
-  headerLink,
-  closable,
-  onClose,
-  autoScroll,
-}: Message & { children?: ReactNode }) {
+/**
+ * TODO: replace with MessageBox
+ * @deprecated Please use MessageBox instead
+ * @see MessageBox
+ */
+export function MessageBoxAutoscroll({ type, header, text, headerLink, closable, onClose }: Message) {
   const [display, setDisplay] = useState<'show' | 'hide' | 'hiding'>('show');
   const divRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (autoScroll && divRef.current) {
+    if (divRef.current) {
       divRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  }, [type, header, text, headerLink, autoScroll]);
+  }, [type, header, text, headerLink]);
 
-  if ((!header && !text && !children) || display === 'hide') return null;
+  if ((!header && !text) || display === 'hide') return null;
 
   const headerLinkNode = headerLink ? <a href={headerLink}>{header}</a> : header;
   const headerNode = header ? <h2>{headerLinkNode}</h2> : undefined;
@@ -72,7 +58,6 @@ export function MessageBox({
       )}
 
       {text}
-      {children}
     </div>
   );
 }

@@ -1,8 +1,5 @@
-'use client';
-
 import { useCallback, useMemo } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Pagination } from '../types';
 
 interface IProps {
   prefix?: string;
@@ -18,7 +15,6 @@ export function usePaginationQuery(params?: IProps): Pagination {
   const replace = params?.replace ?? true;
 
   const defaultPageNumber = 1;
-
   const pageNumberKey = prefix + 'pageNumber';
   const pageSizeKey = prefix + 'pageSize';
   const filterKey = prefix + 'filter';
@@ -28,26 +24,32 @@ export function usePaginationQuery(params?: IProps): Pagination {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const pageNumber = Number(searchParams.get(pageNumberKey)) || defaultPageNumber;
-  const pageSize = Number(searchParams.get(pageSizeKey)) || defaultPageSize;
-  const filter = searchParams.get(filterKey) || '';
-  const sort = searchParams.get(sortKey) || defaultSort;
-
   const commit = useCallback(
     (next: URLSearchParams) => {
-      const qs = next.toString();
+      // URLSearchParams serialisiert Spaces als "+"
+      // Backend erwartet aber echtes Space => %20
+      const qs = next.toString().replace(/\+/g, '%20');
       const url = qs ? `${pathname}?${qs}` : pathname;
+
       if (replace) router.replace(url, { scroll: false });
       else router.push(url, { scroll: false });
     },
     [pathname, replace, router]
   );
 
+  const pageNumber = Number(searchParams.get(pageNumberKey)) || defaultPageNumber;
+  const pageSize = Number(searchParams.get(pageSizeKey)) || defaultPageSize;
+  const filter = searchParams.get(filterKey) || '';
+
+  // DefaultSort nur dann nehmen, wenn Param wirklich fehlt (null),
+  // nicht wenn er leer ist (''), falls du später NO-SORT brauchst.
+  const rawSort = searchParams.get(sortKey);
+  const sort = rawSort === null ? defaultSort : rawSort;
+
   const setPageSize = useCallback(
     (newPageSize: number) => {
       const next = new URLSearchParams(searchParams.toString());
 
-      // wenn pageSize größer wird: pageNumber sauber umrechnen
       if (pageSize < newPageSize) {
         const newPageNumber = Math.ceil(pageNumber / (newPageSize / pageSize));
         if (newPageNumber === defaultPageNumber) next.delete(pageNumberKey);
@@ -59,7 +61,7 @@ export function usePaginationQuery(params?: IProps): Pagination {
 
       commit(next);
     },
-    [commit, defaultPageSize, defaultPageNumber, pageNumber, pageNumberKey, pageSize, pageSizeKey, searchParams]
+    [commit, defaultPageNumber, defaultPageSize, pageNumber, pageNumberKey, pageSize, pageSizeKey, searchParams]
   );
 
   const setPageNumber = useCallback(
@@ -94,7 +96,7 @@ export function usePaginationQuery(params?: IProps): Pagination {
     (newSort: string | undefined) => {
       const next = new URLSearchParams(searchParams.toString());
 
-      if (!newSort) next.delete(sortKey);
+      if (newSort === undefined) next.delete(sortKey);
       else next.set(sortKey, newSort);
 
       commit(next);

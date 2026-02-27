@@ -1,2 +1,2 @@
 export * from './MessageBox';
-export * from './AppMessageBox';
+export * from './MessageBoxAutoscroll';

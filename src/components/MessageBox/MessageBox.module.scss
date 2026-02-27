@@ -1,3 +1,4 @@
+/* MessageBox.module.scss */
 @use '../../Styles/abstracts' as *;
 
 // Message box
@@ -22,7 +23,7 @@
   min-height: calc(var(--spacing) * 6);
 
   &.rowReadonly {
-    display: block; // To override the .read-only-view layout w/o using 
+    display: block;
 
     label {
       &::after {
@@ -31,23 +32,13 @@
     }
   }
 
+  // REMOVE old icon-font pseudo element
   &::before {
-    font-family: var(--font-ico);
-
-    content: '';
-    z-index: 3;
-    display: block;
-    width: rem(30px);
-    height: rem(30px);
-    font-size: rem(31px);
-    line-height: rem(32px);
-    text-align: center;
-    position: absolute;
-    left: calc(var(--spacing) * 6 / 2); // Based on ::after width
-    top: calc(var(--spacing) * 1.2);
-    transform: translateX(-50%);
+    content: none;
+    display: none;
   }
 
+  // keep the left colored stripe
   &::after {
     border-radius: var(--border-radius);
 
@@ -76,41 +67,24 @@
   }
 
   &.message {
-    &::before {
-      content: $messageSymbol;
-    }
-
     &::after {
       background: var(--color-primary-light);
     }
   }
 
   &.success {
-    &::before {
-      content: $successSymbol;
-    }
-
     &::after {
       background: var(--color-positive-light);
     }
   }
 
   &.warning {
-    &::before {
-      content: $warningSymbol;
-    }
-
     &::after {
       background: var(--color-warning);
     }
   }
 
   &.error {
-    &::before {
-      content: $errorSymbol;
-      line-height: rem(30px);
-    }
-
     &::after {
       background: var(--color-negative);
     }
@@ -183,6 +157,31 @@
     &:last-child {
       margin-bottom: 0;
     }
+  }
+}
+
+// NEW: icon container rendered via JSX (<span className={styles.typeIcon}>...)
+.typeIcon {
+  position: absolute;
+  left: calc(var(--spacing) * 6 / 2); // centered on the stripe
+  top: calc(var(--spacing) * 1.2);
+  transform: translateX(-50%);
+  z-index: 4;
+
+  width: rem(30px);
+  height: rem(30px);
+
+  display: grid;
+  place-items: center;
+
+  font-size: rem(24px);
+  line-height: 1;
+
+  // ensure the svg behaves nicely
+  svg {
+    display: block;
+    width: 1em;
+    height: 1em;
   }
 }
 

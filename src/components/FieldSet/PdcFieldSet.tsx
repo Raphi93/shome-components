@@ -1,14 +1,12 @@
-"use client";
-
 import React, { useMemo } from "react";
 import { ReactNode, useLayoutEffect, useRef } from "react";
 
-import style from "./FieldSet.module.scss";
+import style from "./PdcFieldSet.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 
-export type FieldSetProps = {
+export type PdcFieldSetProps = {
   border?: boolean;
   heading?: string;
   children?: ReactNode;
@@ -19,7 +17,7 @@ export type FieldSetProps = {
   isClosedByDefault?: boolean;
 };
 
-export function FieldSet({
+export function PdcFieldSet({
   border,
   heading,
   children,
@@ -28,7 +26,7 @@ export function FieldSet({
   className,
   isExpandable,
   isClosedByDefault = false,
-}: FieldSetProps) {
+}: PdcFieldSetProps) {
   const [expanded, setExpanded] = React.useState(isClosedByDefault);
   const stateClass = expanded && isExpandable ? style.expandedField : isExpandable && !expanded ? style.collapsedField : "";
   const classes = [style.fieldset, stateClass];
@@ -107,14 +105,14 @@ export function FieldSet({
  *
  * @public
  */
-export function FieldSetReadonly({
+export function PdcFieldSetReadonly({
   border,
   heading,
   children,
   headerChildren,
   headerColor = "default",
   className,
-}: FieldSetProps) {
+}: PdcFieldSetProps) {
   const fieldSetRef = useRef<HTMLFieldSetElement>(null);
 
   useLayoutEffect(() => {
@@ -155,7 +153,7 @@ export function FieldSetReadonly({
 }
 
 // wiso geht das nicht es macht nicht row
-export function FieldSetColumn({
+export function PdcFieldSetColumn({
   children,
   size = "50",
 }: {
