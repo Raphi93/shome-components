@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { CardImage, CardContent, CardsImageSelf, CardExpander } from "./CardChildren"; 
 
+import {CardContent, CardExpander, CardImage, CardsImageSelf, } from './CardChildren';
 
 type ChildrenWithImage = 
     | [ReactElement<typeof CardImage> | ReactElement<typeof CardImage> | ReactElement<typeof CardsImageSelf>, ReactElement<typeof CardContent>, ReactElement<typeof CardExpander>?]
@@ -42,9 +42,8 @@ export interface CardImageContentProps {
 export interface CardIconContentProps {
     icon: IconProp;
     fontSize?: string;
-    iconColor?: 'red' | 'green' | 'blue' | 'orange' | 'yellow' | 'secondary' | 'primary' | 'white' | 'black';
+    iconColor?: 'red' | 'green' | 'blue' | 'orange' | 'yellow' | 'brand' | 'primary' | 'white' | 'black';
     className?: string;
-    width?: string;
 }
 
 export interface CardChildrenProps {

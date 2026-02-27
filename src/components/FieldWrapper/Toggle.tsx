@@ -2,7 +2,7 @@
 import { ChangeEventHandler, ReactNode } from 'react';
 import clx from 'classnames';
 
-import { UseFormRegister } from '../../types/Register/FormRegister';
+import { UseFormRegister } from '../..';
 import { ErrorText } from '../ErrorText/ErrorText';
 
 import { DirtyIconWithBorderLabel, TLabelInputWithDirtyState } from './hooks/useLabelInput';

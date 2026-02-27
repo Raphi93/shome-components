@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { Pagination } from '..';
 
 interface IProps {
   prefix?: string;

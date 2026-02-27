@@ -5,7 +5,7 @@ import { FieldSetCommonFields, FieldWrapper } from './FieldWrapper';
 
 import style from './FieldWrapper.module.scss';
 import React from 'react';
-import { UseFormRegister } from '../../types/Register/FormRegister';
+import { UseFormRegister } from '../..';
 
 export function Checkbox({
   id,

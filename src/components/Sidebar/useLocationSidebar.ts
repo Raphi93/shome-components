@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { NavigationItem } from "../../types/Layout/Layout";
+import { NavigationItem } from "../..";
 
 
 export type Result = {

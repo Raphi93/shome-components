@@ -3,10 +3,10 @@ import clx from 'classnames';
 
 import style from './Toggle.module.scss';
 import React from 'react';
-import { UseFormRegister } from '../../types/Register/FormRegister';
 import { DirtyIconWithBorderLabel, TLabelInputWithDirtyState } from '../FieldWrapper/hooks/useLabelInput';
 import { FieldSetCommonFields, FieldWrapper } from '../FieldWrapper';
 import { ErrorText } from '../ErrorText';
+import { UseFormRegister } from '../..';
 
 
 /**

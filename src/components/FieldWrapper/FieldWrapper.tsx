@@ -12,7 +12,7 @@ import { useDebouncedInput } from './hooks/useDebouncedInput';
 import { TLabelInputWithDirtyState, useLabelInput } from './hooks/useLabelInput';
 
 import style from './FieldWrapper.module.scss';
-import { UseFormRegister } from '../../types';
+import { UseFormRegister } from '../..';
 import { useDateFormat } from '../../hooks/dateFormat';
 
 export type FieldSetCommonFields = {

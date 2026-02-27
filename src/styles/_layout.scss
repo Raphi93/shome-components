@@ -1,0 +1,65 @@
+@use './abstracts' as *;
+
+// App
+#app {
+  position: relative;
+}
+
+// Content
+.content {
+  width: calc(100% - var(--navigation-width));
+  margin-top: var(--module-header-height);
+  padding: var(--content-padding);
+  margin-left: auto;
+  transition: opacity var(--transition-duration-base) ease-in;
+  opacity: 1;
+  position: relative;
+  //z-index: 1;
+
+  & > * {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: var(--content-max-width);
+  }
+
+  &.nav-compact {
+    margin-left: 0;
+    width: 100%;
+    max-width: none;
+    overflow-x: hidden;
+  }
+}
+
+// Desktop and up - from 1200px up
+@include desktopAndUp() {
+  // Content
+  .content {
+    &.js-transition {
+      opacity: 0;
+      transition: opacity var(--transition-duration-base) ease;
+    }
+  }
+}
+
+// Tablet landscape and down - up to 1199px
+@include tabletL() {
+  // Content
+  .content {
+    width: 100%;
+  }
+}
+
+// Phone landscape and down - up to 767px
+@include phoneL() {
+  // Content
+  .content {
+    padding: var(--content-padding-md);
+  }
+}
+
+// Phone portrait and down - up to 575px
+@include phoneP() {
+  .content {
+    padding: var(--content-padding-sm);
+  }
+}

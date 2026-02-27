@@ -1,5 +1,3 @@
-"use client";
-
 import React, { forwardRef } from 'react';
 import type { Placement } from '@floating-ui/react';
 import {
@@ -16,9 +14,8 @@ import {
   useMergeRefs,
   useRole,
 } from '@floating-ui/react';
-import clsx from 'clsx';
 
-import './Tooltip.css';
+import styles from './Tooltip.module.scss';
 
 export interface TooltipOptions {
   /** Is open by default */
@@ -89,76 +86,81 @@ const TooltipContext = React.createContext<ContextType>(null);
 
 export const useTooltipContext = () => {
   const context = React.useContext(TooltipContext);
+
   if (context == null) {
     throw new Error('Tooltip components must be wrapped in <Tooltip />');
   }
+
   return context;
 };
 
-/** Text tip that replaces default HTML title */
-export function Tooltip({
-  children,
-  ...options
-}: { children: React.ReactNode } & TooltipOptions) {
+/**
+ * Text tip that replaces default HTML title
+ */
+export function Tooltip({ children, ...options }: { children: React.ReactNode } & TooltipOptions) {
+  // This can accept any props as options, e.g. `placement`,
+  // or other positioning options.
   const tooltip = useTooltip(options);
   return <TooltipContext.Provider value={tooltip}>{children}</TooltipContext.Provider>;
 }
 
-export const TooltipTrigger = React.forwardRef<
-  HTMLElement,
-  React.HTMLProps<HTMLElement> & { asChild?: boolean }
->(function TooltipTrigger({ children, asChild = false, className, ...props }, propRef) {
-  const context = useTooltipContext();
-  const childrenRef = (children as any)?.ref;
-  const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef]);
-
-  const stateAttr = context.open ? 'open' : 'closed';
-
-  // asChild: wrapped Element bleibt erhalten
-  if (asChild && React.isValidElement(children)) {
-    const childElement = children as React.ReactElement<any>;
-    const mergedClass = clsx((childElement.props as any).className, 'tooltip-trigger', className);
-    return React.cloneElement(childElement, {
-      ...context.getReferenceProps({
-        ...(typeof childElement.props === 'object' ? (childElement.props as object) : {}),
-        ...props,
-        ref,
-        className: mergedClass,
-      }),
-      'data-state': stateAttr,
-    });
-  }
-
-  // Default: wir rendern ein <button>
-  return (
-    <button
-      type="button"
-      ref={ref as any}
-      className={clsx('tooltip-trigger', className)}
-      data-state={stateAttr}
-      {...context.getReferenceProps(props)}
-    >
-      {children}
-    </button>
-  );
-});
-
-export const TooltipContent = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
-  function TooltipContent({ style, className, ...props }, propRef) {
+export const TooltipTrigger = React.forwardRef<HTMLElement, React.HTMLProps<HTMLElement> & { asChild?: boolean }>(
+  function TooltipTrigger({ children, asChild = false, ...props }, propRef) {
     const context = useTooltipContext();
-    const ref = useMergeRefs([context.refs.setFloating, propRef]);
+    const childrenRef = (children as any).ref;
+    const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef]);
 
-    if (!context.open) return null;
+    // `asChild` allows the user to pass any element as the anchor
+    if (asChild && React.isValidElement<React.HTMLProps<HTMLElement>>(children)) {
+      return React.cloneElement(
+        children,
+        {
+          ...context.getReferenceProps({
+            ref,
+            className: styles.trigger,
+            ...props,
+            ...children.props,
+          }),
+          'data-state': context.open ? 'open' : 'closed',
+        } as any
+      );
+    }
 
     return (
-      <FloatingPortal>
-        <div
-          ref={ref}
-          style={{ ...context.floatingStyles, ...style }}
-          className={clsx('tooltip-content', className)}
-          {...context.getFloatingProps(props)}
-        />
-      </FloatingPortal>
+      <button
+        type="button"
+        ref={ref}
+        className={styles.trigger}
+        // The user can style the trigger based on the state
+        data-state={context.open ? 'open' : 'closed'}
+        {...context.getReferenceProps(props)}
+      >
+        {children}
+      </button>
     );
   }
 );
+
+export const TooltipContent = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(function TooltipContent(
+  { style, ...props },
+  propRef
+) {
+  const context = useTooltipContext();
+  const ref = useMergeRefs([context.refs.setFloating, propRef]);
+
+  if (!context.open) return null;
+
+  return (
+    <FloatingPortal>
+      <div
+        ref={ref}
+        style={{
+          ...context.floatingStyles,
+          ...style,
+        }}
+        className={styles.tooltipContent}
+        {...context.getFloatingProps(props)}
+      />
+    </FloatingPortal>
+  );
+});

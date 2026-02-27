@@ -8,7 +8,7 @@ import style from './Pager.module.scss';
 import { ActionButton } from '../Button';
 import { useNumberFormat } from '../../hooks/numberFormat';
 import { PaginationContext } from '../../context/paginationContext';
-import { Pagination } from '../../types';
+import { Pagination } from '../..';
 
 const supportedPageSizes = [5, 10, 25, 50, 100];
 
@@ -86,7 +86,7 @@ export function Pager({
           disabled={isFirstPage}
           small={true}
           secondary={true}
-          icon={Icons.ArrowCarbetBack}
+          icon={Icons.Back}
           onClick={() => onPaginationFinal(pageNumberFinal - 1)}
         />
 
@@ -114,7 +114,7 @@ export function Pager({
           disabled={isLastPage}
           small={true}
           secondary={true}
-          icon={Icons.ArrowCarbetForward}
+          icon={Icons.Forward}
           onClick={() => onPaginationFinal(pageNumberFinal + 1)}
         />
 

@@ -1,0 +1,85 @@
+:root {
+  // B&W
+  --color-white: #fff;
+  --color-black: #212121;
+
+  // Shades of gray
+  --color-gray-100: #fafafa;
+  --color-gray-200: #f7f7f7;
+  --color-gray-250: #f2f2f2;
+  --color-gray-275: #e5e5e5;
+  --color-gray-300: #e0e0e0;
+  --color-gray-400: #bdbdbd;
+  --color-gray-500: #9e9e9e;
+  --color-gray-600: #707070;
+  --color-gray-700: #616161;
+  --color-gray-800: #424242;
+  --color-gray-900: #212121;
+
+  // TODO: needs sorting out
+  --color-primary-base: #0072c6;
+
+  // Primary color
+  --color-primary-darkest: #00467a;
+  --color-primary-deep-dark: #16518a;
+  --color-primary-dark: #2c5b9a;
+  --color-primary-semidark: #0072c6;
+  --color-primary: #008ff9;
+  --color-primary-light: #addcff;
+
+  // Positive
+  --color-positive: #82bc3c;
+  --color-positive-dark: #5a8229;
+  --color-positive-light: #93c853;
+
+  // Negative
+  --color-negative: #d64856;
+  --color-negative-dark: #ab2633;
+  --color-negative-light: #dd6571;
+
+  // Warning
+  --color-warning: #ffc000;
+  --color-warning-dark: #e6ad00;
+  --color-warning-light: #ffd34d;
+
+  // Brand
+  --color-brand: var(--color-primary);
+  --color-press-effect: #b2d4ff;
+  --color-label-active: var(--color-primary-light);
+
+  // Named colors
+  --color-red: #db111d;
+  --color-blue: #0f89dc;
+  --color-green: #00a368;
+  --color-purple: #884dd3;
+  --color-orange: #ffc000;
+  --color-yellow: #ffd966;
+  --color-peach: #feb8a4;
+
+  // Colors abstraction
+  --color-text: var(--color-black);
+  --color-text-light: var(--color-gray-600);
+  --color-text-inverted: var(--color-white);
+
+  --color-disabled: var(--color-gray-300);
+  --color-disabled-dark: var(--color-gray-500);
+
+  //Colors for new  navigation
+
+  // Meninx brand
+  --color-mod-nav-theme: var(--color-primary-darkest);
+  --color-mod-nav-theme-variant-1: var(--color-primary);
+  --color-mod-nav-theme-variant-2: var(--color-primary-dark);
+  --color-mod-nav-theme-contrast: var(--color-white);
+
+  // Grid
+  --color-grid-hover: var(--color-gray-250);
+  --color-grid-selected-hover: var(--color-blue);
+  --color-grid-selected: var(--color-primary-light);
+
+  // Neutral
+  // --color-mod-nav-theme: $color-gray-900;
+  // --color-mod-nav-theme-variant-1: $color-gray-700;
+  // --color-mod-nav-theme-variant-2: $color-gray-800;
+  // --color-mod-nav-theme-contrast: $color-gray-200;
+}

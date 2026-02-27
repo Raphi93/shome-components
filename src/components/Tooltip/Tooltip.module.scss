@@ -1,0 +1,20 @@
+@use '../../Styles/abstracts' as *;
+
+.tooltipContent {
+  background-color: var(--color-gray-800);
+  color: var(--color-white);
+  font-size: var(--font-size-smaller);
+  padding: rem(4px) rem(8px);
+  border-radius: var(--border-radius);
+  box-sizing: border-box;
+  width: max-content;
+  max-width: calc(100vw - var(--spacing));
+  z-index: 110;
+  margin:0;
+}
+
+.trigger:focus-visible {
+  outline: rem(2px) solid var(--button-background-color-hover);
+  outline-offset: rem(2px);
+  border-radius: var(--border-radius);
+}

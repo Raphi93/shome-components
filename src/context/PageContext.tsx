@@ -1,12 +1,7 @@
-"use client";
-
 import React, { createContext, useContext, useState } from "react";
+import { Message } from "..";
 
 export type MessageType = "info" | "success" | "warning" | "error";
-export interface Message {
-  type: MessageType;
-  text: string;
-}
 
 interface PageContextValue {
   pageTitle: string | null;

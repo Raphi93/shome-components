@@ -12,7 +12,7 @@ import { SidebarLogoSectionMobile } from "./SidebarLogoSectionMobile";
 import { useLocationSidebar } from "./useLocationSidebar";
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "../Tooltip/Tooltip";
-import { NavigationItem } from "../../types/Layout/Layout";
+import { NavigationItem } from "../..";
 
 import "./Sidebar.scss";
 

@@ -11,7 +11,7 @@ import { Pager, ShownPaginationInfo, TPaginationInfoVariant } from '../Pager/Pag
 import style from './Grid.module.scss';
 import { useGetColumnFieldsMaxWidth } from './ColumnResizer/ColumnResizer';
 import { ActionReducer, checkedReducer, checkedSingleReducer } from './stateReducer';
-import { Pagination } from '../../types';
+import { Pagination } from '../..';
 
 export const TableEmptyImage = () => {
   return (

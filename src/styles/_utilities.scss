@@ -1,0 +1,403 @@
+@use './abstracts' as *;
+
+// Typography
+
+// Regular text
+.main-heading {
+  @include main-heading($offset: false, $content: !important);
+}
+
+.subheading {
+  @include subheading($offset: false, $content: !important);
+}
+
+.sub-subheading {
+  @include sub-subheading($offset: false, $content: !important);
+}
+
+.smallest-subheading {
+  @include smallest-subheading($offset: false, $content: !important);
+}
+
+.base-text {
+  @include base-text($offset: false, $content: !important);
+}
+
+.large-text {
+  @include large-text($offset: false, $content: !important);
+}
+
+.smaller-text {
+  @include smaller-text($offset: false, $content: !important);
+}
+
+.small-text {
+  @include small-text($offset: false, $content: !important);
+}
+
+// Oversized text
+.oversized-text-01 {
+  @include oversized-text-01($offset: false, $content: !important);
+}
+
+.oversized-text-02 {
+  @include oversized-text-02($offset: false, $content: !important);
+}
+
+.oversized-text-03 {
+  @include oversized-text-03($offset: false, $content: !important);
+}
+
+.oversized-text-04 {
+  @include oversized-text-04($offset: false, $content: !important);
+}
+
+// Colors
+
+// Color primary
+.color-primary {
+  color: var(--color-primary) !important;
+}
+
+.color-primary-semidark {
+  color: var(--color-primary-semidark) !important;
+}
+
+.color-primary-dark {
+  color: var(--color-primary-dark) !important;
+}
+
+.color-primary-darkest {
+  color: var(--color-primary-darkest) !important;
+}
+
+.color-primary-light {
+  color: var(--color-primary-light) !important;
+}
+
+// color positive
+.color-positive {
+  color: var(--color-positive) !important;
+}
+
+.color-positive-dark {
+  color: var(--color-positive-dark) !important;
+}
+
+.color-positive-light {
+  color: var(--color-positive-light) !important;
+}
+
+// color negative
+.color-negative {
+  color: var(--color-negative) !important;
+}
+
+.color-negative-dark {
+  color: var(--color-negative-dark) !important;
+}
+
+.color-negative-light {
+  color: var(--color-negative-light) !important;
+}
+
+// color warning
+.color-warning {
+  color: var(--color-warning) !important;
+}
+
+.color-warning-dark {
+  color: var(--color-warning-dark) !important;
+}
+
+.color-warning-light {
+  color: var(--color-warning-light) !important;
+}
+
+// Named colors
+.color-red {
+  color: var(--color-red) !important;
+}
+
+.color-blue {
+  color: var(--color-blue) !important;
+}
+
+.color-green {
+  color: var(--color-green) !important;
+}
+
+.color-purple {
+  color: var(--color-purple) !important;
+}
+
+.color-orange {
+  color: var(--color-orange) !important;
+}
+
+.color-yellow {
+  color: var(--color-yellow) !important;
+}
+
+// color gray
+.color-gray-100 {
+  color: var(--color-gray-100) !important;
+}
+
+.color-gray-200 {
+  color: var(--color-gray-200) !important;
+}
+
+.color-gray-250 {
+  color: var(--color-gray-250) !important;
+}
+
+.color-gray-275 {
+  color: var(--color-gray-275) !important;
+}
+
+.color-gray-300 {
+  color: var(--color-gray-300) !important;
+}
+
+.color-gray-400 {
+  color: var(--color-gray-400) !important;
+}
+
+.color-gray-500 {
+  color: var(--color-gray-500) !important;
+}
+
+.color-gray-600 {
+  color: var(--color-gray-600) !important;
+}
+
+.color-gray-700 {
+  color: var(--color-gray-700) !important;
+}
+
+.color-gray-800 {
+  color: var(--color-gray-800) !important;
+}
+
+.color-gray-900 {
+  color: var(--color-gray-900) !important;
+}
+
+// Black and white
+.color-white {
+  color: var(--color-white) !important;
+}
+
+.color-black {
+  color: var(--color-black) !important;
+}
+
+//----- Background color -----//
+
+// BG primary
+.bg-primary {
+  background-color: var(--color-primary) !important;
+}
+
+.bg-primary-semidark {
+  background-color: var(--color-primary-semidark) !important;
+}
+
+.bg-primary-dark {
+  background-color: var(--color-primary-dark) !important;
+}
+
+.bg-primary-darkest {
+  background-color: var(--color-primary-darkest) !important;
+}
+
+.bg-primary-light {
+  background-color: var(--color-primary-light) !important;
+}
+
+// BG positive
+.bg-positive {
+  background-color: var(--color-positive) !important;
+}
+
+.bg-positive-dark {
+  background-color: var(--color-positive-dark) !important;
+}
+
+.bg-positive-light {
+  background-color: var(--color-positive-light) !important;
+}
+
+// BG negative
+.bg-negative {
+  background-color: var(--color-negative) !important;
+}
+
+.bg-negative-dark {
+  background-color: var(--color-negative-dark) !important;
+}
+
+.bg-negative-light {
+  background-color: var(--color-negative-light) !important;
+}
+
+// BG warning
+.bg-warning {
+  background-color: var(--color-warning) !important;
+}
+
+.bg-warning-dark {
+  background-color: var(--color-warning-dark) !important;
+}
+
+.bg-warning-light {
+  background-color: var(--color-warning-light) !important;
+}
+
+// Named colors
+.bg-red {
+  background-color: var(--color-red) !important;
+}
+
+.bg-blue {
+  background-color: var(--color-blue) !important;
+}
+
+.bg-green {
+  background-color: var(--color-green) !important;
+}
+
+.bg-purple {
+  background-color: var(--color-purple) !important;
+}
+
+.bg-orange {
+  background-color: var(--color-orange) !important;
+}
+
+.bg-yellow {
+  background-color: var(--color-yellow) !important;
+}
+
+// BG grays
+.bg-gray-100 {
+  background-color: var(--color-gray-100) !important;
+}
+
+.bg-gray-200 {
+  background-color: var(--color-gray-200) !important;
+}
+
+.bg-gray-250 {
+  background-color: var(--color-gray-250) !important;
+}
+
+.bg-gray-275 {
+  background-color: var(--color-gray-275) !important;
+}
+
+.bg-gray-300 {
+  background-color: var(--color-gray-300) !important;
+}
+
+.bg-gray-400 {
+  background-color: var(--color-gray-400) !important;
+}
+
+.bg-gray-500 {
+  background-color: var(--color-gray-500) !important;
+}
+
+.bg-gray-600 {
+  background-color: var(--color-gray-600) !important;
+}
+
+.bg-gray-700 {
+  background-color: var(--color-gray-700) !important;
+}
+
+.bg-gray-800 {
+  background-color: var(--color-gray-800) !important;
+}
+
+.bg-gray-900 {
+  background-color: var(--color-gray-900) !important;
+}
+
+// Black and white
+.bg-white {
+  background-color: var(--color-white) !important;
+}
+
+.bg-black {
+  background-color: var(--color-black) !important;
+}
+
+//----- Box shadow -----//
+
+.shadow-none {
+  box-shadow: none;
+}
+
+.shadow-00 {
+  box-shadow: var(--shadow-00) !important;
+}
+
+.shadow-01 {
+  box-shadow: var(--shadow-01) !important;
+}
+
+.shadow-02 {
+  box-shadow: var(--shadow-02) !important;
+}
+
+.shadow-03 {
+  box-shadow: var(--shadow-03) !important;
+}
+
+//----- Spacing -----//
+
+.ml-auto {
+  margin-left: auto !important;
+}
+
+.mr-auto {
+  margin-right: auto !important;
+}
+
+.mt-auto {
+  margin-top: auto !important;
+}
+
+.mb-auto {
+  margin-bottom: auto !important;
+}
+
+@mixin generate($prefix, $property) {
+  // Spacing to multiply the sizes by
+  $spacing: var(--spacing);
+
+  // Loop through all of the sizes(we use @for rather than @each, as we want access to the index)
+  @for $i from 1 through 12 {
+    // Get the size for the current index
+    $size: $i;
+
+    // Create the rule
+    .#{$prefix}-#{$i} {
+      #{$property}: calc(var(--spacing) * $size) !important;
+    }
+  }
+}
+
+// Margin
+@include generate(mb, margin-bottom);
+@include generate(mt, margin-top);
+@include generate(ml, margin-left);
+@include generate(mr, margin-right);
+
+// Padding
+@include generate(pb, padding-bottom);
+@include generate(pt, padding-top);
+@include generate(pl, padding-left);
+@include generate(pr, padding-right);

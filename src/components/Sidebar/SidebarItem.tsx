@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LabelNameWithTooltip } from "./Sidebar";
 import { SidebarChildItem } from "./SidebarChildItem";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../Tooltip/Tooltip";
-import { NavigationItem } from "../../types/Layout/Layout";
+import { NavigationItem } from "../..";
 
 interface SidebarItemProps {
   item: NavigationItem;

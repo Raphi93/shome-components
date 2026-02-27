@@ -22,7 +22,7 @@ import { hideShowClone, setWidths, syncHorizontalScroll } from './Grid.functions
 import style from './Grid.module.scss';
 import { GridContext } from '../../context/gridContext';
 import { PaginationContext } from '../../context/paginationContext';
-import { Pagination } from '../../types';
+import { Pagination } from '../..';
 
 export function GridHeader({ children }: { children?: ReactNode }) {
   return <div className={[style.header, 'branding-grid-header'].join(' ')}>{children}</div>;
@@ -169,7 +169,7 @@ export function GridHeadColumn({
   /** Sorting by */
   sortedBy?: string;
   /** Executes a sorting function when invoked */
-  onSort?: (sortKey: string) => void;
+  onSort?: (sortKey?: string) => void;
   /** Adds pagination */
   pagination?: Pagination;
   /** Make column sticky, can be one column per table */

@@ -1,0 +1,108 @@
+@use './abstracts' as *;
+
+body {
+  @include base-text;
+
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+// Headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  margin: 0;
+  color: var(--color-text);
+  margin-bottom: calc(var(--spacing) * 2);
+}
+
+h1 {
+  @include main-heading($offset: true);
+  margin-bottom: calc(var(--spacing) * 2);
+}
+
+h2 {
+  @include subheading($offset: true);
+}
+
+h3 {
+  @include sub-subheading($offset: true);
+}
+
+h4,
+h5,
+h6 {
+  @include smallest-subheading($offset: true);
+}
+
+// Basic text
+p {
+  @include base-text($offset: true);
+
+  margin: 0;
+  margin-bottom: calc(var(--spacing) * 2);
+}
+
+// Link
+a {
+  color: var(--color-blue);
+
+  &:hover {
+    color: var(--color-blue);
+    text-decoration: none;
+  }
+}
+
+// Strong
+strong,
+b {
+  font-weight: 700;
+}
+
+// Lists
+ol,
+ul {
+  margin: 0;
+  margin-bottom: calc(var(--spacing) * 2);
+}
+
+// Code
+
+code {
+  line-height: var(--line-height-base);
+  line-height: calc(var(--spacing) * 2.5);
+}
+
+p code {
+  line-height: calc(var(--spacing) * 2.5);
+}
+
+.code {
+  @include small-text;
+
+  line-height: var(--line-height-base);
+
+  padding: calc(var(--spacing) * 2);
+  margin: 0;
+  margin-bottom: calc(var(--spacing) * 2);
+  font-family: var(--font-code);
+  background: var(--color-gray-200);
+  white-space: pre-wrap;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Phone portrait and down - up to 575px
+@include phoneP() {
+  .code {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+}

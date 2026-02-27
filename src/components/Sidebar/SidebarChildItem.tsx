@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { LabelNameWithTooltip } from "./Sidebar";
 import path from "path";
-import { NavigationItem } from "../../types/Layout";
+import { NavigationItem } from "../..";
 
 
 interface Props {

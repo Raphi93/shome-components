@@ -7,16 +7,16 @@
 .cards-expandet{
     max-width: 100rem;
     height: auto;
-    box-shadow: 0px 0px 7px 1px var(--color-box-shadow, rgba(29, 34, 41, 0.1));
-    border-radius: var(--border-radius, 12px);
+    box-shadow: 0px 0px 7px 1px var(--color-box-shadow);
+    border-radius: var(--border-radius);
 }
 
 .cards-link{
     cursor: pointer;
-    border-radius: var(--border-radius, 12px);
+    border-radius: var(--border-radius);
     &:hover{
         transform: scale(1.01);
-        box-shadow: 0px 0px 10px 1px var(--color-box-shadow, rgba(29, 34, 41, 0.1));
+        box-shadow: 0px 0px 10px 1px var(--color-box-shadow);
     }
 }
 
@@ -26,8 +26,9 @@
     width: auto;
     height: auto;
     max-width: 100rem;
-    border-radius: var(--border-radius, 12px);
-    box-shadow: 0px 0px 7px 1px var(--color-box-shadow, rgba(29, 34, 41, 0.1));
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-box-shadow);
+    box-shadow: 0px 0px 7px 1px var(--color-box-shadow);
 }
 
 
@@ -37,8 +38,8 @@
     width: auto;
     height: auto;
     max-width: 100rem;
-    border-radius: var(--border-radius, 12px) var(--border-radius, 12px) 0 0;
-    border: 1px solid var(--color-box-shadow, rgba(29, 34, 41, 0.1));
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    border: 1px solid var(--color-box-shadow);
 }
 
 .image-container{
@@ -80,7 +81,7 @@
 }
 
 .content-container-image{
-    border-left: 1px solid var(--color-box-shadow, rgba(29, 34, 41, 0.1));
+    border-left: 1px solid var(--color-box-shadow);
     width: 100%;
 }
 
@@ -92,9 +93,9 @@
 
 .expander-container {
     width: 100%;
-    border: 1px solid var(--color-box-shadow, rgba(29, 34, 41, 0.1));
+    border: 1px solid var(--color-box-shadow);
     border-top: none;
-    border-radius: 0 0 var(--border-radius, 12px) var(--border-radius, 12px);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
@@ -107,48 +108,49 @@
 }
 
 
-.icon-card{
-    color: var(--color-primary, #393c40);
+
+.iconCard{
+    color: var(--color-mod-nav-theme);
 }
 
-.image-card{
+.imageCard{
     object-fit: fill;
 }
 
-.red-card{
-    color: var(--color-negative, #dc3545);
+.pdc-card-red{
+    color: var(--color-negative);
 }
 
-.green-card{
-    color: var(--color-positive, #198754);
+.pdc-card-green{
+    color: var(--color-positive);
 }
 
-.blue-card{
-    color: var(--color-info, #0d6efd);
+.pdc-card-blue{
+    color: var(--color-blue);
 }
 
-.orange-card{
-    color: var(--color-warning, #ffc107);
+.pdc-card-orange{
+    color: var(--color-warning);
 }
 
-.yellow-card{
-    color: var(--color-yellow, #f59e0b);
+.pdc-card-yellow{
+    color: var(--color-yellow);
 }
 
-.secondary-card{
-    color: var(--color-secondary, #0f766e);
+.pdc-card-brand{
+    color: var(--color-brand);
 }
 
-.primary-card{
-    color: var(--color-primary, #393c40);
+.pdc-card-primary{
+    color: var(--color-primary-dark);
 }
 
-.black-card{
-    color: var(--color-black, #000000);
+.pdc-card-black{
+    color: var(--color-black);
 }
 
-.white-card{
-    color: var(--color-white, #ffffff);
+.pdc-card-white{
+    color: var(--color-white);
 }
 
 .expandet-icon {
@@ -160,7 +162,6 @@
     cursor: pointer;
     padding: 0;
     transition: transform 0.3s ease-in-out;
-    background-color: transparent;
 }
 
 .expandet-icon.animate-icon {
@@ -170,3 +171,6 @@
 .expandet-icon.animate-icon-back {
     transform: rotate(180deg);
 }
+
+
+

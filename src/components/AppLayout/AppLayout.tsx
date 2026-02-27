@@ -7,9 +7,10 @@ import { Header } from "../Header/Header";
 import { Main } from "../Main/Main";
 import { Sidebar } from "../Sidebar/Sidebar";
 import { useLocationSidebar } from "../Sidebar/useLocationSidebar";
-import { NavigationItem } from "../../types/Layout/Layout";
+import { NavigationItem } from "../..";
 
 import "./AppLayouts.scss";
+
 
 export interface AppPageWrapperProps {
   children: ReactNode;

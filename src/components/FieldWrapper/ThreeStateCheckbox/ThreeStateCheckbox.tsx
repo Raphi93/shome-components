@@ -6,7 +6,7 @@ import { FieldWrapper } from '../FieldWrapper';
 
 import style from '../FieldWrapper.module.scss';
 import React from 'react';
-import { UseFormRegister } from '../../../types/Register';
+import { UseFormRegister } from '../../..';
 
 export type ThreeStateCheckboxProps = {
   onChange?: (checked: CheckedState) => void;
