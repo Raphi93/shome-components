@@ -1,12 +1,14 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+"use client";
 
-import { NavigationItem, usePageContext } from '../..';
+import React, { useMemo } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import style from './Breadcrumbs.module.scss';
+import { NavigationItem, usePageContext } from "../..";
+import style from "./Breadcrumbs.module.scss";
 
 export type BreadCrumb = {
-  link: string;
+  link?: string;   // optional, wie vorher
   name: string;
 };
 
@@ -17,7 +19,7 @@ export function Breadcrumbs({ crumbs }: { crumbs: BreadCrumb[] }) {
         return (
           <span key={index}>
             {crumb.link ? (
-              <Link to={crumb.link}>{crumb.name}</Link>
+              <Link href={crumb.link}>{crumb.name}</Link>
             ) : (
               <span className={style.currentItem}>{crumb.name}</span>
             )}
@@ -33,46 +35,50 @@ export function useAutomaticBreadcrumbs(
   currentPageName?: string,
   rootPageName?: string
 ): BreadCrumb[] {
-  const location = useLocation();
+  const pathname = usePathname();
   const { pageTitle } = usePageContext();
   currentPageName ??= pageTitle ?? undefined;
 
-  let link = '';
+  const crumbs = useMemo(() => {
+    let link = "";
 
-  let crumbs = location.pathname
-    .split('/')
-    .filter((crumb) => crumb)
-    .map((crumb) => {
-      link += `/${crumb}`;
-      if (location.pathname === link) {
-        return { name: currentPageName };
+    const parts = (pathname || "/")
+      .split("/")
+      .filter((crumb) => crumb);
+
+    const list: (BreadCrumb | undefined)[] = parts.map((part) => {
+      link += `/${part}`;
+
+      if ((pathname || "/") === link) {
+        return { name: currentPageName ?? "" };
       }
+
       const name = findNavigationItemName(link, navigationItems);
       return name ? { link, name } : undefined;
-    })
-    .filter((crumb) => crumb);
+    });
 
-  if (rootPageName) {
-    crumbs.unshift({ link: '/', name: rootPageName });
-  }
+    const filtered = list.filter(Boolean) as BreadCrumb[];
 
-  return crumbs as BreadCrumb[];
+    if (rootPageName) {
+      filtered.unshift({ link: "/", name: rootPageName });
+    }
+
+    return filtered;
+  }, [pathname, navigationItems, currentPageName, rootPageName]);
+
+  return crumbs;
 }
 
 export function findNavigationItemName(link: string, navigationItems?: NavigationItem[]): string | undefined {
-  if (!link || !navigationItems) {
-    return undefined;
-  }
+  if (!link || !navigationItems) return undefined;
+
   const found = navigationItems.find((a) => a.link === link);
-  if (found) {
-    return found.name;
-  } else {
-    for (const item of navigationItems) {
-      const foundName = findNavigationItemName(link, item.children);
-      if (foundName) {
-        return foundName;
-      }
-    }
-    return undefined;
+  if (found) return found.name;
+
+  for (const item of navigationItems) {
+    const foundName = findNavigationItemName(link, item.children);
+    if (foundName) return foundName;
   }
+
+  return undefined;
 }

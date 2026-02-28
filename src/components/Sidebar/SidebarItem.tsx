@@ -114,7 +114,7 @@ const isSubChildSelected = isSelected && !!pathClicks[2];
 
   const iconElement =
     item.isFontAwesome && (item.icon as IconProp) ? (
-      <FontAwesomeIcon icon={item.icon as IconProp} className="menu-icon" onClick={() => toggleParent()} />
+      <FontAwesomeIcon icon={item.icon as IconProp} className="menu-icon-image" onClick={() => toggleParent()} />
     ) : (
       <img src={iconImage ?? ""} alt={itemName} className="menu-icon-image" onClick={() => toggleParent()} />
     );

@@ -1,6 +1,8 @@
 import { ChangeEvent } from 'react';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 import './Styles/index.scss';
+
 
 export * from './Components';
 export * from './context';
@@ -13,7 +15,7 @@ export type NavigationItem = {
   preExpanded?: boolean;
   isExternalLink?: boolean;
   localize?: boolean;
-  icon?: string;
+  icon?: string | IconProp;
   isFontAwesome?: boolean;
   svg?: string;
   tooltip?: string;

@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { NavigationItem } from "../..";
-
 
 export type Result = {
   parentClick: string;
@@ -30,8 +29,13 @@ const linkNorm = (link?: string) => {
 
 function splitLink(full: string) {
   const qIndex = full.indexOf("?");
-  if (qIndex === -1) return { path: normalizePath(full), search: "" };
-  return { path: normalizePath(full.slice(0, qIndex)), search: full.slice(qIndex) };
+  if (qIndex === -1) {
+    return { path: normalizePath(full), search: "" };
+  }
+  return {
+    path: normalizePath(full.slice(0, qIndex)),
+    search: full.slice(qIndex), // enthält das führende "?"
+  };
 }
 
 function queryContainsAll(actualSearch: string, requiredSearch: string): boolean {
@@ -42,7 +46,6 @@ function queryContainsAll(actualSearch: string, requiredSearch: string): boolean
 
   for (const [k, v] of required.entries()) {
     if (!actual.has(k)) return false;
-
     const actualValues = actual.getAll(k);
     if (!actualValues.includes(v)) return false;
   }
@@ -68,8 +71,7 @@ function matchScore(
   const queryOk = queryContainsAll(locationSearch, linkSearch);
   if (!queryOk) return { ok: false, score: 0, linkLen: linkPath.length };
 
-  // scoring: query-links win against plain path links (so /xproduction?Category=... beats /xproduction)
-  const score = (linkPath.length * 10) + (linkSearch ? 100000 : 0) + (linkSearch.length || 0);
+  const score = linkPath.length * 10 + (linkSearch ? 100000 : 0) + (linkSearch.length || 0);
   const linkLen = linkPath.length + (linkSearch?.length ?? 0);
 
   return { ok: true, score, linkLen };
@@ -118,7 +120,13 @@ function findBest(menu: NavigationItem[], path: string, search: string): Best | 
 export function useLocationSidebar(menu: NavigationItem[] | null): Result {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-const [parentClick, setParentClick] = useState("");
+
+  const search = useMemo(() => {
+    const s = searchParams?.toString() ?? "";
+    return s ? `?${s}` : "";
+  }, [searchParams]);
+
+  const [parentClick, setParentClick] = useState("");
   const [childClick, setChildClick] = useState("");
   const [leafClick, setLeafClick] = useState("");
   const [pathClicks, setPathClicks] = useState<string[]>([]);
@@ -126,13 +134,9 @@ const [parentClick, setParentClick] = useState("");
   useEffect(() => {
     if (!menu?.length) return;
 
-    const path = pathname;
-    const search = (searchParams ? `?${searchParams.toString()}` : "");
-
+    const path = pathname || "/";
     let best = findBest(menu, path, search);
 
-    // fallback: wenn du auf /vouchers/myvoucher bist und kein Menu-Link exakt das hat,
-    // dann trimmen wir auf den längsten bekannten prefix (z.B. /vouchers) und suchen nochmal.
     if (best === null) {
       const trimmedPath = trimDynamicSubPath(menu, path);
       best = findBest(menu, trimmedPath, search);
@@ -150,7 +154,7 @@ const [parentClick, setParentClick] = useState("");
     setParentClick(best.names[0] ?? "");
     setChildClick(best.names[1] ?? "");
     setLeafClick(best.names[best.names.length - 1] ?? "");
-  }, [pathname, (searchParams ? `?${searchParams.toString()}` : ""), menu]);
+  }, [pathname, search, menu]);
 
   return { parentClick, childClick, leafClick, pathClicks };
 }
