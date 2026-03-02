@@ -74,7 +74,7 @@ export const BaseDatePicker = ({
 
     const inputValue = stringDate || '';
     const isValidFormat = dateAllowedFormatRegex.test(inputValue);
-    const dateStringResult = isValidFormat ? stringDate : null;
+    const dateStringResult = isValidFormat ? stringDate : "";
     setDateResult(dateStringResult);
     onChange?.(dateStringResult);
   };

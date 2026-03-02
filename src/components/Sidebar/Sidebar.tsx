@@ -15,6 +15,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../Tooltip/Tooltip";
 import { NavigationItem } from "../..";
 
 import "./Sidebar.scss";
+import { SidebarSpecialMenuChange } from "./SidebarSpecialMenuChange";
 
 interface SidebarProps {
   className?: string;
@@ -158,9 +159,6 @@ export function Sidebar({
   useLocationSidebarSelf = undefined,
   brandName,
 }: SidebarProps) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const location = { pathname, search: searchParams ? `?${searchParams.toString()}` : "" };
   const { t } = useTranslation();
   useMemo(() => normalize(`${location.pathname}${location.search}`), [location.pathname, location.search]);
 
@@ -178,7 +176,7 @@ export function Sidebar({
   const hook = useLocationSidebarSelf === undefined ? defaultHook : useLocationSidebarSelf;
 
   const parentRef = React.useRef<HTMLDivElement>(null);
-  const childrenRef = React.useRef<HTMLUListElement>(null);
+  const childrenRef = React.useRef<HTMLUListElement | null>(null);
   const navRef = React.useRef<HTMLElement>(null);
   const footerRef = React.useRef<HTMLDivElement>(null);
 
@@ -276,11 +274,25 @@ export function Sidebar({
                   handleChildClick={handleChildClick}
                   handleGenerateImage={handleGenerateImage}
                   isMobile={isMobile}
+                  childrenRef={childrenRef as React.RefObject<HTMLUListElement>}
                   t={t}
                 />
               ))}
             </ul>
           </div>
+
+          {hasSpecialMenu && (
+            <div className="submenu-desktop-footer" ref={footerRef}>
+              <SidebarSpecialMenuChange
+                handleSpecialMenuClick={handleSpecialMenuClick}
+                menuTypes={menuTypes}
+                isMenuId={isMenuId}
+                handleGenerateImage={handleGenerateImage}
+                expanded={expanded}
+                isSubChild={false}
+              />
+            </div>
+          )}
         </nav>
       </div>
     </aside>
@@ -320,6 +332,7 @@ export function Sidebar({
                     handleChildClick={handleChildClick}
                     handleGenerateImage={handleGenerateImage}
                     isMobile={isMobile}
+                    childrenRef={childrenRef as React.RefObject<HTMLUListElement>}
                     t={t}
                   />
                 ))}
@@ -328,6 +341,19 @@ export function Sidebar({
           </nav>
         )}
       </div>
+
+      {expanded && hasSpecialMenu && (
+        <div className="submenu-desktop-footer">
+          <SidebarSpecialMenuChange
+            handleSpecialMenuClick={handleSpecialMenuClick}
+            menuTypes={menuTypes}
+            isMenuId={isMenuId}
+            handleGenerateImage={handleGenerateImage}
+            expanded={expanded}
+            isSubChild={false}
+          />
+        </div>
+      )}
     </div>
   );
 

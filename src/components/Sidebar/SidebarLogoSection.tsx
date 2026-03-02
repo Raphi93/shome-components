@@ -1,6 +1,9 @@
 import React from "react";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import "./Sidebar.scss";
+
 interface SidebarLogoSectionProps {
   expanded: boolean;
   expandedImage: boolean;
@@ -58,7 +61,7 @@ export function SidebarLogoSection({
       <img
         src={expandedImage && !isSubChild ? imageLong : image}
         alt={brandName || "Logo"}
-        className={`${expanded && !isSubChild ? "logo-long-sidebar-image" : "logo-sidebar-image"} ${brandName?.replace("_", "-").toLowerCase() || ""}`}
+        className={`${expanded && !isSubChild ? "logo-long-new-sidebar-image" : "logo-new-sidebar-image"} ${brandName?.replace("_", "-").toLowerCase() || ""}`}
         onClick={handleImageClick}
         onError={(e) => {
           const newImage = image ?? "";

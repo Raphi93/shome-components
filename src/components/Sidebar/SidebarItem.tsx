@@ -1,16 +1,16 @@
-"use client";
-
 import React, { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { Tooltip, TooltipContent, TooltipTrigger } from "..";
 
-import { LabelNameWithTooltip } from "./Sidebar";
 import { SidebarChildItem } from "./SidebarChildItem";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../Tooltip/Tooltip";
+
+import "./Sidebar.scss";
 import { NavigationItem } from "../..";
+import { LabelNameWithTooltip } from ".";
 
 interface SidebarItemProps {
   item: NavigationItem;
@@ -25,6 +25,7 @@ interface SidebarItemProps {
   handleChildClick: (child: NavigationItem) => void;
   handleGenerateImage?: (svg: string) => string | null;
   isMobile?: boolean;
+  childrenRef: React.RefObject<HTMLUListElement>;
   t: (key: string) => string;
 }
 
@@ -40,6 +41,7 @@ export function SidebarItem({
   handleParentClickNotExpanded,
   handleChildClick,
   handleGenerateImage,
+  childrenRef,
   t,
 }: SidebarItemProps) {
   const item = useMemo(
@@ -66,12 +68,12 @@ export function SidebarItem({
   const isSubmenuOpen = parentExpander && isSelected;
   const hasChildren = !!item.children?.length;
 
-const isChildSelected = isSelected && !!pathClicks[1];
-const isSubChildSelected = isSelected && !!pathClicks[2];
+  const isChildSelected = isSelected && !!pathClicks[1];
+  const isSubChildSelected = isSelected && !!pathClicks[2];
 
-  const cssSelected = `${isSelected && !isChildSelected && !isSubChildSelected ? " selected" : 
-  isSelected && isChildSelected && !isSubChildSelected ? " selectedChild" : 
-  isSelected && isChildSelected && isSubChildSelected ? " selectedSubChild" : ""}`;
+  const cssSelected = `${isSelected && !isChildSelected && !isSubChildSelected ? " selected" :
+    isSelected && isChildSelected && !isSubChildSelected ? " selectedChild" :
+      isSelected && isChildSelected && isSubChildSelected ? " selectedSubChild" : ""}`;
 
   const className = `menu-items${expanded ? " expanded" : ""}${cssSelected}`;
 
@@ -114,7 +116,7 @@ const isSubChildSelected = isSelected && !!pathClicks[2];
 
   const iconElement =
     item.isFontAwesome && (item.icon as IconProp) ? (
-      <FontAwesomeIcon icon={item.icon as IconProp} className="menu-icon-image" onClick={() => toggleParent()} />
+      <FontAwesomeIcon icon={item.icon as IconProp} className="menu-icon" onClick={() => toggleParent()} />
     ) : (
       <img src={iconImage ?? ""} alt={itemName} className="menu-icon-image" onClick={() => toggleParent()} />
     );
@@ -140,14 +142,14 @@ const isSubChildSelected = isSelected && !!pathClicks[2];
               {item.icon && item.icon !== "" && wrappedIcon}
             </a>
           ) : (
-            <Link href={item.link} onClick={(e) => {
+            <Link to={item.link} onClick={(e) => {
               toggleParent();
             }}>
               {item.icon && item.icon !== "" && wrappedIcon}
             </Link>
           )
         ) : (
-      
+
           item.icon && item.icon !== "" && wrappedIcon
         )}
 
@@ -164,7 +166,7 @@ const isSubChildSelected = isSelected && !!pathClicks[2];
                   <LabelNameWithTooltip itemName={itemName} rights={item.svg} t={t} />
                 </a>
               ) : (
-                <Link href={item.link} className="menu-link">
+                <Link to={item.link} className="menu-link">
                   <LabelNameWithTooltip itemName={itemName} rights={item.svg} t={t} />
                 </Link>
               )
@@ -195,8 +197,8 @@ const isSubChildSelected = isSelected && !!pathClicks[2];
       </div>
 
       {hasChildren && expanderDelayedChild && (
-        <ul className={`submenu${isSubmenuOpen ? " selected" : ""}`} aria-hidden={!isSubmenuOpen}>
-          {item.children.map((child: NavigationItem) => {
+        <ul className={`submenu${isSubmenuOpen ? " selected" : ""}`} aria-hidden={!isSubmenuOpen} ref={childrenRef}>
+          {item.children.map((child) => {
             const childIsOpen = openChildName === child.name;
 
             return (
