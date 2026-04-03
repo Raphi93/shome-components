@@ -115,8 +115,8 @@
   cursor: pointer;
 }
 
-.dateDirtyIcon {
-  right: 30px !important;
+.dateDirtyIcon.dateDirtyIcon {
+  right: 30px;
   color: var(--input-color);
 }
 

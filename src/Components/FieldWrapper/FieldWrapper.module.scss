@@ -373,12 +373,13 @@
   right: 28px;
 }
 
-.paddingForIcon {
-  padding-right: 37px !important;
+// Double-class selector (0,2,0) beats any single-class padding rule
+.paddingForIcon.paddingForIcon {
+  padding-right: 37px;
 }
 
-.paddingForTwoIcons {
-  padding-right: 55px !important;
+.paddingForTwoIcons.paddingForTwoIcons {
+  padding-right: 55px;
 }
 
 /* =============================================================================
@@ -409,7 +410,7 @@
       flex-wrap: wrap;
 
       .field-label {
-        width: 100% !important;
+        width: 100%;
 
         label {
           &::after {
@@ -448,6 +449,7 @@
    Datepicker overlay
    ============================================================================= */
 
-:global(.react-datepicker-popper) {
-  z-index: 4 !important;
+// body prefix (0,1,1) beats react-datepicker's own .react-datepicker-popper (0,1,0)
+body :global(.react-datepicker-popper) {
+  z-index: 4;
 }
