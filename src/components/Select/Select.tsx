@@ -1,13 +1,18 @@
-"use client";
-
 import React, { FC, JSX, useMemo, useState } from 'react';
-import ReactSelect, { FormatOptionLabelMeta, MultiValue, SingleValue, Theme } from 'react-select';
+import ReactSelect, {
+  FormatOptionLabelMeta,
+  MenuPlacement,
+  MenuPosition,
+  MultiValue,
+  SingleValue,
+  Theme,
+} from 'react-select';
 import CreatableReactSelect from 'react-select/creatable';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clx from 'classnames';
 
-import ErrorText from '../ErrorText/ErrorText';
+import { ErrorText } from '../ErrorText/ErrorText';
 import { BorderInputLabel, DirtyIconWithBorderLabel } from '../FieldWrapper/hooks/useLabelInput';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../Tooltip/Tooltip';
 
@@ -19,7 +24,7 @@ import s from './Select.module.scss';
 
 type IconLabel = {
   icon: IconProp;
-  title?: string; // optional tooltip/text
+  title?: string;
 };
 
 type TSelectOption = {
@@ -50,6 +55,8 @@ type TSelectBaseProps = {
   onClearDirty?: (arg: any) => void;
   dirtyText?: string;
   menuPortalTarget?: HTMLElement | null;
+  menuPlacement?: MenuPlacement;
+  menuPosition?: MenuPosition;
 };
 
 export type MultiSelectProps = TSelectBaseProps & {
@@ -92,15 +99,14 @@ const renderSelectLabel = (label: TSelectOption['label']) => {
   );
 };
 
-
 const createOption = (label: string): TSelectOption => ({
   value: label.toLowerCase().replace(/\W/g, ''),
   label,
 });
 
-export type { IconLabel, TSelectOption, TSelectProps, MultiValue, SingleValue };
+export type { IconLabel, MultiValue, SingleValue, TSelectOption, TSelectProps };
 
-export const PdcSelect: FC<TSelectProps> = ({
+export const Select: FC<TSelectProps> = ({
   options,
   selectedOptions,
   setSelectedOptions,
@@ -126,17 +132,18 @@ export const PdcSelect: FC<TSelectProps> = ({
   dirtyText,
   isDirty,
   value,
-  menuPortalTarget = document.body,
+  menuPortalTarget = typeof document !== 'undefined' ? document.body : null,
+  menuPlacement = 'auto',
+  menuPosition = 'fixed',
 }): JSX.Element => {
   const [newOptions, setNewOptions] = useState(options);
-
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+  const handleFocus = () => {
     setIsFocused(true);
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+  const handleBlur = () => {
     setIsFocused(false);
   };
 
@@ -182,7 +189,7 @@ export const PdcSelect: FC<TSelectProps> = ({
             label={label}
             isRequired={isRequired}
             className={clx(style.borderLabel, { [style.disabledBorderLabel]: isDisabled })}
-            styles={isActiveLabel ? getMultiselectBorderLabelStyles() : {}}
+            styles={isActiveLabel ? getMultiselectBorderLabelStyles(isFocused, colorActive) : {}}
           />
 
           {isDirty && (
@@ -201,14 +208,13 @@ export const PdcSelect: FC<TSelectProps> = ({
   );
 
   const formatOptionLabel = (option: TSelectOption, meta: FormatOptionLabelMeta<TSelectOption>) => {
-    // keep it simple: always render label via helper
-    // meta can be used later if you want different rendering for menu vs value
     return renderSelectLabel(option.label);
   };
 
   if (isCreatable) {
     const handleCreate = (inputValue: string) => {
       const newOption = createOption(inputValue);
+
       if (isMulti) {
         if (selectedOptions) {
           if (Array.isArray(selectedOptions)) {
@@ -248,6 +254,7 @@ export const PdcSelect: FC<TSelectProps> = ({
             closeMenuOnSelect={closeMenuOnSelect}
             hideSelectedOptions={hideSelectedOptions}
             isClearable={isClearable}
+            isSearchable={isSearchable}
             maxMenuHeight={maxMenuHeight}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -256,6 +263,8 @@ export const PdcSelect: FC<TSelectProps> = ({
               DropdownIndicator: CustomDropdownIndicator,
             }}
             menuPortalTarget={menuPortalTarget}
+            menuPlacement={menuPlacement}
+            menuPosition={menuPosition}
           />
         </div>
 
@@ -272,6 +281,7 @@ export const PdcSelect: FC<TSelectProps> = ({
         style={{ width: selectWidth ? `${selectWidth}px` : '100%' }}
       >
         {labelElement}
+
         <ReactSelect
           theme={(theme: Theme) => getMultiSelectTheme(theme, colorActive, color, pressColor)}
           styles={getMultiSelectStyles(color, colorActive)}
@@ -293,8 +303,11 @@ export const PdcSelect: FC<TSelectProps> = ({
             DropdownIndicator: CustomDropdownIndicator,
           }}
           menuPortalTarget={menuPortalTarget}
+          menuPlacement={menuPlacement}
+          menuPosition={menuPosition}
         />
       </div>
+
       <ErrorText errorMessage={errorText} />
       {description && <p className={s.description}>{description}</p>}
     </>

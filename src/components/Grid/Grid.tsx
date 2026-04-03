@@ -4,7 +4,6 @@ import clx from 'classnames';
 
 import { GridColumnContext, GridContext } from '../../context/gridContext';
 import { PaginationContext } from '../../context/paginationContext';
-import { ActionButton, ButtonAttributes, ButtonContainer } from '../Button';
 import { Pager, ShownPaginationInfo, TPaginationInfoVariant } from '../Pager/Pager';
 
 
@@ -281,26 +280,6 @@ export function EmptyGrid(params: Parameters<typeof Grid>[0]) {
         </tr>
       </GridBody>
     </Grid>
-  );
-}
-
-export function GridButton(attrs: ButtonAttributes) {
-  return <ActionButton {...attrs} className={style['grid-button']} small={true} />;
-}
-
-export function GridButtonContainer({
-  children,
-  alignRight = true,
-  className,
-}: {
-  children?: ReactNode;
-  alignRight?: boolean;
-  className?: string;
-}) {
-  return (
-    <ButtonContainer className={clx(style['grid-button-container'], className)} alignRight={alignRight}>
-      {children}
-    </ButtonContainer>
   );
 }
 

@@ -11,7 +11,6 @@ export * from './FieldSet';
 export * from './FieldWrapper';
 export * from './Grid';
 export * from './HideElement';
-export * from './Icon';
 export * from './MessageBox';
 export * from './MultiDatePickers';
 export * from './Pager';

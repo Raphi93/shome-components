@@ -2,13 +2,13 @@ import { ReactNode, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import clx from 'classnames';
 
-import { Icons } from '../Icon/Icon';
 
 import style from './Pager.module.scss';
-import { ActionButton } from '../Button';
 import { useNumberFormat } from '../../hooks/numberFormat';
 import { PaginationContext } from '../../context/paginationContext';
-import { Pagination } from '../..';
+import { Button, Pagination } from '../..';
+import { faBackwardFast, faPlay, faForwardFast } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const supportedPageSizes = [5, 10, 25, 50, 100];
 
@@ -71,24 +71,33 @@ export function Pager({
   return (
     <div className={clx(style.pagination, { [style.connected]: isConnected }, className)}>
       <div className={style.buttons}>
-        <ActionButton
-          className={style.first}
-          title={t('First page')}
+         <Button
+          title={t("First page")}
+          className={style["first-page-button"]}
           disabled={isFirstPage}
-          small={true}
-          secondary={true}
-          icon={Icons.SkipBackward}
+          small
+          width="2rem"
+          color="light"
+          border
+          isLightColor={true}
           onClick={() => onPaginationFinal(1)}
-        />
-        <ActionButton
-          className={style.prev}
-          title={t('Previous page')}
+        >
+          <FontAwesomeIcon icon={faBackwardFast} style={{ fontSize: '0.8rem' }} />
+        </Button>
+
+        <Button
+          title={t("Previous page")}
+          className={style["previous-page-button"]}
           disabled={isFirstPage}
-          small={true}
-          secondary={true}
-          icon={Icons.Back}
+          small
+          width="2rem"
+          color='light'
+          border
+          isLightColor={true}
           onClick={() => onPaginationFinal(pageNumberFinal - 1)}
-        />
+        >
+          <FontAwesomeIcon icon={faPlay} transform="flip-h" style={{ fontSize: '0.8rem' }} />
+        </Button>
 
         {listPages(pageNumberFinal, pageCount, maximumButtonCount).map((a, i) =>
           a === -1 ? (
@@ -96,37 +105,48 @@ export function Pager({
               …
             </span>
           ) : (
-            <ActionButton
+            <Button
               key={i}
-              className={a === pageNumberFinal ? style.current : ''}
               disabled={a === pageNumberFinal}
-              small={true}
-              secondary={a !== pageNumberFinal}
+              className={style["page-number-button"]}
+              small
+              border
+              style={{ minWidth: '2rem' }}
+              color={a === pageNumberFinal ? 'primary' : 'light'}
               onClick={() => onPaginationFinal(a)}
+              isLightColor={a !== pageNumberFinal}
               text={a.toString()}
             />
           )
         )}
 
-        <ActionButton
-          className={style.next}
-          title={t('Next page')}
+        <Button
+          title={t("Next page")}
+          className={style["next-page-button"]}
           disabled={isLastPage}
-          small={true}
-          secondary={true}
-          icon={Icons.Forward}
+          small
+          width="2rem"
+          color="light"
+          border
           onClick={() => onPaginationFinal(pageNumberFinal + 1)}
-        />
+          isLightColor={true}
+        >
+          <FontAwesomeIcon icon={faPlay} style={{ fontSize: '0.8rem' }} />
+        </Button>
 
-        <ActionButton
-          className={style.last}
-          title={t('Last page')}
+        <Button
+          title={t("Last page")}
           disabled={isLastPage}
-          small={true}
-          secondary={true}
-          icon={Icons.SkipForward}
+          className={style["last-page-button"]}
+          small
+          width="2rem"
+          color="light"
+          border
+          isLightColor={true}
           onClick={() => onPaginationFinal(pageCount)}
-        />
+        >
+          <FontAwesomeIcon icon={faForwardFast} style={{ fontSize: '0.8rem' }} />
+        </Button>
       </div>
 
       {onPageSizeChange ? (

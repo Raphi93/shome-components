@@ -357,7 +357,8 @@
 .dirtyInputIcon {
   position: absolute;
   z-index: 1;
-  top: rem(8px);
+  top: 50%;
+  transform: translateY(-50%);
   right: rem(8px);
   width: 26px;
   height: 26px;

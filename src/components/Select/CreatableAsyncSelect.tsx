@@ -1,11 +1,9 @@
-"use client";
-
 import React, { MutableRefObject, useState } from 'react';
 import { Theme } from 'react-select';
 import AsyncCreatableSelect, { AsyncCreatableProps } from 'react-select/async-creatable';
 import clx from 'classnames';
 
-import ErrorText from '../ErrorText/ErrorText';
+import { ErrorText } from '../ErrorText/ErrorText';
 import { BorderInputLabel } from '../FieldWrapper/hooks/useLabelInput';
 
 import { CustomDropdownIndicator } from './CustomDropdownIndicator';
@@ -71,7 +69,7 @@ export const CreatableAsyncSelect = ({
             isRequired={isRequired}
             id={id}
             className={clx(style.borderLabel, { [style.disabledBorderLabel]: rest.isDisabled })}
-            styles={isFocused || rest.value ? getMultiselectBorderLabelStyles() : {}}
+            styles={isFocused || rest.value ? getMultiselectBorderLabelStyles(isFocused, colorActive) : {}}
           />
         )}
 

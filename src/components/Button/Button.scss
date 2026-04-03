@@ -1,0 +1,259 @@
+/* ---------- Tokens / Defaults ---------- */
+.action-button {
+  --pdc-btn-height: 2.5rem;
+  --pdc-btn-font-size: 1rem;
+  --pdc-btn-px: 1rem;
+  --pdc-btn-gap: 0.35rem;
+  --pdc-btn-radius: var(--border-radius, 12px);
+}
+
+/* ---------- Helpers ---------- */
+@mixin btn-variant($bg, $fg, $bg-hover, $fg-hover, $border-color: null) {
+  background-color: $bg;
+  color: $fg;
+  cursor: pointer;
+
+   &.border {
+    @if $border-color != null {
+      border: 1px solid $border-color;
+    } @else {
+      border: 1px solid $bg;
+    }
+  }
+
+  &.selected {
+    background-color: $bg-hover;
+    color: $fg-hover;
+  }
+
+  &:hover:not(:disabled):not([aria-disabled='true']) {
+    background-color: $bg-hover;
+    color: $fg-hover;
+  }
+
+  &:disabled,
+  &[aria-disabled='true'] {
+    background-color: var(--color-gray-300, #a9b3c0);
+    color: var(--color-white, #ffffff);
+    cursor: not-allowed;
+  }
+}
+
+/* ---------- Base ---------- */
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pdc-btn-gap);
+
+  height: var(--pdc-btn-height);
+  padding: 0 var(--pdc-btn-px);
+  font-size: var(--pdc-btn-font-size);
+  border-radius: var(--pdc-btn-radius);
+
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+
+  &:hover,
+  &:focus,
+  &:focus-visible,
+  &:active {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &.small {
+    --pdc-btn-height: 2rem;
+    --pdc-btn-px: 0.5rem;
+  }
+}
+
+.no-padding,
+.no-padding:focus,
+.no-padding:focus-visible,
+.no-padding:active {
+  outline: none;
+  box-shadow: none;
+  padding-block-end: 0;
+  padding-block-start: 0;
+  padding-inline-end: 0;
+  padding-inline-start: 0;
+}
+
+a.action-button {
+  text-decoration: none;
+}
+
+/* ---------- Content ---------- */
+.icon-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-two {
+  position: relative;
+  top: -0.625rem;
+  right: 0.3125rem;
+  z-index: 1;
+  margin-right: -0.3125rem;
+  font-size: 0.7rem;
+}
+
+.button-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* ---------- Solid Color Variants ---------- */
+.pdc-button-primary {
+  @include btn-variant(var(--button-background-color, #393c40),
+    var(--button-color, #ffffff),
+    var(--button-background-color-hover, #303234),
+    var(--button-color-hover, #ffffff));
+}
+
+.pdc-button-secondary {
+  @include btn-variant(var(--button-background-color-secondary, #0f766e),
+    var(--button-color-secondary, #ffffff),
+    var(--button-background-color-hover-secondary, #0a544e),
+    var(--button-color-hover-secondary, #ffffff));
+}
+
+.pdc-button-success {
+  @include btn-variant(var(--button-background-color-success, #198754),
+    var(--button-color-success, #ffffff),
+    var(--button-background-color-hover-success, #166e3a),
+    var(--button-color-hover-success, #ffffff));
+}
+
+.pdc-button-danger {
+  @include btn-variant(var(--button-background-color-danger, #dc3545),
+    var(--button-color-danger, #ffffff),
+    var(--button-background-color-hover-danger, #b02a37),
+    var(--button-color-hover-danger, #ffffff));
+}
+
+.pdc-button-warning {
+  @include btn-variant(var(--button-background-color-warning, #ffc107),
+    var(--button-color-warning, #ffffff),
+    var(--button-background-color-hover-warning, #cc9a06),
+    var(--button-color-hover-warning, #ffffff));
+}
+
+.pdc-button-info {
+  @include btn-variant(var(--button-background-color-info, #0d6efd),
+    var(--button-color-info, #ffffff),
+    var(--button-background-color-hover-info, #0b5ed7),
+    var(--button-color-hover-info, #ffffff));
+}
+
+.pdc-button-light {
+  @include btn-variant(var(--button-background-color-transparent, transparent),
+    var(--button-color-transparent, hsl(210, 4%, 20%)),
+    var(--button-background-color-hover-transparent, #393c40),
+    var(--button-color-hover-transparent, #ffffff),
+    var(--button-color-transparent, hsl(210, 4%, 20%)));
+}
+
+// /*@mixin btn-variant($bg, $fg, $bg-hover, $fg-hover, $border-color: null) */ 
+.pdc-button-delete {
+  @include btn-variant(var(--button-background-color-transparent, transparent),
+    var(--button-color-light-danger, #b02a37),
+    var(--button-background-color-hover-light-danger, #dc3545),
+    var(--button-color-hover-light-danger, #ffffff),
+    var(--button-color-light-danger, #b02a37));
+}
+
+
+/* ---------- Light (Alpha) Variants ---------- */
+.pdc-button-primary-light {
+  @include btn-variant(var(--button-background-color-light-rgb, rgba(57, 60, 64, 0.12)),
+    var(--button-color-light, #303234),
+    var(--button-background-color-hover-light, #393c40),
+    var(--button-color-hover-light, #ffffff),
+    var(--button-background-color-light-rgb, rgba(57, 60, 64, 0.5)));
+}
+
+.pdc-button-secondary-light {
+  @include btn-variant(var(--button-background-color-light-rgb-secondary, rgba(15, 118, 110, 0.12)),
+    var(--button-color-light-secondary, #0a544e),
+    var(--button-background-color-hover-light-secondary, #0f766e),
+    var(--button-color-hover-light-secondary, #ffffff),
+    var(--button-background-color-light-rgb-secondary, rgba(15, 118, 110, 0.5)));
+}
+
+.pdc-button-success-light {
+  @include btn-variant(var(--button-background-color-light-rgb-success, rgba(25, 135, 84, 0.12)),
+    var(--button-color-light-success, #166e3a),
+    var(--button-background-color-hover-light-success, #198754),
+    var(--button-color-hover-light-success, #ffffff),
+    var(--button-background-color-light-rgb-success, rgba(25, 135, 84, 0.5)));
+}
+
+.pdc-button-danger-light {
+  @include btn-variant(var(--button-background-color-light-rgb-danger, rgba(220, 53, 69, 0.12)),
+    var(--button-color-light-danger, #b02a37),
+    var(--button-background-color-hover-light-danger, #dc3545),
+    var(--button-color-hover-light-danger, #ffffff),
+    var(--button-background-color-light-rgb-danger, rgba(220, 53, 69, 0.5)));
+}
+
+.pdc-button-warning-light {
+  @include btn-variant(var(--button-background-color-light-rgb-warning, rgba(255, 193, 7, 0.12)),
+    var(--button-color-light-warning, #cc9a06),
+    var(--button-background-color-hover-light-warning, #ffc107),
+    var(--button-color-hover-light-warning, #ffffff),
+    var(--button-background-color-light-rgb-warning, rgba(255, 193, 7, 0.5)));
+}
+
+.pdc-button-info-light {
+  @include btn-variant(var(--button-background-color-light-rgb-info, rgba(13, 110, 253, 0.12)),
+    var(--button-color-light-info, #0d6efd),
+    var(--button-background-color-hover-light-info, #0d6efd),
+    var(--button-color-hover-light-info, #ffffff),
+    var(--button-background-color-light-rgb-info, rgba(13, 110, 253, 0.5)));
+}
+
+.pdc-button-light-light {
+  @include btn-variant(var(--button-background-color-transparent-light, transparent),
+    var(--button-color-light-transparent, #ffffff),
+    var(--button-background-color-hover-light-transparent, #0f766e),
+    var(--button-color-hover-light-transparent, #ffffff),
+    var(--button-color-light-transparent, #ffffff));
+}
+
+// /*@mixin btn-variant($bg, $fg, $bg-hover, $fg-hover, $border-color: null) */ 
+.pdc-button-delete-light {
+@include btn-variant(var(--button-background-color-transparent, transparent),
+    var(--button-color-light-danger, #b02a37),
+    var(--button-background-color-hover-light-danger, #dc3545),
+    var(--button-color-hover-light-danger, #ffffff),
+    var(--button-color-light-danger, #b02a37));
+}
+
+/* ---------- Expander ---------- */
+.expander-icon {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  transition: transform 0.3s ease-in-out;
+
+  &.animate-icon {
+    transform: rotate(180deg);
+  }
+
+  &.animate-icon-back {
+    transform: rotate(0deg);
+  }
+}

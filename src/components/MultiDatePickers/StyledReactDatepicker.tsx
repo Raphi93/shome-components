@@ -9,9 +9,10 @@ import {
   DirtyIconWithBorderLabel,
   TLabelInputWithDirtyState,
 } from '../FieldWrapper/hooks/useLabelInput';
-import { Icon, Icons } from '../Icon/Icon';
 
 import style from '../FieldWrapper/FieldWrapper.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 
 export type TStyledReactDatepicker = ReactDatePickerProps & {
   id?: string;
@@ -78,7 +79,7 @@ export const StyledReactDatepicker: FC<TStyledReactDatepicker> = (props) => {
         <DirtyIconWithBorderLabel onClearDirty={onClearDirty} dirtyText={dirtyText} className={style.dateDirtyIcon} />
       )}
 
-      <Icon onClick={handleIconClick} icon={Icons.Calendar} className={style.calendarIcon} />
+      <FontAwesomeIcon icon={faCalendar} className={style.calendarIcon} onClick={handleIconClick} />
       <ErrorText errorMessage={errorText} />
     </div>
   );

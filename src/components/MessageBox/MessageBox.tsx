@@ -1,8 +1,9 @@
 // MessageBox.tsx
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faCircleCheck, faCircleInfo, faCircleXmark, faTriangleExclamation, faX } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clx from 'classnames';
-
-import { Icon, Icons } from '../Icon/Icon';
 
 import styles from './MessageBox.module.scss';
 
@@ -18,11 +19,11 @@ export type Message = {
   autoScroll?: boolean;
 };
 
-const typeIcon: Record<NotificationType, (typeof Icons)[keyof typeof Icons]> = {
-  message: Icons.InformationCircleOutline ?? Icons.InformationCircle ?? Icons.Information,
-  success: Icons.CheckmarkCircleOutline ?? Icons.CheckmarkCircle ?? Icons.Checkmark,
-  warning: Icons.Warning,
-  error: Icons.Alert,
+const typeIcon: Record<NotificationType, IconProp> = {
+  message: faCircleInfo,
+  success: faCircleCheck,
+  warning: faTriangleExclamation,
+  error: faCircleXmark,
 };
 
 export function MessageBox({
@@ -60,14 +61,14 @@ export function MessageBox({
   return (
     <div className={clx(styles[type], display === 'hiding' && styles['message-hiding'])} ref={divRef}>
       <span className={styles.typeIcon}>
-        <Icon icon={typeIcon[type]} />
+        <FontAwesomeIcon icon={typeIcon[type]} />
       </span>
 
       {headerNode}
 
       {closable && (
         <button onClick={handleClose} className={styles.close} type="button">
-          <Icon icon={Icons.Close} />
+          <FontAwesomeIcon icon={faX} />
         </button>
       )}
 

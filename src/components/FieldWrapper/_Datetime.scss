@@ -101,15 +101,17 @@
 /* Calendar icons inside each between input */
 .calendarIconBetweenFrom {
   position: absolute;
-  top: 11px;
+  top: 50%;
+  transform: translateY(-50%);
   right: 13px;
   cursor: pointer;
 }
 
 .calendarIconBetweenTo {
   position: absolute;
-  top: 11px;
+  top: 50%;
   right: 90px;
+  transform: translateY(-50%);
   cursor: pointer;
 }
 

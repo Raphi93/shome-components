@@ -1,7 +1,7 @@
 import React from "react";
 export type ScrewSize = "xs" | "sm" | "md" | "lg" | "xlg";
 
-import "./Screw.css";
+import "./Screw.scss";
 
 export type CommonProps = {
   size?: ScrewSize;

@@ -2,6 +2,7 @@ import { ChangeEvent } from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 import './Styles/index.scss';
+import './Components';
 
 
 export * from './Components';

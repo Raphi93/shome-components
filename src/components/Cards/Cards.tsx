@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 import { CardsProps } from "./Cards.type";
 
-import "./Cards.css";
+import "./Cards.scss";
 
 const checkIsValidCSSLengthUnit = (value: string) => {
     const validCSSLengthUnits = ['px', 'em', 'rem', '%', 'vh', 'vw', 'auto'];

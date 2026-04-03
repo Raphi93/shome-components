@@ -1,4 +1,5 @@
 import React from 'react';
+
 import s from './Select.module.scss';
 
 export const CustomDropdownIndicator = () => (

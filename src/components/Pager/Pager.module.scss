@@ -47,11 +47,17 @@
   max-width: 100%;
 }
 
-// TODO:
-// .grid-responsive:not(.content-max-width) + .pagination {
-//   max-width: 100% !important;
-// }
 
+.current,
+.current:hover {
+  cursor: default;
+  background-color: var(--color-primary-dark);
+  color: var(--color-text-inverted);
+  box-shadow: none;
+}
+
+
+// Buttons
 // Buttons
 .buttons {
   display: flex;
@@ -59,7 +65,7 @@
   margin-right: calc(var(--spacing) * 2.5);
   padding-top: calc(var(--spacing) * 0.5);
 
-  & > * {
+  &>* {
     margin-bottom: calc(var(--spacing) * 0.5);
   }
 
@@ -69,16 +75,34 @@
     }
   }
 
+  .first-page-button,
+  .previous-page-button,
+  .next-page-button,
+  .last-page-button {
+
+    &.disabled,
+    &:disabled {
+      background-color: var(--button-color, #a9b3c0);
+      color: var(--color-gray-300, #ffffff);
+      border: 1px solid var(--color-gray-300);
+      cursor: default;
+    }
+  }
+
+  .page-number-button {
+
+    &.disabled,
+    &:disabled {
+      background-color: var(--button-background-color, #a9b3c0);
+      color: var(--button-color, #ffffff);
+      box-shadow: none;
+      cursor: default;
+    }
+  }
+
   :global .icon {
     font-size: var(--font-size-small);
     line-height: calc(var(--spacing) * 3);
-  }
-}
-
-.first,
-.prev {
-  :global .icon {
-    transform: scaleX(-1);
   }
 }
 

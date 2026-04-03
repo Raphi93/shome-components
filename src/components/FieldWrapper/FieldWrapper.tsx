@@ -5,7 +5,6 @@ import { debounce } from 'lodash';
 
 import { ActionWrapper } from '../Actions/ActionElement';
 import ErrorText from '../ErrorText/ErrorText';
-import { Icon, Icons } from '../Icon/Icon';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../Tooltip/Tooltip';
 
 import { useDebouncedInput } from './hooks/useDebouncedInput';
@@ -14,6 +13,8 @@ import { TLabelInputWithDirtyState, useLabelInput } from './hooks/useLabelInput'
 import style from './FieldWrapper.module.scss';
 import { UseFormRegister } from '../..';
 import { useDateFormat } from '../../hooks/dateFormat';
+import { faCheckSquare, faEye, faEyeSlash, faSquare, faUndo } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export type FieldSetCommonFields = {
   /**
@@ -77,7 +78,7 @@ export function FieldWrapper({
             })}
             onClick={onClearDirty}
           >
-            <Icon className={style.dirtyIcon} icon={Icons.Undo} />
+            <FontAwesomeIcon className={style.dirtyIcon} icon={faUndo} />
           </TooltipTrigger>
           <TooltipContent>{dirtyText || t('Click to reset input value to initial state')}</TooltipContent>
         </Tooltip>
@@ -350,7 +351,7 @@ export function PasswordInput({
 
   const passwordIcon = (
     <button type="button" className={style.passwordInputBtn} onClick={() => setIsShowPassword((show) => !show)}>
-      {isShowPassword ? <Icon icon={Icons.EyeOff} /> : <Icon icon={Icons.Eye} />}
+      <FontAwesomeIcon icon={isShowPassword ? faEyeSlash : faEye} />
     </button>
   );
 
@@ -732,7 +733,7 @@ export function Value({
    * checkbox for readonly mode without wrapper
    */
   function ValueCheckbox({ checked }: { checked?: boolean }) {
-    return <Icon icon={checked ? Icons.Checkbox : Icons.SquareOutline} />;
+    return <FontAwesomeIcon icon={checked ? faCheckSquare : faSquare} />;
   }
 
   if (hideEmpty && !value && value !== false) {

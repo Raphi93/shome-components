@@ -10,7 +10,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '../../Tooltip/Tooltip';
 
 import style from '../FieldWrapper.module.scss';
 import React from 'react';
-import { Icon, Icons } from '../../Icon/Icon';
 
 type TUseLabelInputProps = {
   isDirty?: boolean;
@@ -85,7 +84,7 @@ export const DirtyIconWithBorderLabel = ({
           })}
           onClick={onClearDirty}
         >
-        <Icon icon={Icons.Undo} style={{color: "var(--input-color)"}} />
+        <FontAwesomeIcon icon={faUndo} style={{color: "var(--input-color)"}} />
         </TooltipTrigger>
         <TooltipContent>{dirtyText || t('Click to reset input value to initial state')}</TooltipContent>
       </Tooltip>

@@ -13,7 +13,6 @@ import { useTranslation } from 'react-i18next';
 import clx from 'classnames';
 
 import { ThreeStateCheckbox } from '../FieldWrapper/ThreeStateCheckbox/ThreeStateCheckbox';
-import { Icon, Icons } from '../Icon/Icon';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../Tooltip/Tooltip';
 
 import { hideShowClone, setWidths, syncHorizontalScroll } from './Grid.functions';
@@ -23,6 +22,8 @@ import style from './Grid.module.scss';
 import { GridContext } from '../../context/gridContext';
 import { PaginationContext } from '../../context/paginationContext';
 import { Pagination } from '../..';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 export function GridHeader({ children }: { children?: ReactNode }) {
   return <div className={[style.header, 'branding-grid-header'].join(' ')}>{children}</div>;
@@ -325,7 +326,7 @@ export function GridHeadColumnPaged({
     >
       {title}
       {children}
-      {isSorted && <Icon icon={isSortedDesc ? Icons.ArrowDown : Icons.ArrowUp} />}
+      {isSorted && <FontAwesomeIcon icon={isSortedDesc ? faArrowDown : faArrowUp} />}
     </th>
   );
 }

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { AlertProps } from './Alert.type';
 
-import './Alert.css';
+import './Alert.scss';
 
 /**
  * Alert — a simple modal-style confirmation/notification component.
