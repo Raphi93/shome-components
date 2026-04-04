@@ -1,38 +1,67 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
-import { Screw } from '../Components/Screw/Screw';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Screw, ScrewCircle } from '../Components/Screw/Screw';
+import type { ScrewSize } from '../Components/Screw/Screw';
+
+const SIZES: ScrewSize[] = ['xs', 'sm', 'md', 'lg', 'xlg'];
 
 const meta: Meta<typeof Screw> = {
-  title: 'Layout/Screw',
+  title: 'Utility/Screw',
   component: Screw,
   tags: ['autodocs'],
-  argTypes: {
-    size: { control: 'select', options: ['xs', 'sm', 'md', 'lg', 'xlg'] },
+  args: {
+    size: 'md',
   },
-  args: { size: 'md' },
+  argTypes: {
+    size: {
+      control: 'select',
+      options: SIZES,
+      description: 'Decorative screw head size.',
+    },
+  },
 };
 export default meta;
 
-export const Default: StoryObj = {
-  render: (args) => (
-    <div style={{ background: 'var(--color-gray-100)', padding: '1rem' }}>
-      <div style={{ background: 'var(--color-gray-300)', padding: '0.5rem' }}>Block above</div>
-      <Screw {...args} />
-      <div style={{ background: 'var(--color-gray-300)', padding: '0.5rem' }}>Block below</div>
+type Story = StoryObj<typeof Screw>;
+
+export const Default: Story = {};
+
+export const AllSizes: Story = {
+  name: 'All sizes',
+  render: () => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap' }}>
+      {SIZES.map((size) => (
+        <div key={size} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+          <Screw size={size} />
+          <span style={{ fontSize: '0.75rem', opacity: 0.6 }}>{size}</span>
+        </div>
+      ))}
     </div>
   ),
 };
 
-export const AllSizes: StoryObj = {
+export const ScrewCircleVariant: Story = {
+  name: 'ScrewCircle variant',
   render: () => (
-    <div style={{ background: 'var(--color-gray-100)', padding: '1rem' }}>
-      {(['xs', 'sm', 'md', 'lg', 'xlg'] as const).map((size) => (
-        <div key={size}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--color-gray-500)' }}>{size}</span>
-          <Screw size={size} />
-          <div style={{ background: 'var(--color-gray-300)', padding: '0.25rem', fontSize: '0.75rem' }}>divider</div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap' }}>
+      {SIZES.map((size) => (
+        <div key={size} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+          <ScrewCircle size={size} />
+          <span style={{ fontSize: '0.75rem', opacity: 0.6 }}>{size}</span>
         </div>
       ))}
+    </div>
+  ),
+};
+
+export const CornerDecoration: Story = {
+  name: 'Panel corner decoration',
+  render: () => (
+    <div style={{ position: 'relative', padding: '2rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--border-radius)', maxWidth: 320 }}>
+      <div style={{ position: 'absolute', top: 8,  left: 8  }}><Screw size="sm" /></div>
+      <div style={{ position: 'absolute', top: 8,  right: 8 }}><Screw size="sm" /></div>
+      <div style={{ position: 'absolute', bottom: 8, left: 8  }}><Screw size="sm" /></div>
+      <div style={{ position: 'absolute', bottom: 8, right: 8 }}><Screw size="sm" /></div>
+      <p style={{ margin: 0, textAlign: 'center' }}>Panel with screw corners</p>
     </div>
   ),
 };

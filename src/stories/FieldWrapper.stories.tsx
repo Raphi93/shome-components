@@ -1,83 +1,228 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
-import { FieldWrapper, StringInput, PasswordInput, NumberInput, Textarea, Value } from '../Components/FieldWrapper/FieldWrapper';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
+import {
+  FieldWrapper,
+  StringInput,
+  PasswordInput,
+  NumberInput,
+  Textarea,
+  Value,
+} from '../Components/FieldWrapper/FieldWrapper';
 
-const meta: Meta = {
+// ─── Meta ─────────────────────────────────────────────────────────────────────
+
+const meta: Meta<typeof FieldWrapper> = {
   title: 'Inputs/FieldWrapper',
+  component: FieldWrapper,
   tags: ['autodocs'],
+  args: {
+    label:       'Label',
+    isRequired:  false,
+    description: '',
+    readOnly:    false,
+    errorText:   '',
+  },
+  argTypes: {
+    label:       { control: 'text' },
+    isRequired:  { control: 'boolean' },
+    description: { control: 'text', description: 'Helper text shown below the label.' },
+    readOnly:    { control: 'boolean' },
+    errorText:   { control: 'text', description: 'Validation error — shown in red.' },
+  },
 };
 export default meta;
 
-/** All standard input types in one form */
-export const AllInputs: StoryObj = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxWidth: 480 }}>
-      <StringInput label="Name" id="name" placeholder="John Doe" isWrapped />
-      <StringInput label="Email" id="email" type="email" placeholder="john@example.com" isRequired isWrapped />
-      <PasswordInput label="Password" id="password" isWrapped />
-      <NumberInput label="Age" id="age" min={0} max={120} isWrapped />
-      <Textarea label="Notes" id="notes" placeholder="Write something..." isWrapped />
-    </div>
-  ),
-};
+type Story = StoryObj<typeof FieldWrapper>;
 
-/** Border-label variant — floating label style */
-export const BorderLabel: StoryObj = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: 480 }}>
-      <StringInput label="Name" id="bl-name" hasBorderLabel />
-      <StringInput label="Email" id="bl-email" type="email" hasBorderLabel isRequired />
-      <PasswordInput label="Password" id="bl-pass" hasBorderLabel />
-      <NumberInput label="Amount" id="bl-amount" hasBorderLabel />
-    </div>
-  ),
-};
+// ─── FieldWrapper wrapper ─────────────────────────────────────────────────────
 
-/** Read-only value display */
-export const ReadOnly: StoryObj = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxWidth: 480 }}>
-      <Value label="Name" value="John Doe" />
-      <Value label="Email" value="john@example.com" />
-      <Value label="Registered" value="2024-01-15T10:00:00" valueType="dateTime" />
-      <Value label="Active" value={true} valueType="boolean" />
-    </div>
-  ),
-};
-
-/** With validation errors */
-export const WithErrors: StoryObj = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxWidth: 480 }}>
-      <StringInput label="Username" id="err-user" value="" isRequired errorText="Username is required" isWrapped />
-      <StringInput label="Email" id="err-email" value="notanemail" errorText="Invalid email format" isWrapped />
-    </div>
-  ),
-};
-
-/** Dirty state — shows undo icon */
-export const DirtyState: StoryObj = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: 480 }}>
-      <StringInput
-        label="Name"
-        id="dirty-name"
-        value="Changed Value"
-        hasBorderLabel
-        isDirty
-        dirtyText="Click to reset to original value"
-        onClearDirty={() => alert('reset!')}
+export const CustomChildren: Story = {
+  name: 'FieldWrapper — custom child',
+  args: { label: 'Custom field', isRequired: true, description: 'Any input can live inside.' },
+  render: (args) => (
+    <FieldWrapper {...args}>
+      <input
+        style={{ width: '100%', padding: '0.5rem 0.75rem', border: '1px solid var(--input-border)', borderRadius: 'var(--border-radius-small)', background: 'var(--input-background)', color: 'var(--input-color)' }}
+        placeholder="Type something…"
       />
+    </FieldWrapper>
+  ),
+};
+
+export const WithError: Story = {
+  name: 'FieldWrapper — validation error',
+  args: { label: 'Username', isRequired: true, errorText: 'Username is already taken.' },
+  render: (args) => (
+    <FieldWrapper {...args}>
+      <input
+        style={{ width: '100%', padding: '0.5rem 0.75rem', border: '1px solid var(--color-danger, #ef4444)', borderRadius: 'var(--border-radius-small)', background: 'var(--input-background)', color: 'var(--input-color)' }}
+        defaultValue="john_doe"
+      />
+    </FieldWrapper>
+  ),
+};
+
+// ─── StringInput ──────────────────────────────────────────────────────────────
+
+export const TextInput: Story = {
+  name: 'StringInput — default',
+  render: () => {
+    const [v, setV] = useState('');
+    return (
+      <StringInput
+        label="Full name"
+        placeholder="Anna Müller"
+        isRequired
+        value={v}
+        onChange={(e) => setV(e.target.value)}
+      />
+    );
+  },
+};
+
+export const TextInputBorderLabel: Story = {
+  name: 'StringInput — border label',
+  render: () => {
+    const [v, setV] = useState('');
+    return (
+      <StringInput
+        label="Full name"
+        placeholder="Full name"
+        hasBorderLabel
+        value={v}
+        onChange={(e) => setV(e.target.value)}
+      />
+    );
+  },
+};
+
+export const TextInputWithError: Story = {
+  name: 'StringInput — validation error',
+  render: () => (
+    <StringInput
+      label="Email"
+      type="email"
+      isRequired
+      value="not-an-email"
+      errorText="Please enter a valid email address."
+      onChange={() => undefined}
+    />
+  ),
+};
+
+export const TextInputDisabled: Story = {
+  name: 'StringInput — disabled',
+  render: () => <StringInput label="Username" value="raphi93" disabled />,
+};
+
+// ─── PasswordInput ────────────────────────────────────────────────────────────
+
+export const PasswordField: Story = {
+  name: 'PasswordInput',
+  render: () => {
+    const [v, setV] = useState('');
+    return (
+      <PasswordInput
+        label="Password"
+        isRequired
+        placeholder="Min. 8 characters"
+        value={v}
+        onChange={(e) => setV(e.target.value)}
+      />
+    );
+  },
+};
+
+// ─── NumberInput ──────────────────────────────────────────────────────────────
+
+export const NumberField: Story = {
+  name: 'NumberInput',
+  render: () => {
+    const [v, setV] = useState<number | undefined>(42);
+    return (
+      <NumberInput
+        label="Quantity"
+        isRequired
+        min={0}
+        max={999}
+        step={1}
+        value={v}
+        onChange={(e) => setV(Number(e.target.value))}
+      />
+    );
+  },
+};
+
+export const NumberFieldPercent: Story = {
+  name: 'NumberInput — percent',
+  render: () => {
+    const [v, setV] = useState<number | undefined>(75);
+    return (
+      <NumberInput
+        label="Discount"
+        min={0}
+        max={100}
+        step={5}
+        showPercent
+        value={v}
+        onChange={(e) => setV(Number(e.target.value))}
+      />
+    );
+  },
+};
+
+// ─── Textarea ─────────────────────────────────────────────────────────────────
+
+export const TextareaField: Story = {
+  name: 'Textarea',
+  render: () => {
+    const [v, setV] = useState('');
+    return (
+      <Textarea
+        label="Notes"
+        placeholder="Add any additional notes here…"
+        isRequired
+        value={v}
+        onChange={(e) => setV(e.target.value)}
+      />
+    );
+  },
+};
+
+// ─── Value — read-only display ────────────────────────────────────────────────
+
+export const ValueDisplay: Story = {
+  name: 'Value — display field',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+      <Value label="Username"     value="raphi93" />
+      <Value label="Score"        value={1337} />
+      <Value label="Active"       value={true}                    valueType="boolean" />
+      <Value label="Created"      value="2025-01-15T08:30:00Z"   valueType="dateTime" />
+      <Value label="Profile link" value="View profile"            link="https://example.com" />
+      <Value label="Empty field"  value=""                        hideEmpty />
     </div>
   ),
 };
 
-/** Disabled inputs */
-export const Disabled: StoryObj = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxWidth: 480 }}>
-      <StringInput label="Locked field" id="dis-name" value="Read only" disabled isWrapped />
-      <NumberInput label="Fixed amount" id="dis-num" value={42} disabled isWrapped />
-    </div>
-  ),
+// ─── Form overview ────────────────────────────────────────────────────────────
+
+export const FullFormExample: Story = {
+  name: 'Complete form example',
+  render: () => {
+    const [name,     setName]     = useState('');
+    const [email,    setEmail]    = useState('');
+    const [password, setPassword] = useState('');
+    const [age,      setAge]      = useState<number | undefined>(undefined);
+    const [notes,    setNotes]    = useState('');
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: 480 }}>
+        <StringInput label="Full name"  isRequired placeholder="Anna Müller"         value={name}     onChange={(e) => setName(e.target.value)} />
+        <StringInput label="Email"      isRequired type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <PasswordInput label="Password" isRequired placeholder="Min. 8 characters"   value={password} onChange={(e) => setPassword(e.target.value)} />
+        <NumberInput   label="Age"      min={18} max={120}                            value={age}      onChange={(e) => setAge(Number(e.target.value))} />
+        <Textarea      label="Notes"    placeholder="Anything else?"                 value={notes}    onChange={(e) => setNotes(e.target.value)} />
+      </div>
+    );
+  },
 };

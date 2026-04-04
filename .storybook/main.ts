@@ -4,16 +4,16 @@ const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(ts|tsx)'],
 
   addons: [
-    // In Storybook 10 the former addon-essentials (controls, actions, viewport,
-    // docs, backgrounds) are built into the core — only extra addons needed here.
-    '@storybook/addon-a11y',         // accessibility audit panel
-    '@storybook/addon-interactions', // play-function / interaction testing
+    '@storybook/addon-a11y',
   ],
 
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
+
+  // Serve the public/ folder so theme CSS files are reachable at /Theme/*.css
+  staticDirs: ['../public'],
 
   docs: {},
 };

@@ -29,6 +29,7 @@
   --fs-head-bg: var(--color-gray-200, #f7f7f7);
   --fs-head-fg: var(--color-text, #111);
   --fs-shadow:  var(--shadow-02, 0 2px 8px rgba(0, 0, 0, 0.12));
+  --fs-color-bg: var(--color-card-dashboard-background, #fff); // for header color variant "color"
 }
 
 // Dark mode — inverts surface and border tokens automatically when
@@ -67,6 +68,14 @@
   padding: var(--fs-pad);
 
   & > *:last-child { margin-bottom: 0; }
+}
+
+// color-background: applies the themed surface colour without border or shadow.
+// Useful for layout wrappers that need a subtle tinted background.
+.color-background {
+  border-radius: var(--border-radius, 8px);
+  background:    var(--color-card-dashboard-background, var(--color-surface, #f4f4f5));
+  padding:       var(--fs-pad);
 }
 
 // shadow: elevated card without a visible border
@@ -157,6 +166,11 @@
 .header-secondary {
   background: var(--color-brand, #2d2d2d);
   color: var(--color-white, #fff);
+}
+
+.header-color-background {
+  background: var(--color-card-dashboard-background, var(--color-surface, #f4f4f5));
+  color:      var(--color-text, #111);
 }
 
 // ─── Title ────────────────────────────────────────────────────────────────────

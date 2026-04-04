@@ -2,8 +2,14 @@ import React from 'react';
 
 // ─── Enumerations ────────────────────────────────────────────────────────────
 
-/** Background color variant for the FieldSet header. */
-export type FieldSetHeaderColor = 'default' | 'primary' | 'secondary';
+/**
+ * Background color variant for the FieldSet header.
+ * - `'default'`          — subtle gray surface with border
+ * - `'primary'`          — brand dark background, white text
+ * - `'secondary'`        — brand accent background, white text
+ * - `'color-background'` — themed dashboard gradient, adapts to active CSS theme + dark mode
+ */
+export type FieldSetHeaderColor = 'default' | 'primary' | 'secondary' | 'color-background';
 
 /** HTML heading tag used to render the FieldSet title. */
 export type FieldSetTitleTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -11,43 +17,48 @@ export type FieldSetTitleTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 // ─── Column sizes ─────────────────────────────────────────────────────────────
 
 /**
- * Valid percentage widths for a FieldSetColumn.
- * Maps directly to a CSS class (e.g. 33 → .size-33, 12.5 → .size-12-5).
+ * Valid percentage widths for a FieldSetColumn — passed as a string.
+ *
+ * @example
+ * <FieldSetColumn size="50">half width</FieldSetColumn>
+ * <FieldSetColumn size="12.5">one eighth</FieldSetColumn>
  */
-export type sizeType =
-  | 10 | 12 | 12.5 | 15 | 16
-  | 20 | 25 | 30   | 33 | 40
-  | 50 | 60 | 66   | 70 | 75
-  | 80 | 90 | 100;
+export type ColumnSize =
+  | '10' | '12' | '12.5' | '15' | '16'
+  | '20' | '25' | '30'   | '33' | '40'
+  | '50' | '60' | '66'   | '70' | '75'
+  | '80' | '90' | '100';
+
+/** @deprecated Use ColumnSize. Kept for backward compatibility. */
+export type sizeType = ColumnSize;
 
 /**
  * Named aliases for the most common column sizes.
- * Use these to avoid magic numbers:
  *
  * @example
  * import { sizeMapper } from '@raphi93/shome-components';
- * <FieldSetColumn size={sizeMapper.l} />   // → 50%
- * <FieldSetColumn size={sizeMapper.xl} />  // → 66%
+ * <FieldSetColumn size={sizeMapper.l} />   // → "50"
+ * <FieldSetColumn size={sizeMapper.xl} />  // → "66"
  */
-export const sizeMapper: Record<string, sizeType> = {
-  xxs:    10,
-  '12':   12,
-  '12.5': 12.5,
-  '15':   15,
-  '16':   16,
-  xs:     20,
-  s:      25,
-  '30':   30,
-  m:      33,
-  '40':   40,
-  l:      50,
-  '60':   60,
-  xl:     66,
-  '70':   70,
-  xxl:    75,
-  '80':   80,
-  '90':   90,
-  xxxl:  100,
+export const sizeMapper: Record<string, ColumnSize> = {
+  xxs:    '10',
+  '12':   '12',
+  '12.5': '12.5',
+  '15':   '15',
+  '16':   '16',
+  xs:     '20',
+  s:      '25',
+  '30':   '30',
+  m:      '33',
+  '40':   '40',
+  l:      '50',
+  '60':   '60',
+  xl:     '66',
+  '70':   '70',
+  xxl:    '75',
+  '80':   '80',
+  '90':   '90',
+  xxxl:  '100',
 };
 
 // ─── Component prop types ─────────────────────────────────────────────────────
@@ -120,14 +131,21 @@ export type FieldSetProps = {
    * @default true
    */
   defaultOpen?: boolean;
+  /**
+   * Apply the themed surface/dashboard background colour without adding a border or shadow.
+   * Useful for transparent layout wrappers that still need a subtle background tint.
+   * @default false
+   */
+  colorBackground?: boolean;
 };
 
 export type FieldSetColumnProps = {
   /**
    * Column width as a percentage of the parent row.
+   * Pass as a string: `size="50"`, `size="33"`, `size="12.5"`.
    * Stacks to 100% on viewports ≤ 767px.
    */
-  size: sizeType;
+  size: ColumnSize;
 
   /**
    * Minimum width before the column is forced to full-width.

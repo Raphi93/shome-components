@@ -6,10 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 
 import s from './FieldSet.module.scss';
-import type { FieldSetProps, FieldSetColumnProps } from './FieldSet.types';
+import type { ColumnSize, FieldSetProps, FieldSetColumnProps } from './FieldSet.types';
 
 // Re-export all public types and the sizeMapper from the types file.
 export type {
+  ColumnSize,
   FieldSetHeaderColor,
   FieldSetTitleTag,
   sizeType,
@@ -18,12 +19,30 @@ export type {
 } from './FieldSet.types';
 export { sizeMapper } from './FieldSet.types';
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+// ─── Column size → CSS class map ─────────────────────────────────────────────
+// Explicit map avoids runtime string manipulation and makes all valid
+// sizes visible to tree-shaking and CSS module analysis.
 
-/** Maps a sizeType number to a valid CSS module class name (12.5 → "size-12-5"). */
-function sizeClass(size: number): string {
-  return `size-${String(size).replace('.', '-')}`;
-}
+const sizeClassMap: Record<ColumnSize, string> = {
+  '10':    s['size-10'],
+  '12':    s['size-12'],
+  '12.5':  s['size-12-5'],
+  '15':    s['size-15'],
+  '16':    s['size-16'],
+  '20':    s['size-20'],
+  '25':    s['size-25'],
+  '30':    s['size-30'],
+  '33':    s['size-33'],
+  '40':    s['size-40'],
+  '50':    s['size-50'],
+  '60':    s['size-60'],
+  '66':    s['size-66'],
+  '70':    s['size-70'],
+  '75':    s['size-75'],
+  '80':    s['size-80'],
+  '90':    s['size-90'],
+  '100':   s['size-100'],
+};
 
 // ─── FieldSet ─────────────────────────────────────────────────────────────────
 
@@ -37,8 +56,8 @@ function sizeClass(size: number): string {
  *
  * @example
  * <FieldSet title="Contact" border>
- *   <FieldSetColumn size={50}>...</FieldSetColumn>
- *   <FieldSetColumn size={50}>...</FieldSetColumn>
+ *   <FieldSetColumn size="50">...</FieldSetColumn>
+ *   <FieldSetColumn size="50">...</FieldSetColumn>
  * </FieldSet>
  */
 export function FieldSet({
@@ -56,7 +75,8 @@ export function FieldSet({
   shadow       = false,
   headerColor  = 'default',
   isExpandable = false,
-  defaultOpen  = true,
+  defaultOpen = true,
+  colorBackground = false,
 }: FieldSetProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
@@ -74,8 +94,9 @@ export function FieldSet({
     <fieldset
       className={clsx(
         s.fieldset,
-        border && s.border,
-        shadow && s.shadow,
+        border           && s.border,
+        shadow           && s.shadow,
+        colorBackground  && s['color-background'],
         // card without header: skip the top-padding gap normally reserved for header
         isCard && !hasHeader && s['no-header'],
         className,
@@ -132,8 +153,8 @@ export function FieldSet({
  * Stacks to full width on viewports ≤ 767px.
  *
  * @example
- * <FieldSetColumn size={33}>left third</FieldSetColumn>
- * <FieldSetColumn size={66}>right two-thirds</FieldSetColumn>
+ * <FieldSetColumn size="33">left third</FieldSetColumn>
+ * <FieldSetColumn size="66">right two-thirds</FieldSetColumn>
  */
 export function FieldSetColumn({
   size,
@@ -145,7 +166,7 @@ export function FieldSetColumn({
 
   return (
     <div
-      className={clsx(s.column, s[sizeClass(size)], className)}
+      className={clsx(s.column, sizeClassMap[size], className)}
       // --fsc-min-width prevents the column from collapsing below this threshold
       style={mw ? ({ '--fsc-min-width': mw } as React.CSSProperties) : undefined}
     >

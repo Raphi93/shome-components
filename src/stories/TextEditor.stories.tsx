@@ -1,52 +1,61 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import React, { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
 import { TextEditor } from '../Components/TextEditor/TextEditor';
+import type { TextEditorFormat } from '../Components/TextEditor/TextEditor';
 
 const meta: Meta<typeof TextEditor> = {
   title: 'Inputs/TextEditor',
   component: TextEditor,
   tags: ['autodocs'],
-  argTypes: {
-    format:      { control: 'radio', options: ['html', 'markdown'] },
-    readOnly:    { control: 'boolean' },
-    placeholder: { control: 'text' },
-  },
   args: {
-    format: 'html',
-    readOnly: false,
-    placeholder: 'Start typing...',
+    value:       '',
+    format:      'html',
+    placeholder: 'Start typing…',
+    readOnly:    false,
+  },
+  argTypes: {
+    value:       { control: 'text' },
+    format:      { control: 'select', options: ['html', 'markdown'] as TextEditorFormat[], description: 'Output format.' },
+    placeholder: { control: 'text' },
+    readOnly:    { control: 'boolean', description: 'Disable editing.' },
+    onChange:       { action: 'changed' },
+    onFormatChange: { action: 'formatChanged' },
   },
 };
 export default meta;
 
 type Story = StoryObj<typeof TextEditor>;
 
-export const HTML: Story = {
-  args: { format: 'html' },
-  render: (args) => {
-    const [value, setValue] = useState('<p>Edit this <strong>HTML</strong> content.</p>');
+export const Default: Story = {};
+
+export const HtmlMode: Story = {
+  name: 'HTML output mode',
+  render: () => {
+    const [value, setValue]   = useState('<p>Hello <strong>World</strong></p>');
+    const [output, setOutput] = useState(value);
     return (
-      <div>
-        <TextEditor {...args} value={value} onChange={setValue} />
-        <details style={{ marginTop: '1rem' }}>
-          <summary style={{ cursor: 'pointer', color: 'var(--color-gray-600)', fontSize: '0.85rem' }}>Output</summary>
-          <pre style={{ fontSize: '0.8rem', padding: '0.5rem', background: 'var(--color-gray-100)', borderRadius: 4, overflow: 'auto' }}>{value}</pre>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <TextEditor format="html" value={value} onChange={(v) => { setValue(v); setOutput(v); }} placeholder="Write HTML content…" />
+        <details>
+          <summary style={{ cursor: 'pointer', fontSize: '0.8rem', opacity: 0.6 }}>Raw output</summary>
+          <pre style={{ padding: '0.75rem', background: 'var(--color-surface)', borderRadius: 4, fontSize: '0.75rem', overflow: 'auto' }}>{output}</pre>
         </details>
       </div>
     );
   },
 };
 
-export const Markdown: Story = {
-  args: { format: 'markdown' },
-  render: (args) => {
-    const [value, setValue] = useState('# Hello\n\nEdit this **Markdown** content.');
+export const MarkdownMode: Story = {
+  name: 'Markdown output mode',
+  render: () => {
+    const [value, setValue]   = useState('# Hello World\n\nThis is **bold** and *italic* text.');
+    const [output, setOutput] = useState(value);
     return (
-      <div>
-        <TextEditor {...args} value={value} onChange={setValue} />
-        <details style={{ marginTop: '1rem' }}>
-          <summary style={{ cursor: 'pointer', color: 'var(--color-gray-600)', fontSize: '0.85rem' }}>Output</summary>
-          <pre style={{ fontSize: '0.8rem', padding: '0.5rem', background: 'var(--color-gray-100)', borderRadius: 4, overflow: 'auto' }}>{value}</pre>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <TextEditor format="markdown" value={value} onChange={(v) => { setValue(v); setOutput(v); }} placeholder="Write Markdown…" />
+        <details>
+          <summary style={{ cursor: 'pointer', fontSize: '0.8rem', opacity: 0.6 }}>Raw output</summary>
+          <pre style={{ padding: '0.75rem', background: 'var(--color-surface)', borderRadius: 4, fontSize: '0.75rem', overflow: 'auto' }}>{output}</pre>
         </details>
       </div>
     );
@@ -54,19 +63,13 @@ export const Markdown: Story = {
 };
 
 export const ReadOnly: Story = {
-  args: { readOnly: true },
-  render: (args) => (
-    <TextEditor
-      {...args}
-      value="<p>This editor is <strong>read-only</strong>. You cannot edit it.</p>"
-    />
-  ),
+  args: {
+    value:    '<p>This content is <strong>read-only</strong> and cannot be edited.</p>',
+    format:   'html',
+    readOnly: true,
+  },
 };
 
-export const Empty: Story = {
-  args: { placeholder: 'Start writing your content here...' },
-  render: (args) => {
-    const [value, setValue] = useState('');
-    return <TextEditor {...args} value={value} onChange={setValue} />;
-  },
+export const WithPlaceholder: Story = {
+  args: { value: '', placeholder: 'Write a detailed description of your project…' },
 };

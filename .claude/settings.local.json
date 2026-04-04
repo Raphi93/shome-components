@@ -5,7 +5,14 @@
       "Bash(npx storybook@latest init --yes --skip-install)",
       "Bash(npx storybook@latest init --type react --yes --skip-install)",
       "Bash(npm install:*)",
-      "Bash(npx storybook:*)"
+      "Bash(npx storybook:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm show:*)",
+      "Bash(npx rollup:*)",
+      "Read(//c/Users/raphi/.claude/projects/d--source-repos-shome-components/31b92f64-8522-4122-b896-fd1f70abc5f1/subagents/**)",
+      "Bash(npm run:*)",
+      "Bash(sed -i \"s/  tags: \\\\['autodocs'\\\\],\\\\n//g\" src/stories/*.stories.tsx)",
+      "Bash(grep -l \"tags: \\\\['autodocs'\\\\]\" src/stories/*.stories.tsx)"
     ]
   }
 }
