@@ -18,7 +18,7 @@
     position: fixed;
     background-color: var(--color-mod-nav-theme-contrast);
     /* border-radius: var(--border-radius-large); */
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.01);
+    box-shadow: var(--shadow-00);
     z-index: 96;
     padding: 1.2rem;
     display: flex;
@@ -127,9 +127,8 @@
 
 /*ColorConfirm*/
 .red-confirm {
-    /*d64856*/
-    color: var(--color-black);
-    background-color: rgba(255, 0, 0, 0.2);
+    color: var(--color-text);
+    background-color: rgba(var(--color-negative-rgb), 0.15);
 
     &:hover {
         color: var(--color-white);
@@ -138,8 +137,8 @@
 }
 
 .green-confirm {
-    color: var(--color-black);
-    background-color: rgba(0, 255, 0, 0.2);
+    color: var(--color-text);
+    background-color: rgba(var(--color-positive-rgb), 0.15);
 
     &:hover {
         color: var(--color-white);
@@ -148,8 +147,8 @@
 }
 
 .blue-confirm {
-    color: var(--color-black);
-    background-color: rgba(0, 255, 255, 0.2);
+    color: var(--color-text);
+    background-color: rgba(var(--color-primary-rgb), 0.15);
 
     &:hover {
         color: var(--color-white);
@@ -158,8 +157,8 @@
 }
 
 .orange-confirm {
-    color: var(--color-black);
-    background-color: rgba(255, 200, 0, 0.2);
+    color: var(--color-text);
+    background-color: rgba(var(--color-warning-rgb), 0.15);
 
     &:hover {
         color: var(--color-white);
@@ -168,8 +167,8 @@
 }
 
 .yellow-confirm {
-    color: var(--color-black);
-    background-color: rgba(255, 255, 0, 0.2);
+    color: var(--color-text);
+    background-color: rgba(var(--color-warning-rgb), 0.15);
 
     &:hover {
         color: var(--color-white);
@@ -178,18 +177,18 @@
 }
 
 .brand-confirm {
-    color: var(--button-secondary-light-color);
-    background-color: rgba(var(--button-secondary-light-background-color), 0.2);
+    color: var(--color-text);
+    background-color: rgba(var(--color-brand-rgb), 0.15);
 
     &:hover {
-        color: var(--button-secondary-light-color-hover);
-        background-color: var(--button-secondary-light-background-color-hover);
+        color: var(--color-brand-contrast);
+        background-color: var(--color-brand);
     }
 }
 
 .primary-confirm {
-    color: var(--color-white);
-    background-color: rgba(29, 34, 41, 0.2);
+    color: var(--color-text);
+    background-color: rgba(var(--color-primary-rgb), 0.15);
 
     &:hover {
         color: var(--color-white);

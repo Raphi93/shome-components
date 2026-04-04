@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 import type { ChatBotMessage, ChatBotProps } from './ChatBot.types';
 import { ChatBotMessages } from './ChatBotMessage';
@@ -30,6 +31,7 @@ export function ChatBot({
   isIndexDb,
   handleSendMessage: handleSendMessageProp,
 }: ChatBotProps) {
+  const { t } = useTranslation();
   const [taKey, setTaKey] = useState(0);
 
   // IMPORTANT: start empty if IDB is enabled to avoid preload/overwrite flicker
@@ -154,7 +156,7 @@ export function ChatBot({
           <div className={styles['chat-box-messages-text-area']}>
             <TextareaAutoheight
               key={taKey}
-              placeholder="Type your message..."
+              placeholder={t('Type your message...')}
               startRows={2}
               value={userMessageLast.text ?? ''}
               onChange={e => {

@@ -3,6 +3,7 @@
 import React from "react";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from 'react-i18next';
 
 import "./Sidebar.scss";
 
@@ -58,17 +59,18 @@ export function SidebarLogoSection({
   isSubChild,
   brandName,
 }: SidebarLogoSectionProps) {
+  const { t } = useTranslation();
   return (
     <div className={`logo-container-main ${!expanded ? "logo-container" : "logo-container-expandet"}`}>
       <img
         src={expandedImage && !isSubChild ? imageLong : image}
-        alt={brandName || "Logo"}
+        alt={brandName || t('Logo')}
         className={`${expanded && !isSubChild ? "logo-long-new-sidebar-image" : "logo-new-sidebar-image"} ${brandName?.replace("_", "-").toLowerCase() || ""}`}
         onClick={handleImageClick}
         onError={(e) => {
           const newImage = image ?? "";
           (e.target as HTMLImageElement).src = newImage;
-          (e.target as HTMLImageElement).alt = brandName || "Logo";
+          (e.target as HTMLImageElement).alt = brandName || t('Logo');
         }}
       />
       {!changeLayoutImage && (

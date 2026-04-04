@@ -14,7 +14,7 @@ html {
 //To fight some vendors default styling
 *::placeholder {
   opacity: 1;
-  color: var(--color-text-light);
+  color: var(--input-placeholder-color, var(--color-text-muted));
 }
 
 button {

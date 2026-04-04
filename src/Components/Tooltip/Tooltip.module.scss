@@ -1,7 +1,7 @@
 @use '../../Styles/abstracts' as *;
 
 .tooltipContent {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--color-overlay-dark);
   color: var(--color-white);
   font-size: var(--font-size-smaller);
   padding: rem(4px) rem(8px);

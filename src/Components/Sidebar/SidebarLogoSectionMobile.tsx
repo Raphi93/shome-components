@@ -3,6 +3,7 @@
 import React from "react";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from 'react-i18next';
 interface SidebarLogoSectionMobileProps {
     expanded: boolean;
     expandedImage: boolean;
@@ -46,18 +47,19 @@ export const SidebarLogoSectionMobile: React.FC<SidebarLogoSectionMobileProps> =
     isSubChild
 }) => {
 
+    const { t } = useTranslation();
     return (
         <div className={`${"logo-container-mobile"}`}>
             <div className="logo-bars-mobile">
                 <img
                     src={expandedImage && !isSubChild ? imageLong : image}
-                    alt="Logo"
+                    alt={t('Logo')}
                     className={`${expanded && !isSubChild ? "logo-long-mobile" : "logo-mobile"}`}
                     onClick={handleImageClick}
                     onError={(e) => {
                         const newImage = image ?? "";
                         (e.target as HTMLImageElement).src = newImage;
-                        (e.target as HTMLImageElement).alt = "Logo";
+                        (e.target as HTMLImageElement).alt = t('Logo');
                     }}
                 />
                 {!expanded && (

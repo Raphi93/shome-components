@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { ImageCardProps } from './ImageCard.type';
 export type { ImageCardMediaType, ImageCardProps } from './ImageCard.type';
@@ -15,17 +16,18 @@ export function ImageCard({
   model,
   onFullScreen,
 }: ImageCardProps) {
+  const { t } = useTranslation();
   const [imageError, setImageError] = useState(false);
 
   const showNoImage = !href || (type === 'image' && imageError);
 
   const typeMapper = {
     image: showNoImage ? (
-      <div className={styles.noImage}>Kein Bild</div>
+      <div className={styles.noImage}>{t('No image')}</div>
     ) : (
       <img
         src={href}
-        alt={filename || 'Image'}
+        alt={filename || t('Image')}
         onError={() => setImageError(true)}
         style={onFullScreen ? { cursor: 'zoom-in' } : undefined}
         onClick={onFullScreen}
@@ -45,16 +47,16 @@ export function ImageCard({
 
     document: (
       <a href={href} target="_blank" rel="noopener noreferrer">
-        {filename || 'Document'}{extension ? `.${extension}` : ''}
+        {filename || t('Document')}{extension ? `.${extension}` : ''}
       </a>
     ),
 
     base64: showNoImage ? (
-      <div className={styles.noImage}>Kein Bild</div>
+      <div className={styles.noImage}>{t('No image')}</div>
     ) : (
       <img
         src={`data:image/png;base64,${href}`}
-        alt={filename || 'Base64 Image'}
+        alt={filename || t('Image')}
         onError={() => setImageError(true)}
         style={onFullScreen ? { cursor: 'zoom-in' } : undefined}
         onClick={onFullScreen}
@@ -66,7 +68,7 @@ export function ImageCard({
         style={onFullScreen ? { cursor: 'zoom-in' } : undefined}
         onClick={onFullScreen}
         src={href}
-        title={filename || 'Iframe'}
+        title={filename || t('Iframe')}
       />
     ),
   };

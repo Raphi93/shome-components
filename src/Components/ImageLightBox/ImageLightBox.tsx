@@ -2,6 +2,7 @@
 
 import { JSX, useEffect, useState } from 'react';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { usePhonePortraitAndBelowMediaQuery } from '../../hooks/useMediaQuery';
@@ -19,6 +20,7 @@ export function ImageLightBox({
     children,
     setSelectedImageParent,
 }: ImageLightBoxProps) {
+    const { t } = useTranslation();
     const isMobile = usePhonePortraitAndBelowMediaQuery();
     const [imageError, setImageError] = useState(false);
     const [selectedImageState, setSelectedImage] = useState(selectedImage);
@@ -54,11 +56,11 @@ export function ImageLightBox({
 
     const typeMapper: Record<MediaType, JSX.Element> = {
         image: showNoImage ? (
-            <div className={styles.noImage}>Kein Bild</div>
+            <div className={styles.noImage}>{t('No image')}</div>
         ) : (
             <img
                 src={selectedImageState.href ?? ""}
-                alt={selectedImageState.imageId ?? "Image"}
+                alt={selectedImageState.imageId ?? t('Image')}
                 onError={() => setImageError(true)}
                 className={styles["lightbox-image"]}
             />
@@ -86,7 +88,7 @@ export function ImageLightBox({
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                {selectedImageState.imageId ?? "Document"}
+                {selectedImageState.imageId ?? t('Document')}
                 {selectedImageState.format
                     ? `.${selectedImageState.format}`
                     : ""}
@@ -94,11 +96,11 @@ export function ImageLightBox({
         ),
 
         base64: showNoImage ? (
-            <div className={styles.noImage}>Kein Bild</div>
+            <div className={styles.noImage}>{t('No image')}</div>
         ) : (
             <img
                 src={`data:image/png;base64,${selectedImageState.href}`}
-                alt={selectedImageState.imageId ?? "Base64 Image"}
+                alt={selectedImageState.imageId ?? t('Image')}
                 onError={() => setImageError(true)}
                 className={styles["lightbox-image"]}
             />
@@ -107,7 +109,7 @@ export function ImageLightBox({
         iframe: (
             <iframe
                 src={selectedImageState.href ?? ""}
-                title={selectedImageState.imageId ?? "Iframe"}
+                title={selectedImageState.imageId ?? t('Iframe')}
             />
         ),
     };

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { HeaderProps } from './Header.type';
 
@@ -17,6 +18,7 @@ export function Header({
   noSidebar,
   brandName,
 }: HeaderProps) {
+  const { t } = useTranslation();
   return (
     <header className={className}>
       <div className="header-content">
@@ -25,7 +27,7 @@ export function Header({
             <div className="header-image-container">
               <img
                 src={image}
-                alt="Logo"
+                alt={t('Logo')}
                 className={`header-image ${String(brandName ?? '').replace('_', '-').toLowerCase()}`}
               />
             </div>

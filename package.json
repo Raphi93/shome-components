@@ -1,6 +1,6 @@
 {
   "name": "@raphi93/shome-components",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Small React + TypeScript component library with CSS variable theming.",
   "author": "RHUG",
   "license": "MIT",
@@ -64,10 +64,14 @@
     "react-i18next": ">=16.0.0",
     "react-icons": ">=5.0.0",
     "react-responsive": ">=10.0.0",
+    "react-router-dom": ">=6.0.0",
     "react-select": ">=5.0.0",
     "react-speech-recognition": ">=4.0.0",
-    "react-router-dom": ">=6.0.0",
-    "react-spinners": ">=0.17.0"
+    "react-spinners": ">=0.17.0",
+    "@tiptap/react": ">=3.0.0",
+    "@tiptap/starter-kit": ">=3.0.0",
+    "@tiptap/extension-placeholder": ">=3.0.0",
+    "tiptap-markdown": ">=0.8.0"
   },
   "peerDependenciesMeta": {
     "next": {
@@ -91,8 +95,24 @@
     "react-speech-recognition": {
       "optional": true
     },
-    "react-router-dom": { "optional": true },
-    "react-spinners": { "optional": true }
+    "react-router-dom": {
+      "optional": true
+    },
+    "react-spinners": {
+      "optional": true
+    },
+    "@tiptap/react": {
+      "optional": true
+    },
+    "@tiptap/starter-kit": {
+      "optional": true
+    },
+    "@tiptap/extension-placeholder": {
+      "optional": true
+    },
+    "tiptap-markdown": {
+      "optional": true
+    }
   },
   "dependencies": {
     "classnames": "^2.5.1",
@@ -103,11 +123,15 @@
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@rollup/plugin-typescript": "^12.3.0",
+    "@tiptap/extension-placeholder": "^3.22.1",
+    "@tiptap/react": "^3.22.1",
+    "@tiptap/starter-kit": "^3.22.1",
     "@types/lodash": "^4.17.24",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-speech-recognition": "^3.9.6",
+    "@types/turndown": "^5.0.6",
     "@typescript-eslint/eslint-plugin": "^8.58.0",
     "@typescript-eslint/parser": "^8.58.0",
     "autoprefixer": "^10.4.27",
@@ -126,6 +150,8 @@
     "sass": "^1.99.0",
     "sass-loader": "^16.0.7",
     "style-loader": "^4.0.0",
+    "tiptap-markdown": "^0.9.0",
+    "turndown": "^7.2.4",
     "typescript": "^6.0.2"
   }
 }

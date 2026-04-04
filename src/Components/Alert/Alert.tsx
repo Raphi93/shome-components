@@ -3,6 +3,7 @@
 import React from 'react';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
 
 import { AlertProps } from './Alert.type';
 
@@ -44,12 +45,15 @@ const Alert: React.FC<AlertProps> = ({
   confirmButtonHandler,
   cancelButtonHandler,
   isOkDisabled = false,
-  confirmTitlle = 'Ok',
-  cancelTitle = 'Cancel',
+  confirmTitlle,
+  cancelTitle,
   icon = faCircleXmark,
   color = 'brand',
 }) => {
+  const { t } = useTranslation();
   if (!isOpened) return null;
+  const resolvedConfirm = confirmTitlle ?? t('Ok');
+  const resolvedCancel = cancelTitle ?? t('Cancel');
 
   return (
     <div className="alert-overlay">
@@ -65,7 +69,7 @@ const Alert: React.FC<AlertProps> = ({
             onClick={cancelButtonHandler || (() => setIsOpened?.(false))}
             disabled={isOkDisabled}
           >
-            {cancelTitle}
+            {resolvedCancel}
           </button>
           <button
             className={`alert-button ${color}-confirm `}
@@ -77,7 +81,7 @@ const Alert: React.FC<AlertProps> = ({
             }}
             disabled={isOkDisabled}
           >
-            {confirmTitlle}
+            {resolvedConfirm}
           </button>
         </div>
       </div>
