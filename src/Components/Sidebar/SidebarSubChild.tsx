@@ -6,7 +6,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faArrowLeft, faCircleExclamation, faX } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../Tooltip/Tooltip";
 import { NavigationItem } from '../../types';

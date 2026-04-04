@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from "react";
+import React from "react";
 import { ReactNode, useLayoutEffect, useRef } from "react";
 
 import style from "./PdcFieldSet.module.scss";

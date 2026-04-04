@@ -6,8 +6,7 @@ import Link from "next/link";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { LabelNameWithTooltip } from "./Sidebar";
-import path from "path";
+import { LabelNameWithTooltip } from './SidebarLabel';
 import { NavigationItem } from '../../types';
 
 

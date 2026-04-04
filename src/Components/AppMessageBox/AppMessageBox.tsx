@@ -26,7 +26,7 @@ export type { AppMessageBoxProps } from './AppMessageBox.type';
  */
 export const AppMessageBox = (props: AppMessageBoxProps) => {
   const { hideTimeout = 8000, setMessage, autoScroll = true, ...rest } = props;
-  const intervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const intervalRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     intervalRef.current = setTimeout(() => {

@@ -1,9 +1,8 @@
 'use client';
 
-import { ChangeEventHandler, CSSProperties, FocusEventHandler, JSX, ReactNode, useCallback, useState } from 'react';
+import { ChangeEventHandler, CSSProperties, FocusEventHandler, JSX, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import clx from 'classnames';
-import { debounce } from 'lodash';
 
 import { ActionWrapper } from '../Actions/ActionElement';
 import ErrorText from '../ErrorText/ErrorText';

@@ -12,7 +12,7 @@ import { SidebarChildItem } from "./SidebarChildItem";
 
 import "./Sidebar.scss";
 import { NavigationItem } from '../../types';
-import { LabelNameWithTooltip } from ".";
+import { LabelNameWithTooltip } from './SidebarLabel';
 
 interface SidebarItemProps {
   item: NavigationItem;

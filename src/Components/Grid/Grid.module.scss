@@ -1,5 +1,4 @@
-@use '../../styles/abstracts' as *;
-@use '../Button/Button.module' as button;
+@use '../../Styles/abstracts' as *;
 
 :root {
   /* Header colors (existing API) */
@@ -44,7 +43,8 @@
 
   & > a,
   & > button {
-    @include button.small;
+    --pdc-btn-height: 2rem;
+    --pdc-btn-px: 0.5rem;
 
     color: var(--color-text-inverted);
     margin: calc(var(--spacing) * 0.5);

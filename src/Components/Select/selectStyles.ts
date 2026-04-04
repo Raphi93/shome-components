@@ -4,13 +4,30 @@ import type { TSelectOption } from './Select.type';
 
 export const getMultiSelectStyles = (color?: string, colorActive?: string) => {
   return {
-    menu: (provided: CSSObjectWithLabel) => ({ ...provided, zIndex: 100 }),
+    menu: (provided: CSSObjectWithLabel) => ({
+      ...provided,
+      zIndex: 100,
+      backgroundColor: 'var(--input-background, #ffffff)',
+      color: 'var(--input-color, inherit)',
+    }),
+    option: (provided: CSSObjectWithLabel, state: any) => ({
+      ...provided,
+      cursor: 'pointer',
+      minHeight: '40px',
+      backgroundColor: state.isSelected
+        ? 'var(--color-primary-dark)'
+        : state.isFocused
+        ? 'var(--color-primary-light, #addcff)'
+        : 'var(--input-background, #ffffff)',
+      color: state.isSelected ? '#ffffff' : 'var(--input-color, inherit)',
+    }),
     control: (provided: CSSObjectWithLabel, state: ControlProps<TSelectOption>) => ({
       ...provided,
       cursor: 'pointer',
-      backgroundColor: state.isDisabled ? 'var(--color-gray-200)' : provided.backgroundColor,
+      backgroundColor: state.isDisabled ? 'var(--color-gray-200)' : 'var(--input-background, #ffffff)',
       boxShadow: state.isFocused ? '0 0 0 2px var(--input-focus-outline-color)' : provided.borderColor,
       borderColor: state.isFocused ? 'var(--color-primary-dark)' : 'var(--color-gray-400)',
+      color: 'var(--input-color, inherit)',
       paddingTop: '1px',
       paddingBottom: '1px',
     }),
@@ -34,11 +51,6 @@ export const getMultiSelectStyles = (color?: string, colorActive?: string) => {
         backgroundColor: color ? color : 'var(--color-primary-dark)',
         color: 'white',
       },
-    }),
-    option: (provided: CSSObjectWithLabel) => ({
-      ...provided,
-      cursor: 'pointer',
-      minHeight: '40px',
     }),
   };
 };

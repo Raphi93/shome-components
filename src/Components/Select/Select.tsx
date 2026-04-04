@@ -14,9 +14,7 @@ import { getMultiselectBorderLabelStyles, getMultiSelectStyles, getMultiSelectTh
 
 import type {
   IconLabel,
-  MultiSelectProps,
   MultiValue,
-  SingleSelectProps,
   SingleValue,
   TSelectOption,
   TSelectProps,

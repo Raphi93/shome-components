@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { SidebarItem } from './SidebarItem';
@@ -9,113 +8,15 @@ import { SidebarLogoSection } from './SidebarLogoSection';
 import { SidebarLogoSectionMobile } from './SidebarLogoSectionMobile';
 import { SidebarSpecialMenuChange } from './SidebarSpecialMenuChange';
 import { useLocationSidebar } from './useLocationSidebar';
-import { Tooltip, TooltipContent, TooltipTrigger } from '../Tooltip/Tooltip';
 
 import type { SidebarProps } from './Sidebar.type';
+import type { NavigationItem } from '../../types';
 export type { SidebarProps } from './Sidebar.type';
+export { useIsOverflow, LabelNameWithTooltip } from './SidebarLabel';
 
 import './Sidebar.scss';
 
 const normalize = (p: string) => p.replace(/\/+$/, "");
-
-export function useIsOverflow<T extends HTMLElement>(ref: React.RefObject<T>, deps: any[] = []) {
-  const [isOverflow, setIsOverflow] = useState(false);
-  const last = useRef<boolean>(false);
-
-  useLayoutEffect(() => {
-    const el = ref.current;
-    if (!el) {
-      last.current = false;
-      setIsOverflow(false);
-      return;
-    }
-
-    const compute = () => {
-      const cw = el.clientWidth;
-      const sw = el.scrollWidth;
-      if (cw === 0 || sw === 0) return null;
-      return sw - cw > 1;
-    };
-
-    const apply = () => {
-      const nextOrNull = compute();
-      if (nextOrNull === null) return;
-
-      const next = nextOrNull;
-      if (last.current !== next) {
-        last.current = next;
-        setIsOverflow(next);
-      }
-    };
-
-    const onResize = () => apply();
-    const ro = new ResizeObserver(() => apply());
-    const raf = requestAnimationFrame(() => apply());
-
-    ro.observe(el);
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      ro.disconnect();
-      window.removeEventListener("resize", onResize);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref, ...deps]);
-
-  return isOverflow;
-}
-
-
-function rightsTranslate(rights: string, t: (key: string) => string): string {
-  const allowed = RIGHTS_ORDER
-    .map((key, index) => (rights[index] !== "-" ? t(mapRights[key]) : null))
-    .filter(Boolean);
-
-  return String(allowed[allowed.length - 1] || "");
-}
-
-export function LabelNameWithTooltip({ itemName, rights, t }: { itemName: string; rights?: string; t: (key: string) => string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isOverflow = useIsOverflow(ref as React.RefObject<HTMLElement>);
-
-  const label = (
-    <span className="menu-name" ref={ref}>
-      {itemName}
-    </span>
-  );
-
-  const hasRights = !!rights && rights.trim() !== "";
-
-  if (!isOverflow && !hasRights) return label;
-
-  const translatedRights = hasRights ? rightsTranslate(rights!, t) : "";
-
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>{label}</TooltipTrigger>
-      <TooltipContent>
-        <div className="tooltip-content-menu">
-          {translatedRights && <div className="tooltip-rights">{translatedRights}</div>}
-          {isOverflow && <div className="tooltip-item-name">{itemName}</div>}
-        </div>
-      </TooltipContent>
-    </Tooltip>
-  );
-}
-
-
-const RIGHTS_ORDER = ["A", "I", "N", "Z", "F", "G", "M", "P"];
-const mapRights: Record<string, string> = {
-  A: "Admin",
-  I: "Intern",
-  N: "Named",
-  Z: "Zone",
-  F: "Fleet",
-  G: "Groups",
-  M: "Dealer",
-  P: "Person",
-};
 
 
 export function Sidebar({

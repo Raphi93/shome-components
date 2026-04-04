@@ -18,7 +18,6 @@ export function useDebouncedInput({
 }: UseDebouncedInputProps) {
   const [internalValue, setInternalValue] = useState(value ?? defaultValue ?? '');
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedOnChange = useCallback(
     debounce((newValue: string) => {
       if (onChange) {
