@@ -1,2 +1,1 @@
-export * from "./PdcFieldSet";
-export * from "./FieldSet";
+export * from './FieldSet';

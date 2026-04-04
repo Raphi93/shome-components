@@ -1,72 +1,153 @@
-import React from "react";
-import classNames from "classnames";
+'use client';
 
-import styles from "./FieldSet.module.scss";
+import React, { useState } from 'react';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import clsx from 'clsx';
 
-export type FieldSetProps = {
-  title: string;
-  children: React.ReactNode;
-  headerChildren?: React.ReactNode;
-  headerClassName?: string;
-  className?: string;
-  childrenClassName?: string;
-  disabled?: boolean;
-};
+import s from './FieldSet.module.scss';
+import type { FieldSetProps, FieldSetColumnProps } from './FieldSet.types';
 
+// Re-export all public types and the sizeMapper from the types file.
+export type {
+  FieldSetHeaderColor,
+  FieldSetTitleTag,
+  sizeType,
+  FieldSetProps,
+  FieldSetColumnProps,
+} from './FieldSet.types';
+export { sizeMapper } from './FieldSet.types';
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+/** Maps a sizeType number to a valid CSS module class name (12.5 → "size-12-5"). */
+function sizeClass(size: number): string {
+  return `size-${String(size).replace('.', '-')}`;
+}
+
+// ─── FieldSet ─────────────────────────────────────────────────────────────────
+
+/**
+ * Container component that groups related form fields or content.
+ *
+ * - Without `border` or `shadow`: transparent layout wrapper (no visual card).
+ * - With `border`: card with inset outline.
+ * - With `shadow`: card with drop shadow.
+ * - With `isExpandable`: content is collapsible via a chevron in the header.
+ *
+ * @example
+ * <FieldSet title="Contact" border>
+ *   <FieldSetColumn size={50}>...</FieldSetColumn>
+ *   <FieldSetColumn size={50}>...</FieldSetColumn>
+ * </FieldSet>
+ */
 export function FieldSet({
   title,
+  titleAs: Title = 'h2',
+  titleSize,
+  titleWeight,
   children,
   headerChildren,
   headerClassName,
   className,
-  childrenClassName,
+  contentClassName,
   disabled,
+  border       = false,
+  shadow       = false,
+  headerColor  = 'default',
+  isExpandable = false,
+  defaultOpen  = true,
 }: FieldSetProps) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  const hasHeader = !!title || !!headerChildren;
+  const isCard    = border || shadow;
+  const toggle    = () => setIsOpen((prev) => !prev);
+
+  const content = (
+    <div className={clsx(s.content, contentClassName)}>
+      {children}
+    </div>
+  );
+
   return (
     <fieldset
-      className={classNames(styles["header-cards-container"], styles["special-card"], className)}
+      className={clsx(
+        s.fieldset,
+        border && s.border,
+        shadow && s.shadow,
+        // card without header: skip the top-padding gap normally reserved for header
+        isCard && !hasHeader && s['no-header'],
+        className,
+      )}
       disabled={disabled}
     >
-      <div className={classNames(styles["header-container"], headerClassName)}>
-        <div className={styles["header-title"]}>{title}</div>
-        {headerChildren && <div className={styles["header-children"]}>{headerChildren}</div>}
-      </div>
+      {hasHeader && (
+        <header
+          className={clsx(
+            s.header,
+            s[`header-${headerColor}`],
+            isExpandable && s.clickable,
+            // hook class for app-level branding overrides
+            'branding-fieldset-header',
+            headerClassName,
+          )}
+          style={{
+            // inject title style as CSS custom properties so SCSS can consume them
+            ...(titleSize   && { '--fs-title-size':   typeof titleSize   === 'number' ? `${titleSize}px`   : titleSize   }),
+            ...(titleWeight && { '--fs-title-weight':  typeof titleWeight === 'number' ? String(titleWeight) : titleWeight }),
+          } as React.CSSProperties}
+          onClick={isExpandable ? toggle : undefined}
+        >
+          {title && <Title className={s.title}>{title}</Title>}
 
-      <div className={classNames(styles["children-container"], childrenClassName)}>{children}</div>
+          {headerChildren && (
+            <div className={s['header-children']}>{headerChildren}</div>
+          )}
+
+          {isExpandable && (
+            <FontAwesomeIcon
+              icon={faChevronDown}
+              className={clsx(s['expand-icon'], isOpen && s.open)}
+              // stopPropagation so clicking the icon doesn't also fire the header onClick
+              onClick={(e) => { e.stopPropagation(); toggle(); }}
+            />
+          )}
+        </header>
+      )}
+
+      {isExpandable ? (
+        <div className={clsx(s['expandable-content'], isOpen ? s.open : s.closed)}>
+          {content}
+        </div>
+      ) : content}
     </fieldset>
   );
 }
 
-export type sizeType = 10 | 20 | 25 | 30 | 40 | 50 | 60 | 70 | 75 | 80 | 90 | 100;
+// ─── FieldSetColumn ───────────────────────────────────────────────────────────
 
-export const sizeMapper: Record<string, sizeType> = {
-  xxs: 10,
-  xs: 20,
-  s: 25,
-  m: 30,
-  l: 50,
-  xl: 70,
-  xxl: 75,
-  xxxl: 100,
-};
-
+/**
+ * Flex column to be used as a direct child of `FieldSet`.
+ * Stacks to full width on viewports ≤ 767px.
+ *
+ * @example
+ * <FieldSetColumn size={33}>left third</FieldSetColumn>
+ * <FieldSetColumn size={66}>right two-thirds</FieldSetColumn>
+ */
 export function FieldSetColumn({
   size,
   minWidth,
   children,
   className,
-}: {
-  size: sizeType;
-  minWidth?: number | string;
-  children: React.ReactNode;
-  className?: string;
-}) {
-  const mw = typeof minWidth === "number" ? `${minWidth}px` : minWidth;
+}: FieldSetColumnProps) {
+  const mw = typeof minWidth === 'number' ? `${minWidth}px` : minWidth;
 
   return (
     <div
-      className={classNames(styles["field-set-column"], styles[`size-${size}`], className)}
-      style={mw ? ({ ["--fsc-min-width" as any]: mw } as React.CSSProperties) : undefined}
+      className={clsx(s.column, s[sizeClass(size)], className)}
+      // --fsc-min-width prevents the column from collapsing below this threshold
+      style={mw ? ({ '--fsc-min-width': mw } as React.CSSProperties) : undefined}
     >
       {children}
     </div>

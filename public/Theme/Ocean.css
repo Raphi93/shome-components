@@ -1,0 +1,330 @@
+/* =============================================================================
+   OCEAN LIGHT (shallow reef — snorkeling at noon)
+   ============================================================================= */
+:root {
+  --border-radius-small: 8px;
+  --border-radius:       16px;
+  --border-radius-large: 24px;
+
+  /* Brand — ocean blue */
+  --color-brand:          #0077b6;
+  --color-brand-rgb:      0, 119, 182;
+  --color-brand-contrast: #ffffff;
+
+  /* Primary ladder — ocean blue */
+  --color-primary-darkest: #012a4a;
+  --color-primary-dark:    #014f80;
+  --color-primary-semidark:#0369a1;
+  --color-primary:         #0077b6;
+  --color-primary-light:   #48cae4;
+  --color-primary-base:    #0077b6;
+  --color-primary-rgb:     0, 119, 182;
+  --color-primary-contrast:#ffffff;
+
+  /* Required tokens */
+  --color-background: #e8f4f8;
+  --color-surface:    rgba(255, 255, 255, 0.90);
+  --color-border:     rgba(0, 119, 182, 0.22);
+  --color-text:       rgba(1, 42, 74, 0.90);
+  --color-text-muted: rgba(3, 105, 161, 0.65);
+
+  /* Inputs */
+  --input-background:        rgba(255, 255, 255, 0.92);
+  --input-color:             rgba(1, 42, 74, 0.90);
+  --input-border:            rgba(0, 119, 182, 0.30);
+  --input-label-color:       rgba(1, 42, 74, 0.82);
+  --input-placeholder-color: rgba(3, 105, 161, 0.52);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        var(--color-primary-semidark);
+  --color-label-active:        var(--color-press-effect);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(0, 119, 182, 0.28);
+  --scrollbar-color-hover:  rgba(0, 119, 182, 0.50);
+  --scrollbar-color-active: var(--color-accent);
+
+  /* Shadows — soft blue-tinted */
+  --color-box-shadow: rgba(0, 60, 100, 0.14);
+  --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(0, 60, 100, 0.10);
+  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(0, 60, 100, 0.14);
+  --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(0, 60, 100, 0.14);
+  --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(0, 60, 100, 0.14);
+  --shadow-neon:
+    0 0 0.30rem rgba(0, 119, 182, 0.26),
+    0 0 0.90rem rgba(0, 180, 216, 0.16),
+    0 0 1.60rem rgba(4, 196, 160, 0.10);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(0, 119, 182, 0.22);
+  --nav-actions-color:        rgba(232, 248, 255, 0.95);
+  --nav-toggle-color:         rgba(232, 248, 255, 0.95);
+  --nav-current-module-color: rgba(232, 248, 255, 0.95);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(1, 18, 34, 0.97) 0%,
+      rgba(1, 42, 74, 0.92) 100%);
+  --color-mod-nav-theme-header-color: rgba(232, 248, 255, 0.95);
+
+  --color-mod-nav-theme:
+    linear-gradient(180deg,
+      rgba(0, 180, 216, 0.22) 0%,
+      rgba(0, 119, 182, 0.16) 55%,
+      rgba(4, 196, 160, 0.10) 100%),
+    rgba(1, 30, 55, 0.90);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(1, 18, 34, 0.94);
+  --color-mod-nav-theme-contrast:  rgba(232, 248, 255, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(255, 255, 255, 0.84);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.94) 0%,
+      rgba(0, 180, 216, 0.07) 50%,
+      rgba(4, 196, 160, 0.05) 100%);
+
+  /* Sidebar */
+  --sidebar-level-0-color: #010e1c;
+  --sidebar-level-1-color: #011628;
+
+  --color-sidebar-text:              rgba(210, 240, 255, 0.90);
+  --color-sidebar-selected:          rgba(0, 180, 216, 0.22);
+  --color-sidebar-selected-text:     rgba(232, 248, 255, 0.98);
+  --color-sidebar-env-text:          rgba(4, 245, 208, 0.90);
+
+  --color-sidebar-selected-child:       rgba(0, 119, 182, 0.16);
+  --color-sidebar-selected-subchild:    rgba(4, 196, 160, 0.20);
+
+  --color-sidebar-selected-child-text:    rgba(232, 248, 255, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(232, 248, 255, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(0, 180, 216, 0.12);
+
+  /* Buttons */
+  --button-color:                      #ffffff;
+  --button-color-hover:                #ffffff;
+  --button-background-color:           var(--color-primary-dark);
+  --button-background-color-hover:     var(--color-primary);
+
+  --button-color-secondary:            #ffffff;
+  --button-color-hover-secondary:      #ffffff;
+  --button-background-color-secondary:       rgba(4, 196, 160, 0.18);
+  --button-background-color-hover-secondary: var(--color-accent);
+
+  --button-background-color-light-rgb:       rgba(0, 119, 182, 0.14);
+  --button-color-light:                      var(--color-primary-dark);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(4, 196, 160, 0.14);
+  --button-color-light-secondary:                var(--color-accent);
+  --button-color-hover-light-secondary:          #ffffff;
+  --button-background-color-hover-light-secondary: var(--color-accent);
+
+  /* Grid */
+  --grid-head-color:             rgba(232, 248, 255, 0.96);
+  --grid-head-background:        rgba(1, 18, 34, 0.95);
+  --grid-head-background-active: rgba(0, 180, 216, 0.28);
+  --grid-head-hover:             rgba(4, 196, 160, 0.18);
+
+  --color-grid-hover:          rgba(0, 180, 216, 0.06);
+  --color-grid-selected-hover: rgba(0, 119, 182, 0.10);
+  --color-grid-selected:       rgba(0, 180, 216, 0.07);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(0, 119, 182, 0.90)  0%,
+      rgba(0, 180, 216, 0.90)  55%,
+      rgba(4, 196, 160, 0.80)  100%);
+  --progressbar-text-color: var(--color-text);
+}
+
+
+/* =============================================================================
+   OCEAN DARK (abyssal deep — near-black navy, bioluminescent cyan)
+   ============================================================================= */
+:root[data-theme="dark"] {
+  /* Brand — bioluminescent cyan */
+  --color-brand:          #04f5d0;
+  --color-brand-rgb:      4, 245, 208;
+  --color-brand-contrast: #020810;
+
+  /* Primary ladder — deep navy */
+  --color-primary-darkest: #020810;
+  --color-primary-dark:    #023e58;
+  --color-primary-semidark:#035e80;
+  --color-primary:         #0096b7;
+  --color-primary-light:   #00b4d8;
+  --color-primary-rgb:     0, 150, 183;
+  --color-primary-contrast:#020810;
+
+  /* Accent */
+  --color-accent:     #04c4a0;
+  --color-accent-rgb: 4, 196, 160;
+
+  /* Required tokens */
+  --color-background: #030a12;
+  --color-surface:    rgba(4, 12, 22, 0.88);
+  --color-border:     rgba(4, 245, 208, 0.18);
+  --color-text:       rgba(210, 248, 255, 0.94);
+  --color-text-muted: rgba(130, 210, 230, 0.68);
+
+  /* Inputs */
+  --input-background:        rgba(2, 8, 16, 0.78);
+  --input-color:             rgba(210, 248, 255, 0.94);
+  --input-border:            rgba(4, 245, 208, 0.22);
+  --input-label-color:       rgba(210, 248, 255, 0.90);
+  --input-placeholder-color: rgba(130, 210, 230, 0.52);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        rgba(210, 248, 255, 0.94);
+  --color-label-active:        rgba(210, 248, 255, 0.94);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(4, 245, 208, 0.20);
+  --scrollbar-color-hover:  rgba(4, 245, 208, 0.38);
+  --scrollbar-color-active: var(--color-brand);
+
+  /* Shadows / Neon — bioluminescent 4-layer cyan glow */
+  --color-box-shadow: rgba(0, 0, 0, 0.85);
+  --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(0, 0, 0, 0.70);
+  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(0, 0, 0, 0.80);
+  --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(0, 0, 0, 0.80);
+  --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(0, 0, 0, 0.80);
+  --shadow-neon:
+    0 0 0.40rem rgba(4, 245, 208, 0.55),
+    0 0 1.20rem rgba(4, 245, 208, 0.36),
+    0 0 2.50rem rgba(0, 150, 183, 0.22),
+    0 0 4.00rem rgba(4, 196, 160, 0.10);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(4, 245, 208, 0.16);
+  --nav-actions-color:        rgba(210, 248, 255, 0.92);
+  --nav-toggle-color:         rgba(210, 248, 255, 0.92);
+  --nav-current-module-color: rgba(210, 248, 255, 0.92);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(2, 5, 10, 0.98) 0%,
+      rgba(3, 10, 18, 0.88) 100%);
+  --color-mod-nav-theme-header-color: rgba(210, 248, 255, 0.95);
+
+  --color-mod-nav-theme: linear-gradient(180deg,
+      rgba(4, 245, 208, 0.18) 0%,
+      rgba(0, 150, 183, 0.14) 55%,
+      rgba(4, 196, 160, 0.08) 100%),
+    rgba(2, 8, 16, 0.92);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(2, 5, 10, 0.90);
+  --color-mod-nav-theme-contrast:  rgba(210, 248, 255, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(4, 12, 22, 0.72);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(4, 12, 22, 0.96) 0%,
+      rgba(4, 245, 208, 0.10) 30%,
+      rgba(0, 150, 183, 0.08) 62%,
+      rgba(4, 196, 160, 0.05) 100%);
+
+  /* Sidebar */
+  --sidebar-level-0-color: #020608;
+  --sidebar-level-1-color: #030a0e;
+
+  --color-sidebar-text:           rgba(210, 248, 255, 0.92);
+  --color-sidebar-selected:       rgba(4, 245, 208, 0.20);
+  --color-sidebar-selected-text:  rgba(210, 248, 255, 0.96);
+  --color-sidebar-env-text:       rgba(4, 245, 208, 0.92);
+
+  --color-sidebar-selected-child:       rgba(4, 245, 208, 0.14);
+  --color-sidebar-selected-subchild:    rgba(0, 150, 183, 0.22);
+
+  --color-sidebar-selected-child-text:    rgba(210, 248, 255, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(210, 248, 255, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(4, 245, 208, 0.12);
+
+  /* Buttons */
+  --button-color:                       #020810;
+  --button-color-hover:                 #020810;
+  --button-background-color:            var(--color-primary-dark);
+  --button-background-color-hover:      var(--color-brand);
+
+  --button-color-secondary:             #020810;
+  --button-color-hover-secondary:       #020810;
+  --button-background-color-secondary:       rgba(4, 245, 208, 0.18);
+  --button-background-color-hover-secondary: var(--color-brand);
+
+  --button-background-color-light-rgb:       rgba(0, 150, 183, 0.18);
+  --button-color-light:                      var(--color-brand);
+  --button-color-hover-light:                #020810;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(4, 245, 208, 0.14);
+  --button-color-light-secondary:                rgba(4, 245, 208, 0.90);
+  --button-color-hover-light-secondary:          #020810;
+  --button-background-color-hover-light-secondary: var(--color-brand);
+
+  /* Grid */
+  --grid-head-color:             rgba(210, 248, 255, 0.95);
+  --grid-head-background:        var(--color-primary-darkest);
+  --grid-head-background-active: rgba(4, 245, 208, 0.22);
+  --grid-head-hover:             rgba(0, 150, 183, 0.18);
+
+  --color-grid-hover:          rgba(4, 245, 208, 0.06);
+  --color-grid-selected-hover: rgba(4, 245, 208, 0.10);
+  --color-grid-selected:       rgba(4, 245, 208, 0.08);
+
+  --grid-surface:  rgba(4, 10, 18, 0.85);
+  --pager-surface: rgba(4, 10, 18, 0.80);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(4, 245, 208, 0.90)  0%,
+      rgba(0, 150, 183, 0.88)  55%,
+      rgba(4, 196, 160, 0.75)  100%);
+  --progressbar-text-color: rgba(210, 248, 255, 0.92);
+}
+
+
+/* =============================================================================
+   BODY BACKGROUNDS
+   ============================================================================= */
+
+body {
+  background-attachment: fixed;
+  background:
+    linear-gradient(rgba(232, 244, 248, 0.60), rgba(232, 244, 248, 0.60)),
+    radial-gradient(1400px 500px at 50% -10%,  rgba(0, 180, 216, 0.38), transparent 65%),
+    radial-gradient(800px  900px at 15%  30%,  rgba(0, 119, 182, 0.28), transparent 65%),
+    radial-gradient(800px  900px at 85%  25%,  rgba(72, 202, 228, 0.24), transparent 65%),
+    radial-gradient(1200px 400px at 50% 110%,  rgba(210, 180, 120, 0.20), transparent 70%),
+    radial-gradient(600px  300px at 30%  80%,  rgba(4, 196, 160, 0.14), transparent 65%),
+    linear-gradient(180deg,
+      rgba(0, 180, 216, 0.10) 0%,
+      rgba(232, 244, 248, 0.96) 45%,
+      rgba(210, 190, 140, 0.08) 100%);
+}
+
+html[data-theme="dark"] body,
+body[data-theme="dark"] {
+  background-attachment: fixed;
+  background:
+    radial-gradient(circle at center, rgba(0, 0, 0, 0.82) 15%, var(--color-background) 85%),
+    radial-gradient(700px  500px at 20%  30%,  rgba(4, 245, 208, 0.18), transparent 60%),
+    radial-gradient(500px  400px at 75%  55%,  rgba(4, 245, 208, 0.12), transparent 60%),
+    radial-gradient(600px  350px at 50%  80%,  rgba(0, 150, 183, 0.14), transparent 60%),
+    radial-gradient(300px  250px at 10%  70%,  rgba(4, 196, 160, 0.10), transparent 60%),
+    radial-gradient(400px  300px at 88%  15%,  rgba(4, 245, 208, 0.08), transparent 55%),
+    radial-gradient(ellipse 120% 40% at 50% 100%, rgba(0, 0, 0, 0.60), transparent 80%),
+    repeating-linear-gradient(0deg, rgba(4, 245, 208, 0.008) 0px, transparent 1px, transparent 120px),
+    #030a12;
+}

@@ -1,0 +1,355 @@
+/* =============================================================================
+   RETRO GAMING THEME
+   Light: Klassisches Konsolen-Grau — SNES/NES Ära
+   Dark:  CRT-Monitor — Phosphor-Grün, Scanlines, Arcade-Feeling
+   ============================================================================= */
+
+/* ─── SHARED PALETTE ─────────────────────────────────────────────────────────── */
+:root {
+  --color-accent:     #f8c000;
+  --color-accent-rgb: 248, 192, 0;
+
+  /* Dashboard border — 8-bit Farb-Attrakt-Mode */
+  --dashboard-border-size:    2px;
+  --dashboard-border-opacity: 1;
+  --dashboard-border-gradient: conic-gradient(from 0turn,
+      #e60012,
+      #f8c000,
+      #00c853,
+      #00aaff,
+      #cc00cc,
+      #e60012);
+  --dashboard-special-hover: retroAttract 3s steps(60) infinite;
+  --dashboard-border-filter:  none;
+}
+
+@keyframes retroAttract {
+  0%   { filter: hue-rotate(0deg);   }
+  100% { filter: hue-rotate(360deg); }
+}
+
+
+/* =============================================================================
+   RETRO GAMING LIGHT (SNES / Konsolen-Grau)
+   ============================================================================= */
+:root {
+  /* Pixel-sharp — keine runden Ecken */
+  --border-radius-small: 0px;
+  --border-radius:       2px;
+  --border-radius-large: 4px;
+
+  /* Brand — Arcade Red */
+  --color-brand:          #cc0011;
+  --color-brand-rgb:      204, 0, 17;
+  --color-brand-contrast: #ffffff;
+
+  /* Primary ladder — Midnight Navy (NES-Cartridge) */
+  --color-primary-darkest: #0a0a2e;
+  --color-primary-dark:    #1a1a6e;
+  --color-primary-semidark:#2828a8;
+  --color-primary:         #3838d0;
+  --color-primary-light:   #6060e0;
+  --color-primary-base:    #2828a8;
+  --color-primary-rgb:     56, 56, 208;
+  --color-primary-contrast:#ffffff;
+
+  /* Required tokens */
+  --color-background: #b8c8d4;
+  --color-surface:    #d8dce2;
+  --color-border:     #8898a8;
+  --color-text:       #141018;
+  --color-text-muted: #445060;
+
+  /* Inputs */
+  --input-background:        #e8ecf0;
+  --input-color:             #141018;
+  --input-border:            #8898a8;
+  --input-label-color:       #1e2430;
+  --input-placeholder-color: #788898;
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        var(--color-primary-semidark);
+  --color-label-active:        var(--color-press-effect);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(204, 0, 17, 0.30);
+  --scrollbar-color-hover:  rgba(204, 0, 17, 0.55);
+  --scrollbar-color-active: var(--color-primary-dark);
+
+  /* Shadows — hart und pixelig */
+  --color-box-shadow: rgba(10, 10, 40, 0.30);
+  --shadow-00: 2px 2px 0 rgba(10, 10, 40, 0.25);
+  --shadow-01: 3px 3px 0 rgba(10, 10, 40, 0.30);
+  --shadow-02: 4px 4px 0 rgba(10, 10, 40, 0.30);
+  --shadow-03: 6px 6px 0 rgba(10, 10, 40, 0.30);
+  --shadow-neon:
+    3px 3px 0 rgba(204, 0, 17, 0.60),
+    0 0 0.50rem rgba(204, 0, 17, 0.20);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           #8898a8;
+  --nav-actions-color:        #e8eef4;
+  --nav-toggle-color:         #e8eef4;
+  --nav-current-module-color: #e8eef4;
+
+  --color-mod-nav-theme-header:       #1a1a6e;
+  --color-mod-nav-theme-header-color: #e8eef4;
+
+  --color-mod-nav-theme:           #0a0a2e;
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: #1a1a6e;
+  --color-mod-nav-theme-contrast:  #e8eef4;
+
+  /* Cards */
+  --color-card-background: #d8dce2;
+  --color-card-dashboard-background: linear-gradient(180deg,
+      #d8dce2 0%,
+      #c8d4dc 100%);
+
+  /* Sidebar — dunkles Controller-Schwarz */
+  --sidebar-level-0-color: #181828;
+  --sidebar-level-1-color: #10101e;
+
+  --color-sidebar-text:              #c8d8e8;
+  --color-sidebar-selected:          rgba(204, 0, 17, 0.25);
+  --color-sidebar-selected-text:     #ffffff;
+  --color-sidebar-env-text:          #f8c000;
+
+  --color-sidebar-selected-child:       rgba(204, 0, 17, 0.18);
+  --color-sidebar-selected-subchild:    rgba(56, 56, 208, 0.25);
+
+  --color-sidebar-selected-child-text:    #ffffff;
+  --color-sidebar-selected-subchild-text: #ffffff;
+
+  --sidebar-selected-submenu-hover: rgba(204, 0, 17, 0.14);
+
+  /* Buttons */
+  --button-color:                      #ffffff;
+  --button-color-hover:                #ffffff;
+  --button-background-color:           var(--color-primary-dark);
+  --button-background-color-hover:     var(--color-brand);
+
+  --button-color-secondary:            #ffffff;
+  --button-color-hover-secondary:      #ffffff;
+  --button-background-color-secondary:       var(--color-brand);
+  --button-background-color-hover-secondary: var(--color-primary-dark);
+
+  --button-background-color-light-rgb:       rgba(56, 56, 208, 0.14);
+  --button-color-light:                      var(--color-primary-dark);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(204, 0, 17, 0.14);
+  --button-color-light-secondary:                var(--color-brand);
+  --button-color-hover-light-secondary:          #ffffff;
+  --button-background-color-hover-light-secondary: var(--color-brand);
+
+  /* Grid */
+  --grid-head-color:             #e8eef4;
+  --grid-head-background:        var(--color-primary-darkest);
+  --grid-head-background-active: var(--color-brand);
+  --grid-head-hover:             var(--color-primary-dark);
+
+  --color-grid-hover:          rgba(204, 0, 17, 0.07);
+  --color-grid-selected-hover: rgba(204, 0, 17, 0.12);
+  --color-grid-selected:       rgba(204, 0, 17, 0.08);
+
+  --progressbar-color: linear-gradient(90deg,
+      #e60012 0%,
+      #f8c000 40%,
+      #00c853 100%);
+  --progressbar-text-color: var(--color-text);
+}
+
+
+/* =============================================================================
+   RETRO GAMING DARK (CRT-Monitor — Phosphor Grün)
+   ============================================================================= */
+:root[data-theme="dark"] {
+  /* Brand — Phosphor Grün */
+  --color-brand:          #00e533;
+  --color-brand-rgb:      0, 229, 51;
+  --color-brand-contrast: #000800;
+
+  /* Primary ladder — CRT Grün */
+  --color-primary-darkest: #000a00;
+  --color-primary-dark:    #003a00;
+  --color-primary-semidark:#006600;
+  --color-primary:         #00aa00;
+  --color-primary-light:   #00dd00;
+  --color-primary-rgb:     0, 170, 0;
+  --color-primary-contrast:#000800;
+
+  /* Accent — Arcade Yellow */
+  --color-accent:     #f8c000;
+  --color-accent-rgb: 248, 192, 0;
+
+  /* Required tokens */
+  --color-background: #040804;
+  --color-surface:    rgba(6, 14, 6, 0.92);
+  --color-border:     rgba(0, 229, 51, 0.20);
+  --color-text:       rgba(190, 255, 200, 0.94);
+  --color-text-muted: rgba(0, 180, 40, 0.75);
+
+  /* Inputs */
+  --input-background:        rgba(2, 8, 2, 0.85);
+  --input-color:             rgba(190, 255, 200, 0.94);
+  --input-border:            rgba(0, 229, 51, 0.25);
+  --input-label-color:       rgba(190, 255, 200, 0.90);
+  --input-placeholder-color: rgba(0, 150, 30, 0.65);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        rgba(190, 255, 200, 0.94);
+  --color-label-active:        rgba(190, 255, 200, 0.94);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(0, 229, 51, 0.22);
+  --scrollbar-color-hover:  rgba(0, 229, 51, 0.40);
+  --scrollbar-color-active: var(--color-brand);
+
+  /* Shadows — CRT Phosphor Glow */
+  --color-box-shadow: rgba(0, 0, 0, 0.85);
+  --shadow-00: 0 0 0.25rem rgba(0, 229, 51, 0.30);
+  --shadow-01: 0 0 0.50rem rgba(0, 229, 51, 0.35);
+  --shadow-02: 0 0 0.75rem rgba(0, 229, 51, 0.30);
+  --shadow-03: 0 0 1.25rem rgba(0, 229, 51, 0.25);
+  --shadow-neon:
+    0 0 0.30rem rgba(0, 229, 51, 0.55),
+    0 0 0.80rem rgba(0, 229, 51, 0.38),
+    0 0 1.60rem rgba(0, 229, 51, 0.20),
+    0 0 3.00rem rgba(0, 229, 51, 0.10);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(0, 229, 51, 0.18);
+  --nav-actions-color:        rgba(190, 255, 200, 0.92);
+  --nav-toggle-color:         rgba(190, 255, 200, 0.92);
+  --nav-current-module-color: rgba(190, 255, 200, 0.92);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(0, 6, 0, 0.98) 0%,
+      rgba(0, 8, 0, 0.90) 100%);
+  --color-mod-nav-theme-header-color: rgba(190, 255, 200, 0.95);
+
+  --color-mod-nav-theme: linear-gradient(180deg,
+      rgba(0, 229, 51, 0.16) 0%,
+      rgba(0, 102, 0, 0.20) 55%,
+      rgba(0, 4, 0, 0.96)   100%),
+    rgba(0, 4, 0, 0.95);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(0, 5, 0, 0.98);
+  --color-mod-nav-theme-contrast:  rgba(190, 255, 200, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(4, 10, 4, 0.85);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(4, 10, 4, 0.97) 0%,
+      rgba(0, 229, 51, 0.10) 40%,
+      rgba(0, 58, 0, 0.08)  100%);
+
+  /* Sidebar */
+  --sidebar-level-0-color: #010501;
+  --sidebar-level-1-color: #020802;
+
+  --color-sidebar-text:           rgba(180, 255, 190, 0.90);
+  --color-sidebar-selected:       rgba(0, 229, 51, 0.22);
+  --color-sidebar-selected-text:  rgba(190, 255, 200, 0.96);
+  --color-sidebar-env-text:       rgba(248, 192, 0, 0.90);
+
+  --color-sidebar-selected-child:       rgba(0, 229, 51, 0.16);
+  --color-sidebar-selected-subchild:    rgba(0, 170, 0, 0.22);
+
+  --color-sidebar-selected-child-text:    rgba(190, 255, 200, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(190, 255, 200, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(0, 229, 51, 0.14);
+
+  /* Buttons */
+  --button-color:                       #000800;
+  --button-color-hover:                 #000800;
+  --button-background-color:            var(--color-brand);
+  --button-background-color-hover:      var(--color-primary-light);
+
+  --button-color-secondary:             #000800;
+  --button-color-hover-secondary:       #000800;
+  --button-background-color-secondary:       rgba(0, 229, 51, 0.85);
+  --button-background-color-hover-secondary: var(--color-primary-light);
+
+  --button-background-color-light-rgb:       rgba(0, 229, 51, 0.14);
+  --button-color-light:                      var(--color-brand);
+  --button-color-hover-light:                #000800;
+  --button-background-color-hover-light:     var(--color-brand);
+
+  --button-background-color-light-rgb-secondary: rgba(0, 229, 51, 0.18);
+  --button-color-light-secondary:                rgba(0, 229, 51, 1.00);
+  --button-color-hover-light-secondary:          #000800;
+  --button-background-color-hover-light-secondary: var(--color-brand);
+
+  /* Grid */
+  --grid-head-color:             rgba(190, 255, 200, 0.95);
+  --grid-head-background:        var(--color-primary-darkest);
+  --grid-head-background-active: rgba(0, 229, 51, 0.24);
+  --grid-head-hover:             rgba(0, 229, 51, 0.14);
+
+  --color-grid-hover:          rgba(0, 229, 51, 0.06);
+  --color-grid-selected-hover: rgba(0, 229, 51, 0.12);
+  --color-grid-selected:       rgba(0, 229, 51, 0.08);
+
+  --grid-surface:  rgba(2, 8, 2, 0.90);
+  --pager-surface: rgba(2, 8, 2, 0.85);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(0, 100, 0, 0.90)   0%,
+      rgba(0, 229, 51, 0.90)  55%,
+      rgba(248, 192, 0, 0.80) 100%);
+  --progressbar-text-color: #000800;
+}
+
+
+/* =============================================================================
+   BODY BACKGROUNDS
+   ============================================================================= */
+
+body {
+  background-attachment: fixed;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(0, 0, 0, 0.06) 0px, rgba(0, 0, 0, 0.06) 1px,
+      transparent 1px, transparent 4px),
+    repeating-linear-gradient(0deg,
+      rgba(0, 0, 0, 0.04) 0px, rgba(0, 0, 0, 0.04) 1px,
+      transparent 1px, transparent 4px),
+    var(--color-background);
+}
+
+html[data-theme="dark"] body,
+body[data-theme="dark"] {
+  background-attachment: fixed;
+  background:
+    /* CRT Scanlines */
+    repeating-linear-gradient(0deg,
+      rgba(0, 0, 0, 0.40) 0px,
+      rgba(0, 0, 0, 0.40) 1px,
+      transparent 1px,
+      transparent 3px),
+    /* Phosphor Vignette */
+    radial-gradient(ellipse at center,
+      rgba(0, 30, 0, 0.60) 0%,
+      rgba(0, 229, 51, 0.04) 40%,
+      rgba(0, 0, 0, 0.90) 100%),
+    /* CRT Glow Mitte */
+    radial-gradient(ellipse 120% 60% at 50% 50%,
+      rgba(0, 60, 0, 0.50) 0%,
+      transparent 70%),
+    #040804;
+}

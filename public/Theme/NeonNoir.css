@@ -1,0 +1,353 @@
+/* =============================================================================
+   NEON NOIR THEME
+   Light: Dunkle Räume, gedämpfte Neons — verregneter Jazz-Club
+   Dark:  Absolute Dunkelheit, maximale Neon-Intensität — Mitternacht in der Stadt
+   ============================================================================= */
+
+/* ─── SHARED NEON PALETTE ──────────────────────────────────────────────────── */
+:root {
+  --color-accent:     #ff2d78;
+  --color-accent-rgb: 255, 45, 120;
+  --color-amber:      #ffb300;
+  --color-amber-rgb:  255, 179, 0;
+
+  /* Dashboard border */
+  --dashboard-border-size:    1px;
+  --dashboard-border-opacity: 1;
+  --dashboard-border-gradient: conic-gradient(from 0turn,
+      #ff2d78,
+      #00c8f8,
+      #ff2d78);
+  --dashboard-special-hover: noirPulse 6s ease-in-out infinite;
+  --dashboard-border-filter:  none;
+}
+
+@keyframes noirPulse {
+  0%   { filter: hue-rotate(0deg)   brightness(1.0); }
+  50%  { filter: hue-rotate(-30deg) brightness(1.4); }
+  100% { filter: hue-rotate(0deg)   brightness(1.0); }
+}
+
+
+/* =============================================================================
+   NEON NOIR LIGHT (dimly lit — schummrige Bar-Atmosphäre)
+   ============================================================================= */
+:root {
+  --border-radius-small: 2px;
+  --border-radius:       4px;
+  --border-radius-large: 8px;
+
+  /* Neon brand — electric cyan */
+  --color-brand:          #00c8f8;
+  --color-brand-rgb:      0, 200, 248;
+  --color-brand-contrast: #050c14;
+
+  /* Primary ladder — neon pink */
+  --color-primary-darkest: #1a0a18;
+  --color-primary-dark:    #b51f5a;
+  --color-primary-semidark:#e02870;
+  --color-primary:         #ff2d78;
+  --color-primary-light:   #ff6699;
+  --color-primary-base:    #ff2d78;
+  --color-primary-rgb:     255, 45, 120;
+  --color-primary-contrast:#ffffff;
+
+    /* Backgrounds — helles Lavendel, Neon-Akzente auf hellem Grund */
+  --color-background: #f0e8ff;
+  --color-surface:    rgba(252, 248, 255, 0.97);
+  --color-border:     rgba(200, 30, 100, 0.22);
+  --color-text:       rgba(16, 6, 28, 0.90);
+  --color-text-muted: rgba(85, 55, 120, 0.68);
+
+  /* Inputs */
+  --input-background:        rgba(255, 252, 255, 0.95);
+  --input-color:             rgba(16, 6, 28, 0.90);
+  --input-border:            rgba(255, 45, 120, 0.32);
+  --input-label-color:       rgba(16, 6, 28, 0.85);
+  --input-placeholder-color: rgba(130, 90, 165, 0.52);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-primary);
+  --color-press-effect:        var(--color-primary);
+  --color-label-active:        var(--color-press-effect);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(255, 45, 120, 0.30);
+  --scrollbar-color-hover:  rgba(255, 45, 120, 0.52);
+  --scrollbar-color-active: var(--color-primary);
+
+  /* Shadows */
+  --color-box-shadow: rgba(80, 20, 120, 0.14);
+  --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(80, 20, 120, 0.10);
+  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(80, 20, 120, 0.14);
+  --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(80, 20, 120, 0.14);
+  --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(80, 20, 120, 0.18);
+  --shadow-neon:
+    0 0 0.30rem rgba(255, 45, 120, 0.32),
+    0 0 0.90rem rgba(255, 45, 120, 0.22),
+    0 0 1.60rem rgba(0, 200, 248, 0.15);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(255, 45, 120, 0.20);
+  --nav-actions-color:        rgba(240, 232, 255, 0.88);
+  --nav-toggle-color:         rgba(240, 232, 255, 0.88);
+  --nav-current-module-color: rgba(240, 232, 255, 0.88);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(5, 2, 10, 0.98) 0%,
+      rgba(8, 4, 14, 0.92) 100%);
+  --color-mod-nav-theme-header-color: rgba(240, 232, 255, 0.92);
+
+  --color-mod-nav-theme:
+    linear-gradient(180deg,
+      rgba(255, 45, 120, 0.18) 0%,
+      rgba(0, 200, 248, 0.12) 55%,
+      rgba(255, 179, 0, 0.06) 100%),
+    rgba(6, 3, 12, 0.92);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(5, 2, 10, 0.95);
+  --color-mod-nav-theme-contrast:  rgba(240, 232, 255, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(52, 38, 76, 0.92);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(56, 42, 82, 0.97) 0%,
+      rgba(255, 45, 120, 0.12) 50%,
+      rgba(0, 200, 248, 0.08) 100%);
+
+  /* Sidebar */
+  --sidebar-level-0-color: #0a0510;
+  --sidebar-level-1-color: #06030c;
+
+  --color-sidebar-text:              rgba(230, 220, 255, 0.88);
+  --color-sidebar-selected:          rgba(255, 45, 120, 0.20);
+  --color-sidebar-selected-text:     rgba(240, 232, 255, 0.98);
+  --color-sidebar-env-text:          rgba(0, 200, 248, 0.90);
+
+  --color-sidebar-selected-child:       rgba(255, 45, 120, 0.14);
+  --color-sidebar-selected-subchild:    rgba(0, 200, 248, 0.18);
+
+  --color-sidebar-selected-child-text:    rgba(240, 232, 255, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(240, 232, 255, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(255, 45, 120, 0.12);
+
+  /* Buttons */
+  --button-color:                      #ffffff;
+  --button-color-hover:                #ffffff;
+  --button-background-color:           var(--color-primary-dark);
+  --button-background-color-hover:     var(--color-primary);
+
+  --button-color-secondary:            #ffffff;
+  --button-color-hover-secondary:      #ffffff;
+  --button-background-color-secondary:       rgba(0, 200, 248, 0.16);
+  --button-background-color-hover-secondary: var(--color-brand);
+
+  --button-background-color-light-rgb:       rgba(255, 45, 120, 0.14);
+  --button-color-light:                      var(--color-primary);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(0, 200, 248, 0.14);
+  --button-color-light-secondary:                var(--color-brand);
+  --button-color-hover-light-secondary:          #ffffff;
+  --button-background-color-hover-light-secondary: var(--color-brand);
+
+  /* Grid */
+  --grid-head-color:             rgba(240, 232, 255, 0.95);
+  --grid-head-background:        rgba(5, 2, 10, 0.96);
+  --grid-head-background-active: rgba(255, 45, 120, 0.26);
+  --grid-head-hover:             rgba(0, 200, 248, 0.16);
+
+  --color-grid-hover:          rgba(255, 45, 120, 0.30);
+  --color-grid-selected-hover: rgba(255, 45, 120, 0.46);
+  --color-grid-selected:       rgba(255, 45, 120, 0.38);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(255, 45, 120, 0.90)  0%,
+      rgba(0, 200, 248, 0.90)   60%,
+      rgba(255, 179, 0, 0.70)   100%);
+  --progressbar-text-color: var(--color-text);
+}
+
+
+/* =============================================================================
+   NEON NOIR DARK (midnight alley — absolute Dunkelheit, maximale Intensität)
+   ============================================================================= */
+:root[data-theme="dark"] {
+  /* Neon brand — hot pink, volle Intensität */
+  --color-brand:          #ff2d78;
+  --color-brand-rgb:      255, 45, 120;
+  --color-brand-contrast: #050008;
+
+  /* Primary ladder — tiefer Crimson/Pink */
+  --color-primary-darkest: #120008;
+  --color-primary-dark:    #8a0f3e;
+  --color-primary-semidark:#c41856;
+  --color-primary:         #ff2d78;
+  --color-primary-light:   #ff6699;
+  --color-primary-rgb:     255, 45, 120;
+  --color-primary-contrast:#050008;
+
+  /* Accent */
+  --color-accent:     #00c8f8;
+  --color-accent-rgb: 0, 200, 248;
+
+  /* Required tokens */
+  --color-background: #070407;
+  --color-surface:    rgba(10, 5, 14, 0.85);
+  --color-border:     rgba(255, 45, 120, 0.18);
+  --color-text:       rgba(245, 238, 255, 0.94);
+  --color-text-muted: rgba(190, 170, 220, 0.68);
+
+  /* Inputs */
+  --input-background:        rgba(6, 3, 10, 0.80);
+  --input-color:             rgba(245, 238, 255, 0.94);
+  --input-border:            rgba(255, 45, 120, 0.24);
+  --input-label-color:       rgba(245, 238, 255, 0.90);
+  --input-placeholder-color: rgba(190, 170, 220, 0.52);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        rgba(245, 238, 255, 0.94);
+  --color-label-active:        rgba(245, 238, 255, 0.94);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(255, 45, 120, 0.20);
+  --scrollbar-color-hover:  rgba(255, 45, 120, 0.38);
+  --scrollbar-color-active: var(--color-accent);
+
+  /* Shadows / Neon — maximale Intensität */
+  --color-box-shadow: rgba(0, 0, 0, 0.85);
+  --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(0, 0, 0, 0.70);
+  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(0, 0, 0, 0.80);
+  --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(0, 0, 0, 0.80);
+  --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(0, 0, 0, 0.80);
+  --shadow-neon:
+    0 0 0.40rem rgba(255, 45, 120, 0.55),
+    0 0 1.20rem rgba(255, 45, 120, 0.38),
+    0 0 2.50rem rgba(255, 45, 120, 0.22),
+    0 0 4.00rem rgba(0, 200, 248, 0.12);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(255, 45, 120, 0.16);
+  --nav-actions-color:        rgba(245, 238, 255, 0.92);
+  --nav-toggle-color:         rgba(245, 238, 255, 0.92);
+  --nav-current-module-color: rgba(245, 238, 255, 0.92);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(4, 1, 8, 0.98) 0%,
+      rgba(6, 2, 10, 0.88) 100%);
+  --color-mod-nav-theme-header-color: rgba(245, 238, 255, 0.95);
+
+  --color-mod-nav-theme: linear-gradient(180deg,
+      rgba(255, 45, 120, 0.22) 0%,
+      rgba(0, 200, 248, 0.12) 55%,
+      rgba(255, 179, 0, 0.06) 100%),
+    rgba(5, 2, 9, 0.94);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(4, 1, 8, 0.92);
+  --color-mod-nav-theme-contrast:  rgba(245, 238, 255, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(8, 4, 12, 0.75);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(8, 4, 12, 0.96) 0%,
+      rgba(255, 45, 120, 0.16) 30%,
+      rgba(0, 200, 248, 0.10) 62%,
+      rgba(255, 179, 0, 0.06) 100%);
+
+  /* Sidebar */
+  --sidebar-level-0-color: #060209;
+  --sidebar-level-1-color: #040108;
+
+  --color-sidebar-text:           rgba(245, 238, 255, 0.92);
+  --color-sidebar-selected:       rgba(255, 45, 120, 0.22);
+  --color-sidebar-selected-text:  rgba(245, 238, 255, 0.96);
+  --color-sidebar-env-text:       rgba(0, 200, 248, 0.90);
+
+  --color-sidebar-selected-child:       rgba(255, 45, 120, 0.18);
+  --color-sidebar-selected-subchild:    rgba(0, 200, 248, 0.20);
+
+  --color-sidebar-selected-child-text:    rgba(245, 238, 255, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(245, 238, 255, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(255, 45, 120, 0.14);
+
+  /* Buttons */
+  --button-color:                       #ffffff;
+  --button-color-hover:                 #ffffff;
+  --button-background-color:            var(--color-primary-dark);
+  --button-background-color-hover:      var(--color-brand);
+
+  --button-color-secondary:             #ffffff;
+  --button-color-hover-secondary:       #ffffff;
+  --button-background-color-secondary:       rgba(0, 200, 248, 0.14);
+  --button-background-color-hover-secondary: var(--color-brand);
+
+  --button-background-color-light-rgb:       rgba(255, 45, 120, 0.18);
+  --button-color-light:                      var(--color-brand);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(0, 200, 248, 0.14);
+  --button-color-light-secondary:                rgba(0, 200, 248, 0.90);
+  --button-color-hover-light-secondary:          #ffffff;
+  --button-background-color-hover-light-secondary: var(--color-brand);
+
+  /* Grid */
+  --grid-head-color:             rgba(245, 238, 255, 0.95);
+  --grid-head-background:        var(--color-primary-darkest);
+  --grid-head-background-active: rgba(255, 45, 120, 0.24);
+  --grid-head-hover:             rgba(0, 200, 248, 0.16);
+
+  --color-grid-hover:          rgba(255, 45, 120, 0.14);
+  --color-grid-selected-hover: rgba(255, 45, 120, 0.22);
+  --color-grid-selected:       rgba(255, 45, 120, 0.16);
+
+  --grid-surface:  rgba(6, 3, 10, 0.85);
+  --pager-surface: rgba(6, 3, 10, 0.80);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(255, 45, 120, 0.90)  0%,
+      rgba(0, 200, 248, 0.85)   55%,
+      rgba(255, 179, 0, 0.70)   100%);
+  --progressbar-text-color: rgba(245, 238, 255, 0.92);
+}
+
+
+/* =============================================================================
+   BODY BACKGROUNDS
+   ============================================================================= */
+
+body {
+  background-attachment: fixed;
+  background:
+    radial-gradient(900px 600px at 15% 25%, rgba(255, 45, 120, 0.10), transparent 70%),
+    radial-gradient(900px 600px at 85% 15%, rgba(0, 200, 248, 0.08), transparent 70%),
+    radial-gradient(700px 500px at 50% 95%, rgba(255, 179, 0, 0.06), transparent 75%),
+    #f0e8ff;
+}
+
+html[data-theme="dark"] body,
+body[data-theme="dark"] {
+  background-attachment: fixed;
+  background:
+    radial-gradient(circle at center, rgba(0, 0, 0, 0.78) 15%, var(--color-background) 82%),
+    radial-gradient(900px 700px at 15% 40%, rgba(255, 45, 120, 0.65), transparent 60%),
+    radial-gradient(900px 700px at 85% 20%, rgba(0, 200, 248, 0.50), transparent 55%),
+    radial-gradient(700px 600px at 50% 95%, rgba(255, 179, 0, 0.30), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.018) 0px, transparent 1px, transparent 80px),
+    repeating-linear-gradient(0deg,  rgba(255, 255, 255, 0.018) 0px, transparent 1px, transparent 80px),
+    #070407;
+}

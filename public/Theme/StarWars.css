@@ -1,0 +1,344 @@
+/* =============================================================================
+   STAR WARS LIGHT (Jedi / Republik — Tatooine)
+   ============================================================================= */
+:root {
+  --border-radius-small: 4px;
+  --border-radius:       8px;
+  --border-radius-large: 14px;
+
+  /* Brand — Lichtschwert Blau */
+  --color-brand:          #1e7fd4;
+  --color-brand-rgb:      30, 127, 212;
+  --color-brand-contrast: #ffffff;
+
+  /* Primary ladder — Jedi-Blau */
+  --color-primary-darkest: #0a1a30;
+  --color-primary-dark:    #0f3868;
+  --color-primary-semidark:#1a5aaa;
+  --color-primary:         #1e7fd4;
+  --color-primary-light:   #5aaae8;
+  --color-primary-base:    #1a5aaa;
+  --color-primary-rgb:     30, 127, 212;
+  --color-primary-contrast:#ffffff;
+
+  /* Required tokens */
+  --color-background: #ede4d0;
+  --color-surface:    rgba(253, 248, 238, 0.92);
+  --color-border:     rgba(201, 160, 48, 0.28);
+  --color-text:       #1a1408;
+  --color-text-muted: #5a4e38;
+
+  /* Inputs */
+  --input-background:        rgba(253, 248, 238, 0.95);
+  --input-color:             #1a1408;
+  --input-border:            rgba(201, 160, 48, 0.35);
+  --input-label-color:       #2a2010;
+  --input-placeholder-color: #8a7a60;
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        var(--color-primary-semidark);
+  --color-label-active:        var(--color-press-effect);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(30, 127, 212, 0.28);
+  --scrollbar-color-hover:  rgba(30, 127, 212, 0.52);
+  --scrollbar-color-active: var(--color-accent);
+
+  /* Shadows */
+  --color-box-shadow: rgba(26, 20, 8, 0.16);
+  --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(26, 20, 8, 0.12);
+  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(26, 20, 8, 0.16);
+  --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(26, 20, 8, 0.16);
+  --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(26, 20, 8, 0.16);
+  --shadow-neon:
+    0 0 0.30rem rgba(30, 127, 212, 0.30),
+    0 0 0.90rem rgba(30, 127, 212, 0.18),
+    0 0 1.80rem rgba(201, 160, 48, 0.12);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(201, 160, 48, 0.22);
+  --nav-actions-color:        rgba(240, 235, 220, 0.95);
+  --nav-toggle-color:         rgba(240, 235, 220, 0.95);
+  --nav-current-module-color: rgba(240, 235, 220, 0.95);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(10, 12, 22, 0.97) 0%,
+      rgba(14, 18, 32, 0.92) 100%);
+  --color-mod-nav-theme-header-color: rgba(240, 235, 220, 0.95);
+
+  --color-mod-nav-theme:
+    linear-gradient(180deg,
+      rgba(201, 160, 48, 0.18) 0%,
+      rgba(30, 127, 212, 0.16) 55%,
+      rgba(10, 20, 48, 0.95)   100%),
+    rgba(8, 10, 20, 0.92);
+
+  --color-mod-nav-theme-variant-1: var(--color-accent);
+  --color-mod-nav-theme-variant-2: rgba(8, 10, 20, 0.96);
+  --color-mod-nav-theme-contrast:  rgba(240, 235, 220, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(253, 248, 238, 0.88);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(253, 248, 238, 0.96) 0%,
+      rgba(201, 160, 48, 0.07)  50%,
+      rgba(30, 127, 212, 0.05)  100%);
+
+  /* Sidebar — Jedi-Tempel Dunkel */
+  --sidebar-level-0-color: #0c1022;
+  --sidebar-level-1-color: #08091a;
+
+  --color-sidebar-text:              rgba(230, 225, 205, 0.90);
+  --color-sidebar-selected:          rgba(201, 160, 48, 0.22);
+  --color-sidebar-selected-text:     rgba(245, 240, 220, 0.98);
+  --color-sidebar-env-text:          rgba(201, 160, 48, 0.92);
+
+  --color-sidebar-selected-child:       rgba(30, 127, 212, 0.18);
+  --color-sidebar-selected-subchild:    rgba(201, 160, 48, 0.18);
+
+  --color-sidebar-selected-child-text:    rgba(245, 240, 220, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(245, 240, 220, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(201, 160, 48, 0.12);
+
+  /* Buttons */
+  --button-color:                      #ffffff;
+  --button-color-hover:                #ffffff;
+  --button-background-color:           var(--color-primary-dark);
+  --button-background-color-hover:     var(--color-brand);
+
+  --button-color-secondary:            #1a1408;
+  --button-color-hover-secondary:      #1a1408;
+  --button-background-color-secondary:       rgba(201, 160, 48, 0.85);
+  --button-background-color-hover-secondary: var(--color-accent);
+
+  --button-background-color-light-rgb:       rgba(30, 127, 212, 0.14);
+  --button-color-light:                      var(--color-primary-dark);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(201, 160, 48, 0.16);
+  --button-color-light-secondary:                #8a6a10;
+  --button-color-hover-light-secondary:          #1a1408;
+  --button-background-color-hover-light-secondary: rgba(201, 160, 48, 0.90);
+
+  /* Grid */
+  --grid-head-color:             rgba(240, 235, 220, 0.96);
+  --grid-head-background:        rgba(8, 10, 20, 0.95);
+  --grid-head-background-active: rgba(201, 160, 48, 0.28);
+  --grid-head-hover:             rgba(30, 127, 212, 0.18);
+
+  --color-grid-hover:          rgba(201, 160, 48, 0.06);
+  --color-grid-selected-hover: rgba(30, 127, 212, 0.10);
+  --color-grid-selected:       rgba(201, 160, 48, 0.08);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(15, 56, 104, 0.90)  0%,
+      rgba(30, 127, 212, 0.90) 50%,
+      rgba(201, 160, 48, 0.85) 100%);
+  --progressbar-text-color: var(--color-text);
+}
+
+
+/* =============================================================================
+   STAR WARS DARK (Sith / Imperium)
+   ============================================================================= */
+:root[data-theme="dark"] {
+  /* Dashboard border — Sith-Rot */
+  --dashboard-border-gradient: conic-gradient(from 0turn,
+      #cc1a1a,
+      #880000,
+      #ff3333,
+      #880000,
+      #cc1a1a);
+
+  /* Brand — Lichtschwert Rot */
+  --color-brand:          #cc1a1a;
+  --color-brand-rgb:      204, 26, 26;
+  --color-brand-contrast: #ffffff;
+
+  /* Primary ladder — Sith-Rot */
+  --color-primary-darkest: #0e0000;
+  --color-primary-dark:    #4a0000;
+  --color-primary-semidark:#880000;
+  --color-primary:         #cc1a1a;
+  --color-primary-light:   #ee4444;
+  --color-primary-rgb:     204, 26, 26;
+  --color-primary-contrast:#ffffff;
+
+  /* Accent — Imperial Grau */
+  --color-accent:     #8899aa;
+  --color-accent-rgb: 136, 153, 170;
+
+  /* Required tokens */
+  --color-background: #030306;
+  --color-surface:    rgba(8, 8, 14, 0.88);
+  --color-border:     rgba(204, 26, 26, 0.18);
+  --color-text:       rgba(218, 210, 198, 0.94);
+  --color-text-muted: rgba(150, 140, 128, 0.72);
+
+  /* Inputs */
+  --input-background:        rgba(6, 4, 8, 0.82);
+  --input-color:             rgba(218, 210, 198, 0.94);
+  --input-border:            rgba(204, 26, 26, 0.24);
+  --input-label-color:       rgba(218, 210, 198, 0.90);
+  --input-placeholder-color: rgba(130, 120, 110, 0.60);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        rgba(218, 210, 198, 0.94);
+  --color-label-active:        rgba(218, 210, 198, 0.94);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(204, 26, 26, 0.22);
+  --scrollbar-color-hover:  rgba(204, 26, 26, 0.40);
+  --scrollbar-color-active: var(--color-brand);
+
+  /* Shadows — Sith Glow */
+  --color-box-shadow: rgba(0, 0, 0, 0.85);
+  --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(0, 0, 0, 0.65);
+  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(0, 0, 0, 0.75);
+  --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(0, 0, 0, 0.75);
+  --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(0, 0, 0, 0.80);
+  --shadow-neon:
+    0 0 0.40rem rgba(204, 26, 26, 0.55),
+    0 0 1.20rem rgba(204, 26, 26, 0.35),
+    0 0 2.50rem rgba(204, 26, 26, 0.20),
+    0 0 4.00rem rgba(136, 0, 0, 0.10);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(204, 26, 26, 0.16);
+  --nav-actions-color:        rgba(218, 210, 198, 0.92);
+  --nav-toggle-color:         rgba(218, 210, 198, 0.92);
+  --nav-current-module-color: rgba(218, 210, 198, 0.92);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(4, 2, 4, 0.98) 0%,
+      rgba(6, 3, 6, 0.90) 100%);
+  --color-mod-nav-theme-header-color: rgba(218, 210, 198, 0.95);
+
+  --color-mod-nav-theme: linear-gradient(180deg,
+      rgba(204, 26, 26, 0.18) 0%,
+      rgba(74, 0, 0, 0.22)    50%,
+      rgba(4, 2, 4, 0.96)     100%),
+    rgba(4, 2, 4, 0.96);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(4, 2, 4, 0.98);
+  --color-mod-nav-theme-contrast:  rgba(218, 210, 198, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(8, 6, 10, 0.78);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(8, 6, 10, 0.97)   0%,
+      rgba(204, 26, 26, 0.12) 35%,
+      rgba(74, 0, 0, 0.08)   70%,
+      rgba(3, 3, 6, 0.95)    100%);
+
+  /* Sidebar — Imperial Schwarz */
+  --sidebar-level-0-color: #060204;
+  --sidebar-level-1-color: #040103;
+
+  --color-sidebar-text:           rgba(210, 202, 190, 0.92);
+  --color-sidebar-selected:       rgba(204, 26, 26, 0.22);
+  --color-sidebar-selected-text:  rgba(218, 210, 198, 0.96);
+  --color-sidebar-env-text:       rgba(204, 26, 26, 0.90);
+
+  --color-sidebar-selected-child:       rgba(204, 26, 26, 0.16);
+  --color-sidebar-selected-subchild:    rgba(136, 0, 0, 0.22);
+
+  --color-sidebar-selected-child-text:    rgba(218, 210, 198, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(218, 210, 198, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(204, 26, 26, 0.14);
+
+  /* Buttons */
+  --button-color:                       #ffffff;
+  --button-color-hover:                 #ffffff;
+  --button-background-color:            var(--color-primary-dark);
+  --button-background-color-hover:      var(--color-brand);
+
+  --button-color-secondary:             #ffffff;
+  --button-color-hover-secondary:       #ffffff;
+  --button-background-color-secondary:       rgba(204, 26, 26, 0.16);
+  --button-background-color-hover-secondary: var(--color-brand);
+
+  --button-background-color-light-rgb:       rgba(204, 26, 26, 0.18);
+  --button-color-light:                      var(--color-brand);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(204, 26, 26, 0.14);
+  --button-color-light-secondary:                rgba(204, 26, 26, 0.90);
+  --button-color-hover-light-secondary:          #ffffff;
+  --button-background-color-hover-light-secondary: var(--color-brand);
+
+  /* Grid */
+  --grid-head-color:             rgba(218, 210, 198, 0.95);
+  --grid-head-background:        var(--color-primary-darkest);
+  --grid-head-background-active: rgba(204, 26, 26, 0.24);
+  --grid-head-hover:             rgba(204, 26, 26, 0.14);
+
+  --color-grid-hover:          rgba(204, 26, 26, 0.06);
+  --color-grid-selected-hover: rgba(204, 26, 26, 0.12);
+  --color-grid-selected:       rgba(204, 26, 26, 0.08);
+
+  --grid-surface:  rgba(5, 3, 7, 0.88);
+  --pager-surface: rgba(5, 3, 7, 0.82);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(74, 0, 0, 0.92)    0%,
+      rgba(204, 26, 26, 0.90) 55%,
+      rgba(238, 68, 68, 0.80) 100%);
+  --progressbar-text-color: rgba(218, 210, 198, 0.92);
+}
+
+
+/* =============================================================================
+   BODY BACKGROUNDS
+   ============================================================================= */
+
+/* Light — Tatooine: Zwei Sonnen am Horizont */
+body {
+  background-attachment: fixed;
+  background:
+    linear-gradient(rgba(237, 228, 208, 0.55), rgba(237, 228, 208, 0.55)),
+    radial-gradient(300px 300px at 22%  7%, rgba(255, 210, 80, 0.70), transparent 70%),
+    radial-gradient(200px 200px at 46%  2%, rgba(255, 175, 50, 0.55), transparent 70%),
+    linear-gradient(180deg,
+      rgba(255, 160, 60, 0.35)  0%,
+      rgba(255, 210, 120, 0.20) 30%,
+      rgba(237, 228, 208, 0.00) 65%),
+    radial-gradient(ellipse 140% 40% at 50% 110%, rgba(180, 140, 60, 0.28), transparent 60%);
+}
+
+/* Dark — Tiefer Weltraum mit Sith-Atmosphäre und Sternen */
+html[data-theme="dark"] body,
+body[data-theme="dark"] {
+  background-attachment: fixed;
+  background:
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.80) 10%, var(--color-background) 80%),
+    radial-gradient(900px 500px at 20% 80%, rgba(204, 26, 26, 0.45), transparent 65%),
+    radial-gradient(700px 400px at 80% 90%, rgba(136, 0, 0, 0.35), transparent 60%),
+    radial-gradient(1200px 300px at 50%  0%, rgba(80, 10, 10, 0.40), transparent 70%),
+    radial-gradient(1px 1px at 15% 20%, rgba(255, 255, 255, 0.80), transparent),
+    radial-gradient(1px 1px at 38% 12%, rgba(255, 255, 255, 0.60), transparent),
+    radial-gradient(1px 1px at 62% 28%, rgba(255, 255, 255, 0.70), transparent),
+    radial-gradient(1px 1px at 78%  8%, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1px 1px at 90% 35%, rgba(255, 255, 255, 0.65), transparent),
+    radial-gradient(1px 1px at  5% 45%, rgba(255, 255, 255, 0.50), transparent),
+    radial-gradient(1px 1px at 48% 55%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1px 1px at 25% 70%, rgba(255, 255, 255, 0.40), transparent),
+    radial-gradient(2px 2px at 70% 15%, rgba(255, 255, 255, 0.75), transparent),
+    radial-gradient(2px 2px at 88% 60%, rgba(255, 255, 255, 0.60), transparent),
+    #030306;
+}

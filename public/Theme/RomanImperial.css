@@ -1,0 +1,351 @@
+/* =============================================================================
+   ROMAN IMPERIAL LIGHT (Forum Romanum — Marmor & Sonnenlicht)
+   ============================================================================= */
+:root {
+  --border-radius-small: 2px;
+  --border-radius:       6px;
+  --border-radius-large: 10px;
+
+  /* Brand — Imperiales Purpur */
+  --color-brand:          #7b3fa0;
+  --color-brand-rgb:      123, 63, 160;
+  --color-brand-contrast: #ffffff;
+
+  /* Primary ladder — Tyrisches Violett */
+  --color-primary-darkest: #1e0830;
+  --color-primary-dark:    #48186a;
+  --color-primary-semidark:#6a2890;
+  --color-primary:         #8b40b8;
+  --color-primary-light:   #b070d8;
+  --color-primary-base:    #6a2890;
+  --color-primary-rgb:     139, 64, 184;
+  --color-primary-contrast:#ffffff;
+
+  /* Required tokens */
+  --color-background: #ede6d8;
+  --color-surface:    rgba(250, 246, 238, 0.94);
+  --color-border:     rgba(201, 162, 39, 0.30);
+  --color-text:       #1a1008;
+  --color-text-muted: #5a4430;
+
+  /* Inputs */
+  --input-background:        rgba(250, 246, 238, 0.96);
+  --input-color:             #1a1008;
+  --input-border:            rgba(201, 162, 39, 0.38);
+  --input-label-color:       #2a1c08;
+  --input-placeholder-color: #8a7050;
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        var(--color-primary-semidark);
+  --color-label-active:        var(--color-press-effect);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(123, 63, 160, 0.28);
+  --scrollbar-color-hover:  rgba(123, 63, 160, 0.52);
+  --scrollbar-color-active: var(--color-accent);
+
+  /* Shadows — steinern, schwer */
+  --color-box-shadow: rgba(26, 16, 8, 0.20);
+  --shadow-00: 2px 2px 4px  rgba(26, 16, 8, 0.16);
+  --shadow-01: 2px 2px 6px  rgba(26, 16, 8, 0.20);
+  --shadow-02: 3px 3px 10px rgba(26, 16, 8, 0.20);
+  --shadow-03: 4px 4px 16px rgba(26, 16, 8, 0.22);
+  --shadow-neon:
+    0 0 0.30rem rgba(201, 162, 39, 0.38),
+    0 0 0.90rem rgba(201, 162, 39, 0.22),
+    0 0 1.80rem rgba(123, 63, 160, 0.12);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(201, 162, 39, 0.25);
+  --nav-actions-color:        rgba(240, 232, 210, 0.95);
+  --nav-toggle-color:         rgba(240, 232, 210, 0.95);
+  --nav-current-module-color: rgba(240, 232, 210, 0.95);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(14, 6, 22, 0.97) 0%,
+      rgba(20, 8, 32, 0.92) 100%);
+  --color-mod-nav-theme-header-color: rgba(240, 232, 210, 0.95);
+
+  --color-mod-nav-theme:
+    linear-gradient(180deg,
+      rgba(201, 162, 39, 0.20) 0%,
+      rgba(106, 40, 144, 0.18) 55%,
+      rgba(12, 4, 20, 0.96)    100%),
+    rgba(10, 4, 18, 0.94);
+
+  --color-mod-nav-theme-variant-1: var(--color-accent);
+  --color-mod-nav-theme-variant-2: rgba(10, 4, 18, 0.97);
+  --color-mod-nav-theme-contrast:  rgba(240, 232, 210, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(250, 246, 238, 0.90);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(250, 246, 238, 0.96) 0%,
+      rgba(201, 162, 39, 0.08)  50%,
+      rgba(123, 63, 160, 0.05)  100%);
+
+  /* Sidebar — Dunkler Marmor / Porphyr */
+  --sidebar-level-0-color: #140824;
+  --sidebar-level-1-color: #0e041a;
+
+  --color-sidebar-text:              rgba(232, 218, 180, 0.90);
+  --color-sidebar-selected:          rgba(201, 162, 39, 0.24);
+  --color-sidebar-selected-text:     rgba(245, 235, 200, 0.98);
+  --color-sidebar-env-text:          rgba(201, 162, 39, 0.92);
+
+  --color-sidebar-selected-child:       rgba(123, 63, 160, 0.20);
+  --color-sidebar-selected-subchild:    rgba(201, 162, 39, 0.20);
+
+  --color-sidebar-selected-child-text:    rgba(245, 235, 200, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(245, 235, 200, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(201, 162, 39, 0.14);
+
+  /* Buttons */
+  --button-color:                      #ffffff;
+  --button-color-hover:                #ffffff;
+  --button-background-color:           var(--color-primary-dark);
+  --button-background-color-hover:     var(--color-brand);
+
+  --button-color-secondary:            #1a1008;
+  --button-color-hover-secondary:      #1a1008;
+  --button-background-color-secondary:       rgba(201, 162, 39, 0.88);
+  --button-background-color-hover-secondary: var(--color-accent);
+
+  --button-background-color-light-rgb:       rgba(139, 64, 184, 0.14);
+  --button-color-light:                      var(--color-primary-dark);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(201, 162, 39, 0.16);
+  --button-color-light-secondary:                #7a6010;
+  --button-color-hover-light-secondary:          #1a1008;
+  --button-background-color-hover-light-secondary: rgba(201, 162, 39, 0.88);
+
+  /* Grid */
+  --grid-head-color:             rgba(240, 232, 210, 0.96);
+  --grid-head-background:        rgba(10, 4, 18, 0.96);
+  --grid-head-background-active: rgba(201, 162, 39, 0.30);
+  --grid-head-hover:             rgba(123, 63, 160, 0.20);
+
+  --color-grid-hover:          rgba(201, 162, 39, 0.07);
+  --color-grid-selected-hover: rgba(123, 63, 160, 0.12);
+  --color-grid-selected:       rgba(201, 162, 39, 0.09);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(72, 24, 106, 0.90)  0%,
+      rgba(123, 63, 160, 0.90) 45%,
+      rgba(201, 162, 39, 0.88) 100%);
+  --progressbar-text-color: var(--color-text);
+}
+
+
+/* =============================================================================
+   ROMAN IMPERIAL DARK (Thronsaal bei Nacht — Fackelglühen)
+   ============================================================================= */
+:root[data-theme="dark"] {
+  /* Dashboard border — Gold dominiert im Dunkeln */
+  --dashboard-border-gradient: conic-gradient(from 0turn,
+      #d4af37,
+      #9040b8,
+      #f0cc50,
+      #9040b8,
+      #d4af37);
+
+  /* Brand — Fackelgold */
+  --color-brand:          #d4af37;
+  --color-brand-rgb:      212, 175, 55;
+  --color-brand-contrast: #0e0800;
+
+  /* Primary ladder — Gold-Glut */
+  --color-primary-darkest: #140c00;
+  --color-primary-dark:    #3c2800;
+  --color-primary-semidark:#6e4e00;
+  --color-primary:         #a87c10;
+  --color-primary-light:   #d4af37;
+  --color-primary-rgb:     168, 124, 16;
+  --color-primary-contrast:#140c00;
+
+  /* Accent — Tyrisches Purpur */
+  --color-accent:     #9040b8;
+  --color-accent-rgb: 144, 64, 184;
+
+  /* Required tokens */
+  --color-background: #0c0810;
+  --color-surface:    rgba(16, 10, 20, 0.90);
+  --color-border:     rgba(212, 175, 55, 0.18);
+  --color-text:       rgba(235, 220, 175, 0.94);
+  --color-text-muted: rgba(165, 138, 80, 0.75);
+
+  /* Inputs */
+  --input-background:        rgba(10, 6, 14, 0.84);
+  --input-color:             rgba(235, 220, 175, 0.94);
+  --input-border:            rgba(212, 175, 55, 0.24);
+  --input-label-color:       rgba(235, 220, 175, 0.90);
+  --input-placeholder-color: rgba(145, 110, 50, 0.65);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        rgba(235, 220, 175, 0.94);
+  --color-label-active:        rgba(235, 220, 175, 0.94);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(212, 175, 55, 0.22);
+  --scrollbar-color-hover:  rgba(212, 175, 55, 0.42);
+  --scrollbar-color-active: var(--color-brand);
+
+  /* Shadows — Fackel-Glow */
+  --color-box-shadow: rgba(0, 0, 0, 0.85);
+  --shadow-00: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.65);
+  --shadow-01: 0 0.125rem 0.500rem rgba(0, 0, 0, 0.75);
+  --shadow-02: 0 0.250rem 0.750rem rgba(0, 0, 0, 0.75);
+  --shadow-03: 0 0.375rem 1.375rem rgba(0, 0, 0, 0.80);
+  --shadow-neon:
+    0 0 0.40rem rgba(212, 175, 55, 0.55),
+    0 0 1.10rem rgba(212, 175, 55, 0.35),
+    0 0 2.20rem rgba(168, 96, 16, 0.22),
+    0 0 4.00rem rgba(144, 64, 184, 0.10);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(212, 175, 55, 0.16);
+  --nav-actions-color:        rgba(235, 220, 175, 0.92);
+  --nav-toggle-color:         rgba(235, 220, 175, 0.92);
+  --nav-current-module-color: rgba(235, 220, 175, 0.92);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(8, 4, 12, 0.98) 0%,
+      rgba(10, 6, 16, 0.90) 100%);
+  --color-mod-nav-theme-header-color: rgba(235, 220, 175, 0.95);
+
+  --color-mod-nav-theme: linear-gradient(180deg,
+      rgba(212, 175, 55, 0.18)  0%,
+      rgba(144, 64, 184, 0.14)  50%,
+      rgba(6, 3, 10, 0.96)      100%),
+    rgba(6, 3, 10, 0.96);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(6, 3, 10, 0.98);
+  --color-mod-nav-theme-contrast:  rgba(235, 220, 175, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(16, 10, 20, 0.82);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(16, 10, 20, 0.97)   0%,
+      rgba(212, 175, 55, 0.12)  35%,
+      rgba(144, 64, 184, 0.08)  68%,
+      rgba(8, 4, 12, 0.95)      100%);
+
+  /* Sidebar — Porphyr-Schwarz */
+  --sidebar-level-0-color: #080410;
+  --sidebar-level-1-color: #06030c;
+
+  --color-sidebar-text:           rgba(220, 205, 158, 0.92);
+  --color-sidebar-selected:       rgba(212, 175, 55, 0.22);
+  --color-sidebar-selected-text:  rgba(235, 220, 175, 0.96);
+  --color-sidebar-env-text:       rgba(144, 64, 184, 0.92);
+
+  --color-sidebar-selected-child:       rgba(212, 175, 55, 0.16);
+  --color-sidebar-selected-subchild:    rgba(144, 64, 184, 0.20);
+
+  --color-sidebar-selected-child-text:    rgba(235, 220, 175, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(235, 220, 175, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(212, 175, 55, 0.14);
+
+  /* Buttons */
+  --button-color:                       #0e0800;
+  --button-color-hover:                 #0e0800;
+  --button-background-color:            var(--color-brand);
+  --button-background-color-hover:      var(--color-primary-light);
+
+  --button-color-secondary:             #0e0800;
+  --button-color-hover-secondary:       #0e0800;
+  --button-background-color-secondary:       rgba(212, 175, 55, 0.20);
+  --button-background-color-hover-secondary: var(--color-brand);
+
+  --button-background-color-light-rgb:       rgba(212, 175, 55, 0.16);
+  --button-color-light:                      var(--color-brand);
+  --button-color-hover-light:                #0e0800;
+  --button-background-color-hover-light:     var(--color-brand);
+
+  --button-background-color-light-rgb-secondary: rgba(144, 64, 184, 0.16);
+  --button-color-light-secondary:                rgba(144, 64, 184, 0.90);
+  --button-color-hover-light-secondary:          #0e0800;
+  --button-background-color-hover-light-secondary: var(--color-brand);
+
+  /* Grid */
+  --grid-head-color:             rgba(235, 220, 175, 0.95);
+  --grid-head-background:        var(--color-primary-darkest);
+  --grid-head-background-active: rgba(212, 175, 55, 0.26);
+  --grid-head-hover:             rgba(144, 64, 184, 0.16);
+
+  --color-grid-hover:          rgba(212, 175, 55, 0.07);
+  --color-grid-selected-hover: rgba(212, 175, 55, 0.13);
+  --color-grid-selected:       rgba(212, 175, 55, 0.09);
+
+  --grid-surface:  rgba(8, 5, 14, 0.88);
+  --pager-surface: rgba(8, 5, 14, 0.82);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(60, 40, 0, 0.92)    0%,
+      rgba(168, 124, 16, 0.90) 45%,
+      rgba(212, 175, 55, 0.88) 100%);
+  --progressbar-text-color: #0e0800;
+}
+
+
+/* =============================================================================
+   BODY BACKGROUNDS
+   ============================================================================= */
+
+/* Light — Marmor mit feiner Maserung */
+body {
+  background-attachment: fixed;
+  background:
+    /* Marmor-Maserung (diagonale Adern) */
+    repeating-linear-gradient(118deg,
+      rgba(201, 162, 39, 0.05) 0px,  rgba(201, 162, 39, 0.05) 1px,
+      transparent 1px, transparent 80px),
+    repeating-linear-gradient(62deg,
+      rgba(123, 63, 160, 0.03) 0px, rgba(123, 63, 160, 0.03) 1px,
+      transparent 1px, transparent 120px),
+    /* Licht von oben (Pantheon-Oculus) */
+    radial-gradient(600px 400px at 50% 0%, rgba(255, 230, 160, 0.28), transparent 70%),
+    /* Warmer Marmor-Gradient */
+    linear-gradient(160deg,
+      rgba(245, 235, 210, 0.70) 0%,
+      rgba(237, 230, 216, 0.00) 50%,
+      rgba(220, 200, 160, 0.40) 100%),
+    var(--color-background);
+}
+
+/* Dark — Thronsaal bei Fackelschein */
+html[data-theme="dark"] body,
+body[data-theme="dark"] {
+  background-attachment: fixed;
+  background:
+    /* Tiefe Schatten im Zentrum */
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.78) 12%, var(--color-background) 80%),
+    /* Fackel links */
+    radial-gradient(500px 700px at 5%  50%, rgba(212, 148, 26, 0.42), transparent 65%),
+    /* Fackel rechts */
+    radial-gradient(500px 700px at 95% 50%, rgba(190, 120, 10, 0.38), transparent 65%),
+    /* Purpur-Gewölbe oben */
+    radial-gradient(1000px 350px at 50%  0%, rgba(100, 30, 140, 0.35), transparent 70%),
+    /* Glut am Boden */
+    radial-gradient(900px 300px at 50% 110%, rgba(160, 80, 8, 0.35), transparent 60%),
+    /* Marmor-Adern im Dunkeln */
+    repeating-linear-gradient(118deg,
+      rgba(212, 175, 55, 0.02) 0px, rgba(212, 175, 55, 0.02) 1px,
+      transparent 1px, transparent 80px),
+    #0c0810;
+}

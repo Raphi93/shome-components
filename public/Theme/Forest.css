@@ -1,0 +1,352 @@
+/* =============================================================================
+   FOREST LIGHT (Sunlit clearing — warm greens, golden light, earthy tones)
+   ============================================================================= */
+:root {
+  --border-radius-small: 8px;
+  --border-radius:       16px;
+  --border-radius-large: 24px;
+
+  /* Brand — deep forest green */
+  --color-brand:          #2d7a3a;
+  --color-brand-rgb:      45, 122, 58;
+  --color-brand-contrast: #ffffff;
+
+  /* Primary ladder — forest greens */
+  --color-primary-darkest: #0e2010;
+  --color-primary-dark:    #1a4a20;
+  --color-primary-semidark:#2d7a3a;
+  --color-primary:         #2d7a3a;
+  --color-primary-light:   #4aaa5a;
+  --color-primary-base:    #2d7a3a;
+  --color-primary-rgb:     45, 122, 58;
+  --color-primary-contrast:#ffffff;
+
+  /* Required tokens */
+  --color-background: #e4edd8;
+  --color-surface:    rgba(248, 245, 235, 0.92);
+  --color-border:     rgba(45, 122, 58, 0.22);
+  --color-text:       #141a0c;
+  --color-text-muted: #4a5a30;
+
+  /* Inputs */
+  --input-background:        rgba(248, 246, 236, 0.90);
+  --input-color:             #141a0c;
+  --input-border:            rgba(45, 122, 58, 0.30);
+  --input-label-color:       rgba(20, 26, 12, 0.85);
+  --input-placeholder-color: rgba(74, 90, 48, 0.55);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        var(--color-primary-semidark);
+  --color-label-active:        var(--color-press-effect);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(45, 122, 58, 0.28);
+  --scrollbar-color-hover:  rgba(45, 122, 58, 0.50);
+  --scrollbar-color-active: var(--color-accent);
+
+  /* Shadows */
+  --color-box-shadow: rgba(14, 32, 16, 0.14);
+  --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(14, 32, 16, 0.10);
+  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(14, 32, 16, 0.14);
+  --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(14, 32, 16, 0.14);
+  --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(14, 32, 16, 0.14);
+  --shadow-neon:
+    0 0 0.30rem rgba(45, 122, 58, 0.26),
+    0 0 0.90rem rgba(45, 122, 58, 0.16),
+    0 0 1.60rem rgba(139, 105, 20, 0.10);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(45, 122, 58, 0.20);
+  --nav-actions-color:        rgba(232, 242, 225, 0.95);
+  --nav-toggle-color:         rgba(232, 242, 225, 0.95);
+  --nav-current-module-color: rgba(232, 242, 225, 0.95);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(8, 18, 8, 0.97) 0%,
+      rgba(10, 24, 10, 0.90) 100%);
+  --color-mod-nav-theme-header-color: rgba(232, 242, 225, 0.95);
+
+  --color-mod-nav-theme:
+    linear-gradient(180deg,
+      rgba(74, 170, 90, 0.20) 0%,
+      rgba(45, 122, 58, 0.16) 55%,
+      rgba(139, 105, 20, 0.10) 100%),
+    rgba(6, 14, 6, 0.90);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(6, 14, 6, 0.94);
+  --color-mod-nav-theme-contrast:  rgba(232, 242, 225, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(248, 245, 235, 0.82);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(248, 245, 235, 0.94) 0%,
+      rgba(45, 122, 58, 0.07)   50%,
+      rgba(139, 105, 20, 0.05)  100%);
+
+  /* Sidebar */
+  --sidebar-level-0-color: #060e06;
+  --sidebar-level-1-color: #081408;
+
+  --color-sidebar-text:              rgba(210, 232, 200, 0.90);
+  --color-sidebar-selected:          rgba(45, 122, 58, 0.20);
+  --color-sidebar-selected-text:     rgba(232, 242, 225, 0.98);
+  --color-sidebar-env-text:          rgba(74, 170, 90, 0.90);
+
+  --color-sidebar-selected-child:       rgba(45, 122, 58, 0.14);
+  --color-sidebar-selected-subchild:    rgba(139, 105, 20, 0.18);
+
+  --color-sidebar-selected-child-text:    rgba(232, 242, 225, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(232, 242, 225, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(45, 122, 58, 0.12);
+
+  /* Buttons */
+  --button-color:                      #ffffff;
+  --button-color-hover:                #ffffff;
+  --button-background-color:           var(--color-primary-dark);
+  --button-background-color-hover:     var(--color-brand);
+
+  --button-color-secondary:            #ffffff;
+  --button-color-hover-secondary:      #ffffff;
+  --button-background-color-secondary:       var(--color-brand);
+  --button-background-color-hover-secondary: var(--color-primary-dark);
+
+  --button-background-color-light-rgb:       rgba(45, 122, 58, 0.14);
+  --button-color-light:                      var(--color-primary-dark);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(139, 105, 20, 0.14);
+  --button-color-light-secondary:                var(--color-accent);
+  --button-color-hover-light-secondary:          #ffffff;
+  --button-background-color-hover-light-secondary: var(--color-accent);
+
+  /* Grid */
+  --grid-head-color:             rgba(232, 242, 225, 0.96);
+  --grid-head-background:        rgba(6, 14, 6, 0.95);
+  --grid-head-background-active: rgba(45, 122, 58, 0.28);
+  --grid-head-hover:             rgba(139, 105, 20, 0.18);
+
+  --color-grid-hover:          rgba(45, 122, 58, 0.06);
+  --color-grid-selected-hover: rgba(45, 122, 58, 0.10);
+  --color-grid-selected:       rgba(45, 122, 58, 0.07);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(45, 122, 58, 0.90)  0%,
+      rgba(74, 170, 90, 0.90)  55%,
+      rgba(139, 105, 20, 0.80) 100%);
+  --progressbar-text-color: var(--color-text);
+}
+
+
+/* =============================================================================
+   FOREST DARK (Night forest — near-black depths, firefly glows, moonlit silver)
+   ============================================================================= */
+:root[data-theme="dark"] {
+  /* Brand — firefly green */
+  --color-brand:          #4ade80;
+  --color-brand-rgb:      74, 222, 128;
+  --color-brand-contrast: #030c03;
+
+  /* Primary ladder — deep forest dark */
+  --color-primary-darkest: #040c04;
+  --color-primary-dark:    #0e2810;
+  --color-primary-semidark:#1a4a20;
+  --color-primary:         #4ade80;
+  --color-primary-light:   #86efac;
+  --color-primary-rgb:     74, 222, 128;
+  --color-primary-contrast:#040c04;
+
+  /* Accent — golden firefly / moonlight */
+  --color-accent:     #c8a030;
+  --color-accent-rgb: 200, 160, 48;
+
+  /* Required tokens */
+  --color-background: #060c06;
+  --color-surface:    rgba(8, 14, 8, 0.88);
+  --color-border:     rgba(74, 222, 128, 0.18);
+  --color-text:       rgba(220, 242, 210, 0.94);
+  --color-text-muted: rgba(148, 185, 140, 0.68);
+
+  /* Inputs */
+  --input-background:        rgba(6, 12, 6, 0.80);
+  --input-color:             rgba(220, 242, 210, 0.94);
+  --input-border:            rgba(74, 222, 128, 0.22);
+  --input-label-color:       rgba(220, 242, 210, 0.90);
+  --input-placeholder-color: rgba(148, 185, 140, 0.52);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        rgba(220, 242, 210, 0.94);
+  --color-label-active:        rgba(220, 242, 210, 0.94);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(74, 222, 128, 0.20);
+  --scrollbar-color-hover:  rgba(74, 222, 128, 0.38);
+  --scrollbar-color-active: var(--color-accent);
+
+  /* Shadows / Firefly glow */
+  --color-box-shadow: rgba(0, 0, 0, 0.85);
+  --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(0, 0, 0, 0.70);
+  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(0, 0, 0, 0.80);
+  --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(0, 0, 0, 0.80);
+  --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(0, 0, 0, 0.80);
+  --shadow-neon:
+    0 0 0.40rem rgba(74, 222, 128, 0.50),
+    0 0 1.20rem rgba(74, 222, 128, 0.30),
+    0 0 2.50rem rgba(200, 160, 48, 0.18),
+    0 0 4.00rem rgba(45, 122, 58, 0.10);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(74, 222, 128, 0.16);
+  --nav-actions-color:        rgba(220, 242, 210, 0.92);
+  --nav-toggle-color:         rgba(220, 242, 210, 0.92);
+  --nav-current-module-color: rgba(220, 242, 210, 0.92);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(2, 6, 2, 0.98) 0%,
+      rgba(4, 10, 4, 0.88) 100%);
+  --color-mod-nav-theme-header-color: rgba(220, 242, 210, 0.95);
+
+  --color-mod-nav-theme: linear-gradient(180deg,
+      rgba(74, 222, 128, 0.18) 0%,
+      rgba(45, 122, 58, 0.12)  50%,
+      rgba(200, 160, 48, 0.06) 100%),
+    rgba(3, 8, 3, 0.92);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(3, 8, 3, 0.90);
+  --color-mod-nav-theme-contrast:  rgba(220, 242, 210, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(8, 14, 8, 0.72);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(8, 14, 8, 0.96)      0%,
+      rgba(74, 222, 128, 0.10)  30%,
+      rgba(45, 122, 58, 0.08)   62%,
+      rgba(200, 160, 48, 0.05)  100%);
+
+  /* Dashboard border override */
+  --dashboard-border-gradient: conic-gradient(from 0turn,
+      #4ade80,
+      #c8a030,
+      #86efac,
+      #c8a030,
+      #4ade80);
+
+  /* Sidebar */
+  --sidebar-level-0-color: #030803;
+  --sidebar-level-1-color: #040c04;
+
+  --color-sidebar-text:           rgba(220, 242, 210, 0.92);
+  --color-sidebar-selected:       rgba(74, 222, 128, 0.20);
+  --color-sidebar-selected-text:  rgba(220, 242, 210, 0.96);
+  --color-sidebar-env-text:       rgba(74, 222, 128, 0.92);
+
+  --color-sidebar-selected-child:       rgba(74, 222, 128, 0.14);
+  --color-sidebar-selected-subchild:    rgba(200, 160, 48, 0.20);
+
+  --color-sidebar-selected-child-text:    rgba(220, 242, 210, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(220, 242, 210, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(74, 222, 128, 0.12);
+
+  /* Buttons */
+  --button-color:                       #ffffff;
+  --button-color-hover:                 #ffffff;
+  --button-background-color:            var(--color-primary-dark);
+  --button-background-color-hover:      var(--color-brand);
+
+  --button-color-secondary:             #ffffff;
+  --button-color-hover-secondary:       #ffffff;
+  --button-background-color-secondary:       rgba(74, 222, 128, 0.16);
+  --button-background-color-hover-secondary: var(--color-brand);
+
+  --button-background-color-light-rgb:       rgba(74, 222, 128, 0.18);
+  --button-color-light:                      var(--color-brand);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(200, 160, 48, 0.14);
+  --button-color-light-secondary:                rgba(200, 160, 48, 0.90);
+  --button-color-hover-light-secondary:          #ffffff;
+  --button-background-color-hover-light-secondary: var(--color-accent);
+
+  /* Grid */
+  --grid-head-color:             rgba(220, 242, 210, 0.95);
+  --grid-head-background:        var(--color-primary-darkest);
+  --grid-head-background-active: rgba(74, 222, 128, 0.22);
+  --grid-head-hover:             rgba(200, 160, 48, 0.18);
+
+  --color-grid-hover:          rgba(74, 222, 128, 0.06);
+  --color-grid-selected-hover: rgba(74, 222, 128, 0.10);
+  --color-grid-selected:       rgba(74, 222, 128, 0.08);
+
+  --grid-surface:  rgba(6, 12, 6, 0.85);
+  --pager-surface: rgba(6, 12, 6, 0.80);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(74, 222, 128, 0.90)  0%,
+      rgba(134, 239, 172, 0.85) 50%,
+      rgba(200, 160, 48, 0.75)  100%);
+  --progressbar-text-color: rgba(220, 242, 210, 0.92);
+}
+
+
+/* =============================================================================
+   BODY BACKGROUNDS
+   ============================================================================= */
+
+body {
+  background-attachment: fixed;
+  background:
+    linear-gradient(rgba(228, 237, 216, 0.60), rgba(228, 237, 216, 0.60)),
+    radial-gradient(1100px 500px at 50% 0%,   rgba(200, 200, 80, 0.30), transparent 65%),
+    radial-gradient(900px  700px at 15% 50%,  rgba(45, 122, 58, 0.28), transparent 70%),
+    radial-gradient(900px  700px at 85% 45%,  rgba(74, 170, 90, 0.22), transparent 70%),
+    radial-gradient(700px  500px at 50% 100%, rgba(139, 105, 20, 0.18), transparent 70%),
+    linear-gradient(160deg,
+      rgba(74, 170, 90, 0.10)  0%,
+      rgba(228, 237, 216, 0.94) 40%,
+      rgba(139, 105, 20, 0.07) 100%),
+    repeating-linear-gradient(
+      145deg,
+      rgba(45, 122, 58, 0.025) 0px,
+      transparent 1px,
+      transparent 60px),
+    repeating-linear-gradient(
+      55deg,
+      rgba(139, 105, 20, 0.018) 0px,
+      transparent 1px,
+      transparent 80px);
+}
+
+html[data-theme="dark"] body,
+body[data-theme="dark"] {
+  background-attachment: fixed;
+  background:
+    radial-gradient(3px 3px at 15% 30%, rgba(74, 222, 128, 0.70), transparent),
+    radial-gradient(2px 2px at 45% 20%, rgba(200, 160, 48, 0.60), transparent),
+    radial-gradient(3px 3px at 72% 45%, rgba(74, 222, 128, 0.65), transparent),
+    radial-gradient(2px 2px at 28% 65%, rgba(200, 160, 48, 0.55), transparent),
+    radial-gradient(3px 3px at 85% 25%, rgba(74, 222, 128, 0.60), transparent),
+    radial-gradient(2px 2px at 60% 70%, rgba(200, 160, 48, 0.50), transparent),
+    radial-gradient(3px 3px at 8%  55%, rgba(74, 222, 128, 0.55), transparent),
+    radial-gradient(2px 2px at 92% 80%, rgba(200, 160, 48, 0.45), transparent),
+    radial-gradient(circle at center, rgba(0, 0, 0, 0.82) 10%, var(--color-background) 82%),
+    radial-gradient(1200px 300px at 50%  -5%,  rgba(200, 210, 200, 0.12), transparent 65%),
+    radial-gradient(800px  600px at 20%  60%,  rgba(45, 122, 58, 0.25), transparent 65%),
+    radial-gradient(800px  600px at 80%  40%,  rgba(74, 222, 128, 0.15), transparent 60%),
+    radial-gradient(600px  500px at 50% 100%,  rgba(139, 105, 20, 0.20), transparent 65%),
+    #060c06;
+}

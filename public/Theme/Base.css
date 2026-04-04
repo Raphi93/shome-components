@@ -1,0 +1,595 @@
+/* =============================================================================
+   BASE.css (single file)
+   - Core (no colors)
+   - Default colors (light)
+   - Component aliases (uses tokens)
+   - Dark mode overrides (ONLY colors + aliases)
+   - Themes will be separate css files later
+   ============================================================================= */
+
+
+/* =============================================================================
+   01) CORE / GENERAL (Theme-neutral, no colors)
+   ============================================================================= */
+
+:root {
+   /* Spacing */
+   --spacing: 0.5rem;
+
+   /* Fonts */
+   --font-primary: Segoe UI, Helvetica, sans-serif;
+   --font-code: Consolas, Courier New, monospace;
+   --font-ico: ionicons;
+   --font-meninx-ico: meninxicons;
+
+   --font-family: "Outfit-VariableFont_wght";
+   --font-weight: 400;
+
+   /* Editor */
+   --editor-font-size: 14px;
+
+   /* Font sizes */
+   --font-size-base: 1rem;
+   --font-size-large: 1.125rem;
+   --font-size-smaller: 0.875rem;
+   --font-size-small: 0.75rem;
+
+   --font-size-main-heading: 1.875rem;
+   --font-size-subheading: 1.375rem;
+   --font-size-sub-subheading: 1.125rem;
+
+   --font-size-oversized-01: 1.875rem;
+   --font-size-oversized-02: 2.8125rem;
+   --font-size-oversized-03: 3.75rem;
+   --font-size-oversized-04: 5rem;
+
+   /* Line heights */
+   --line-height-base: 1.5rem;
+   --line-height-large: 1.5rem;
+   --line-height-smaller: 1rem;
+   --line-height-small: 1rem;
+
+   --line-height-main-heading: 2.5rem;
+   --line-height-subheading: 2rem;
+   --line-height-sub-subheading: 1.5rem;
+
+   --line-height-oversized-01: 2rem;
+   --line-height-oversized-02: 2.5rem;
+   --line-height-oversized-03: 3.5rem;
+   --line-height-oversized-04: 4.5rem;
+
+   /* Baseline offsets */
+   --baseline-offset-base: 0.34375rem;
+   --baseline-offset-large: 0.3125rem;
+   --baseline-offset-smaller: 0.125rem;
+   --baseline-offset-small: 0.1875rem;
+
+   --baseline-offset-main-heading: 0rem;
+   --baseline-offset-subheading: 0.4375rem;
+   --baseline-offset-sub-subheading: 0.3125rem;
+
+   --baseline-offset-oversized-01: 0.25rem;
+   --baseline-offset-oversized-02: 0.125rem;
+   --baseline-offset-oversized-03: 0.1875rem;
+   --baseline-offset-oversized-04: 0.1875rem;
+
+   /* Motion */
+   --transition-duration-base: 0.2s;
+   --transition-duration-long: 0.4s;
+
+   /* Layout */
+   --module-header-height: 3.5rem;
+   --navigation-width: 15rem;
+   --content-max-width: 93.75rem;
+
+   --content-padding: 2rem;
+   --content-padding-md: 1.5rem;
+   --content-padding-sm: 1rem;
+
+   --nav-height: 3rem;
+   --nav-width: 20.5rem;
+   --nav-module-width: 4rem;
+
+   /* Breakpoints */
+   --breakpoint-xxl: 88em;
+   --breakpoint-xl: 75em;
+   --breakpoint-lg: 62em;
+   --breakpoint-md: 48em;
+   --breakpoint-sm: 36em;
+
+   /* Border radius */
+   --border-radius-small: 4px;
+   --border-radius: 8px;
+   --border-radius-large: 16px;
+
+   /* Scrollbar */
+   --scrollbar-size: 0.375rem;
+
+   /* Icons */
+   --clickableDownSymbol: ;
+   --clickableUpSymbol: ;
+
+   /* Grid / Container */
+   --main-max-width: 1600px;
+   --main-min-width: 200px;
+   --main-width: 100%;
+
+   /* Sidebar layout */
+   --sidebar-collapsed-width: calc(var(--spacing) * 8);
+   --sidebar-extended-width: calc(var(--spacing) * 34);
+   --sidebar-nav-height: 90svh;
+
+   --sidebar-menu-item-height: 2.5rem;
+   --sidebar-submenu-header-height: 2.5rem;
+   --sidebar-submenu-item-height: 2.5rem;
+   --sidebar-submenu-indent: calc(var(--spacing) * 6);
+   --sidebar-submenu-width: calc(var(--spacing) * 26);
+
+   /* Sidebar logo default */
+   --sidebar-logo-expanded-height: 6.5rem;
+   --sidebar-logo-expanded-width: auto;
+   --sidebar-font-size: 1rem;
+
+   --sidebar-bars-left: calc((var(--sidebar-collapsed-width) - (var(--font-size-large))) / 2);
+   --sidebar-bars-bottom: 1.5rem;
+
+   /* Sidebar Logo Collapsed */
+   --icon-sidebar-height: calc(var(--nav-height) - 1rem);
+   --icon-sidebar-width: calc(var(--nav-height) - 0.5rem);
+   --sidebar-logo-left: calc((var(--sidebar-collapsed-width) / 2) - (var(--icon-sidebar-width) / 2));
+   --sidebar-logo-top: calc((var(--nav-height) / 2) - (var(--icon-sidebar-height) / 2));
+
+   /* Sidebar Logo Expanded */
+   --icon-sidebar-long-height: 3rem;
+   --icon-sidebar-long-width: auto;
+   --sidebar-menu-icon-margin: calc((var(--sidebar-collapsed-width) / 2) - (var(--sidebar-font-size) / 2 + 0.25rem));
+   --sidebar-logo-long-left: var(--sidebar-menu-icon-margin);
+   --sidebar-logo-expanded-top: 1rem;
+
+   /* Sidebar expanded grid */
+   --sidebar-expanded-grid: calc(var(--sidebar-collapsed-width) - 1.5rem) calc(var(--sidebar-extended-width) - 5.65rem) 2rem;
+}
+
+
+/* =============================================================================
+   02) COLOR TOKENS (DEFAULT / LIGHT)
+   ============================================================================= */
+
+:root {
+   /* Overlays */
+   --color-overlay-dark: #00000080;
+   --color-overlay-dar-opaque: #999;
+   /* keeping original name */
+   --color-overlay-light: #ffffff80;
+
+   /* Neutrals */
+   --color-white: #fff;
+   --color-black: #212121;
+
+   --color-gray-100: #fafafa;
+   --color-gray-200: #f7f7f7;
+   --color-gray-250: #f2f2f2;
+   --color-gray-275: #e5e5e5;
+   --color-gray-300: #e0e0e0;
+   --color-gray-400: #bdbdbd;
+   --color-gray-500: #9e9e9e;
+   --color-gray-600: #707070;
+   --color-gray-700: #616161;
+   --color-gray-800: #424242;
+   --color-gray-900: #212121;
+
+   /* Semantic */
+   --color-positive: #82bc3c;
+   --color-positive-dark: #5a8229;
+   --color-positive-light: #93c853;
+   --color-positive-rgb: 130, 188, 60;
+
+   --color-negative: #d64856;
+   --color-negative-dark: #ab2633;
+   --color-negative-light: #dd6571;
+   --color-negative-rgb: 214, 72, 86;
+
+   --color-warning: #ffc000;
+   --color-warning-dark: #e6ad00;
+   --color-warning-light: #ffd34d;
+   --color-warning-rgb: 255, 192, 0;
+
+   /* Named */
+   --color-red: #db111d;
+   --color-blue: #0f89dc;
+   --color-blue-dark: #0d6efd;
+   --color-green: #00a368;
+   --color-purple: #884dd3;
+   --color-orange: #ffc000;
+   --color-yellow: #ffd966;
+   --color-peach: #feb8a4;
+
+   /* Charts / Reports */
+   --color-chart-bar: var(--color-primary-dark);
+
+   --color-reports-green: #c6efce;
+   --color-reports-red: #ffc7ce;
+   --color-reports-header-color: #e6e6e6;
+   --color-reports-group-row: #f1f1f1;
+   --color-reports-yellow: #faeabc;
+   --color-reports-blue: #bcd6ec;
+
+   --color-reports-accent-blue: #01239E;
+   --color-reports-accent-lightblue: #0087B6;
+   --color-reports-accent-green: #59A14F;
+   --color-reports-accent-yellow: #FAA800;
+   --color-reports-accent-orange: #F36A20;
+   --color-reports-accent-red: #E15759;
+
+   /* Brand / Primary */
+   --color-brand: #6592CC;
+   --color-brand-rgb: 31, 106, 156;
+   --color-brand-contrast: #fefeff;
+
+   --color-primary-darkest: #00467a;
+   --color-primary-dark: #044680;
+   --color-primary-semidark: #0072c6;
+   --color-primary: #6592CC;
+   --color-primary-light: #B7D2EC;
+   --color-primary-base: #0072c6;
+
+   --color-primary-rgb: 0, 114, 198;
+   --color-primary-contrast: #e5f2ff;
+
+   /* =========================
+     THEME REQUIRED TOKENS
+     (Pflicht für Themes)
+     ========================= */
+   --color-background: var(--color-white);
+   --color-surface: var(--color-gray-100);
+   --color-border: var(--color-gray-275);
+   --color-text: var(--color-gray-900);
+   --color-text-muted: var(--color-gray-600);
+
+   /* Inputs (theme required) */
+   --input-background: var(--color-white);
+   --input-color: var(--color-gray-900);
+   --input-border: var(--color-gray-400);
+   --input-label-color: var(--color-gray-800);
+   --input-placeholder-color: var(--color-text-muted);
+
+   /* Focus / press */
+   --input-focus-outline-color: var(--color-brand);
+   --color-press-effect: var(--color-primary-semidark);
+   --color-label-active: var(--color-press-effect);
+
+   /* Scrollbar colors */
+   --scrollbar-color: var(--color-gray-400);
+   --scrollbar-color-hover: var(--color-gray-500);
+   --scrollbar-color-active: var(--color-primary);
+
+   /* Shadows */
+   --color-box-shadow: rgba(29, 34, 41, 0.1);
+   --shadow-00: 0 0.1875rem 0.3125rem 0 #2f365c1a;
+   --shadow-01: 0 0.0625rem 0.3125rem 0 #2f365c33;
+   --shadow-02: 0 0.1875rem 0.625rem 0.1875rem #2f365c33;
+   --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem #2f365c33;
+   --shadow-neon: 0 0 0.25rem rgba(var(--color-primary-rgb), 0.25),
+      0 0 0.75rem rgba(var(--color-primary-rgb), 0.18),
+      0 0 1.5rem rgba(var(--color-primary-rgb), 0.12);
+}
+
+
+/* =============================================================================
+   03) COMPONENT ALIASES (uses tokens above)
+   ============================================================================= */
+
+:root {
+   /* Navigation */
+   --nav-border-radius: 0;
+   --nav-line-color: var(--color-border);
+   --nav-border-line: 0.0625rem solid var(--nav-line-color);
+
+   --nav-actions-color: var(--color-primary-dark);
+   --nav-toggle-color: var(--color-primary-dark);
+   --nav-toggle-border-radius: 0;
+
+   --nav-current-module-color: var(--color-primary-dark);
+
+   /* IMPORTANT: base header is white */
+   --color-mod-nav-theme-header: var(--color-white);
+   --color-mod-nav-theme-header-color: var(--color-primary-dark);
+
+   --color-mod-nav-theme: var(--color-primary-dark);
+   --color-mod-nav-theme-variant-1: var(--color-brand);
+   --color-mod-nav-theme-variant-2: var(--color-white);
+   --color-mod-nav-theme-contrast: var(--color-white);
+
+   /* Backgrounds (aliases) */
+   --color-card-background: var(--color-background);
+   --color-card-dashboard-background: linear-gradient(0deg,
+         #ffffff 0%,
+         #f4fbff 25%,
+         #d9f3fb 60%,
+         #9ed8ea 100%);
+
+   /* Sidebar */
+   --color-sidebar-text: var(--color-white);
+   --color-sidebar-selected: var(--color-brand);
+   --color-sidebar-selected-text: var(--color-white);
+   --color-sidebar-env-text: var(--color-brand);
+
+   --sidebar-level-0-color: #073068;
+   --sidebar-level-1-color: #011B4A;
+   --color-sidebar-selected-child: #05579E;
+   --color-sidebar-selected-subchild: #0668BF;
+
+   --color-sidebar-selected-child-text: var(--color-white);
+   --color-sidebar-selected-subchild-text: var(--color-white);
+
+   --sidebar-selected-submenu-hover: var(--color-primary-dark);
+
+   --filter-icon: invert(1);
+   --filter-icon-selected: invert(1);
+
+   /* Checkbox */
+   --checkbox-color-checked-brand: var(--color-brand);
+   --checkbox-color-checked-check: var(--color-white);
+
+   /* Buttons */
+   --button-color: var(--color-white, #ffffff);
+   --button-color-hover: var(--color-white, #ffffff);
+   --button-background-color: var(--color-primary-dark, #044680);
+   --button-background-color-hover: var(--color-brand, #6592CC);
+
+   --button-color-secondary: var(--color-white, #ffffff);
+   --button-color-hover-secondary: var(--color-white, #ffffff);
+   --button-background-color-secondary: var(--color-brand, #6592CC);
+   --button-background-color-hover-secondary: var(--color-primary-dark, #044680);
+
+   --button-background-color-light-rgb: rgba(var(--color-primary-rgb, 101, 146, 204), 0.3);
+   --button-color-light: var(--color-primary-dark, #044680);
+   --button-color-hover-light: var(--color-white, #ffffff);
+   --button-background-color-hover-light: var(--color-primary, #6592CC);
+
+   --button-background-color-light-rgb-secondary: rgba(var(--color-brand-rgb, 101, 146, 204), 0.3);
+   --button-color-light-secondary: var(--color-brand, #6592CC);
+   --button-color-hover-light-secondary: var(--color-white, #ffffff);
+   --button-background-color-hover-light-secondary: var(--color-brand, #6592CC);
+
+   --button-color-success: var(--color-white, #ffffff);
+   --button-color-hover-success: var(--color-white, #ffffff);
+   --button-background-color-success: var(--color-positive, #198754);
+   --button-background-color-hover-success: var(--color-positive-dark, #166e3a);
+
+   --button-color-warning: var(--color-white, #ffffff);
+   --button-color-hover-warning: var(--color-white, #ffffff);
+   --button-background-color-warning: var(--color-warning, #ffc107);
+   --button-background-color-hover-warning: var(--color-warning-dark, #cc9a06);
+
+   --button-color-danger: var(--color-white, #ffffff);
+   --button-color-hover-danger: var(--color-white, #ffffff);
+   --button-background-color-danger: var(--color-negative, #dc3545);
+   --button-background-color-hover-danger: var(--color-negative-dark, #b02a37);
+
+   --button-color-info: var(--color-white, #ffffff);
+   --button-color-hover-info: var(--color-white, #ffffff);
+   --button-background-color-info: var(--color-blue-dark, #0d6efd);
+   --button-background-color-hover-info: #0b5ed7;
+
+   --button-background-color-light-rgb-success: rgba(var(--color-positive-rgb, 25, 135, 84), 0.3);
+   --button-color-light-success: var(--color-positive-dark, #146c43);
+   --button-color-hover-light-success: var(--color-white, #ffffff);
+   --button-background-color-hover-light-success: var(--color-positive, #198754);
+
+   --button-background-color-light-rgb-danger: rgba(var(--color-negative-rgb, 220, 53, 69), 0.3);
+   --button-color-light-danger: var(--color-negative-dark, #842029);
+   --button-color-hover-light-danger: var(--color-white, #ffffff);
+   --button-background-color-hover-light-danger: var(--color-negative, #dc3545);
+
+   --button-background-color-light-rgb-warning: rgba(var(--color-warning-rgb, 255, 193, 7), 0.3);
+   --button-color-light-warning: var(--color-warning-dark, #997404);
+   --button-color-hover-light-warning: var(--color-white, #ffffff);
+   --button-background-color-hover-light-warning: var(--color-warning, #ffc107);
+
+   --button-background-color-light-rgb-info: rgba(13, 110, 253, 0.3);
+   --button-color-light-info: #084298;
+   --button-color-hover-light-info: var(--color-white, #ffffff);
+   --button-background-color-hover-light-info: var(--color-blue-dark, #0d6efd);
+
+   /* Grid */
+   --grid-head-color: var(--color-white);
+   --grid-head-background: var(--color-primary-dark);
+   --grid-head-background-active: var(--color-brand);
+   --grid-head-hover: var(--color-primary-semidark);
+
+   --grid-head-color-secondary: var(--color-black);
+   --grid-head-background-secondary: var(--color-gray-300);
+
+   --color-grid-hover: var(--color-gray-250);
+   --color-grid-selected-hover: var(--color-brand);
+   --color-grid-selected: var(--color-gray-275);
+
+      --progressbar-color: linear-gradient(90deg,
+         #ffffff 0%,
+         #f4fbff 25%,
+         #d9f3fb 60%,
+         #9ed8ea 100%);
+
+   --progressbar-text-color: var(--color-text);
+}
+
+
+/* =============================================================================
+   04) DARK MODE (ONLY overrides)
+   - usage: <html data-theme="dark">
+   - themes will be separate CSS files later
+   ============================================================================= */
+
+:root[data-theme="dark"] {
+   /* Overlays */
+   --color-overlay-dark: rgba(0, 0, 0, 0.6);
+   --color-overlay-light: rgba(255, 255, 255, 0.08);
+   --color-overlay-dar-opaque: #111;
+
+   /* Neutrals (dark scale — 100 = darkest, 900 = lightest) */
+   --color-white: #ffffff;
+   --color-black: #000000;
+
+   --color-gray-100: #14161a;
+   --color-gray-200: #1a1d23;
+   --color-gray-250: #20242b;
+   --color-gray-275: #272c35;
+   --color-gray-300: #2f3540;
+   --color-gray-400: #434d5c;
+   --color-gray-500: #697585;
+   --color-gray-600: #8a97a8;
+   --color-gray-700: #b0bcc9;
+   --color-gray-800: #d4dae3;
+   --color-gray-900: #f2f5f8;
+
+   /* Brand / Primary */
+   --color-brand:          #6ea8fe;
+   --color-brand-contrast: #060a12;
+   --color-brand-rgb:      110, 168, 254;
+
+   --color-primary-darkest:  #071526;
+   --color-primary-dark:     #0d2444;
+   --color-primary-semidark: #1e4a9a;
+   --color-primary:          #5b8ff5;
+   --color-primary-light:    #8db4ff;
+   --color-primary-base:     #5b8ff5;
+
+   --color-primary-rgb:      91, 143, 245;
+   --color-primary-contrast: #060a12;
+
+   /* Accent (fallback for themes that need it) */
+   --color-accent:     #7c8cf8;
+   --color-accent-rgb: 124, 140, 248;
+
+   /* Semantic (tuned for dark) */
+   --color-positive:      #4fd18b;
+   --color-positive-dark: #32a36a;
+   --color-positive-light:#7ae3ad;
+   --color-positive-rgb:  79, 209, 139;
+
+   --color-negative:      #ff6b7a;
+   --color-negative-dark: #d94a58;
+   --color-negative-light:#ff909b;
+   --color-negative-rgb:  255, 107, 122;
+
+   --color-warning:       #ffd166;
+   --color-warning-dark:  #e3b64f;
+   --color-warning-light: #ffe3a3;
+   --color-warning-rgb:   255, 209, 102;
+
+   /* =========================
+     THEME REQUIRED TOKENS
+     ========================= */
+   --color-background: #111318;
+   --color-surface:    var(--color-gray-100);
+   --color-border:     var(--color-gray-275);
+   --color-text:       var(--color-gray-900);
+   --color-text-muted: var(--color-gray-600);
+
+   /* Inputs */
+   --input-background:        var(--color-gray-100);
+   --input-color:             var(--color-white);
+   --input-border:            var(--color-gray-400);
+   --input-label-color:       var(--color-gray-900);
+   --input-placeholder-color: var(--color-text-muted);
+
+   /* Focus / press */
+   --input-focus-outline-color: var(--color-brand);
+   --color-press-effect:        var(--color-white);
+   --color-label-active:        var(--color-press-effect);
+
+   /* Shadows */
+   --color-box-shadow: rgba(0, 0, 0, 0.50);
+   --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(0, 0, 0, 0.40);
+   --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(0, 0, 0, 0.50);
+   --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(0, 0, 0, 0.50);
+   --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(0, 0, 0, 0.50);
+   --shadow-neon:
+      0 0 0.5rem  rgba(var(--color-brand-rgb), 0.35),
+      0 0 1.25rem rgba(var(--color-brand-rgb), 0.22),
+      0 0 2.5rem  rgba(var(--color-brand-rgb), 0.12);
+
+   /* Scrollbar */
+   --scrollbar-color:        rgba(255, 255, 255, 0.16);
+   --scrollbar-color-hover:  rgba(255, 255, 255, 0.28);
+   --scrollbar-color-active: var(--color-primary);
+
+   /* Icons */
+   --filter-icon:          invert(1);
+   --filter-icon-selected: invert(1);
+
+   /* Navigation */
+   --nav-line-color:           var(--color-border);
+   --nav-actions-color:        var(--color-gray-900);
+   --nav-toggle-color:         var(--color-gray-900);
+   --nav-current-module-color: var(--color-gray-900);
+
+   --color-mod-nav-theme-header:       var(--color-primary-darkest);
+   --color-mod-nav-theme-header-color: var(--color-gray-900);
+   --color-mod-nav-theme:              var(--color-primary-darkest);
+   --color-mod-nav-theme-variant-1:    var(--color-brand);
+   --color-mod-nav-theme-variant-2:    var(--color-gray-100);
+   --color-mod-nav-theme-contrast:     var(--color-gray-900);
+
+   /* Sidebar */
+   --sidebar-level-0-color: #0b1220;
+   --sidebar-level-1-color: #070b18;
+
+   --color-sidebar-text:          var(--color-gray-900);
+   --color-sidebar-selected:      var(--color-brand);
+   --color-sidebar-selected-text: var(--color-primary-contrast);
+   --color-sidebar-env-text:      var(--color-brand);
+
+   --color-sidebar-selected-child:          #1b3f86;
+   --color-sidebar-selected-subchild:       #2b66d4;
+   --color-sidebar-selected-child-text:     var(--color-white);
+   --color-sidebar-selected-subchild-text:  var(--color-white);
+
+   --sidebar-selected-submenu-hover: var(--color-primary-semidark);
+
+   /* Buttons */
+   --button-background-color:       var(--color-primary-darkest);
+   --button-background-color-hover: var(--color-brand);
+
+   --button-color-light:                      var(--color-gray-900);
+   --button-background-color-light-rgb:       rgba(var(--color-primary-rgb), 0.20);
+   --button-background-color-light-rgb-secondary: rgba(var(--color-primary-rgb), 0.20);
+   --button-color-light-secondary:            var(--color-brand);
+
+   /* Cards */
+   --color-card-background: rgba(255, 255, 255, 0.06);
+   --color-card-dashboard-background: linear-gradient(180deg,
+         var(--color-gray-200) 0%,
+         var(--color-gray-250) 40%,
+         var(--color-gray-275) 100%);
+
+   /* Grid */
+   --grid-head-color:             rgba(242, 246, 255, 0.95);
+   --grid-head-background:        var(--color-primary-darkest);
+   --grid-head-background-active: rgba(var(--color-brand-rgb), 0.24);
+   --grid-head-hover:             rgba(var(--color-accent-rgb), 0.18);
+
+   --color-grid-hover:          rgba(var(--color-brand-rgb), 0.06);
+   --color-grid-selected-hover: rgba(var(--color-accent-rgb), 0.10);
+   --color-grid-selected:       rgba(var(--color-brand-rgb), 0.08);
+   --grid-surface:  rgba(14, 16, 22, 0.80);
+   --pager-surface: rgba(255, 255, 255, 0.05);
+
+   --progressbar-color: linear-gradient(90deg,
+         var(--color-primary-darkest) 0%,
+         var(--color-primary-dark)    40%,
+         var(--color-primary-semidark)80%,
+         var(--color-brand)           100%);
+   --progressbar-text-color: var(--color-text);
+}
+
+
+:root {
+   --color-brand-accent: transparent;
+   --dashboard-special-hover: none;
+}
+
+body {
+   background: var(--color-background);
+}
