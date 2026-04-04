@@ -1,0 +1,252 @@
+// VS Code-like CodeEditor
+// All colours use CSS custom properties so the component inherits the app theme,
+// but falls back to authentic VS Code dark values.
+
+:root {
+  --ce-bg:           #1e1e1e;
+  --ce-activity:     #333333;
+  --ce-tab-bg:       #2d2d2d;
+  --ce-tab-active:   #1e1e1e;
+  --ce-tab-border:   #252526;
+  --ce-tab-text:     #969696;
+  --ce-tab-active-text: #ffffff;
+  --ce-tab-accent:   #007acc;
+  --ce-breadcrumb:   #1e1e1e;
+  --ce-breadcrumb-text: #cccccc88;
+  --ce-statusbar:    #007acc;
+  --ce-statusbar-text: #ffffff;
+  --ce-border:       #3c3c3c;
+  --ce-icon:         #858585;
+  --ce-icon-hover:   #cccccc;
+  --ce-modified:     #e8a838;
+}
+
+// ─── Container ────────────────────────────────────────────────────────────────
+
+.container {
+  display:       flex;
+  flex-direction: row;
+  height:        var(--ce-height, 400px);
+  border:        1px solid var(--ce-border);
+  border-radius: 4px;
+  overflow:      hidden;
+  background:    var(--ce-bg);
+  font-family:   -apple-system, 'Segoe UI', sans-serif;
+  font-size:     13px;
+}
+
+// ─── Activity bar (left strip) ────────────────────────────────────────────────
+
+.activityBar {
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  gap:            4px;
+  width:          48px;
+  flex-shrink:    0;
+  background:     var(--ce-activity);
+  padding:        8px 0;
+  border-right:   1px solid var(--ce-border);
+}
+
+.activityIcon {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  width:           36px;
+  height:          36px;
+  font-size:       20px;
+  color:           var(--ce-icon);
+  border-radius:   4px;
+  cursor:          pointer;
+  transition:      color 0.15s;
+  user-select:     none;
+
+  &:hover { color: var(--ce-icon-hover); }
+}
+
+// ─── Main area ────────────────────────────────────────────────────────────────
+
+.main {
+  display:        flex;
+  flex-direction: column;
+  flex:           1;
+  min-width:      0;
+  overflow:       hidden;
+}
+
+// ─── Tab bar ─────────────────────────────────────────────────────────────────
+
+.tabBar {
+  display:     flex;
+  flex-shrink: 0;
+  align-items: stretch;
+  background:  var(--ce-tab-bg);
+  border-bottom: 1px solid var(--ce-border);
+  overflow-x:  auto;
+  overflow-y:  hidden;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.tab {
+  display:      flex;
+  align-items:  center;
+  gap:          6px;
+  padding:      0 12px;
+  height:       35px;
+  flex-shrink:  0;
+  border-right: 1px solid var(--ce-tab-border);
+  background:   var(--ce-tab-bg);
+  color:        var(--ce-tab-text);
+  cursor:       pointer;
+  user-select:  none;
+  position:     relative;
+  transition:   background 0.1s, color 0.1s;
+  min-width:    0;
+
+  &:hover:not(.tabActive) {
+    background: #2a2a2a;
+    color:      #cccccc;
+  }
+}
+
+.tabActive {
+  background: var(--ce-tab-active) !important;
+  color:      var(--ce-tab-active-text) !important;
+
+  // blue top accent line
+  &::before {
+    content:    '';
+    position:   absolute;
+    top:        0;
+    left:       0;
+    right:      0;
+    height:     1px;
+    background: var(--ce-tab-accent);
+  }
+}
+
+.tabIcon {
+  font-size:   14px;
+  flex-shrink: 0;
+}
+
+.tabName {
+  font-size:     12px;
+  white-space:   nowrap;
+  overflow:      hidden;
+  text-overflow: ellipsis;
+  max-width:     140px;
+}
+
+.tabModified {
+  width:         8px;
+  height:        8px;
+  border-radius: 50%;
+  background:    var(--ce-modified);
+  flex-shrink:   0;
+}
+
+.tabClose {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  width:           18px;
+  height:          18px;
+  border:          none;
+  background:      transparent;
+  color:           var(--ce-tab-text);
+  font-size:       14px;
+  line-height:     1;
+  cursor:          pointer;
+  border-radius:   3px;
+  flex-shrink:     0;
+  opacity:         0;
+  transition:      opacity 0.1s, background 0.1s;
+
+  .tab:hover &,
+  .tabActive & { opacity: 1; }
+  &:hover { background: rgba(255,255,255,0.1); color: #fff; }
+}
+
+.tabBarFill {
+  flex:       1;
+  min-width:  0;
+}
+
+.langSelect {
+  height:       35px;
+  padding:      0 8px;
+  border:       none;
+  background:   var(--ce-tab-bg);
+  color:        var(--ce-tab-text);
+  font-size:    12px;
+  cursor:       pointer;
+  border-left:  1px solid var(--ce-border);
+  flex-shrink:  0;
+
+  &:focus { outline: none; }
+  &:hover { color: #cccccc; }
+}
+
+// ─── Breadcrumb ───────────────────────────────────────────────────────────────
+
+.breadcrumb {
+  display:       flex;
+  align-items:   center;
+  gap:           6px;
+  padding:       3px 12px;
+  background:    var(--ce-breadcrumb);
+  color:         var(--ce-breadcrumb-text);
+  font-size:     12px;
+  border-bottom: 1px solid var(--ce-border);
+  flex-shrink:   0;
+}
+
+// ─── Language dot ────────────────────────────────────────────────────────────
+
+.langDot {
+  display:       inline-block;
+  width:         10px;
+  height:        10px;
+  border-radius: 50%;
+  flex-shrink:   0;
+}
+
+// ─── Editor wrapper ───────────────────────────────────────────────────────────
+
+.editorWrap {
+  flex:     1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+// ─── Status bar ───────────────────────────────────────────────────────────────
+
+.statusBar {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  height:          22px;
+  padding:         0 12px;
+  background:      var(--ce-statusbar);
+  color:           var(--ce-statusbar-text);
+  font-size:       12px;
+  flex-shrink:     0;
+  user-select:     none;
+}
+
+.statusLeft,
+.statusRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.statusReadOnly {
+  background:    rgba(255,255,255,0.2);
+  border-radius: 3px;
+  padding:       0 6px;
+  font-size:     11px;
+}

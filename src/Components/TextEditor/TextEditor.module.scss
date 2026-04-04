@@ -65,37 +65,86 @@
 }
 
 .toolbarBtn {
-  display: inline-flex;
-  align-items: center;
+  display:        inline-flex;
+  align-items:    center;
   justify-content: center;
-  min-width: rem(28px);
-  height: rem(28px);
-  padding: 0 calc(var(--spacing) * 0.5);
-  border: rem(1px) solid transparent;
-  border-radius: var(--border-radius);
-  background: transparent;
-  color: var(--text-editor-text);
-  font-size: var(--font-size-small);
-  font-family: var(--font-primary);
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  min-width:      rem(32px);
+  height:         rem(32px);
+  padding:        0 calc(var(--spacing) * 0.5);
+  border:         rem(1px) solid transparent;
+  border-radius:  var(--border-radius);
+  background:     transparent;
+  color:          var(--text-editor-text);
+  font-size:      rem(14px);
+  font-family:    var(--font-primary);
+  font-weight:    600;
+  cursor:         pointer;
+  flex-shrink:    0;
+  transition:     background 0.15s, border-color 0.15s, color 0.15s;
 
   &:hover:not(:disabled) {
-    background: var(--text-editor-btn-hover);
+    background:   var(--text-editor-btn-hover);
     border-color: var(--text-editor-border);
   }
 
   &.active {
-    background: var(--text-editor-btn-active-bg);
+    background:   var(--text-editor-btn-active-bg);
     border-color: var(--text-editor-btn-active-bg);
-    color: var(--text-editor-btn-active-color);
+    color:        var(--text-editor-btn-active-color);
   }
 
   &:disabled {
     opacity: 0.35;
-    cursor: default;
+    cursor:  default;
   }
+}
+
+// Inner div inside every toolbar button (avoids nested <button> in tooltip)
+.toolbarBtnInner {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  pointer-events:  none; // clicks go to the button
+}
+
+// ── Toolbar selects (heading / font-size / font-family) ──────────────────────
+
+.toolbarSelect {
+  height:        rem(32px);
+  padding:       0 calc(var(--spacing) * 0.5);
+  border:        rem(1px) solid var(--text-editor-border);
+  border-radius: var(--border-radius);
+  background:    var(--text-editor-select-surface);
+  color:         var(--text-editor-text);
+  font-size:     rem(13px);
+  font-family:   var(--font-primary);
+  cursor:        pointer;
+
+  &:focus {
+    outline:        rem(2px) solid var(--text-editor-focus);
+    outline-offset: rem(1px);
+  }
+}
+
+.selectBlock { width: rem(100px); }
+.selectSize  { width: rem(56px); }
+.selectFont  { width: rem(150px); }
+
+// ── Color picker icon ─────────────────────────────────────────────────────────
+
+.colorIcon {
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  gap:            rem(2px);
+  line-height:    1;
+}
+
+.colorBar {
+  display:       block;
+  width:         rem(14px);
+  height:        rem(3px);
+  border-radius: rem(2px);
 }
 
 // ── Controls (format select + view toggle) ────────────────────────────────────
@@ -109,29 +158,29 @@
 }
 
 .formatSelect {
-  height: rem(28px);
-  padding: 0 calc(var(--spacing) * 0.75);
-  border: rem(1px) solid var(--text-editor-border);
+  height:        rem(32px);
+  padding:       0 calc(var(--spacing) * 0.75);
+  border:        rem(1px) solid var(--text-editor-border);
   border-radius: var(--border-radius);
-  background: var(--text-editor-select-surface);
-  color: var(--text-editor-text);
-  font-size: var(--font-size-small);
-  font-family: var(--font-primary);
-  cursor: pointer;
+  background:    var(--text-editor-select-surface);
+  color:         var(--text-editor-text);
+  font-size:     rem(13px);
+  font-family:   var(--font-primary);
+  cursor:        pointer;
 
   &:focus {
-    outline: rem(2px) solid var(--text-editor-focus);
+    outline:        rem(2px) solid var(--text-editor-focus);
     outline-offset: rem(1px);
   }
 }
 
 .viewToggle {
-  display: inline-flex;
-  align-items: center;
+  display:         inline-flex;
+  align-items:     center;
   justify-content: center;
-  width: rem(28px);
-  height: rem(28px);
-  border: rem(1px) solid var(--text-editor-border);
+  width:           rem(32px);
+  height:          rem(32px);
+  border:          rem(1px) solid var(--text-editor-border);
   border-radius: var(--border-radius);
   background: var(--text-editor-select-surface);
   color: var(--text-editor-text);
@@ -155,7 +204,9 @@
 
 .editorContent {
   :global(.tiptap) {
-    min-height: rem(120px);
+    min-height: var(--te-min-h, rem(120px));
+    max-height: var(--te-max-h, none);
+    overflow-y: auto;
     padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 2);
     outline: none;
     line-height: 1.6;
@@ -223,7 +274,435 @@
       pointer-events: none;
       height: 0;
     }
+
+    // ── Table ────────────────────────────────────────────────────────────────
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: calc(var(--spacing) * 1) 0;
+      table-layout: fixed;
+      overflow: hidden;
+
+      td, th {
+        border: rem(1px) solid var(--text-editor-border);
+        padding: rem(6px) rem(10px);
+        vertical-align: top;
+        min-width: rem(60px);
+        position: relative;
+
+        > * { margin: 0; }
+      }
+
+      th {
+        background: var(--text-editor-toolbar-surface);
+        font-weight: 600;
+        text-align: left;
+      }
+
+      .selectedCell:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(var(--color-brand-rgb, 0,114,198), 0.12);
+        pointer-events: none;
+      }
+    }
+
+    // ── Code block with syntax highlighting ──────────────────────────────────
+    pre {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      border: none;
+      border-radius: var(--border-radius);
+      padding: calc(var(--spacing) * 1.5);
+      overflow-x: auto;
+      margin: calc(var(--spacing) * 1) 0;
+      position: relative;
+
+      code {
+        background: none;
+        border: none;
+        padding: 0;
+        font-size: var(--font-size-smaller);
+        font-family: var(--font-code, 'Fira Code', 'Courier New', monospace);
+        color: inherit;
+
+        // lowlight token colours (Catppuccin-inspired)
+        :global(.hljs-keyword)  { color: #cba6f7; }
+        :global(.hljs-string)   { color: #a6e3a1; }
+        :global(.hljs-number)   { color: #fab387; }
+        :global(.hljs-comment)  { color: #6c7086; font-style: italic; }
+        :global(.hljs-function) { color: #89b4fa; }
+        :global(.hljs-title)    { color: #89dceb; }
+        :global(.hljs-attr)     { color: #f38ba8; }
+        :global(.hljs-built_in) { color: #f9e2af; }
+        :global(.hljs-type)     { color: #cba6f7; }
+        :global(.hljs-variable) { color: #cdd6f4; }
+        :global(.hljs-operator) { color: #89dceb; }
+        :global(.hljs-punctuation) { color: #9399b2; }
+        :global(.hljs-tag)      { color: #f38ba8; }
+        :global(.hljs-name)     { color: #89b4fa; }
+        :global(.hljs-selector-tag) { color: #cba6f7; }
+        :global(.hljs-literal)  { color: #fab387; }
+        :global(.hljs-symbol)   { color: #a6e3a1; }
+      }
+    }
   }
+}
+
+// ── Fullscreen ────────────────────────────────────────────────────────────────
+
+.fullscreen {
+  position:   absolute;
+  left: var(--sidebar-width);
+  right: 0;
+  top: calc(var(--nav-height) + 1px);
+  bottom: 0;
+  inset:      0;
+  z-index:    1000;
+  border-radius: 0;
+  display:    flex;
+  flex-direction: column;
+  background: var(--text-editor-surface);
+
+  .editorContent {
+    flex: 1;
+    overflow-y: auto;
+
+    :global(.tiptap) {
+      min-height: 100%;
+      max-height: none;
+    }
+  }
+
+  .source {
+    flex: 1;
+    border-radius: 0;
+    min-height: unset;
+  }
+}
+
+// ── Word count ────────────────────────────────────────────────────────────────
+
+.wordCount {
+  padding:    rem(4px) calc(var(--spacing) * 2);
+  font-size:  rem(11px);
+  color:      var(--text-editor-text-muted);
+  border-top: rem(1px) solid var(--text-editor-border);
+  text-align: right;
+}
+
+// ── Color picker popover ─────────────────────────────────────────────────────
+
+.colorPicker {
+  position:      absolute;
+  top:           calc(100% + 4px);
+  left:          0;
+  z-index:       200;
+  width:         rem(200px);
+  background:    var(--text-editor-surface);
+  border:        rem(1px) solid var(--text-editor-border);
+  border-radius: var(--border-radius);
+  box-shadow:    var(--shadow-02, 0 4px 12px rgba(0,0,0,0.12));
+  padding:       rem(8px);
+}
+
+.colorGrid {
+  display:               grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap:                   rem(4px);
+}
+
+.colorSwatch {
+  width:         rem(26px);
+  height:        rem(26px);
+  border:        rem(2px) solid transparent;
+  border-radius: var(--border-radius);
+  cursor:        pointer;
+  transition:    transform 0.1s, border-color 0.1s;
+
+  &:hover  { transform: scale(1.15); }
+  &.active { border-color: var(--text-editor-focus); }
+}
+
+.colorReset {
+  display:      block;
+  width:        100%;
+  margin-top:   rem(6px);
+  padding:      rem(4px);
+  border:       rem(1px) solid var(--text-editor-border);
+  border-radius: var(--border-radius);
+  background:   transparent;
+  color:        var(--text-editor-text-muted);
+  font-size:    rem(12px);
+  cursor:       pointer;
+  text-align:   center;
+
+  &:hover { background: var(--text-editor-btn-hover); }
+}
+
+// ── Emoji picker ─────────────────────────────────────────────────────────────
+
+.emojiPicker {
+  position:      absolute;
+  top:           calc(100% + 4px);
+  left:          0;
+  z-index:       200;
+  width:         rem(320px);
+  background:    var(--text-editor-surface);
+  border:        rem(1px) solid var(--text-editor-border);
+  border-radius: var(--border-radius);
+  box-shadow:    var(--shadow-02, 0 6px 20px rgba(0,0,0,0.15));
+  overflow:      hidden;
+}
+
+.emojiTabs {
+  display:         flex;
+  flex-wrap:       nowrap;
+  overflow-x:      auto;
+  gap:             rem(2px);
+  padding:         rem(6px) rem(6px) rem(4px);
+  border-bottom:   rem(1px) solid var(--text-editor-border);
+  background:      var(--text-editor-toolbar-surface);
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.emojiTab {
+  flex-shrink:   0;
+  padding:       rem(4px) rem(6px);
+  border:        rem(1px) solid transparent;
+  border-radius: var(--border-radius);
+  background:    transparent;
+  cursor:        pointer;
+  font-size:     rem(18px);
+  line-height:   1;
+  transition:    background 0.1s, border-color 0.1s;
+
+  &:hover  { background: var(--text-editor-btn-hover); }
+  &.active { background: var(--text-editor-btn-active-bg); border-color: var(--text-editor-btn-active-bg); }
+}
+
+.emojiLabel {
+  padding:        rem(5px) rem(8px) rem(2px);
+  font-size:      rem(11px);
+  font-weight:    600;
+  color:          var(--text-editor-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.emojiGrid {
+  display:               grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap:                   rem(1px);
+  padding:               rem(4px) rem(6px) rem(8px);
+  max-height:            rem(220px);
+  overflow-y:            auto;
+  scrollbar-width:       thin;
+}
+
+.emojiItem {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  width:           rem(34px);
+  height:          rem(34px);
+  border:          none;
+  border-radius:   var(--border-radius);
+  background:      transparent;
+  font-size:       rem(20px);
+  cursor:          pointer;
+  line-height:     1;
+  transition:      background 0.1s, transform 0.1s;
+
+  &:hover { background: var(--text-editor-btn-hover); transform: scale(1.2); }
+}
+
+// ── Image insert dialog ───────────────────────────────────────────────────────
+
+.imageDialog {
+  position:      absolute;
+  top:           calc(100% + 4px);
+  right:         0;         // anchor to right so it doesn't overflow viewport
+  z-index:       300;
+  width:         rem(320px);
+  background:    var(--text-editor-surface);
+  border:        rem(1px) solid var(--text-editor-border);
+  border-radius: var(--border-radius);
+  box-shadow:    var(--shadow-02, 0 6px 24px rgba(0,0,0,0.14));
+  overflow:      hidden;
+}
+
+.imageTabs {
+  display:     flex;
+  border-bottom: rem(1px) solid var(--text-editor-border);
+  background:  var(--text-editor-toolbar-surface);
+}
+
+.imageTab {
+  flex:        1;
+  padding:     rem(8px);
+  border:      none;
+  background:  transparent;
+  color:       var(--text-editor-text-muted);
+  font-size:   rem(13px);
+  font-weight: 500;
+  cursor:      pointer;
+  border-bottom: rem(2px) solid transparent;
+  transition:  color 0.15s, border-color 0.15s;
+
+  &:hover  { color: var(--text-editor-text); }
+  &.active {
+    color:         var(--text-editor-btn-active-bg);
+    border-bottom-color: var(--text-editor-btn-active-bg);
+    font-weight:   600;
+  }
+}
+
+.imageForm {
+  display:        flex;
+  flex-direction: column;
+  gap:            rem(10px);
+  padding:        rem(14px);
+}
+
+.imageField {
+  display:        flex;
+  flex-direction: column;
+  gap:            rem(4px);
+}
+
+.imageLabel {
+  font-size:   rem(11px);
+  font-weight: 600;
+  color:       var(--text-editor-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.imageRequired { color: #e53e3e; }
+
+.imageInput {
+  height:        rem(32px);
+  padding:       0 rem(8px);
+  border:        rem(1px) solid var(--text-editor-border);
+  border-radius: var(--border-radius);
+  background:    var(--text-editor-select-surface);
+  color:         var(--text-editor-text);
+  font-size:     rem(13px);
+  font-family:   var(--font-primary);
+  width:         100%;
+  box-sizing:    border-box;
+
+  &:focus {
+    outline:        rem(2px) solid var(--text-editor-focus);
+    outline-offset: rem(-1px);
+  }
+}
+
+.imageInputSmall { width: rem(100px); }
+
+.imageRow {
+  display: flex;
+  gap:     rem(10px);
+
+  .imageField { flex: 1; }
+}
+
+// ── Drop zone ─────────────────────────────────────────────────────────────────
+
+.imageDropZone {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  height:          rem(100px);
+  border:          rem(2px) dashed var(--text-editor-border);
+  border-radius:   var(--border-radius);
+  background:      var(--text-editor-toolbar-surface);
+  cursor:          pointer;
+  overflow:        hidden;
+  transition:      border-color 0.15s, background 0.15s;
+
+  &:hover, &.dragging {
+    border-color: var(--text-editor-btn-active-bg);
+    background:   rgba(var(--color-brand-rgb, 0,114,198), 0.05);
+  }
+}
+
+.imageDropHint {
+  font-size: rem(13px);
+  color:     var(--text-editor-text-muted);
+}
+
+.imagePreview {
+  max-height: rem(96px);
+  max-width:  100%;
+  object-fit: contain;
+}
+
+// ── Alignment buttons ─────────────────────────────────────────────────────────
+
+.imageAlignRow {
+  display: flex;
+  gap:     rem(4px);
+}
+
+.imageAlignBtn {
+  flex:          1;
+  padding:       rem(5px) rem(4px);
+  border:        rem(1px) solid var(--text-editor-border);
+  border-radius: var(--border-radius);
+  background:    transparent;
+  color:         var(--text-editor-text);
+  font-size:     rem(12px);
+  cursor:        pointer;
+  transition:    background 0.1s, border-color 0.1s, color 0.1s;
+
+  &:hover  { background: var(--text-editor-btn-hover); }
+  &.active {
+    background:   var(--text-editor-btn-active-bg);
+    border-color: var(--text-editor-btn-active-bg);
+    color:        var(--text-editor-btn-active-color);
+  }
+}
+
+// ── Actions ───────────────────────────────────────────────────────────────────
+
+.imageActions {
+  display:     flex;
+  gap:         rem(8px);
+  margin-top:  rem(2px);
+}
+
+.imageAddBtn {
+  flex:          1;
+  height:        rem(34px);
+  border:        none;
+  border-radius: var(--border-radius);
+  background:    var(--text-editor-btn-active-bg);
+  color:         var(--text-editor-btn-active-color);
+  font-size:     rem(13px);
+  font-weight:   600;
+  cursor:        pointer;
+  transition:    opacity 0.15s;
+
+  &:disabled { opacity: 0.4; cursor: default; }
+  &:not(:disabled):hover { opacity: 0.85; }
+}
+
+.imageCancelBtn {
+  height:        rem(34px);
+  padding:       0 rem(14px);
+  border:        rem(1px) solid var(--text-editor-border);
+  border-radius: var(--border-radius);
+  background:    transparent;
+  color:         var(--text-editor-text);
+  font-size:     rem(13px);
+  cursor:        pointer;
+  transition:    background 0.1s;
+
+  &:hover { background: var(--text-editor-btn-hover); }
 }
 
 // ── Source view (raw textarea) ────────────────────────────────────────────────

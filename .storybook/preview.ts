@@ -93,7 +93,7 @@ const preview: Preview = {
       // 2. Inject selected CSS theme file
       applyThemeCss(context.globals['cssTheme'] ?? 'Light');
 
-      return Story();
+      return Story(context);
     },
   ],
 

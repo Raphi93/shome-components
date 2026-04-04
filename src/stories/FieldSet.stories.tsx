@@ -30,7 +30,7 @@ const meta: Meta<typeof FieldSet> = {
       options: ['default', 'primary', 'secondary', 'color-background'],
       description: 'Header background colour.',
     },
-    colorBackground: { control: 'boolean', description: 'Themed surface background without border or shadow.' },
+    colorBackground: { control: 'boolean', description: 'Dashboard-gradient card: zero outer padding, header gets border-bottom, content gets 1rem padding.' },
     isExpandable:    { control: 'boolean', description: 'Allow collapsing via header click.' },
     defaultOpen:     { control: 'boolean', description: 'Whether the section starts expanded.' },
     disabled:        { control: 'boolean', description: 'Dim and disable the whole section.' },

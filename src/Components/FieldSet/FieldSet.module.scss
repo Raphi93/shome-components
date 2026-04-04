@@ -70,19 +70,55 @@
   & > *:last-child { margin-bottom: 0; }
 }
 
-// color-background: applies the themed surface colour without border or shadow.
-// Useful for layout wrappers that need a subtle tinted background.
+// ─── color-background card ────────────────────────────────────────────────────
+// Exakt wie die Vorlage: kein padding am Card, Header transparent mit border-bottom,
+// Content bekommt padding: 1rem.
+
 .color-background {
-  border-radius: var(--border-radius, 8px);
-  background:    var(--color-card-dashboard-background, var(--color-surface, #f4f4f5));
-  padding:       var(--fs-pad);
+  padding:       0;
+  background:    var(--color-card-dashboard-background, #fff);
+  box-shadow:    var(--shadow-02);
+  border-radius: var(--border-radius);
+  border:        0;
+  margin-bottom: 1rem;
+  min-inline-size: 0;
+
+  & .header {
+    width:         100%;
+    margin:        0;
+    padding:       0.5rem 1rem;
+    border-bottom: 2px solid rgba(var(--color-brand-rgb, 0, 114, 198), 0.3);
+    border-radius: 0;
+    min-height:    unset;
+    background:    transparent;
+    box-shadow:    none;
+  }
+
+  // Alle headerColor-Varianten: transparent — Card-Hintergrund scheint durch
+  & .header-default,
+  & .header-primary,
+  & .header-secondary,
+  & .header-color-background {
+    background: transparent;
+    color:      var(--color-text, #111);
+    box-shadow: none;
+  }
+
+  // Eingeklappt: keine verwaiste Trennlinie
+  &:has(.expandable-content.closed) .header {
+    border-bottom: none;
+  }
+
+  & .content {
+    padding:    1rem;
+    column-gap: 1rem;
+  }
 }
 
 // shadow: elevated card without a visible border
 .shadow {
   border-radius: var(--border-radius, 8px);
   box-shadow: var(--fs-shadow);
-  background: var(--fs-bg);
   padding: var(--fs-pad);
 
   & > *:last-child { margin-bottom: 0; }
@@ -168,9 +204,12 @@
   color: var(--color-white, #fff);
 }
 
+// When used on a border/shadow card, shows the dashboard gradient as the header bar.
+// (When colorBackground is true, this is overridden to transparent — see above.)
 .header-color-background {
   background: var(--color-card-dashboard-background, var(--color-surface, #f4f4f5));
   color:      var(--color-text, #111);
+  box-shadow: none;
 }
 
 // ─── Title ────────────────────────────────────────────────────────────────────
@@ -241,63 +280,93 @@
 // ─── Content wrapper ──────────────────────────────────────────────────────────
 
 .content {
+  --pdc-column-gap: var(--fs-gap, 2rem);
   display:   flex;
   flex-wrap: wrap;
-  gap:       0 var(--fs-gap);
+  gap:       0 var(--pdc-column-gap);
   width:     100%;
 
-  & > * { min-width: 0; } // prevent flex children from overflowing
+  // Children without a .column class (no FieldSetColumn) → full width
+  & > *:not(.column) { flex: 0 0 100%; min-width: 0; }
 }
 
 // ─── Columns ──────────────────────────────────────────────────────────────────
+// Each column class sets two custom properties:
+//   --pdc-col-size  : the target percentage width
+//   --pdc-col-ratio : size / 100  (used in the shared flex-basis formula)
+//
+// The shared .column base computes:
+//   flex-basis = --pdc-col-size - (gap × (1 - --pdc-col-ratio))
+// This guarantees all columns in a row sum to exactly 100% regardless of gap.
 
 .column {
-  flex:            0 0 auto;
+  flex-grow:       0;
+  flex-shrink:     0;
+  flex-basis:      calc(var(--pdc-col-size) - (var(--pdc-column-gap) * (1 - var(--pdc-col-ratio))));
   min-width:       var(--fsc-min-width, 0); // set via minWidth prop
   min-inline-size: 0;
   max-width:       100%;
 }
 
-// Flex-basis formula: P% - gap × (1 - P/100)
-// This ensures columns at different percentages still sum to exactly 100%
-// when placed in the same row, regardless of the gap value.
-//
-// Example for size-50 with gap = 2rem:
-//   flex-basis = 50% - 2rem × 0.5 = 50% - 1rem  ✓
-
-.size-10   { flex-basis: calc(10%   - var(--fs-gap) * 0.900); }
-.size-12   { flex-basis: calc(12%   - var(--fs-gap) * 0.880); }
-.size-12-5 { flex-basis: calc(12.5% - var(--fs-gap) * 0.875); }
-.size-15   { flex-basis: calc(15%   - var(--fs-gap) * 0.850); }
-.size-16   { flex-basis: calc(16%   - var(--fs-gap) * 0.840); }
-.size-20   { flex-basis: calc(20%   - var(--fs-gap) * 0.800); }
-.size-25   { flex-basis: calc(25%   - var(--fs-gap) * 0.750); }
-.size-30   { flex-basis: calc(30%   - var(--fs-gap) * 0.700); }
-.size-33   { flex-basis: calc(33%   - var(--fs-gap) * 0.670); }
-.size-40   { flex-basis: calc(40%   - var(--fs-gap) * 0.600); }
-.size-50   { flex-basis: calc(50%   - var(--fs-gap) * 0.500); }
-.size-60   { flex-basis: calc(60%   - var(--fs-gap) * 0.400); }
-.size-66   { flex-basis: calc(66%   - var(--fs-gap) * 0.340); }
-.size-70   { flex-basis: calc(70%   - var(--fs-gap) * 0.300); }
-.size-75   { flex-basis: calc(75%   - var(--fs-gap) * 0.250); }
-.size-80   { flex-basis: calc(80%   - var(--fs-gap) * 0.200); }
-.size-90   { flex-basis: calc(90%   - var(--fs-gap) * 0.100); }
-.size-100  { flex-basis: 100%; }
+.column-10   { --pdc-col-size: 10%;          --pdc-col-ratio: 0.1;         }
+.column-12   { --pdc-col-size: 12%;          --pdc-col-ratio: 0.12;        }
+.column-12-5 { --pdc-col-size: 12.5%;        --pdc-col-ratio: 0.125;       }
+.column-15   { --pdc-col-size: 15%;          --pdc-col-ratio: 0.15;        }
+.column-16   { --pdc-col-size: 16.666667%;   --pdc-col-ratio: 0.166667;    }
+.column-20   { --pdc-col-size: 20%;          --pdc-col-ratio: 0.2;         }
+.column-25   { --pdc-col-size: 25%;          --pdc-col-ratio: 0.25;        }
+.column-30   { --pdc-col-size: 30%;          --pdc-col-ratio: 0.3;         }
+.column-33   { --pdc-col-size: 33.333333%;   --pdc-col-ratio: 0.333333;    }
+.column-40   { --pdc-col-size: 40%;          --pdc-col-ratio: 0.4;         }
+.column-50   { --pdc-col-size: 50%;          --pdc-col-ratio: 0.5;         }
+.column-60   { --pdc-col-size: 60%;          --pdc-col-ratio: 0.6;         }
+.column-66   { --pdc-col-size: 66.666667%;   --pdc-col-ratio: 0.666667;    }
+.column-70   { --pdc-col-size: 70%;          --pdc-col-ratio: 0.7;         }
+.column-75   { --pdc-col-size: 75%;          --pdc-col-ratio: 0.75;        }
+.column-80   { --pdc-col-size: 80%;          --pdc-col-ratio: 0.8;         }
+.column-90   { --pdc-col-size: 90%;          --pdc-col-ratio: 0.9;         }
+.column-100  { --pdc-col-size: 100%;         --pdc-col-ratio: 1;           }
 
 // ─── Responsive ───────────────────────────────────────────────────────────────
 
-// Tablet and below: all columns go full-width
-@media (max-width: 767px) {
-  .column {
-    flex-basis: 100% !important;
-    width: 100%;
+// Tablet (576px – 991px): wide columns collapse to 100%, narrow columns go 50%
+@media (max-width: 991px) and (min-width: 576px) {
+  .column-60,
+  .column-66,
+  .column-70,
+  .column-75,
+  .column-80,
+  .column-90,
+  .column-100 {
+    --pdc-col-size:  100%;
+    --pdc-col-ratio: 1;
+  }
+
+  .column-10,
+  .column-12,
+  .column-12-5,
+  .column-15,
+  .column-16,
+  .column-20,
+  .column-25,
+  .column-30,
+  .column-33,
+  .column-40,
+  .column-50 {
+    --pdc-col-size:  50%;
+    --pdc-col-ratio: 0.5;
   }
 
   .header { flex-wrap: nowrap; }
 }
 
-// Phone portrait: allow header items to wrap onto a second line
+// Mobile (<576px): all columns go full-width
 @media (max-width: 575px) {
+  .column {
+    --pdc-col-size:  100%;
+    --pdc-col-ratio: 1;
+  }
+
   .header {
     flex-wrap: wrap;
 
