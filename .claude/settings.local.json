@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -d /d/source/repos/shome-components/src/Components/*/)",
+      "Bash(npx storybook@latest init --yes --skip-install)",
+      "Bash(npx storybook@latest init --type react --yes --skip-install)",
+      "Bash(npm install:*)",
+      "Bash(npx storybook:*)"
+    ]
+  }
+}
