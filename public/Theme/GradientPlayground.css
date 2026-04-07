@@ -1,0 +1,402 @@
+/* =============================================================================
+   GRADIENT PLAYGROUND THEME
+   Light: Holographisches Pastell-Mesh — lebendige Farben, weiche Lesbarkeit
+   Dark:  Tiefer Spektral-Drift — alle Farben des Universums auf Schwarz
+   ============================================================================= */
+
+/* ─── SHARED ─────────────────────────────────────────────────────────────────── */
+:root {
+  --color-accent:     #ec4899;
+  --color-accent-rgb: 236, 72, 153;
+
+  /* Dashboard border — voller Regenbogen, endloser Spin */
+  --dashboard-border-size:    2px;
+  --dashboard-border-opacity: 1;
+  --dashboard-border-gradient: conic-gradient(from 0turn,
+      hsl(0,   100%, 65%),
+      hsl(45,  100%, 65%),
+      hsl(90,  100%, 55%),
+      hsl(135, 100%, 55%),
+      hsl(180, 100%, 55%),
+      hsl(225, 100%, 65%),
+      hsl(270, 100%, 65%),
+      hsl(315, 100%, 65%),
+      hsl(360, 100%, 65%));
+  --dashboard-special-hover: rainbowSpin 3s linear infinite;
+  --dashboard-border-filter:  none;
+}
+
+@keyframes rainbowSpin {
+  0%   { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+@keyframes meshDrift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+/* =============================================================================
+   GRADIENT PLAYGROUND LIGHT (Holographisches Pastell — lesbar & lebendig)
+   ============================================================================= */
+:root {
+  --border-radius-small: 8px;
+  --border-radius:       16px;
+  --border-radius-large: 24px;
+
+  /* Brand — Vivid Violet */
+  --color-brand:          #7c3aed;
+  --color-brand-rgb:      124, 58, 237;
+  --color-brand-contrast: #ffffff;
+
+  /* Primary ladder — Indigo/Violet */
+  --color-primary-darkest: #1e0048;
+  --color-primary-dark:    #4c1d95;
+  --color-primary-semidark:#6d28d9;
+  --color-primary:         #7c3aed;
+  --color-primary-light:   #a78bfa;
+  --color-primary-base:    #6d28d9;
+  --color-primary-rgb:     124, 58, 237;
+  --color-primary-contrast:#ffffff;
+
+  /* Required tokens — hohe Opazität für Lesbarkeit */
+  --color-background: #fdf4ff;
+  --color-surface:    rgba(255, 255, 255, 0.88);
+  --color-border:     rgba(124, 58, 237, 0.20);
+  --color-text:       rgba(15, 10, 30, 0.92);
+  --color-text-muted: rgba(70, 40, 120, 0.65);
+
+  /* Inputs */
+  --input-background:        rgba(255, 255, 255, 0.92);
+  --input-color:             rgba(15, 10, 30, 0.92);
+  --input-border:            rgba(124, 58, 237, 0.28);
+  --input-label-color:       rgba(15, 10, 30, 0.85);
+  --input-placeholder-color: rgba(100, 60, 160, 0.52);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        var(--color-primary-semidark);
+  --color-label-active:        var(--color-press-effect);
+
+  /* Scrollbar — Regenbogen-Gradient */
+  --scrollbar-color:        rgba(124, 58, 237, 0.28);
+  --scrollbar-color-hover:  rgba(236, 72, 153, 0.45);
+  --scrollbar-color-active: var(--color-accent);
+
+  /* Shadows — weich, holographisch */
+  --color-box-shadow: rgba(124, 58, 237, 0.14);
+  --shadow-00: 0 0.125rem 0.50rem rgba(124, 58, 237, 0.10);
+  --shadow-01: 0 0.125rem 0.75rem rgba(124, 58, 237, 0.14);
+  --shadow-02: 0 0.250rem 1.00rem rgba(124, 58, 237, 0.14);
+  --shadow-03: 0 0.500rem 1.75rem rgba(124, 58, 237, 0.16);
+  --shadow-neon:
+    0 0 0.50rem rgba(124, 58, 237, 0.30),
+    0 0 1.20rem rgba(236, 72, 153, 0.20),
+    0 0 2.00rem rgba(6, 182, 212, 0.14),
+    0 0 3.00rem rgba(52, 211, 153, 0.10);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(124, 58, 237, 0.18);
+  --nav-actions-color:        rgba(245, 240, 255, 0.96);
+  --nav-toggle-color:         rgba(245, 240, 255, 0.96);
+  --nav-current-module-color: rgba(245, 240, 255, 0.96);
+
+  --color-mod-nav-theme-header: linear-gradient(135deg,
+      rgba(30, 0, 72, 0.97) 0%,
+      rgba(76, 29, 149, 0.95) 50%,
+      rgba(157, 23, 77, 0.92) 100%);
+  --color-mod-nav-theme-header-color: rgba(245, 240, 255, 0.96);
+
+  --color-mod-nav-theme: linear-gradient(180deg,
+      rgba(124, 58, 237, 0.22) 0%,
+      rgba(236, 72, 153, 0.16) 50%,
+      rgba(6, 182, 212, 0.12)  100%),
+    rgba(15, 5, 30, 0.92);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(15, 5, 30, 0.96);
+  --color-mod-nav-theme-contrast:  rgba(245, 240, 255, 0.96);
+
+  /* Cards — Glas auf dem lebendigen Background */
+  --color-card-background: rgba(255, 255, 255, 0.82);
+  --color-card-dashboard-background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.94) 0%,
+      rgba(167, 139, 250, 0.08) 33%,
+      rgba(236, 72, 153, 0.06)  66%,
+      rgba(6, 182, 212, 0.06)   100%);
+
+  /* Sidebar — Tief violett/indigo */
+  --sidebar-level-0-color: #160030;
+  --sidebar-level-1-color: #0e001e;
+
+  --color-sidebar-text:              rgba(232, 220, 255, 0.90);
+  --color-sidebar-selected:          rgba(124, 58, 237, 0.24);
+  --color-sidebar-selected-text:     rgba(245, 240, 255, 0.98);
+  --color-sidebar-env-text:          rgba(236, 72, 153, 0.92);
+
+  --color-sidebar-selected-child:       rgba(236, 72, 153, 0.18);
+  --color-sidebar-selected-subchild:    rgba(6, 182, 212, 0.20);
+
+  --color-sidebar-selected-child-text:    rgba(245, 240, 255, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(245, 240, 255, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(124, 58, 237, 0.14);
+
+  /* Buttons */
+  --button-color:                      #ffffff;
+  --button-color-hover:                #ffffff;
+  --button-background-color:           var(--color-primary-dark);
+  --button-background-color-hover:     var(--color-brand);
+
+  --button-color-secondary:            #ffffff;
+  --button-color-hover-secondary:      #ffffff;
+  --button-background-color-secondary:       var(--color-accent);
+  --button-background-color-hover-secondary: #be185d;
+
+  --button-background-color-light-rgb:       rgba(124, 58, 237, 0.14);
+  --button-color-light:                      var(--color-primary-dark);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(236, 72, 153, 0.14);
+  --button-color-light-secondary:                #9d174d;
+  --button-color-hover-light-secondary:          #ffffff;
+  --button-background-color-hover-light-secondary: var(--color-accent);
+
+  /* Grid */
+  --grid-head-color:             rgba(245, 240, 255, 0.96);
+  --grid-head-background:        rgba(15, 5, 30, 0.96);
+  --grid-head-background-active: rgba(124, 58, 237, 0.30);
+  --grid-head-hover:             rgba(236, 72, 153, 0.18);
+
+  --color-grid-hover:          rgba(124, 58, 237, 0.06);
+  --color-grid-selected-hover: rgba(236, 72, 153, 0.10);
+  --color-grid-selected:       rgba(124, 58, 237, 0.08);
+
+  --progressbar-color: linear-gradient(90deg,
+      hsl(270, 80%, 55%) 0%,
+      hsl(320, 80%, 55%) 33%,
+      hsl(190, 80%, 50%) 66%,
+      hsl(150, 70%, 50%) 100%);
+  --progressbar-text-color: #ffffff;
+}
+
+
+/* =============================================================================
+   GRADIENT PLAYGROUND DARK (Spektral-Drift — alle Farben auf Schwarz)
+   ============================================================================= */
+:root[data-theme="dark"] {
+  /* Brand — Leuchtendes Orchid */
+  --color-brand:          #e879f9;
+  --color-brand-rgb:      232, 121, 249;
+  --color-brand-contrast: #1a0020;
+
+  /* Primary ladder — Vivid Purple */
+  --color-primary-darkest: #0e0018;
+  --color-primary-dark:    #2e0060;
+  --color-primary-semidark:#5b21b6;
+  --color-primary:         #8b5cf6;
+  --color-primary-light:   #c4b5fd;
+  --color-primary-rgb:     139, 92, 246;
+  --color-primary-contrast:#1a0020;
+
+  /* Accent — Neon Pink */
+  --color-accent:     #f472b6;
+  --color-accent-rgb: 244, 114, 182;
+
+  /* Required tokens */
+  --color-background: #08000f;
+  --color-surface:    rgba(14, 0, 24, 0.82);
+  --color-border:     rgba(232, 121, 249, 0.18);
+  --color-text:       rgba(240, 232, 255, 0.94);
+  --color-text-muted: rgba(180, 150, 220, 0.68);
+
+  /* Inputs */
+  --input-background:        rgba(10, 0, 20, 0.80);
+  --input-color:             rgba(240, 232, 255, 0.94);
+  --input-border:            rgba(232, 121, 249, 0.24);
+  --input-label-color:       rgba(240, 232, 255, 0.90);
+  --input-placeholder-color: rgba(160, 120, 200, 0.55);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        rgba(240, 232, 255, 0.94);
+  --color-label-active:        rgba(240, 232, 255, 0.94);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(232, 121, 249, 0.22);
+  --scrollbar-color-hover:  rgba(244, 114, 182, 0.38);
+  --scrollbar-color-active: var(--color-brand);
+
+  /* Shadows — maximaler Spektral-Glow */
+  --color-box-shadow: rgba(0, 0, 0, 0.80);
+  --shadow-00: 0 0.125rem 0.50rem rgba(0, 0, 0, 0.65);
+  --shadow-01: 0 0.125rem 0.75rem rgba(0, 0, 0, 0.75);
+  --shadow-02: 0 0.250rem 1.00rem rgba(0, 0, 0, 0.75);
+  --shadow-03: 0 0.500rem 1.75rem rgba(0, 0, 0, 0.80);
+  --shadow-neon:
+    0 0 0.50rem rgba(232, 121, 249, 0.55),
+    0 0 1.20rem rgba(244, 114, 182, 0.38),
+    0 0 2.50rem rgba(6, 182, 212, 0.22),
+    0 0 4.50rem rgba(52, 211, 153, 0.12);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(232, 121, 249, 0.16);
+  --nav-actions-color:        rgba(240, 232, 255, 0.92);
+  --nav-toggle-color:         rgba(240, 232, 255, 0.92);
+  --nav-current-module-color: rgba(240, 232, 255, 0.92);
+
+  --color-mod-nav-theme-header: linear-gradient(135deg,
+      rgba(6, 0, 14, 0.98) 0%,
+      rgba(20, 0, 40, 0.95) 50%,
+      rgba(30, 0, 20, 0.92) 100%);
+  --color-mod-nav-theme-header-color: rgba(240, 232, 255, 0.95);
+
+  --color-mod-nav-theme: linear-gradient(180deg,
+      rgba(232, 121, 249, 0.20) 0%,
+      rgba(244, 114, 182, 0.14) 40%,
+      rgba(6, 182, 212, 0.10)   75%,
+      rgba(6, 0, 14, 0.96)      100%),
+    rgba(6, 0, 14, 0.96);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(6, 0, 14, 0.98);
+  --color-mod-nav-theme-contrast:  rgba(240, 232, 255, 0.95);
+
+  /* Cards — Tiefdunkles Glas */
+  --color-card-background: rgba(14, 0, 24, 0.75);
+  --color-card-dashboard-background: linear-gradient(135deg,
+      rgba(14, 0, 24, 0.96)    0%,
+      rgba(232, 121, 249, 0.14) 25%,
+      rgba(244, 114, 182, 0.10) 50%,
+      rgba(6, 182, 212, 0.08)   75%,
+      rgba(52, 211, 153, 0.06)  100%);
+
+  /* Sidebar */
+  --sidebar-level-0-color: #060010;
+  --sidebar-level-1-color: #04000c;
+
+  --color-sidebar-text:           rgba(232, 220, 255, 0.92);
+  --color-sidebar-selected:       rgba(232, 121, 249, 0.22);
+  --color-sidebar-selected-text:  rgba(240, 232, 255, 0.96);
+  --color-sidebar-env-text:       rgba(244, 114, 182, 0.92);
+
+  --color-sidebar-selected-child:       rgba(244, 114, 182, 0.18);
+  --color-sidebar-selected-subchild:    rgba(6, 182, 212, 0.20);
+
+  --color-sidebar-selected-child-text:    rgba(240, 232, 255, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(240, 232, 255, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(232, 121, 249, 0.14);
+
+  /* Buttons */
+  --button-color:                       #1a0020;
+  --button-color-hover:                 #1a0020;
+  --button-background-color:            var(--color-brand);
+  --button-background-color-hover:      var(--color-primary-light);
+
+  --button-color-secondary:             #1a0020;
+  --button-color-hover-secondary:       #1a0020;
+  --button-background-color-secondary:       var(--color-accent);
+  --button-background-color-hover-secondary: var(--color-brand);
+
+  --button-background-color-light-rgb:       rgba(232, 121, 249, 0.18);
+  --button-color-light:                      var(--color-brand);
+  --button-color-hover-light:                #1a0020;
+  --button-background-color-hover-light:     var(--color-brand);
+
+  --button-background-color-light-rgb-secondary: rgba(244, 114, 182, 0.16);
+  --button-color-light-secondary:                var(--color-accent);
+  --button-color-hover-light-secondary:          #1a0020;
+  --button-background-color-hover-light-secondary: var(--color-accent);
+
+  /* Grid */
+  --grid-head-color:             rgba(240, 232, 255, 0.95);
+  --grid-head-background:        var(--color-primary-darkest);
+  --grid-head-background-active: rgba(232, 121, 249, 0.24);
+  --grid-head-hover:             rgba(244, 114, 182, 0.16);
+
+  --color-grid-hover:          rgba(232, 121, 249, 0.07);
+  --color-grid-selected-hover: rgba(244, 114, 182, 0.12);
+  --color-grid-selected:       rgba(232, 121, 249, 0.09);
+
+  --grid-surface:  rgba(8, 0, 16, 0.88);
+  --pager-surface: rgba(8, 0, 16, 0.82);
+
+  --progressbar-color: linear-gradient(90deg,
+      hsl(270, 90%, 65%) 0%,
+      hsl(320, 90%, 65%) 25%,
+      hsl(190, 85%, 60%) 60%,
+      hsl(150, 80%, 55%) 100%);
+  --progressbar-text-color: #1a0020;
+}
+
+
+/* =============================================================================
+   BODY BACKGROUNDS — Das Herzstück
+   ============================================================================= */
+
+/* Light — Animiertes Pastell-Mesh, lebendig und holographisch */
+body {
+  background:
+    linear-gradient(-45deg,
+      #ffb3c6 0%,
+      #ffd6e8 10%,
+      #c8b6ff 20%,
+      #b8d8ff 30%,
+      #b5ead7 40%,
+      #fffcb5 50%,
+      #ffd6a5 60%,
+      #ffb3de 70%,
+      #d4b8ff 80%,
+      #b8e8ff 90%,
+      #ffb3c6 100%);
+  background-size: 400% 400%;
+  background-attachment: fixed;
+  animation: meshDrift 20s ease infinite;
+}
+
+/* Dark — Tiefer Spektral-Drift auf Schwarz */
+html[data-theme="dark"] body,
+body[data-theme="dark"] {
+  background:
+    /* Animierter Tiefen-Gradient — alle Layers gleiche size */
+    linear-gradient(-45deg,
+      #160030 0%,
+      #001530 12%,
+      #200018 25%,
+      #001a08 37%,
+      #160030 50%,
+      #1a000d 62%,
+      #0a0018 75%,
+      #001020 87%,
+      #160030 100%);
+  background-size: 400% 400%;
+  background-attachment: fixed;
+  animation: meshDrift 25s ease infinite;
+}
+
+html[data-theme="dark"] body::before,
+body[data-theme="dark"]::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 20%, rgba(139, 92, 246, 0.30), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 80% 30%, rgba(236, 72, 153, 0.25), transparent 60%),
+    radial-gradient(ellipse 80% 50% at 50% 80%, rgba(6, 182, 212, 0.22), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 10% 70%, rgba(52, 211, 153, 0.18), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 75%, rgba(251, 191, 36, 0.15), transparent 60%);
+}

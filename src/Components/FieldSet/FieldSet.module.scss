@@ -1,0 +1,377 @@
+@use '../../Styles/abstracts' as *;
+
+// =============================================================================
+// FieldSet — layout container for grouping related form fields or content.
+//
+// Structure:
+//   <fieldset.fieldset [.border] [.shadow]>
+//     <header.header .header-{color}>
+//       <h2.title />
+//       <div.header-children />
+//       <svg.expand-icon />
+//     </header>
+//     <div.expandable-content [.open|.closed]>   ← only when isExpandable
+//       <div.content />
+//     </div>
+//     <div.content />                             ← when not expandable
+//       <div.column .size-{n} />
+// =============================================================================
+
+// ─── Component-level CSS tokens ───────────────────────────────────────────────
+// Defined on .fieldset so they cascade into all child elements.
+// Override at the app level via [data-theme="dark"] or a custom CSS class.
+
+.fieldset {
+  --fs-gap:     calc(var(--spacing, 1rem) * 2);  // gap between columns
+  --fs-pad:     calc(var(--spacing, 1rem) * 2);  // card padding
+  --fs-bg:      var(--color-white, #fff);
+  --fs-border:  var(--color-gray-300, #e0e0e0);
+  --fs-head-bg: var(--color-gray-200, #f7f7f7);
+  --fs-head-fg: var(--color-text, #111);
+  --fs-shadow:  var(--shadow-02, 0 2px 8px rgba(0, 0, 0, 0.12));
+  --fs-color-bg: var(--color-card-dashboard-background, #fff); // for header color variant "color"
+}
+
+// Dark mode — inverts surface and border tokens automatically when
+// a parent element carries data-theme="dark".
+[data-theme='dark'] .fieldset {
+  --fs-bg:      var(--color-gray-800, #424242);
+  --fs-border:  var(--color-gray-600, #707070);
+  --fs-head-bg: var(--color-gray-700, #616161);
+  --fs-head-fg: var(--color-gray-100, #fafafa);
+}
+
+// ─── Base ─────────────────────────────────────────────────────────────────────
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  padding: 0;
+  margin: 0 0 var(--fs-gap);
+  width: 100%;
+  min-inline-size: 0; // prevents fieldset from overflowing flex parents
+}
+
+// Vertical rhythm between stacked fieldsets
+.fieldset + .fieldset {
+  margin-top: calc(var(--fs-gap) * 0.5);
+}
+
+// ─── Card variants ────────────────────────────────────────────────────────────
+
+// border: subtle inset outline card
+.border {
+  border-radius: var(--border-radius, 8px);
+  box-shadow: inset 0 0 0 1px var(--fs-border);
+  background: var(--fs-bg);
+  padding: var(--fs-pad);
+
+  & > *:last-child { margin-bottom: 0; }
+}
+
+// ─── color-background card ────────────────────────────────────────────────────
+// Exakt wie die Vorlage: kein padding am Card, Header transparent mit border-bottom,
+// Content bekommt padding: 1rem.
+
+.color-background {
+  padding:       0;
+  background:    var(--color-card-dashboard-background, #fff);
+  box-shadow:    var(--shadow-02);
+  border-radius: var(--border-radius);
+  border:        0;
+  margin-bottom: 1rem;
+  min-inline-size: 0;
+
+  & .header {
+    width:         100%;
+    margin:        0;
+    padding:       0.5rem 1rem;
+    border-bottom: 2px solid rgba(var(--color-brand-rgb, 0, 114, 198), 0.3);
+    border-radius: 0;
+    min-height:    unset;
+    background:    transparent;
+    box-shadow:    none;
+  }
+
+  // Alle headerColor-Varianten: transparent — Card-Hintergrund scheint durch
+  & .header-default,
+  & .header-primary,
+  & .header-secondary,
+  & .header-color-background {
+    background: transparent;
+    color:      var(--color-text, #111);
+    box-shadow: none;
+  }
+
+  // Eingeklappt: keine verwaiste Trennlinie
+  &:has(.expandable-content.closed) .header {
+    border-bottom: none;
+  }
+
+  & .content {
+    padding:    1rem;
+    column-gap: 1rem;
+  }
+}
+
+// shadow: elevated card without a visible border
+.shadow {
+  border-radius: var(--border-radius, 8px);
+  box-shadow: var(--fs-shadow);
+  padding: var(--fs-pad);
+
+  & > *:last-child { margin-bottom: 0; }
+}
+
+// Card without a header: prevent content from touching the rounded corners
+.no-header {
+  overflow: hidden;
+}
+
+// ─── Header ───────────────────────────────────────────────────────────────────
+
+.header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: calc(var(--spacing, 1rem) * 0.5) calc(var(--spacing, 1rem) * 2);
+  border-radius: var(--border-radius, 8px);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  min-height: 53px;
+  margin-bottom: var(--spacing, 1rem);
+
+  // Reset heading margins inside the header — layout is controlled via flex
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    margin-right: auto;
+  }
+
+  a, button {
+    margin-left: calc(var(--spacing, 1rem) * 0.5);
+    color: inherit;
+    cursor: pointer;
+  }
+}
+
+// When the entire header acts as a toggle button
+.header.clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+// Full-bleed header inside a card: negative margins punch through the card padding
+// so the header fills edge-to-edge while the content below remains padded.
+.border .header,
+.shadow  .header {
+  width:         calc(100% + var(--fs-pad) * 2);
+  margin-left:   calc(var(--fs-pad) * -1);
+  margin-right:  calc(var(--fs-pad) * -1);
+  margin-top:    calc(var(--fs-pad) * -1);
+  margin-bottom: var(--spacing, 1rem);
+}
+
+// When collapsed: remove the gap between header and hidden content
+.fieldset:has(.expandable-content.closed) .header {
+  margin-bottom: 0;
+}
+
+// ─── Header color variants ────────────────────────────────────────────────────
+
+.header-default {
+  background: var(--fs-head-bg);
+  color: var(--fs-head-fg);
+  // Multi-directional inset shadow draws the border on all sides
+  box-shadow:
+    inset  0  2px 0 0 var(--fs-border),
+    inset  2px 0  0 0 var(--fs-border),
+    inset -2px 0  0 0 var(--fs-border),
+    inset  0 -1px 0 0 var(--fs-border);
+}
+
+.header-primary {
+  background: var(--color-primary-dark, #121a2a);
+  color: var(--color-white, #fff);
+}
+
+.header-secondary {
+  background: var(--color-brand, #2d2d2d);
+  color: var(--color-white, #fff);
+}
+
+// When used on a border/shadow card, shows the dashboard gradient as the header bar.
+// (When colorBackground is true, this is overridden to transparent — see above.)
+.header-color-background {
+  background: var(--color-card-dashboard-background, var(--color-surface, #f4f4f5));
+  color:      var(--color-text, #111);
+  box-shadow: none;
+}
+
+// ─── Title ────────────────────────────────────────────────────────────────────
+// Font size and weight can be overridden at runtime via --fs-title-size /
+// --fs-title-weight CSS custom properties injected from the titleSize / titleWeight props.
+
+.title {
+  font-size:    var(--fs-title-size, 1rem);
+  font-weight:  var(--fs-title-weight, 700);
+  margin:       0;
+  margin-right: auto;
+}
+
+// ─── Header children (right-side slot) ───────────────────────────────────────
+
+.header-children {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--spacing, 1rem) * 0.5);
+}
+
+// ─── Expand / collapse icon ───────────────────────────────────────────────────
+
+.expand-icon {
+  margin-left:      calc(var(--spacing, 1rem) * 0.5);
+  cursor:           pointer;
+  opacity:          0.7;
+  transform-origin: center;
+  transition:
+    transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity   150ms ease;
+
+  &:hover { opacity: 1; }
+}
+
+// Rotates 180° when the content is open
+.expand-icon.open {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+// ─── Expandable content ───────────────────────────────────────────────────────
+// Uses max-height animation instead of height so no JS measurement is needed.
+// 100svh is a safe upper bound — actual content is never that tall.
+
+.expandable-content {
+  overflow:  hidden;
+  max-height: 0;
+  opacity:   0;
+  transform: translateY(-4px);
+  transition:
+    max-height 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity    220ms ease,
+    transform  220ms ease;
+}
+
+.expandable-content.open {
+  max-height: 100svh;
+  opacity:   1;
+  transform: translateY(0);
+}
+
+// Disable pointer events while animating closed to prevent accidental clicks
+.expandable-content.closed {
+  pointer-events: none;
+}
+
+// ─── Content wrapper ──────────────────────────────────────────────────────────
+
+.content {
+  --pdc-column-gap: var(--fs-gap, 2rem);
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       0 var(--pdc-column-gap);
+  width:     100%;
+
+  // Children without a .column class (no FieldSetColumn) → full width
+  & > *:not(.column) { flex: 0 0 100%; min-width: 0; }
+}
+
+// ─── Columns ──────────────────────────────────────────────────────────────────
+// Each column class sets two custom properties:
+//   --pdc-col-size  : the target percentage width
+//   --pdc-col-ratio : size / 100  (used in the shared flex-basis formula)
+//
+// The shared .column base computes:
+//   flex-basis = --pdc-col-size - (gap × (1 - --pdc-col-ratio))
+// This guarantees all columns in a row sum to exactly 100% regardless of gap.
+
+.column {
+  flex-grow:       0;
+  flex-shrink:     0;
+  flex-basis:      calc(var(--pdc-col-size) - (var(--pdc-column-gap) * (1 - var(--pdc-col-ratio))));
+  min-width:       var(--fsc-min-width, 0); // set via minWidth prop
+  min-inline-size: 0;
+  max-width:       100%;
+}
+
+.column-10   { --pdc-col-size: 10%;          --pdc-col-ratio: 0.1;         }
+.column-12   { --pdc-col-size: 12%;          --pdc-col-ratio: 0.12;        }
+.column-12-5 { --pdc-col-size: 12.5%;        --pdc-col-ratio: 0.125;       }
+.column-15   { --pdc-col-size: 15%;          --pdc-col-ratio: 0.15;        }
+.column-16   { --pdc-col-size: 16.666667%;   --pdc-col-ratio: 0.166667;    }
+.column-20   { --pdc-col-size: 20%;          --pdc-col-ratio: 0.2;         }
+.column-25   { --pdc-col-size: 25%;          --pdc-col-ratio: 0.25;        }
+.column-30   { --pdc-col-size: 30%;          --pdc-col-ratio: 0.3;         }
+.column-33   { --pdc-col-size: 33.333333%;   --pdc-col-ratio: 0.333333;    }
+.column-40   { --pdc-col-size: 40%;          --pdc-col-ratio: 0.4;         }
+.column-50   { --pdc-col-size: 50%;          --pdc-col-ratio: 0.5;         }
+.column-60   { --pdc-col-size: 60%;          --pdc-col-ratio: 0.6;         }
+.column-66   { --pdc-col-size: 66.666667%;   --pdc-col-ratio: 0.666667;    }
+.column-70   { --pdc-col-size: 70%;          --pdc-col-ratio: 0.7;         }
+.column-75   { --pdc-col-size: 75%;          --pdc-col-ratio: 0.75;        }
+.column-80   { --pdc-col-size: 80%;          --pdc-col-ratio: 0.8;         }
+.column-90   { --pdc-col-size: 90%;          --pdc-col-ratio: 0.9;         }
+.column-100  { --pdc-col-size: 100%;         --pdc-col-ratio: 1;           }
+
+// ─── Responsive ───────────────────────────────────────────────────────────────
+
+// Tablet (576px – 991px): wide columns collapse to 100%, narrow columns go 50%
+@media (max-width: 991px) and (min-width: 576px) {
+  .column-60,
+  .column-66,
+  .column-70,
+  .column-75,
+  .column-80,
+  .column-90,
+  .column-100 {
+    --pdc-col-size:  100%;
+    --pdc-col-ratio: 1;
+  }
+
+  .column-10,
+  .column-12,
+  .column-12-5,
+  .column-15,
+  .column-16,
+  .column-20,
+  .column-25,
+  .column-30,
+  .column-33,
+  .column-40,
+  .column-50 {
+    --pdc-col-size:  50%;
+    --pdc-col-ratio: 0.5;
+  }
+
+  .header { flex-wrap: nowrap; }
+}
+
+// Mobile (<576px): all columns go full-width
+@media (max-width: 575px) {
+  .column {
+    --pdc-col-size:  100%;
+    --pdc-col-ratio: 1;
+  }
+
+  .header {
+    flex-wrap: wrap;
+
+    a, button {
+      margin-top: calc(var(--spacing, 1rem) * 0.5);
+    }
+  }
+}

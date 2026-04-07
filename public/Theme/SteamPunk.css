@@ -1,0 +1,374 @@
+/* =============================================================================
+   STEAMPUNK THEME
+   Light: Viktorianische Werkstatt — Pergament, Kupfer, Messing
+   Dark:  Nacht-Atelier — Ruß, Gaslicht-Bernstein, Dampf-Glühen
+   ============================================================================= */
+
+/* ─── SHARED ─────────────────────────────────────────────────────────────────── */
+:root {
+  --color-accent:     #4a6e48;
+  --color-accent-rgb: 74, 110, 72;
+
+  /* Dashboard border — Messing/Kupfer Conic */
+  --dashboard-border-size:    2px;
+  --dashboard-border-opacity: 1;
+  --dashboard-border-gradient: conic-gradient(from 0turn,
+      #c8860a,
+      #b07040,
+      #e8a820,
+      #8b5a28,
+      #c8860a);
+  --dashboard-special-hover: steamPressure 5s ease-in-out infinite;
+  --dashboard-border-filter:  none;
+}
+
+@keyframes steamPressure {
+  0%, 100% { filter: brightness(1.00); }
+  25%       { filter: brightness(1.28); }
+  55%       { filter: brightness(0.86); }
+  80%       { filter: brightness(1.35); }
+}
+
+
+/* =============================================================================
+   STEAMPUNK LIGHT (Viktorianische Werkstatt — Tageslicht)
+   ============================================================================= */
+:root {
+  --border-radius-small: 3px;
+  --border-radius:       6px;
+  --border-radius-large: 10px;
+
+  /* Brand — Gealterte Kupfer */
+  --color-brand:          #b06828;
+  --color-brand-rgb:      176, 104, 40;
+  --color-brand-contrast: #ffffff;
+
+  /* Primary ladder — Mahagoni / Bronze */
+  --color-primary-darkest: #1e0a04;
+  --color-primary-dark:    #4a1c08;
+  --color-primary-semidark:#783010;
+  --color-primary:         #a04818;
+  --color-primary-light:   #c87840;
+  --color-primary-base:    #783010;
+  --color-primary-rgb:     160, 72, 24;
+  --color-primary-contrast:#ffffff;
+
+  /* Required tokens */
+  --color-background: #e4d4b0;
+  --color-surface:    rgba(242, 232, 196, 0.94);
+  --color-border:     rgba(176, 104, 40, 0.32);
+  --color-text:       #1a1006;
+  --color-text-muted: #5a3e20;
+
+  /* Inputs */
+  --input-background:        rgba(245, 236, 205, 0.96);
+  --input-color:             #1a1006;
+  --input-border:            rgba(176, 104, 40, 0.38);
+  --input-label-color:       #2a1a08;
+  --input-placeholder-color: #8a6640;
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        var(--color-primary-semidark);
+  --color-label-active:        var(--color-press-effect);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(176, 104, 40, 0.30);
+  --scrollbar-color-hover:  rgba(176, 104, 40, 0.55);
+  --scrollbar-color-active: var(--color-primary-dark);
+
+  /* Shadows — warm, gusseisen-artig */
+  --color-box-shadow: rgba(26, 16, 6, 0.22);
+  --shadow-00: 2px 2px 4px rgba(26, 16, 6, 0.18);
+  --shadow-01: 2px 2px 6px rgba(26, 16, 6, 0.22);
+  --shadow-02: 3px 3px 8px rgba(26, 16, 6, 0.22);
+  --shadow-03: 4px 4px 14px rgba(26, 16, 6, 0.24);
+  --shadow-neon:
+    0 0 0.30rem rgba(200, 134, 10, 0.35),
+    0 0 0.80rem rgba(200, 134, 10, 0.20),
+    0 0 1.60rem rgba(176, 104, 40, 0.12);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(176, 104, 40, 0.25);
+  --nav-actions-color:        rgba(240, 228, 190, 0.95);
+  --nav-toggle-color:         rgba(240, 228, 190, 0.95);
+  --nav-current-module-color: rgba(240, 228, 190, 0.95);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(20, 8, 2, 0.97) 0%,
+      rgba(28, 12, 4, 0.92) 100%);
+  --color-mod-nav-theme-header-color: rgba(240, 228, 190, 0.95);
+
+  --color-mod-nav-theme:
+    linear-gradient(180deg,
+      rgba(200, 134, 10, 0.20) 0%,
+      rgba(120, 48, 16, 0.22)  55%,
+      rgba(18, 8, 2, 0.95)     100%),
+    rgba(16, 6, 2, 0.94);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(14, 6, 2, 0.97);
+  --color-mod-nav-theme-contrast:  rgba(240, 228, 190, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(242, 232, 196, 0.90);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(245, 236, 205, 0.96) 0%,
+      rgba(200, 134, 10, 0.08)  50%,
+      rgba(120, 48, 16, 0.06)   100%);
+
+  /* Sidebar — Dunkles Mahagoni / Leder */
+  --sidebar-level-0-color: #1c0a04;
+  --sidebar-level-1-color: #140602;
+
+  --color-sidebar-text:              rgba(228, 208, 160, 0.90);
+  --color-sidebar-selected:          rgba(200, 134, 10, 0.24);
+  --color-sidebar-selected-text:     rgba(242, 228, 180, 0.98);
+  --color-sidebar-env-text:          rgba(74, 110, 72, 0.92);
+
+  --color-sidebar-selected-child:       rgba(176, 104, 40, 0.20);
+  --color-sidebar-selected-subchild:    rgba(200, 134, 10, 0.22);
+
+  --color-sidebar-selected-child-text:    rgba(242, 228, 180, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(242, 228, 180, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(200, 134, 10, 0.14);
+
+  /* Buttons */
+  --button-color:                      #ffffff;
+  --button-color-hover:                #ffffff;
+  --button-background-color:           var(--color-primary-dark);
+  --button-background-color-hover:     var(--color-brand);
+
+  --button-color-secondary:            #1a1006;
+  --button-color-hover-secondary:      #1a1006;
+  --button-background-color-secondary:       rgba(200, 134, 10, 0.85);
+  --button-background-color-hover-secondary: #c8860a;
+
+  --button-background-color-light-rgb:       rgba(160, 72, 24, 0.14);
+  --button-color-light:                      var(--color-primary-dark);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(200, 134, 10, 0.16);
+  --button-color-light-secondary:                #7a5008;
+  --button-color-hover-light-secondary:          #1a1006;
+  --button-background-color-hover-light-secondary: rgba(200, 134, 10, 0.85);
+
+  /* Grid */
+  --grid-head-color:             rgba(240, 228, 190, 0.96);
+  --grid-head-background:        rgba(14, 6, 2, 0.95);
+  --grid-head-background-active: rgba(200, 134, 10, 0.30);
+  --grid-head-hover:             rgba(176, 104, 40, 0.20);
+
+  --color-grid-hover:          rgba(200, 134, 10, 0.07);
+  --color-grid-selected-hover: rgba(176, 104, 40, 0.12);
+  --color-grid-selected:       rgba(200, 134, 10, 0.09);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(74, 28, 8, 0.90)   0%,
+      rgba(176, 104, 40, 0.90) 45%,
+      rgba(200, 134, 10, 0.85) 100%);
+  --progressbar-text-color: var(--color-text);
+}
+
+
+/* =============================================================================
+   STEAMPUNK DARK (Nacht-Atelier — Ruß & Gaslicht)
+   ============================================================================= */
+:root[data-theme="dark"] {
+  /* Brand — Glühendes Messing */
+  --color-brand:          #d4941a;
+  --color-brand-rgb:      212, 148, 26;
+  --color-brand-contrast: #0c0604;
+
+  /* Primary ladder — Amber-Glut */
+  --color-primary-darkest: #0c0400;
+  --color-primary-dark:    #3c1a00;
+  --color-primary-semidark:#6e3800;
+  --color-primary:         #a86010;
+  --color-primary-light:   #d4941a;
+  --color-primary-rgb:     168, 96, 16;
+  --color-primary-contrast:#0c0604;
+
+  /* Accent — Patina-Grün */
+  --color-accent:     #5a8a58;
+  --color-accent-rgb: 90, 138, 88;
+
+  /* Required tokens */
+  --color-background: #0a0704;
+  --color-surface:    rgba(16, 10, 4, 0.90);
+  --color-border:     rgba(212, 148, 26, 0.18);
+  --color-text:       rgba(228, 208, 160, 0.94);
+  --color-text-muted: rgba(160, 128, 72, 0.75);
+
+  /* Inputs */
+  --input-background:        rgba(10, 6, 2, 0.84);
+  --input-color:             rgba(228, 208, 160, 0.94);
+  --input-border:            rgba(212, 148, 26, 0.24);
+  --input-label-color:       rgba(228, 208, 160, 0.90);
+  --input-placeholder-color: rgba(140, 100, 48, 0.62);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        rgba(228, 208, 160, 0.94);
+  --color-label-active:        rgba(228, 208, 160, 0.94);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(212, 148, 26, 0.22);
+  --scrollbar-color-hover:  rgba(212, 148, 26, 0.42);
+  --scrollbar-color-active: var(--color-brand);
+
+  /* Shadows — Dampf-Glühen */
+  --color-box-shadow: rgba(0, 0, 0, 0.85);
+  --shadow-00: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.65);
+  --shadow-01: 0 0.125rem 0.50rem  rgba(0, 0, 0, 0.75);
+  --shadow-02: 0 0.250rem 0.75rem  rgba(0, 0, 0, 0.75);
+  --shadow-03: 0 0.375rem 1.375rem rgba(0, 0, 0, 0.80);
+  --shadow-neon:
+    0 0 0.40rem rgba(212, 148, 26, 0.55),
+    0 0 1.10rem rgba(212, 148, 26, 0.35),
+    0 0 2.20rem rgba(200, 100, 10, 0.22),
+    0 0 4.00rem rgba(160, 72, 8, 0.10);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(212, 148, 26, 0.16);
+  --nav-actions-color:        rgba(228, 208, 160, 0.92);
+  --nav-toggle-color:         rgba(228, 208, 160, 0.92);
+  --nav-current-module-color: rgba(228, 208, 160, 0.92);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(6, 3, 1, 0.98) 0%,
+      rgba(8, 5, 2, 0.90) 100%);
+  --color-mod-nav-theme-header-color: rgba(228, 208, 160, 0.95);
+
+  --color-mod-nav-theme: linear-gradient(180deg,
+      rgba(212, 148, 26, 0.18) 0%,
+      rgba(110, 56, 0, 0.22)   50%,
+      rgba(6, 3, 1, 0.96)      100%),
+    rgba(5, 3, 1, 0.96);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(5, 3, 1, 0.98);
+  --color-mod-nav-theme-contrast:  rgba(228, 208, 160, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(14, 9, 3, 0.82);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(14, 9, 3, 0.97)    0%,
+      rgba(212, 148, 26, 0.12) 35%,
+      rgba(110, 56, 0, 0.08)   70%,
+      rgba(8, 5, 1, 0.95)      100%);
+
+  /* Sidebar — Kohleschwarzes Eisen */
+  --sidebar-level-0-color: #070402;
+  --sidebar-level-1-color: #050301;
+
+  --color-sidebar-text:           rgba(212, 192, 140, 0.90);
+  --color-sidebar-selected:       rgba(212, 148, 26, 0.22);
+  --color-sidebar-selected-text:  rgba(228, 208, 160, 0.96);
+  --color-sidebar-env-text:       rgba(90, 138, 88, 0.90);
+
+  --color-sidebar-selected-child:       rgba(212, 148, 26, 0.16);
+  --color-sidebar-selected-subchild:    rgba(168, 96, 16, 0.22);
+
+  --color-sidebar-selected-child-text:    rgba(228, 208, 160, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(228, 208, 160, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(212, 148, 26, 0.14);
+
+  /* Buttons */
+  --button-color:                       #ffffff;
+  --button-color-hover:                 #ffffff;
+  --button-background-color:            var(--color-brand);
+  --button-background-color-hover:      var(--color-primary-light);
+
+  --button-color-secondary:             #0c0604;
+  --button-color-hover-secondary:       #0c0604;
+  --button-background-color-secondary:       rgba(212, 148, 26, 0.20);
+  --button-background-color-hover-secondary: var(--color-brand);
+
+  --button-background-color-light-rgb:       rgba(212, 148, 26, 0.16);
+  --button-color-light:                      var(--color-brand);
+  --button-color-hover-light:                #0c0604;
+  --button-background-color-hover-light:     var(--color-brand);
+
+  --button-background-color-light-rgb-secondary: rgba(212, 148, 26, 0.12);
+  --button-color-light-secondary:                rgba(212, 148, 26, 0.90);
+  --button-color-hover-light-secondary:          #0c0604;
+  --button-background-color-hover-light-secondary: var(--color-brand);
+
+  /* Grid */
+  --grid-head-color:             rgba(228, 208, 160, 0.95);
+  --grid-head-background:        var(--color-primary-darkest);
+  --grid-head-background-active: rgba(212, 148, 26, 0.26);
+  --grid-head-hover:             rgba(212, 148, 26, 0.14);
+
+  --color-grid-hover:          rgba(212, 148, 26, 0.07);
+  --color-grid-selected-hover: rgba(212, 148, 26, 0.13);
+  --color-grid-selected:       rgba(212, 148, 26, 0.09);
+
+  --grid-surface:  rgba(8, 5, 2, 0.88);
+  --pager-surface: rgba(8, 5, 2, 0.82);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(60, 26, 0, 0.92)    0%,
+      rgba(168, 96, 16, 0.90)  50%,
+      rgba(212, 148, 26, 0.88) 100%);
+  --progressbar-text-color: #0c0604;
+}
+
+
+/* =============================================================================
+   BODY BACKGROUNDS
+   ============================================================================= */
+
+/* Light — Pergament mit Blaupausen-Raster */
+body {
+  background-attachment: fixed;
+  background:
+    /* Blaupausen / Schraffur */
+    repeating-linear-gradient(45deg,
+      rgba(120, 80, 20, 0.04) 0px, rgba(120, 80, 20, 0.04) 1px,
+      transparent 1px, transparent 12px),
+    repeating-linear-gradient(-45deg,
+      rgba(120, 80, 20, 0.03) 0px, rgba(120, 80, 20, 0.03) 1px,
+      transparent 1px, transparent 12px),
+    /* Pergament-Gradient */
+    linear-gradient(160deg,
+      rgba(220, 190, 120, 0.60) 0%,
+      rgba(222, 202, 144, 0.00) 50%,
+      rgba(180, 140, 60, 0.30)  100%),
+    /* Gaslicht von oben-links */
+    radial-gradient(700px 500px at 0% 0%, rgba(255, 200, 80, 0.18), transparent 70%),
+    var(--color-background);
+}
+
+/* Dark — Ruß & Gaslicht-Bernstein */
+html[data-theme="dark"] body,
+body[data-theme="dark"] {
+  background-attachment: fixed;
+  background:
+    /* Ruß-Vignette */
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.75) 15%, var(--color-background) 78%),
+    /* Gaslicht-Lampe oben-links */
+    radial-gradient(600px 600px at 5%   10%, rgba(212, 148, 26, 0.45), transparent 65%),
+    /* Gaslicht-Lampe oben-rechts */
+    radial-gradient(500px 500px at 95%  8%,  rgba(190, 110, 10, 0.35), transparent 60%),
+    /* Warme Glut von unten */
+    radial-gradient(900px 400px at 50% 110%, rgba(160, 72, 8, 0.40),  transparent 60%),
+    /* Dampf-Schleier */
+    radial-gradient(1200px 200px at 50%  45%, rgba(212, 148, 26, 0.06), transparent 80%),
+    /* Metall-Schraffur */
+    repeating-linear-gradient(90deg,
+      rgba(212, 148, 26, 0.02) 0px, transparent 1px, transparent 60px),
+    #0a0704;
+}

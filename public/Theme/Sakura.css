@@ -1,0 +1,352 @@
+
+
+/* =============================================================================
+   SAKURA LIGHT (Cherry blossom spring — pure, delicate, minimal)
+   ============================================================================= */
+:root {
+  --border-radius-small: 8px;
+  --border-radius:       16px;
+  --border-radius-large: 24px;
+
+  /* Brand — Sakura Pink */
+  --color-brand:          #d4607a;
+  --color-brand-rgb:      212, 96, 122;
+  --color-brand-contrast: #ffffff;
+
+  /* Primary ladder — Sakura Pink */
+  --color-primary-darkest: #3a1020;
+  --color-primary-dark:    #8b2840;
+  --color-primary-semidark:#c04060;
+  --color-primary:         #d4607a;
+  --color-primary-light:   #e8909e;
+  --color-primary-base:    #c04060;
+  --color-primary-rgb:     212, 96, 122;
+  --color-primary-contrast:#ffffff;
+
+  /* Required tokens */
+  --color-background: #fdf6f8;
+  --color-surface:    rgba(255, 252, 253, 0.94);
+  --color-border:     rgba(212, 96, 122, 0.18);
+  --color-text:       #1a0c10;
+  --color-text-muted: #6a3848;
+
+  /* Inputs */
+  --input-background:        rgba(255, 253, 254, 0.96);
+  --input-color:             #1a0c10;
+  --input-border:            rgba(212, 96, 122, 0.24);
+  --input-label-color:       #2a1018;
+  --input-placeholder-color: #a06878;
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        var(--color-primary-semidark);
+  --color-label-active:        var(--color-press-effect);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(212, 96, 122, 0.22);
+  --scrollbar-color-hover:  rgba(212, 96, 122, 0.42);
+  --scrollbar-color-active: var(--color-accent);
+
+  /* Shadows — ultra-soft, rice paper delicacy */
+  --color-box-shadow: rgba(212, 96, 122, 0.08);
+  --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(212, 96, 122, 0.06);
+  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(212, 96, 122, 0.08);
+  --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(212, 96, 122, 0.08);
+  --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(212, 96, 122, 0.08);
+  --shadow-neon:
+    0 0 0.30rem rgba(212, 96, 122, 0.22),
+    0 0 0.90rem rgba(212, 96, 122, 0.12),
+    0 0 1.60rem rgba(74, 124, 90, 0.08);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(212, 96, 122, 0.18);
+  --nav-actions-color:        rgba(255, 248, 250, 0.95);
+  --nav-toggle-color:         rgba(255, 248, 250, 0.95);
+  --nav-current-module-color: rgba(255, 248, 250, 0.95);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(26, 8, 16, 0.97) 0%,
+      rgba(32, 10, 20, 0.92) 100%);
+  --color-mod-nav-theme-header-color: rgba(255, 248, 250, 0.95);
+
+  --color-mod-nav-theme:
+    linear-gradient(180deg,
+      rgba(212, 96, 122, 0.20) 0%,
+      rgba(74, 124, 90, 0.14) 55%,
+      rgba(240, 160, 180, 0.08) 100%),
+    rgba(22, 6, 14, 0.92);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(22, 6, 14, 0.96);
+  --color-mod-nav-theme-contrast:  rgba(255, 248, 250, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(255, 252, 253, 0.90);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(255, 252, 253, 0.96) 0%,
+      rgba(212, 96, 122, 0.05) 50%,
+      rgba(74, 124, 90, 0.04) 100%);
+
+  /* Sidebar — deep lacquer, dark contrast */
+  --sidebar-level-0-color: #160810;
+  --sidebar-level-1-color: #0e0408;
+
+  --color-sidebar-text:              rgba(255, 240, 244, 0.90);
+  --color-sidebar-selected:          rgba(212, 96, 122, 0.22);
+  --color-sidebar-selected-text:     rgba(255, 248, 250, 0.98);
+  --color-sidebar-env-text:          rgba(106, 170, 122, 0.92);
+
+  --color-sidebar-selected-child:       rgba(212, 96, 122, 0.16);
+  --color-sidebar-selected-subchild:    rgba(74, 124, 90, 0.20);
+
+  --color-sidebar-selected-child-text:    rgba(255, 248, 250, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(255, 248, 250, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(212, 96, 122, 0.12);
+
+  /* Buttons */
+  --button-color:                      #ffffff;
+  --button-color-hover:                #ffffff;
+  --button-background-color:           var(--color-primary-dark);
+  --button-background-color-hover:     var(--color-primary);
+
+  --button-color-secondary:            #ffffff;
+  --button-color-hover-secondary:      #ffffff;
+  --button-background-color-secondary:       rgba(74, 124, 90, 0.80);
+  --button-background-color-hover-secondary: var(--color-accent);
+
+  --button-background-color-light-rgb:       rgba(212, 96, 122, 0.12);
+  --button-color-light:                      var(--color-primary-dark);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(74, 124, 90, 0.12);
+  --button-color-light-secondary:                var(--color-accent);
+  --button-color-hover-light-secondary:          #ffffff;
+  --button-background-color-hover-light-secondary: var(--color-accent);
+
+  /* Grid */
+  --grid-head-color:             rgba(255, 248, 250, 0.96);
+  --grid-head-background:        rgba(22, 6, 14, 0.96);
+  --grid-head-background-active: rgba(212, 96, 122, 0.26);
+  --grid-head-hover:             rgba(74, 124, 90, 0.18);
+
+  --color-grid-hover:          rgba(212, 96, 122, 0.05);
+  --color-grid-selected-hover: rgba(212, 96, 122, 0.09);
+  --color-grid-selected:       rgba(212, 96, 122, 0.06);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(212, 96, 122, 0.88)  0%,
+      rgba(74, 124, 90, 0.85)   60%,
+      rgba(240, 160, 180, 0.75) 100%);
+  --progressbar-text-color: var(--color-text);
+}
+
+
+/* =============================================================================
+   SAKURA DARK (Japanese night — lacquer black, moonlight, glowing sakura)
+   ============================================================================= */
+:root[data-theme="dark"] {
+  /* Dashboard border — glowing night sakura */
+  --dashboard-border-gradient: conic-gradient(from 0turn,
+      #f0829a,
+      #6aaa7a,
+      #ffb0c4,
+      #6aaa7a,
+      #f0829a);
+
+  /* Brand — Glowing Sakura */
+  --color-brand:          #f0829a;
+  --color-brand-rgb:      240, 130, 154;
+  --color-brand-contrast: #0a0206;
+
+  /* Primary ladder — deep lacquer crimson */
+  --color-primary-darkest: #100408;
+  --color-primary-dark:    #3a0818;
+  --color-primary-semidark:#7a1a30;
+  --color-primary:         #f0829a;
+  --color-primary-light:   #f8aab8;
+  --color-primary-rgb:     240, 130, 154;
+  --color-primary-contrast:#100408;
+
+  /* Accent — bright bamboo */
+  --color-accent:     #6aaa7a;
+  --color-accent-rgb: 106, 170, 122;
+
+  /* Required tokens */
+  --color-background: #080608;
+  --color-surface:    rgba(12, 6, 8, 0.88);
+  --color-border:     rgba(240, 130, 154, 0.18);
+  --color-text:       rgba(255, 242, 246, 0.94);
+  --color-text-muted: rgba(200, 170, 180, 0.70);
+
+  /* Inputs */
+  --input-background:        rgba(8, 4, 6, 0.82);
+  --input-color:             rgba(255, 242, 246, 0.94);
+  --input-border:            rgba(240, 130, 154, 0.24);
+  --input-label-color:       rgba(255, 242, 246, 0.90);
+  --input-placeholder-color: rgba(190, 150, 165, 0.55);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        rgba(255, 242, 246, 0.94);
+  --color-label-active:        rgba(255, 242, 246, 0.94);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(240, 130, 154, 0.20);
+  --scrollbar-color-hover:  rgba(240, 130, 154, 0.38);
+  --scrollbar-color-active: var(--color-accent);
+
+  /* Shadows — soft sakura glow, lower opacity, refined */
+  --color-box-shadow: rgba(0, 0, 0, 0.85);
+  --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(0, 0, 0, 0.70);
+  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(0, 0, 0, 0.78);
+  --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(0, 0, 0, 0.78);
+  --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(0, 0, 0, 0.78);
+  --shadow-neon:
+    0 0 0.40rem rgba(240, 130, 154, 0.40),
+    0 0 1.20rem rgba(240, 130, 154, 0.26),
+    0 0 2.50rem rgba(106, 170, 122, 0.16),
+    0 0 4.00rem rgba(255, 176, 196, 0.08);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(240, 130, 154, 0.16);
+  --nav-actions-color:        rgba(255, 242, 246, 0.92);
+  --nav-toggle-color:         rgba(255, 242, 246, 0.92);
+  --nav-current-module-color: rgba(255, 242, 246, 0.92);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(4, 1, 3, 0.98) 0%,
+      rgba(6, 2, 4, 0.90) 100%);
+  --color-mod-nav-theme-header-color: rgba(255, 242, 246, 0.95);
+
+  --color-mod-nav-theme: linear-gradient(180deg,
+      rgba(240, 130, 154, 0.20) 0%,
+      rgba(106, 170, 122, 0.14) 55%,
+      rgba(255, 176, 196, 0.06) 100%),
+    rgba(5, 2, 4, 0.94);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(4, 1, 3, 0.92);
+  --color-mod-nav-theme-contrast:  rgba(255, 242, 246, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(12, 6, 8, 0.75);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(12, 6, 8, 0.96) 0%,
+      rgba(240, 130, 154, 0.14) 32%,
+      rgba(106, 170, 122, 0.09) 64%,
+      rgba(255, 176, 196, 0.05) 100%);
+
+  /* Sidebar — absolute lacquer black */
+  --sidebar-level-0-color: #060204;
+  --sidebar-level-1-color: #040102;
+
+  --color-sidebar-text:           rgba(255, 242, 246, 0.92);
+  --color-sidebar-selected:       rgba(240, 130, 154, 0.22);
+  --color-sidebar-selected-text:  rgba(255, 242, 246, 0.96);
+  --color-sidebar-env-text:       rgba(106, 170, 122, 0.92);
+
+  --color-sidebar-selected-child:       rgba(240, 130, 154, 0.16);
+  --color-sidebar-selected-subchild:    rgba(106, 170, 122, 0.22);
+
+  --color-sidebar-selected-child-text:    rgba(255, 242, 246, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(255, 242, 246, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(240, 130, 154, 0.14);
+
+  /* Buttons */
+  --button-color:                       #ffffff;
+  --button-color-hover:                 #ffffff;
+  --button-background-color:            var(--color-primary-dark);
+  --button-background-color-hover:      var(--color-brand);
+
+  --button-color-secondary:             #ffffff;
+  --button-color-hover-secondary:       #ffffff;
+  --button-background-color-secondary:       rgba(106, 170, 122, 0.18);
+  --button-background-color-hover-secondary: var(--color-accent);
+
+  --button-background-color-light-rgb:       rgba(240, 130, 154, 0.18);
+  --button-color-light:                      var(--color-brand);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(106, 170, 122, 0.16);
+  --button-color-light-secondary:                rgba(106, 170, 122, 0.92);
+  --button-color-hover-light-secondary:          #ffffff;
+  --button-background-color-hover-light-secondary: var(--color-accent);
+
+  /* Grid */
+  --grid-head-color:             rgba(255, 242, 246, 0.95);
+  --grid-head-background:        var(--color-primary-darkest);
+  --grid-head-background-active: rgba(240, 130, 154, 0.24);
+  --grid-head-hover:             rgba(106, 170, 122, 0.18);
+
+  --color-grid-hover:          rgba(240, 130, 154, 0.06);
+  --color-grid-selected-hover: rgba(240, 130, 154, 0.10);
+  --color-grid-selected:       rgba(240, 130, 154, 0.08);
+
+  --grid-surface:  rgba(8, 4, 6, 0.85);
+  --pager-surface: rgba(8, 4, 6, 0.80);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(240, 130, 154, 0.90)  0%,
+      rgba(106, 170, 122, 0.85)  55%,
+      rgba(255, 176, 196, 0.72)  100%);
+  --progressbar-text-color: rgba(255, 242, 246, 0.92);
+}
+
+
+/* =============================================================================
+   BODY BACKGROUNDS
+   ============================================================================= */
+
+/* Light — sakura bloom: white base, delicate pink radial, green at corners */
+body {
+  background-attachment: fixed;
+  background:
+    /* Preserve luminosity — very light white wash */
+    linear-gradient(rgba(253, 246, 248, 0.55), rgba(253, 246, 248, 0.55)),
+    /* Sakura bloom — soft pink centered */
+    radial-gradient(900px 600px at 50% 30%, rgba(212, 96, 122, 0.14), transparent 70%),
+    /* Bamboo leaves — green whisper at bottom corners */
+    radial-gradient(600px 500px at 5%  90%, rgba(74, 124, 90, 0.10), transparent 65%),
+    radial-gradient(600px 500px at 95% 85%, rgba(74, 124, 90, 0.08), transparent 65%),
+    /* Petal suggestion — very subtle diagonal blush */
+    linear-gradient(135deg,
+      rgba(240, 160, 180, 0.06) 0%,
+      rgba(253, 246, 248, 0.00) 40%,
+      rgba(212, 96, 122, 0.04)  100%),
+    /* Pure sakura white base */
+    #fdf6f8;
+}
+
+/* Dark — moonlit garden: lacquer black, moonlight silver above, sakura left, bamboo right */
+html[data-theme="dark"] body,
+body[data-theme="dark"] {
+  background-attachment: fixed;
+  background:
+    /* Deep center shadow — lacquer depth */
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.82) 15%, var(--color-background) 85%),
+    /* Moonlight silver — top center glow */
+    radial-gradient(1000px 300px at 50%  -2%, rgba(220, 210, 215, 0.16), transparent 65%),
+    /* Sakura bloom — bottom left */
+    radial-gradient(700px 600px at 15%  80%, rgba(240, 130, 154, 0.38), transparent 60%),
+    /* Bamboo green — right side */
+    radial-gradient(700px 600px at 88%  55%, rgba(106, 170, 122, 0.30), transparent 60%),
+    /* Very faint petal scatter — diagonal */
+    linear-gradient(150deg,
+      rgba(240, 130, 154, 0.06) 0%,
+      transparent              50%,
+      rgba(106, 170, 122, 0.04) 100%),
+    /* Absolute lacquer */
+    #080608;
+}

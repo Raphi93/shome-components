@@ -1,264 +1,275 @@
-# shome-components
+# @raphi93/shome-components
 
-<p align="center">
-  <a href="#installation"><img alt="npm" src="https://img.shields.io/badge/install-npm-green" /></a>
-  <img alt="types" src="https://img.shields.io/badge/TypeScript-ready-blue" />
-  <img alt="css-variables" src="https://img.shields.io/badge/CSS%20Variables-themable-purple" />
-  <img alt="license" src="https://img.shields.io/badge/license-MIT-lightgrey" />
-</p>
+A production-ready React + TypeScript component library with CSS custom property theming. Designed for **Next.js App Router (SSR)** and **Vite** projects.
 
-[Show Storybook / Wiki](https://shome-wiki.raphaelhug.ch/)
-
-A small, modern **React + TypeScript** component library themed via **CSS custom properties**.
-This README covers **Button**, **Cards**, **Tooltip**, **StringInput**, **NumberInput**, and **Switch**.
+[![npm version](https://img.shields.io/npm/v/@raphi93/shome-components)](https://www.npmjs.com/package/@raphi93/shome-components)
+[![license](https://img.shields.io/npm/l/@raphi93/shome-components)](LICENSE)
+[![node](https://img.shields.io/node/v/@raphi93/shome-components)](package.json)
 
 ---
 
 ## Table of Contents
 
-- [Design Tokens](#design-tokens)
+- [Installation](#installation)
+- [Setup](#setup)
+- [Components](#components)
+- [Theming](#theming)
+- [Peer Dependencies](#peer-dependencies)
+- [Building](#building)
+- [Links](#links)
 - [License](#license)
 
 ---
 
-## Design Tokens
+## Installation
 
-Override any token at `:root` (or a wrapper element) to theme the library.
+```bash
+npm install @raphi93/shome-components
+```
+
+Install the required peer dependencies:
+
+```bash
+npm install react react-dom \
+  @fortawesome/fontawesome-svg-core \
+  @fortawesome/free-solid-svg-icons \
+  @fortawesome/free-regular-svg-icons \
+  @fortawesome/free-brands-svg-icons \
+  @fortawesome/react-fontawesome \
+  @floating-ui/react \
+  i18next react-i18next \
+  react-select
+```
+
+---
+
+## Setup
+
+### Import Styles
+
+Import the compiled stylesheet once at your application root. It provides all component styles and CSS custom property defaults.
+
+```ts
+import '@raphi93/shome-components/styles.css';
+```
+
+### Next.js App Router
+
+The library ships `'use client'` directives in the bundle — no additional configuration required. Components that rely on browser APIs (`Sidebar`, `ChatBot`, `SearchBox`, etc.) are already annotated internally and integrate seamlessly with the App Router.
+
+```tsx
+// app/layout.tsx
+import '@raphi93/shome-components/styles.css';
+```
+
+```tsx
+// Any client component
+'use client';
+import { Button, Sidebar } from '@raphi93/shome-components';
+```
+
+### Vite
+
+No special configuration needed. Import styles in your entry point:
+
+```ts
+// main.ts or main.tsx
+import '@raphi93/shome-components/styles.css';
+```
+
+The package ships both **ESM** (`dist/esm/`) and **CJS** (`dist/cjs/`) builds, compatible with any modern bundler.
+
+---
+
+## Components
+
+| Component | Description |
+|---|---|
+| `Alert` | Dismissible alert messages — info, success, warning, error |
+| `Actions` / `ActionElement` | Toolbar action buttons |
+| `AppLayout` | Top-level application shell layout |
+| `AppMessageBox` | Application-wide notification overlay with auto-dismiss |
+| `AppToggleActive` | Toggle button for active/inactive state |
+| `Breadcrumbs` | Navigation breadcrumb trail |
+| `Button` | Primary, secondary, and icon button variants |
+| `Cards` / `CardChildren` | Content card containers |
+| `ChatBot` | Chat interface with IndexedDB message persistence |
+| `ErrorText` | Inline form validation error display |
+| `FieldSet` | Fieldset wrapper with legend |
+| `FieldWrapper` | Form field wrapper with label, icons, and validation state |
+| `Grid` | Data grid with column resizing and sorting |
+| `Header` | Application header bar |
+| `HideElement` | Conditional visibility wrapper |
+| `ImageCard` | Image with overlay and caption |
+| `ImageLightBox` | Full-screen image lightbox |
+| `Main` | Main content area container |
+| `MessageBox` | Inline message display with auto-scroll support |
+| `MultiDatePickers` | Single and range date pickers |
+| `Pager` | Pagination controls |
+| `Search` / `SearchBox` | Search input with optional voice recognition |
+| `Select` / `CreatableAsyncSelect` | Enhanced select inputs built on react-select |
+| `Sidebar` | Collapsible navigation sidebar for desktop and mobile |
+| `Spinner` | Loading spinners |
+| `Tooltip` | Floating tooltip powered by @floating-ui/react |
+| `Screw` | Decorative screw element |
+
+### Usage Examples
+
+```tsx
+import { Button, Alert, Sidebar } from '@raphi93/shome-components';
+
+// Button
+<Button variant="primary" onClick={() => {}}>Save</Button>
+
+// Alert
+<Alert type="success" message="Changes saved successfully." />
+
+// Sidebar
+<Sidebar
+  menu={navigationItems}
+  expanded={sidebarOpen}
+  setExpanded={setSidebarOpen}
+  isMobile={isMobile}
+/>
+```
+
+---
+
+## Theming
+
+All visual properties are controlled through **CSS custom properties** on `:root`. Override them in your global stylesheet to match your brand — no rebuilding required.
+
+### Colors
 
 ```css
 :root {
-  /* Typography */
-  font-family: 'Arial', Tahoma, Geneva, Verdana, sans-serif;
-  --font-size-base: 1rem;
-  --font-size-md: 0.875rem;
-  --font-size-smaller: 0.75rem;
-
-  /* Spacing / Radius / Motion / Shadows */
-  --spacing: .5rem;
-  --spacing-xs: calc(var(--spacing) * .5);
-  --spacing-sm: var(--spacing);
-  --spacing-md: calc(var(--spacing) * 1.5);
-  --border-radius: 8px;
-  --border-radius-small: calc(var(--border-radius) - 2px);
-  --transition-normal: 160ms ease;
-  --color-box-shadow: rgba(42, 45, 49, 0.1);
-  --shadow-medium: 0 1px 2px var(--color-box-shadow), 0 6px 18px var(--color-box-shadow);
-
-  /* Base Palette */
-  --color-white: #ffffff;
-  --color-black: #000000;
-  --color-gray-light: #a9b3c0;
-  --color-gray: #6b7280;
-  --color-gray-dark: #1d2229;
-
   /* Brand */
-  --color-primary-rgb: 57, 60, 64;
-  --color-primary: #393c40;
-  --color-primary-dark: #303234;
-  --color-primary-light: rgba(var(--color-primary-rgb), 0.8);
+  --color-primary:           #008ff9;
+  --color-primary-dark:      #2c5b9a;
+  --color-primary-darkest:   #00467a;
+  --color-primary-light:     #addcff;
 
-  --color-secondary-rgb: 15, 118, 110;
-  --color-secondary: #0f766e;
-  --color-secondary-dark: #0a544e;
-  --color-secondary-light: rgba(var(--color-secondary-rgb), 0.8);
+  /* Semantic */
+  --color-positive:          #82bc3c;
+  --color-negative:          #d64856;
+  --color-warning:           #ffc000;
 
-  /* States */
-  --color-success-rgb: 25, 135, 84;
-  --color-success: #198754;
-  --color-success-dark: #166e3a;
-  --color-success-light: rgba(var(--color-success-rgb), 0.6);
+  /* Navigation */
+  --color-mod-nav-theme:           var(--color-primary-darkest);
+  --color-mod-nav-theme-variant-1: var(--color-primary);
+  --color-mod-nav-theme-variant-2: var(--color-primary-dark);
+  --color-mod-nav-theme-contrast:  #ffffff;
 
-  --color-danger-rgb: 220, 53, 69;
-  --color-danger: #dc3545;
-  --color-danger-dark: #b02a37;
-  --color-danger-light: rgba(var(--color-danger-rgb), 0.6);
+  /* Text */
+  --color-text:              #212121;
+  --color-text-light:        #707070;
+  --color-text-inverted:     #ffffff;
+}
+```
 
-  --color-warning-rgb: 255, 193, 7;
-  --color-warning: #ffc107;
-  --color-warning-dark: #cc9a06;
-  --color-warning-light: rgba(var(--color-warning-rgb), 0.6);
+### Layout & Spacing
 
-  --color-info-rgb: 13, 110, 253;
-  --color-info: #0d6efd;
-  --color-info-dark: #0b5ed7;
-  --color-info-light: rgba(var(--color-info-rgb), 0.6);
+```css
+:root {
+  --spacing:                 0.5rem;    /* 8px baseline grid */
+  --border-radius:           0.313rem;
+  --nav-width:               20.5rem;
+  --nav-module-width:        4rem;
+  --content-max-width:       93.75rem;
+  --sidebar-extended-width:  16rem;
+}
+```
 
-  /* Text / Background */
-  --color-text: var(--color-gray-dark);
-  --color-background: var(--color-white);
+### Typography
 
-  /* Header / Nav / Layout */
-  --nav-height: 3.5rem;
-  --nav-border-line: 1px solid var(--color-gray-light, #a9b3c0);
+```css
+:root {
+  --font-primary:            'Segoe UI', Helvetica, sans-serif;
+  --font-size-base:          1rem;
+  --font-size-smaller:       0.875rem;
+  --font-size-small:         0.75rem;
+}
+```
 
-  --header-height: var(--nav-height);
-  --header-gap: .5rem;
-  --header-margin-left: 1rem;
-  --header-color-title: var(--color-secondary);
-  --header-color-subtitle: var(--color-black);
-  --header-color-env: var(--color-secondary);
-  --header-color-bg: var(--color-secondary);
-  --header-title-font-size: 1.1rem;
-  --header-title-font-weight: bold;
-  --header-subtitle-font-size: 1rem;
-  --header-env-font-size: 1.1rem;
-  --header-env-font-weight: bold;
-  --header-title-font-size-sm: 1rem;
-  --header-subtitle-font-size-sm: 0.9rem;
-  --header-env-font-size-sm: 1rem;
+### Scrollbars
 
-  --layout-sidebar-width-collapsed: calc(var(--spacing) * 8);
-  --layout-sidebar-width-expanded: calc(var(--spacing) * 37);
-  --layout-header-height: calc(var(--nav-height) + 1px);
-  --layout-header-bg: var(--color-white);
-  --layout-header-border: var(--nav-border-line);
-  --layout-content-padding: calc(var(--spacing) * 3);
-  --layout-content-max-width: 80rem;
-  --layout-content-min-width: 0;
-
-  /* Sidebar */
-  --sidebar-height: 4rem;
-  --sidebar-height-compact: 48px;
-  --sidebar-gap: var(--spacing);
-  --sidebar-bg: var(--color-primary);
-  --sidebar-fg: var(--color-white);
-  --sidebar-accent-rgb: var(--color-secondary-rgb);
-  --sidebar-item-height: 3.25rem;
-  --sidebar-subitem-height: 38px;
-  --sidebar-padding-sm: 10px;
-  --sidebar-padding-md: 12px;
-  --sidebar-margin-sm: 1rem;
-  --sidebar-margin-md: 2rem;
-  --sidebar-icon-size: 1rem;
-  --sidebar-icon-size-compact: 0.8rem;
-  --sidebar-transition: 0.3s ease-in-out;
-  --sidebar-mobile-nav-height: calc(var(--nav-height) + 1px);
-  --sidebar-mobile-icon-size: 1.1rem;
-  --sidebar-mobile-gap: 50px;
-
-  /* Buttons */
-  --button-color: var(--color-white, #ffffff);
-  --button-color-hover: var(--color-white, #ffffff);
-  --button-background-color: var(--color-primary, #393c40);
-  --button-background-color-hover: var(--color-secondary, #0a544e);
-
-  --button-color-light: var(--color-primary-dark, #303234);
-  --button-color-hover-light: var(--color-white, #ffffff);
-  --button-background-color-light-rgb: var(--color-primary-rgb, 57, 60, 64);
-  --button-background-color-hover-light: var(--color-primary, #393c40);
-
-  --button-color-secondary: var(--color-white, #ffffff);
-  --button-color-hover-secondary: var(--color-white, #ffffff);
-  --button-background-color-secondary: var(--color-secondary, #0f766e);
-  --button-background-color-hover-secondary: var(--color-primary, #393c40);
-
-  --button-color-success: var(--color-white, #ffffff);
-  --button-color-hover-success: var(--color-white, #ffffff);
-  --button-background-color-success: var(--color-success, #198754);
-  --button-background-color-hover-success: var(--color-success-dark, #166e3a);
-
-  --button-color-warning: var(--color-white, #ffffff);
-  --button-color-hover-warning: var(--color-white, #ffffff);
-  --button-background-color-warning: var(--color-warning, #ffc107);
-  --button-background-color-hover-warning: var(--color-warning-dark, #cc9a06);
-
-  --button-color-danger: var(--color-white, #ffffff);
-  --button-color-hover-danger: var(--color-white, #ffffff);
-  --button-background-color-danger: var(--color-danger, #dc3545);
-  --button-background-color-hover-danger: var(--color-danger-dark, #b02a37);
-
-  --button-color-info: var(--color-white, #ffffff);
-  --button-color-hover-info: var(--color-white, #ffffff);
-  --button-background-color-info: var(--color-info, #0d6efd);
-  --button-background-color-hover-info: var(--color-info-dark, #0b5ed7);
-
-  /* Inputs / Labels */
-  --color-label-input: var(--color-secondary, #6c757d);
-  --color-label-input-focus: var(--color-secondary, #6c757d);
-
-  /* Switch */
-  --switch-track-off: var(--color-danger-light, #dc2626);
-  --switch-track-on: var(--color-success-light, #16a34a);
-  --switch-knob-off: var(--color-danger-dark, #303234);
-  --switch-knob-on: var(--color-success-dark, #0f766e);
-  --switch-border: var(--color-gray, #6b7280);
-  --switch-focus-ring: rgba(13,110,253,.35);
-  --switch-w: 44px; --switch-h: 24px; --switch-thumb: 20px; --switch-pad: 2px;
-
-  /* Grid (Table) */
-  --grid-bg: var(--color-white);
-  --grid-fg: var(--color-text);
-  --grid-border: var(--color-gray-light);
-  --grid-header-bg: var(--color-primary);
-  --grid-header-fg: var(--color-white);
-  --grid-row-alt: rgba(var(--color-primary-rgb), 0.04);
-  --grid-row-hover: rgba(var(--color-secondary-rgb), 0.08);
-  --grid-radius: var(--border-radius);
-  --grid-shadow: var(--shadow-medium);
-  --grid-pad-y: .6rem; --grid-pad-x: .75rem;
-  --grid-font-size: 1rem; --grid-font-head-size: 1.125rem;
-  --grid-checkbox-accent: var(--color-secondary);
-  --grid-border-strong: var(--color-gray);
-
-  /* Grid (secondary scheme) */
-  --grid-font-size-secondary: 0.9rem;
-  --grid-font-head-size-secondary: 1rem;
-  --grid-header-bg-secondary: var(--color-secondary);
-  --grid-header-fg-secondary: var(--color-white);
-  --grid-row-alt-secondary: rgba(var(--color-secondary-rgb), 0.05);
-  --grid-row-hover-secondary: rgba(var(--color-secondary-rgb), 0.10);
-
-  /* PageGrid (pager) */
-  --pg-bg: var(--grid-bg);
-  --pg-fg: var(--grid-fg);
-  --pg-border: var(--grid-border);
-  --pg-hover: var(--grid-row-hover);
-  --pg-active-bg: var(--grid-header-bg);
-  --pg-active-fg: var(--grid-header-fg);
-  --pg-radius: var(--grid-radius);
-  --pg-pad-y: .4rem; --pg-pad-x: .6rem; --pg-gap: .25rem;
-  --pg-font: var(--grid-font-size);
-  --pg-card-bg: var(--grid-bg);
-  --pg-card-border: var(--grid-border);
-  --pg-card-radius: 10px;
-  --pg-card-shadow: var(--grid-shadow);
-  --pg-frame-outer: #c8d3e3;
-  --pg-frame-bg: #ffffff;
-  --pg-frame-radius: 12px;
-  --pg-frame-shadow: 0 1px 2px rgba(8, 24, 55, .06), 0 4px 18px rgba(8, 24, 55, .06);
-  --pg-size: 34px;
-
-  /* Select */
-  --select-bg: var(--color-white, #fff);
-  --select-fg: var(--color-gray-dark, #1d2229);
-  --select-border: var(--color-gray-light, #c5cfdd);
-  --select-border-focus: var(--color-secondary, #0f766e);
-  --select-placeholder: var(--color-gray, #6b7280);
-  --select-radius: var(--border-radius, 10px);
-  --select-shadow: var(--shadow-medium);
-  --select-pad-y: .5rem; --select-pad-x: .75rem;
-  --select-tag-bg: rgba(15, 118, 110, .1);
-  --select-tag-fg: var(--color-secondary, #0f766e);
-  --select-tag-remove-fg: var(--color-gray, #6b7280);
-  --select-opt-hover: #f2f6fb;
-  --select-opt-selected-bg: rgba(15, 118, 110, .12);
-  --select-opt-selected-fg: var(--color-secondary, #0f766e);
-
-  /* Select (secondary theme) */
-  --select-bg-secondary: var(--color-white, #fff);
-  --select-fg-secondary: var(--color-gray-dark, #1d2229);
-  --select-border-secondary: var(--color-secondary, #0f766e);
-  --select-opt-selected-bg-secondary: rgba(15, 118, 110, .16);
-  --select-opt-selected-fg-secondary: var(--color-secondary, #0f766e);
-
-  /* Z-index */
-  --select-z: 20;
+```css
+:root {
+  --scrollbar-size:          0.375rem;
+  --scrollbar-color:         var(--color-gray-400);
+  --scrollbar-color-hover:   var(--color-gray-500);
+  --scrollbar-color-active:  var(--color-primary);
 }
 ```
 
 ---
 
+## Peer Dependencies
+
+| Package | Required | Purpose |
+|---|---|---|
+| `react` ≥ 18 | Yes | |
+| `react-dom` ≥ 18 | Yes | |
+| `@fortawesome/fontawesome-svg-core` ≥ 7 | Yes | Icon rendering |
+| `@fortawesome/free-solid-svg-icons` ≥ 7 | Yes | Icon set |
+| `@fortawesome/free-regular-svg-icons` ≥ 7 | Yes | Icon set |
+| `@fortawesome/free-brands-svg-icons` ≥ 7 | Yes | Icon set |
+| `@fortawesome/react-fontawesome` ≥ 3 | Yes | |
+| `@floating-ui/react` ≥ 0.27 | Yes | Tooltip positioning |
+| `i18next` ≥ 25 | Yes | Translations |
+| `react-i18next` ≥ 16 | Yes | Translations |
+| `react-select` ≥ 5 | Yes | Select components |
+| `date-fns` ≥ 4 | Optional | DatePicker components |
+| `react-datepicker` ≥ 9 | Optional | DatePicker components |
+| `lodash` ≥ 4.17 | Optional | Utility functions |
+| `react-icons` ≥ 5 | Optional | Additional icons |
+| `react-responsive` ≥ 10 | Optional | Responsive hooks |
+| `react-router-dom` ≥ 6 | Optional | Routing integration |
+| `react-speech-recognition` ≥ 4 | Optional | Voice search |
+| `react-spinners` ≥ 0.17 | Optional | Spinner variants |
+| `next` ≥ 13 | Optional | App Router support |
+
+---
+
+## Building
+
+Requires Node.js `>=20 <25`.
+
+```bash
+# Install dependencies
+npm install
+
+# Build JS (ESM + CJS), type declarations, and standalone CSS
+npm run rollup
+
+# Lint TypeScript
+npm run lint:ts
+
+# Lint and auto-fix
+npm run lint:ts:fix
+```
+
+Output is written to `dist/`:
+
+```
+dist/
+  esm/index.js      ESM build
+  cjs/index.js      CommonJS build
+  index.d.ts        TypeScript declarations
+  styles.css        Compiled stylesheet
+```
+
+---
+
+## Links
+
+- [Documentation](https://shome-wiki.raphaelhug.ch/)
+- [npm](https://www.npmjs.com/package/@raphi93/shome-components)
+- [GitHub](https://github.com/raphi93/shome-components)
+- [Issues](https://github.com/raphi93/shome-components/issues)
+
+---
+
 ## License
 
-MIT © Raphael Hug
-
+[MIT](LICENSE) © RHUG

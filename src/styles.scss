@@ -1,0 +1,10 @@
+// Standalone CSS entry point — import this in your app for all styles:
+//   import '@raphi93/shome-components/styles.css'
+
+// Base / design tokens
+@use './Styles/_base';
+@use './Styles/_fonts';
+@use './Styles/_layout';
+@use './Styles/_typography';
+@use './Styles/_utilities';
+@use './Styles/_colors';

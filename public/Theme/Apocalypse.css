@@ -1,0 +1,360 @@
+/* =============================================================================
+   APOCALYPSE THEME
+   Light: Ödland am Tag — Asche-Braun, Strahlungs-Grün, Rost
+   Dark:  Mitternacht nach dem Ende — Pechschwarz, toxisches Glühen, Feuer
+   ============================================================================= */
+
+/* ─── SHARED ─────────────────────────────────────────────────────────────────── */
+:root {
+  --color-accent:     #d97706;
+  --color-accent-rgb: 217, 119, 6;
+
+  /* Dashboard border — Biohazard + Rost */
+  --dashboard-border-size:    2px;
+  --dashboard-border-opacity: 1;
+  --dashboard-border-gradient: conic-gradient(from 0turn,
+      #a3e635,
+      #d97706,
+      #ef4444,
+      #d97706,
+      #a3e635);
+  --dashboard-special-hover: radiationPulse 4s ease-in-out infinite;
+  --dashboard-border-filter:  none;
+}
+
+@keyframes radiationPulse {
+  0%   { filter: brightness(1.00); }
+  50%  { filter: brightness(1.24); }
+  100% { filter: brightness(1.00); }
+}
+
+
+/* =============================================================================
+   APOCALYPSE LIGHT (Ödland bei Tag — Staub, Asche, Strahlung)
+   ============================================================================= */
+:root {
+  --border-radius-small: 3px;
+  --border-radius:       6px;
+  --border-radius-large: 12px;
+
+  /* Brand — Toxisches Strahlungsgrün */
+  --color-brand:          #84cc16;
+  --color-brand-rgb:      132, 204, 22;
+  --color-brand-contrast: #0a1200;
+
+  /* Primary ladder — Biohazard-Grün */
+  --color-primary-darkest: #0a1200;
+  --color-primary-dark:    #1c3200;
+  --color-primary-semidark:#3c6800;
+  --color-primary:         #65a30d;
+  --color-primary-light:   #a3e635;
+  --color-primary-base:    #3c6800;
+  --color-primary-rgb:     101, 163, 13;
+  --color-primary-contrast:#0a1200;
+
+  /* Backgrounds — helles Ödland-Sandbeige, lesbar */
+  --color-background: #ece0c8;
+  --color-surface:    rgba(248, 242, 228, 0.97);
+  --color-border:     rgba(120, 60, 20, 0.22);
+  --color-text:       rgba(16, 10, 2, 0.90);
+  --color-text-muted: rgba(80, 56, 18, 0.68);
+
+  /* Inputs */
+  --input-background:        rgba(252, 246, 234, 0.96);
+  --input-color:             rgba(16, 10, 2, 0.90);
+  --input-border:            rgba(150, 80, 20, 0.32);
+  --input-label-color:       rgba(16, 10, 2, 0.85);
+  --input-placeholder-color: rgba(110, 78, 28, 0.52);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        var(--color-primary-semidark);
+  --color-label-active:        var(--color-press-effect);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(132, 204, 22, 0.36);
+  --scrollbar-color-hover:  rgba(132, 204, 22, 0.58);
+  --scrollbar-color-active: var(--color-accent);
+
+  /* Shadows */
+  --color-box-shadow: rgba(60, 36, 8, 0.18);
+  --shadow-00: 0 0.125rem 0.375rem rgba(60, 36, 8, 0.12);
+  --shadow-01: 0 0.125rem 0.500rem rgba(60, 36, 8, 0.16);
+  --shadow-02: 0 0.250rem 0.750rem rgba(60, 36, 8, 0.18);
+  --shadow-03: 0 0.375rem 1.375rem rgba(60, 36, 8, 0.22);
+  --shadow-neon:
+    0 0 0.30rem rgba(132, 204, 22, 0.32),
+    0 0 0.80rem rgba(132, 204, 22, 0.20),
+    0 0 1.60rem rgba(217, 119, 6, 0.14);
+
+  /* Icons — hell, kein Invertieren */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(120, 60, 20, 0.20);
+  --nav-actions-color:        rgba(16, 10, 2, 0.88);
+  --nav-toggle-color:         rgba(16, 10, 2, 0.88);
+  --nav-current-module-color: rgba(16, 10, 2, 0.88);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(8, 6, 2, 0.97) 0%,
+      rgba(12, 8, 3, 0.92) 100%);
+  --color-mod-nav-theme-header-color: rgba(220, 215, 195, 0.95);
+
+  --color-mod-nav-theme:
+    linear-gradient(180deg,
+      rgba(132, 204, 22, 0.14)  0%,
+      rgba(217, 119, 6, 0.12)   55%,
+      rgba(6, 6, 2, 0.96)       100%),
+    rgba(8, 6, 2, 0.96);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(236, 224, 200, 0.99);
+  --color-mod-nav-theme-contrast:  rgba(16, 10, 2, 0.92);
+
+  /* Cards */
+  --color-card-background: rgba(248, 242, 228, 0.95);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(252, 246, 234, 0.97) 0%,
+      rgba(132, 204, 22, 0.05)  55%,
+      rgba(217, 119, 6, 0.04)   100%);
+
+  /* Sidebar */
+  --sidebar-level-0-color: #3c372d;
+  --sidebar-level-1-color: #48453e;
+
+  --color-sidebar-text:              rgba(239, 228, 214, 0.88);
+  --color-sidebar-selected:          rgba(132, 204, 22, 0.22);
+  --color-sidebar-selected-text:     rgba(205, 198, 190, 0.98);
+  --color-sidebar-env-text:          rgba(80, 140, 10, 0.90);
+
+  --color-sidebar-selected-child:       rgba(132, 204, 22, 0.14);
+  --color-sidebar-selected-subchild:    rgba(217, 119, 6, 0.16);
+
+  --color-sidebar-selected-child-text:    rgba(207, 200, 191, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(223, 215, 205, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(132, 204, 22, 0.12);
+
+  /* Buttons */
+  --button-color:                      #0a1200;
+  --button-color-hover:                #0a1200;
+  --button-background-color:           var(--color-brand);
+  --button-background-color-hover:     var(--color-primary-light);
+
+  --button-color-secondary:            #0a0600;
+  --button-color-hover-secondary:      #0a0600;
+  --button-background-color-secondary:       rgba(217, 119, 6, 0.88);
+  --button-background-color-hover-secondary: var(--color-accent);
+
+  --button-background-color-light-rgb:       rgba(132, 204, 22, 0.14);
+  --button-color-light:                      var(--color-primary-semidark);
+  --button-color-hover-light:                #0a1200;
+  --button-background-color-hover-light:     var(--color-brand);
+
+  --button-background-color-light-rgb-secondary: rgba(217, 119, 6, 0.14);
+  --button-color-light-secondary:                rgba(170, 90, 0, 0.90);
+  --button-color-hover-light-secondary:          #0a0600;
+  --button-background-color-hover-light-secondary: rgba(217, 119, 6, 0.88);
+
+  /* Grid — prägnantes Strahlungsgrün auf hellem Sand */
+  --grid-head-color:             rgba(220, 215, 195, 0.98);
+  --grid-head-background:        rgba(10, 6, 2, 0.95);
+  --grid-head-background-active: rgba(132, 204, 22, 0.30);
+  --grid-head-hover:             rgba(217, 119, 6, 0.22);
+
+  --color-grid-hover:          rgba(132, 204, 22, 0.22);
+  --color-grid-selected-hover: rgba(217, 119, 6, 0.38);
+  --color-grid-selected:       rgba(132, 204, 22, 0.30);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(60, 104, 0, 0.92)   0%,
+      rgba(132, 204, 22, 0.90) 50%,
+      rgba(217, 119, 6, 0.85)  100%);
+  --progressbar-text-color: #0a1200;
+}
+
+
+/* =============================================================================
+   APOCALYPSE DARK (Mitternacht nach dem Ende)
+   ============================================================================= */
+:root[data-theme="dark"] {
+  /* Brand — Radioaktives Grün, volle Intensität */
+  --color-brand:          #a3e635;
+  --color-brand-rgb:      163, 230, 53;
+  --color-brand-contrast: #080f00;
+
+  /* Primary ladder */
+  --color-primary-darkest: #060c00;
+  --color-primary-dark:    #182800;
+  --color-primary-semidark:#2e5200;
+  --color-primary:         #57890a;
+  --color-primary-light:   #84cc16;
+  --color-primary-rgb:     87, 137, 10;
+  --color-primary-contrast:#060c00;
+
+  /* Accent — Rost-Feuer */
+  --color-accent:     #f59e0b;
+  --color-accent-rgb: 245, 158, 11;
+
+  /* Required tokens */
+  --color-background: #0a0a08;
+  --color-surface:    rgba(14, 13, 8, 0.90);
+  --color-border:     rgba(163, 58, 58, 0.20);
+  --color-text:       rgba(220, 215, 195, 0.94);
+  --color-text-muted: rgba(140, 120, 70, 0.75);
+
+  /* Inputs */
+  --input-background:        rgba(8, 8, 4, 0.85);
+  --input-color:             rgba(220, 215, 195, 0.94);
+  --input-border:            rgba(163, 58, 58, 0.26);
+  --input-label-color:       rgba(220, 215, 195, 0.90);
+  --input-placeholder-color: rgba(120, 100, 55, 0.65);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        rgba(220, 215, 195, 0.94);
+  --color-label-active:        rgba(220, 215, 195, 0.94);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(163, 230, 53, 0.22);
+  --scrollbar-color-hover:  rgba(163, 230, 53, 0.40);
+  --scrollbar-color-active: var(--color-brand);
+
+  /* Shadows — toxisches Glühen */
+  --color-box-shadow: rgba(0, 0, 0, 0.88);
+  --shadow-00: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.75);
+  --shadow-01: 0 0.125rem 0.500rem rgba(0, 0, 0, 0.85);
+  --shadow-02: 0 0.250rem 0.750rem rgba(0, 0, 0, 0.85);
+  --shadow-03: 0 0.375rem 1.375rem rgba(0, 0, 0, 0.88);
+  --shadow-neon:
+    0 0 0.40rem rgba(163, 230, 53, 0.55),
+    0 0 1.20rem rgba(163, 230, 53, 0.35),
+    0 0 2.50rem rgba(217, 119, 6, 0.22),
+    0 0 4.00rem rgba(163, 58, 58, 0.10);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(163, 58, 58, 0.20);
+  --nav-actions-color:        rgba(220, 215, 195, 0.92);
+  --nav-toggle-color:         rgba(220, 215, 195, 0.92);
+  --nav-current-module-color: rgba(220, 215, 195, 0.92);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(4, 4, 2, 0.98) 0%,
+      rgba(6, 6, 3, 0.90) 100%);
+  --color-mod-nav-theme-header-color: rgba(220, 215, 195, 0.94);
+
+  --color-mod-nav-theme: linear-gradient(180deg,
+      rgba(163, 230, 53, 0.14)  0%,
+      rgba(217, 119, 6, 0.10)   55%,
+      rgba(4, 4, 2, 0.97)       100%),
+    rgba(4, 4, 2, 0.98);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(4, 4, 2, 0.99);
+  --color-mod-nav-theme-contrast:  rgba(220, 215, 195, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(12, 11, 6, 0.85);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(12, 11, 6, 0.97)    0%,
+      rgba(163, 230, 53, 0.10)  35%,
+      rgba(217, 119, 6, 0.07)   68%,
+      rgba(6, 5, 2, 0.96)       100%);
+
+  /* Sidebar — Verkohltes Schwarz */
+  --sidebar-level-0-color: #060602;
+  --sidebar-level-1-color: #040401;
+
+  --color-sidebar-text:           rgba(205, 200, 175, 0.90);
+  --color-sidebar-selected:       rgba(163, 230, 53, 0.20);
+  --color-sidebar-selected-text:  rgba(220, 215, 195, 0.96);
+  --color-sidebar-env-text:       rgba(163, 230, 53, 0.90);
+
+  --color-sidebar-selected-child:       rgba(163, 230, 53, 0.14);
+  --color-sidebar-selected-subchild:    rgba(217, 119, 6, 0.20);
+
+  --color-sidebar-selected-child-text:    rgba(220, 215, 195, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(220, 215, 195, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(163, 230, 53, 0.12);
+
+  /* Buttons */
+  --button-color:                       #080f00;
+  --button-color-hover:                 #080f00;
+  --button-background-color:            var(--color-brand);
+  --button-background-color-hover:      var(--color-primary-light);
+
+  --button-color-secondary:             #0a0600;
+  --button-color-hover-secondary:       #0a0600;
+  --button-background-color-secondary:       rgba(245, 158, 11, 0.85);
+  --button-background-color-hover-secondary: var(--color-accent);
+
+  --button-background-color-light-rgb:       rgba(163, 230, 53, 0.16);
+  --button-color-light:                      var(--color-brand);
+  --button-color-hover-light:                #080f00;
+  --button-background-color-hover-light:     var(--color-brand);
+
+  --button-background-color-light-rgb-secondary: rgba(245, 158, 11, 0.14);
+  --button-color-light-secondary:                rgba(245, 158, 11, 0.92);
+  --button-color-hover-light-secondary:          #0a0600;
+  --button-background-color-hover-light-secondary: rgba(245, 158, 11, 0.85);
+
+  /* Grid */
+  --grid-head-color:             rgba(220, 215, 195, 0.95);
+  --grid-head-background:        var(--color-primary-darkest);
+  --grid-head-background-active: rgba(163, 230, 53, 0.22);
+  --grid-head-hover:             rgba(217, 119, 6, 0.16);
+
+  --color-grid-hover:          rgba(163, 230, 53, 0.12);
+  --color-grid-selected-hover: rgba(217, 119, 6, 0.20);
+  --color-grid-selected:       rgba(163, 230, 53, 0.14);
+
+  --grid-surface:  rgba(8, 7, 3, 0.90);
+  --pager-surface: rgba(8, 7, 3, 0.84);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(28, 40, 0, 0.92)    0%,
+      rgba(163, 230, 53, 0.90)  50%,
+      rgba(217, 119, 6, 0.85)  100%);
+  --progressbar-text-color: #080f00;
+}
+
+
+/* =============================================================================
+   BODY BACKGROUNDS
+   ============================================================================= */
+
+/* Light — Staubiger Ödland-Tag */
+body {
+  background-attachment: fixed;
+  background:
+    repeating-linear-gradient(35deg,
+      rgba(255, 255, 255, 0.004) 0px, rgba(0, 0, 0, 0.004) 2px,
+      transparent 4px, transparent 10px),
+    repeating-linear-gradient(0deg,
+      rgba(255, 255, 255, 0.02) 0px, transparent 1px, transparent 8px),
+    radial-gradient(900px 400px at 30% -5%, rgba(132, 204, 22, 0.12), transparent 70%),
+    radial-gradient(700px 500px at 90% 20%, rgba(217, 119, 6, 0.10), transparent 70%),
+    var(--color-background);
+}
+
+/* Dark — Mitternacht, Asche, toxische Strahlung, Feuer-Glut */
+html[data-theme="dark"] body,
+body[data-theme="dark"] {
+  background-attachment: fixed;
+  background:
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.82) 10%, var(--color-background) 80%),
+    radial-gradient(700px 900px at 15% -10%, rgba(163, 230, 53, 0.28), transparent 65%),
+    radial-gradient(800px 600px at 90% 100%, rgba(217, 119, 6, 0.38), transparent 60%),
+    radial-gradient(1200px 250px at 50% 100%, rgba(163, 58, 58, 0.30), transparent 65%),
+    radial-gradient(600px 400px at 50% 50%, rgba(40, 60, 0, 0.35), transparent 70%),
+    repeating-linear-gradient(35deg,
+      rgba(163, 230, 53, 0.015) 0px, transparent 2px, transparent 8px),
+    #0a0a08;
+}

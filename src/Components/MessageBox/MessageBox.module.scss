@@ -1,0 +1,222 @@
+/* MessageBox.module.scss */
+@use '../../Styles/abstracts' as *;
+
+// Message box
+
+.error,
+.warning,
+.message,
+.success {
+  @include base-text;
+  scroll-margin-top: var(--module-header-height);
+  border-radius: var(--border-radius);
+  z-index: 0;
+  display: block;
+  background: var(--color-white);
+  box-shadow: 0 0 0 rem(1px) var(--color-gray-300), var(--shadow-00);
+  margin-bottom: calc(var(--spacing) * 2);
+  padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 3);
+  padding-left: calc(var(--spacing) * 7.5);
+  position: relative;
+  transform-origin: top left;
+
+  min-height: calc(var(--spacing) * 6);
+
+  &.rowReadonly {
+    display: block;
+
+    label {
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  // REMOVE old icon-font pseudo element
+  &::before {
+    content: none;
+    display: none;
+  }
+
+  // keep the left colored stripe
+  &::after {
+    border-radius: var(--border-radius);
+
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: calc(var(--spacing) * 2);
+    text-align: center;
+    height: 100%;
+    width: calc(var(--spacing) * 6);
+    box-shadow: 0 0 0 rem(1px) var(--color-gray-300);
+    z-index: 2;
+  }
+
+  &.clickable {
+    h2,
+    h3,
+    h4 {
+      &:hover {
+        &::before {
+          background: var(--color-gray-200);
+        }
+      }
+    }
+  }
+
+  &.message {
+    &::after {
+      background: var(--color-primary-light);
+    }
+  }
+
+  &.success {
+    &::after {
+      background: var(--color-positive-light);
+    }
+  }
+
+  &.warning {
+    &::after {
+      background: var(--color-warning);
+    }
+  }
+
+  &.error {
+    &::after {
+      background: var(--color-negative);
+    }
+  }
+
+  h2,
+  h3,
+  h4,
+  & > .formLbl label {
+    @include sub-subheading;
+
+    transform: none;
+    margin-bottom: calc(var(--spacing) * 3);
+    font-weight: 400;
+    z-index: 1;
+    position: relative;
+    width: 100%;
+
+    &::before {
+      content: '';
+      display: block;
+      background: var(--color-gray-200);
+      box-shadow: 0 0 0 rem(1px) var(--color-gray-300);
+      position: absolute;
+      top: calc(var(--spacing) * -1.5);
+      left: calc(var(--spacing) * -2);
+      z-index: -1;
+      width: calc(100% + calc(var(--spacing) * 5));
+      height: calc(100% + var(--spacing) * 3);
+
+      border-top-right-radius: var(--border-radius);
+    }
+  }
+
+  & > .formLbl {
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+
+  & > .formCtrl {
+    @include base-text;
+
+    transform: none;
+
+    a {
+      word-break: break-all;
+    }
+  }
+
+  a {
+    color: var(--color-primary-base);
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: rem(2px) solid var(--button-background-color-hover);
+      outline-offset: rem(2px);
+      border-radius: var(--border-radius);
+    }
+  }
+
+  p {
+    transform: none;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// NEW: icon container rendered via JSX (<span className={styles.typeIcon}>...)
+.typeIcon {
+  position: absolute;
+  left: calc(var(--spacing) * 6 / 2); // centered on the stripe
+  top: calc(var(--spacing) * 1.2);
+  transform: translateX(-50%);
+  z-index: 4;
+
+  width: rem(30px);
+  height: rem(30px);
+
+  display: grid;
+  place-items: center;
+
+  font-size: rem(24px);
+  line-height: 1;
+
+  // ensure the svg behaves nicely
+  svg {
+    display: block;
+    width: 1em;
+    height: 1em;
+  }
+}
+
+.message-hiding {
+  animation: notificationMoveOut 0.3s ease-in forwards;
+}
+
+@keyframes notificationMoveOut {
+  0% {
+    opacity: 1;
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
+    max-height: 100px;
+  }
+
+  100% {
+    opacity: 0;
+    transform-origin: 0% 0%;
+    transform: scaleY(0.8);
+    max-height: 0;
+    overflow: hidden;
+  }
+}
+
+.close {
+  position: absolute;
+  text-align: center;
+  padding: calc(var(--spacing) * 0.5) var(--spacing);
+  top: 0;
+  right: 0;
+  z-index: 5;
+  cursor: pointer;
+  color: var(--color-text);
+
+  &:hover {
+    color: var(--color-primary-base);
+  }
+}

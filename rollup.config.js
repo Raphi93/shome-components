@@ -1,48 +1,60 @@
-const typescript = require("@rollup/plugin-typescript");
-const dts = require("rollup-plugin-dts").default;
-const postcss = require("rollup-plugin-postcss");
-const pkg = require("./package.json");
+import typescript from '@rollup/plugin-typescript';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import dts from 'rollup-plugin-dts';
+import postcss from 'rollup-plugin-postcss';
+import preserveDirectives from 'rollup-preserve-directives';
 
-const external = [
-  "react",
-  "react/jsx-runtime",
-  "react-dom",
-  "@fortawesome/react-fontawesome",
-  "@fortawesome/free-solid-svg-icons",
-  "@fortawesome/free-regular-svg-icons",
-  "@fortawesome/free-brands-svg-icons",
-  "@floating-ui/react",
-  "clsx",
-  "classnames"
+// Only these need to be singletons / share context with the host app.
+// Everything else gets bundled into the dist so consumers don't need to install it.
+const EXTERNAL = [
+  'react',
+  'react-dom',
+  'react/jsx-runtime',
+  'react-router-dom',
+  'react-i18next',
+  'i18next',
+  'next',
 ];
 
-module.exports = [
+const external = (id) =>
+  EXTERNAL.some((p) => id === p || id.startsWith(p + '/'));
+
+// Silence Dart Sass legacy-js-api deprecation warning emitted by rollup-plugin-postcss
+const sassOptions = {
+  extensions: ['.css', '.scss'],
+  use: [['sass', { silenceDeprecations: ['legacy-js-api'] }]],
+};
+
+const jsPlugins = [
+  preserveDirectives(),
+  nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'], browser: true }),
+  commonjs(),
+  typescript({
+    tsconfig: './tsconfig.json',
+    declaration: false,
+    declarationMap: false,
+    exclude: ['src/stories/**/*', '**/*.stories.*'],
+  }),
+  postcss(sassOptions),
+];
+
+export default [
   // JS build
   {
-    input: "src/index.ts",
+    input: 'src/index.ts',
     output: [
-      { file: pkg.main, format: "cjs", sourcemap: false },
-      { file: pkg.module, format: "esm", sourcemap: false }
+      { file: 'dist/cjs/index.js', format: 'cjs', sourcemap: false },
+      { file: 'dist/esm/index.js', format: 'esm', sourcemap: false },
     ],
     external,
-    plugins: [
-      typescript({
-        tsconfig: "./tsconfig.json",
-        declaration: false,
-        declarationMap: false,
-        exclude: ["src/stories/**/*", "**/*.stories.*"]
-      }),
-      postcss({
-        extensions: [".css", ".scss"]
-        // optional: extract: 'styles.css',
-      })
-    ]
+    plugins: jsPlugins,
   },
   // DTS build
   {
-    input: "src/index.ts",
-    output: [{ file: "dist/index.d.ts", format: "esm" }],
-    external: [...external, /\.css$/, /\.scss$/],
-    plugins: [dts()]
-  }
+    input: 'src/index.ts',
+    output: [{ file: 'dist/index.d.ts', format: 'esm' }],
+    external: (id) => external(id) || /\.(css|scss)$/.test(id),
+    plugins: [dts()],
+  },
 ];

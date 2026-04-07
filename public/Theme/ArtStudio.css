@@ -1,0 +1,328 @@
+/* =============================================================================
+   ARTSTUDIO THEME
+   Light: Warmes Weiß, lebendiges Korall/Magenta — Kreatives Studio
+   Dark:  Tiefes Pflaume, leuchtendes Korall — Nacht-Atelier
+   ============================================================================= */
+
+/* ─── SHARED ─────────────────────────────────────────────────────────────────── */
+:root {
+  --color-accent:     #ff4f8b;
+  --color-accent-rgb: 255, 79, 139;
+
+  --dashboard-border-size:    1px;
+  --dashboard-border-opacity: 1;
+  --dashboard-border-gradient: rgba(255, 79, 139, 0.25);
+  --dashboard-special-hover:  none;
+  --dashboard-border-filter:  none;
+}
+
+
+/* =============================================================================
+   ARTSTUDIO LIGHT
+   ============================================================================= */
+:root {
+  --border-radius-small: 6px;
+  --border-radius:       12px;
+  --border-radius-large: 20px;
+
+  /* Brand — Vivid Coral-Magenta */
+  --color-brand:          #ff4f8b;
+  --color-brand-rgb:      255, 79, 139;
+  --color-brand-contrast: #ffffff;
+
+  /* Primary ladder */
+  --color-primary-darkest: #7a0035;
+  --color-primary-dark:    #b8005a;
+  --color-primary-semidark:#e0006e;
+  --color-primary:         #ff4f8b;
+  --color-primary-light:   #ff9ec4;
+  --color-primary-base:    #e0006e;
+  --color-primary-rgb:     255, 79, 139;
+  --color-primary-contrast:#ffffff;
+
+  /* Required tokens */
+  --color-background: #fff8fb;
+  --color-surface:    #ffffff;
+  --color-border:     #f0d8e6;
+  --color-text:       #1e0a14;
+  --color-text-muted: #7a4864;
+
+  /* Inputs */
+  --input-background:        #ffffff;
+  --input-color:             #1e0a14;
+  --input-border:            #e8c0d4;
+  --input-label-color:       #3a1828;
+  --input-placeholder-color: #b08098;
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        var(--color-primary-semidark);
+  --color-label-active:        var(--color-press-effect);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(255, 79, 139, 0.28);
+  --scrollbar-color-hover:  rgba(255, 79, 139, 0.50);
+  --scrollbar-color-active: var(--color-primary-dark);
+
+  /* Shadows — weich, kreativ */
+  --color-box-shadow: rgba(120, 0, 60, 0.10);
+  --shadow-00: 0 0.125rem 0.375rem  0 rgba(120, 0, 60, 0.08);
+  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(120, 0, 60, 0.10);
+  --shadow-02: 0 0.25rem  0.75rem  0.125rem rgba(120, 0, 60, 0.10);
+  --shadow-03: 0 0.375rem 1.5rem   0.25rem rgba(120, 0, 60, 0.12);
+  --shadow-neon:
+    0 0 0 1px rgba(255, 79, 139, 0.22),
+    0 0.125rem 0.75rem rgba(255, 79, 139, 0.16);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           #f0d8e6;
+  --nav-actions-color:        #fceef5;
+  --nav-toggle-color:         #fceef5;
+  --nav-current-module-color: #fceef5;
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      #3a0020 0%,
+      #5a0030 100%);
+  --color-mod-nav-theme-header-color: #ffc0dc;
+
+  --color-mod-nav-theme: linear-gradient(180deg,
+      rgba(120, 0, 60, 0.95) 0%,
+      rgba(60, 0, 30, 0.98)  100%);
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: #3a0020;
+  --color-mod-nav-theme-contrast:  #ffc0dc;
+
+  /* Cards */
+  --color-card-background: #ffffff;
+  --color-card-dashboard-background: linear-gradient(180deg,
+      #ffffff    0%,
+      #fff0f6   40%,
+      #ffe0ef  100%);
+
+  /* Sidebar */
+  --sidebar-level-0-color: #300018;
+  --sidebar-level-1-color: #200010;
+
+  --color-sidebar-text:              #ffc0dc;
+  --color-sidebar-selected:          rgba(255, 79, 139, 0.22);
+  --color-sidebar-selected-text:     #ffffff;
+  --color-sidebar-env-text:          rgba(255, 158, 196, 0.95);
+
+  --color-sidebar-selected-child:       rgba(255, 79, 139, 0.16);
+  --color-sidebar-selected-subchild:    rgba(255, 79, 139, 0.26);
+
+  --color-sidebar-selected-child-text:    #ffffff;
+  --color-sidebar-selected-subchild-text: #ffffff;
+
+  --sidebar-selected-submenu-hover: rgba(255, 79, 139, 0.14);
+
+  /* Buttons */
+  --button-color:                      #ffffff;
+  --button-color-hover:                #ffffff;
+  --button-background-color:           var(--color-primary-dark);
+  --button-background-color-hover:     var(--color-brand);
+
+  --button-color-secondary:            #ffffff;
+  --button-color-hover-secondary:      #ffffff;
+  --button-background-color-secondary:       var(--color-brand);
+  --button-background-color-hover-secondary: var(--color-primary-dark);
+
+  --button-background-color-light-rgb:       rgba(255, 79, 139, 0.12);
+  --button-color-light:                      var(--color-primary-dark);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-dark);
+
+  --button-background-color-light-rgb-secondary: rgba(255, 79, 139, 0.12);
+  --button-color-light-secondary:                var(--color-brand);
+  --button-color-hover-light-secondary:          #ffffff;
+  --button-background-color-hover-light-secondary: var(--color-brand);
+
+  /* Grid */
+  --grid-head-color:             #ffffff;
+  --grid-head-background:        var(--color-primary-darkest);
+  --grid-head-background-active: var(--color-primary-semidark);
+  --grid-head-hover:             var(--color-primary-dark);
+
+  --color-grid-hover:          rgba(255, 79, 139, 0.05);
+  --color-grid-selected-hover: rgba(255, 79, 139, 0.12);
+  --color-grid-selected:       rgba(255, 79, 139, 0.07);
+
+  --progressbar-color: linear-gradient(90deg,
+      #b8005a 0%,
+      #e0006e 50%,
+      #ff4f8b 100%);
+  --progressbar-text-color: var(--color-text);
+}
+
+
+/* =============================================================================
+   ARTSTUDIO DARK
+   ============================================================================= */
+:root[data-theme="dark"] {
+  /* Brand — leuchtendes Korall */
+  --color-brand:          #ff6ea4;
+  --color-brand-rgb:      255, 110, 164;
+  --color-brand-contrast: #1a0010;
+
+  /* Primary ladder */
+  --color-primary-darkest: #0e0008;
+  --color-primary-dark:    #200010;
+  --color-primary-semidark:#6e0038;
+  --color-primary:         #cc0058;
+  --color-primary-light:   #ff6ea4;
+  --color-primary-rgb:     204, 0, 88;
+  --color-primary-contrast:#0e0008;
+
+  /* Accent */
+  --color-accent:     #ff6ea4;
+  --color-accent-rgb: 255, 110, 164;
+
+  /* Required tokens */
+  --color-background: #14080e;
+  --color-surface:    rgba(24, 10, 18, 0.92);
+  --color-border:     rgba(255, 110, 164, 0.14);
+  --color-text:       rgba(255, 230, 242, 0.94);
+  --color-text-muted: rgba(200, 140, 175, 0.72);
+
+  /* Inputs */
+  --input-background:        rgba(14, 6, 10, 0.85);
+  --input-color:             rgba(255, 230, 242, 0.94);
+  --input-border:            rgba(255, 110, 164, 0.22);
+  --input-label-color:       rgba(255, 230, 242, 0.90);
+  --input-placeholder-color: rgba(200, 140, 175, 0.55);
+
+  /* Focus / press */
+  --input-focus-outline-color: var(--color-brand);
+  --color-press-effect:        rgba(255, 230, 242, 0.94);
+  --color-label-active:        rgba(255, 230, 242, 0.94);
+
+  /* Scrollbar */
+  --scrollbar-color:        rgba(255, 110, 164, 0.22);
+  --scrollbar-color-hover:  rgba(255, 110, 164, 0.40);
+  --scrollbar-color-active: var(--color-brand);
+
+  /* Shadows */
+  --color-box-shadow: rgba(0, 0, 0, 0.60);
+  --shadow-00: 0 0.125rem 0.375rem  0 rgba(0, 0, 0, 0.50);
+  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(0, 0, 0, 0.60);
+  --shadow-02: 0 0.25rem  0.75rem  0.125rem rgba(0, 0, 0, 0.60);
+  --shadow-03: 0 0.375rem 1.5rem   0.25rem rgba(0, 0, 0, 0.65);
+  --shadow-neon:
+    0 0 0 1px rgba(255, 110, 164, 0.18),
+    0 0 0.75rem rgba(255, 110, 164, 0.22),
+    0 0.125rem 1.25rem rgba(255, 110, 164, 0.12);
+
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
+  /* Navigation */
+  --nav-line-color:           rgba(255, 110, 164, 0.14);
+  --nav-actions-color:        rgba(255, 230, 242, 0.92);
+  --nav-toggle-color:         rgba(255, 230, 242, 0.92);
+  --nav-current-module-color: rgba(255, 230, 242, 0.92);
+
+  --color-mod-nav-theme-header: linear-gradient(180deg,
+      rgba(8, 2, 6, 0.99)  0%,
+      rgba(14, 4, 10, 0.96) 100%);
+  --color-mod-nav-theme-header-color: rgba(255, 230, 242, 0.95);
+
+  --color-mod-nav-theme: linear-gradient(180deg,
+      rgba(255, 110, 164, 0.10) 0%,
+      rgba(110, 0, 56, 0.16)   60%,
+      rgba(14, 4, 10, 0.96)    100%),
+    rgba(10, 2, 8, 0.96);
+
+  --color-mod-nav-theme-variant-1: var(--color-brand);
+  --color-mod-nav-theme-variant-2: rgba(10, 2, 8, 0.97);
+  --color-mod-nav-theme-contrast:  rgba(255, 230, 242, 0.95);
+
+  /* Cards */
+  --color-card-background: rgba(20, 8, 16, 0.84);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      rgba(20, 8, 16, 0.96) 0%,
+      rgba(255, 110, 164, 0.06) 50%,
+      rgba(110, 0, 56, 0.05) 100%);
+
+  /* Sidebar */
+  --sidebar-level-0-color: #0e0408;
+  --sidebar-level-1-color: #080204;
+
+  --color-sidebar-text:           rgba(255, 200, 230, 0.92);
+  --color-sidebar-selected:       rgba(255, 110, 164, 0.18);
+  --color-sidebar-selected-text:  rgba(255, 230, 242, 0.96);
+  --color-sidebar-env-text:       rgba(255, 110, 164, 0.90);
+
+  --color-sidebar-selected-child:       rgba(255, 110, 164, 0.12);
+  --color-sidebar-selected-subchild:    rgba(255, 110, 164, 0.20);
+
+  --color-sidebar-selected-child-text:    rgba(255, 230, 242, 0.96);
+  --color-sidebar-selected-subchild-text: rgba(255, 230, 242, 0.96);
+
+  --sidebar-selected-submenu-hover: rgba(255, 110, 164, 0.10);
+
+  /* Buttons */
+  --button-color:                       #ffffff;
+  --button-color-hover:                 #ffffff;
+  --button-background-color:            var(--color-primary-semidark);
+  --button-background-color-hover:      var(--color-brand);
+
+  --button-color-secondary:             #ffffff;
+  --button-color-hover-secondary:       #ffffff;
+  --button-background-color-secondary:       rgba(255, 110, 164, 0.18);
+  --button-background-color-hover-secondary: var(--color-brand);
+
+  --button-background-color-light-rgb:       rgba(255, 110, 164, 0.16);
+  --button-color-light:                      var(--color-brand);
+  --button-color-hover-light:                #ffffff;
+  --button-background-color-hover-light:     var(--color-primary-semidark);
+
+  --button-background-color-light-rgb-secondary: rgba(255, 110, 164, 0.14);
+  --button-color-light-secondary:                var(--color-brand);
+  --button-color-hover-light-secondary:          #ffffff;
+  --button-background-color-hover-light-secondary: var(--color-brand);
+
+  /* Grid */
+  --grid-head-color:             rgba(255, 230, 242, 0.95);
+  --grid-head-background:        var(--color-primary-darkest);
+  --grid-head-background-active: rgba(255, 110, 164, 0.20);
+  --grid-head-hover:             rgba(255, 110, 164, 0.12);
+
+  --color-grid-hover:          rgba(255, 110, 164, 0.05);
+  --color-grid-selected-hover: rgba(255, 110, 164, 0.10);
+  --color-grid-selected:       rgba(255, 110, 164, 0.07);
+
+  --grid-surface:  rgba(14, 4, 10, 0.90);
+  --pager-surface: rgba(14, 4, 10, 0.84);
+
+  --progressbar-color: linear-gradient(90deg,
+      rgba(110, 0, 56, 0.90)   0%,
+      rgba(204, 0, 88, 0.90)   50%,
+      rgba(255, 110, 164, 0.85) 100%);
+  --progressbar-text-color: rgba(255, 230, 242, 0.92);
+}
+
+
+/* =============================================================================
+   BODY BACKGROUNDS
+   ============================================================================= */
+
+body {
+  background: var(--color-background);
+}
+
+html[data-theme="dark"] body,
+body[data-theme="dark"] {
+  background-attachment: fixed;
+  background:
+    linear-gradient(180deg,
+      rgba(18, 6, 14, 0.92)  0%,
+      var(--color-background) 60%),
+    radial-gradient(1000px 500px at 30% 0%, rgba(255, 110, 164, 0.10), transparent 70%),
+    radial-gradient(800px 400px at 80% 100%, rgba(150, 0, 200, 0.07), transparent 70%),
+    #14080e;
+}

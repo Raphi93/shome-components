@@ -1,0 +1,455 @@
+// Imports
+@use "../../Styles/abstracts" as *;
+
+// Partials
+@use "./Datetime";
+@use "./Checkbox";
+@use "./Select";
+
+// Variables
+:root {
+  --input-focus-outline-color: var(--color-primary-light);
+}
+
+/* =============================================================================
+   Base control styles (keeps all existing class names)
+   - less duplication
+   - colors via --input-background / --input-color
+   ============================================================================= */
+
+@mixin controlBase {
+  @include base-text;
+
+  border-radius: var(--border-radius);
+  border: rem(1px) solid var(--input-border, var(--color-gray-400));
+  appearance: none;
+
+  transition:
+    border-color var(--transition-duration-base),
+    box-shadow var(--transition-duration-base);
+
+  padding: var(--spacing) calc(var(--spacing) * 1.5);
+  flex-grow: 1;
+  vertical-align: top;
+
+  background-color: var(--input-background, var(--color-white));
+  color: var(--input-color, var(--color-gray-900));
+
+  &::placeholder {
+    color: var(--input-placeholder-color, var(--color-text-light));
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary-dark);
+    box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    color: var(--color-text-light);
+    background: var(--color-gray-200);
+  }
+}
+
+/* =============================================================================
+   Autofill override (Chrome/WebKit)
+   - forces YOUR theme variables instead of browser autofill colors
+   ============================================================================= */
+
+@mixin autofillFix {
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-text-fill-color: var(
+      --input-color,
+      var(--color-gray-900)
+    ) !important;
+    caret-color: var(--input-color, var(--color-gray-900)) !important;
+
+    /* overwrite Chrome's internal autofill background */
+    -webkit-box-shadow: 0 0 0 1000px var(--input-background, var(--color-white))
+      inset !important;
+    box-shadow: 0 0 0 1000px var(--input-background, var(--color-white)) inset !important;
+
+    border-color: var(--input-border, var(--color-gray-400)) !important;
+
+    /* keeps it stable (prevents color flash) */
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+/* =============================================================================
+   Input (text, number, email, ...)
+   ============================================================================= */
+
+@mixin input {
+  @include controlBase;
+  @include autofillFix;
+
+  height: calc(var(--spacing) * 5);
+
+  &.percent {
+    padding-right: 25px;
+  }
+}
+
+.input {
+  @include input;
+  width: 100%;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* =============================================================================
+   Percent helper
+   ============================================================================= */
+
+.inputNumberWrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.percentText {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5px;
+  font-weight: 600;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+/* =============================================================================
+   Field wrapper / label / content / description
+   ============================================================================= */
+
+.field-wrapper {
+  width: 100%;
+  border: none;
+  margin-bottom: var(--spacing);
+}
+
+.field-label {
+  margin-bottom: var(--spacing);
+  display: flex;
+
+  label {
+    @include base-text($offset: true);
+    display: block;
+    color: var(--input-label-color, var(--color-gray-800));
+  }
+
+  .required {
+    color: var(--color-negative);
+    font-weight: 600;
+    margin-left: calc(var(--spacing) * 0.5);
+  }
+
+  .dirty {
+    margin-left: calc(var(--spacing) * 0.5);
+  }
+
+  .dirtyTrigger {
+    cursor: pointer;
+  }
+
+  .dirtyIcon {
+    height: 20px;
+  }
+}
+
+.field-content {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+
+  & > a,
+  & > button {
+    margin-left: var(--spacing);
+    min-width: 0;
+  }
+}
+
+.field-description {
+  color: var(--color-text-light);
+  font-style: italic;
+  width: 100%;
+  transform: translateY(var(--baseline-offset-base));
+}
+
+/* =============================================================================
+   Read-only variants
+   ============================================================================= */
+
+.fieldset-read-only {
+  .read-only {
+    display: flex;
+
+    label {
+      &::after {
+        content: "\003A";
+      }
+    }
+  }
+
+  .field-content {
+    word-break: break-all;
+  }
+
+  .field-description {
+    color: var(--color-text-light);
+    font-style: italic;
+    width: 100%;
+    transform: translateY(var(--baseline-offset-base));
+  }
+}
+
+.read-only {
+  .field-label {
+    margin-right: calc(var(--spacing) * 1);
+    margin-bottom: var(--spacing);
+    max-width: 100%;
+    flex-shrink: 0;
+  }
+
+  .field-content {
+    @include large-text($offset: true);
+    width: auto;
+    margin-bottom: var(--spacing);
+    flex-grow: 1;
+  }
+
+  a {
+    margin-left: 0;
+  }
+
+  a:focus {
+    outline: rem(2px) solid var(--input-focus-outline-color);
+    outline-offset: rem(2px);
+    border-radius: var(--border-radius);
+  }
+}
+
+/* =============================================================================
+   Border label input wrapper (floating label)
+   - same markup, less duplication
+   ============================================================================= */
+
+.borderLabelInputWrapper {
+  position: relative;
+  width: 100%;
+  margin: 1rem 0 0.5rem 0;
+
+  &:focus-within .staticBorderLabel {
+    color: var(--color-label-active);
+  }
+
+  .borderLabel {
+    @include base-text;
+    position: absolute;
+    z-index: 2;
+
+    color: var(--input-label-color, var(--color-text-light));
+    opacity: 0.6;
+
+    transform: translateY(-50%);
+    top: 50%;
+    left: var(--spacing);
+    padding: 0 5px;
+
+    pointer-events: none;
+    transition: all 200ms ease-in-out;
+
+    // kein normales background mehr hier
+    background: transparent;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+
+      background: var(--input-background, var(--color-white));
+      border-radius: 4px; // optional
+    }
+  }
+
+  .textAreaBorderLabel {
+    top: rem(20px);
+  }
+
+  .disabledBorderLabel {
+    background-color: var(--color-gray-200);
+  }
+
+  .staticBorderLabel {
+    z-index: 1;
+    position: absolute;
+
+    background-color: var(--input-background, var(--color-white));
+    color: var(--input-color, var(--color-gray-900));
+
+    top: -6px;
+    padding: 0 5px;
+    left: var(--spacing);
+    pointer-events: none;
+    transition: all 200ms ease-in-out;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .borderLabelInput {
+    @include input;
+    width: 100%;
+
+    &.active + .borderLabel {
+      line-height: 12px;
+      opacity: 1;
+      top: 0;
+      font-size: 12px;
+      padding: 0 5px;
+      color: var(--input-border, var(--color-gray-400));
+    }
+
+    &:focus + .borderLabel {
+      line-height: 12px;
+      opacity: 1;
+      top: 0;
+      font-size: 12px;
+      padding: 0 5px;
+      color: var(--color-label-active);
+    }
+
+    &:focus + .staticBorderLabel {
+      color: var(--color-label-active);
+    }
+  }
+
+  .required {
+    color: var(--color-negative);
+    font-weight: 600;
+    margin-left: calc(var(--spacing) * 0.5);
+  }
+}
+
+/* =============================================================================
+   Children wrapper + dirty icon helpers
+   ============================================================================= */
+
+.childrenWrapper {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+
+  .children {
+    margin-top: calc($spacing * 2);
+    margin-left: $spacing;
+  }
+}
+
+.dirtyInputIcon {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  right: rem(8px);
+  width: 26px;
+  height: 26px;
+  color: var(--input-color);
+
+  .dirtyTrigger {
+    cursor: pointer;
+  }
+}
+
+.dirtyIconWithOtherIcon {
+  right: 28px;
+}
+
+// Double-class selector (0,2,0) beats any single-class padding rule
+.paddingForIcon.paddingForIcon {
+  padding-right: 37px;
+}
+
+.paddingForTwoIcons.paddingForTwoIcons {
+  padding-right: 55px;
+}
+
+/* =============================================================================
+   Textarea
+   ============================================================================= */
+
+.textarea {
+  @include controlBase;
+  @include autofillFix;
+
+  height: calc(var(--spacing) * 26);
+  resize: vertical;
+
+  &.textarea-autoheight {
+    height: auto;
+    overflow-y: hidden;
+    resize: none;
+  }
+}
+
+/* =============================================================================
+   Responsive
+   ============================================================================= */
+
+@include phoneP() {
+  .read-only-view {
+    .read-only {
+      flex-wrap: wrap;
+
+      .field-label {
+        width: 100%;
+
+        label {
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* =============================================================================
+   Password helpers
+   ============================================================================= */
+
+.passwordInputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.passwordInput {
+  width: 100%;
+  padding-right: 35px;
+}
+
+.passwordInputBtn {
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  cursor: pointer;
+  color: var(--input-color);
+}
+
+/* =============================================================================
+   Datepicker overlay
+   ============================================================================= */
+
+// body prefix (0,1,1) beats react-datepicker's own .react-datepicker-popper (0,1,0)
+body :global(.react-datepicker-popper) {
+  z-index: 4;
+}

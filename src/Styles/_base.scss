@@ -1,0 +1,45 @@
+@use './abstracts' as *;
+
+// Box sizing
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+}
+
+//To fight some vendors default styling
+*::placeholder {
+  opacity: 1;
+  color: var(--input-placeholder-color, var(--color-text-muted));
+}
+
+button {
+  appearance: none;
+  border: none;
+  background: none;
+
+  &:active {
+    outline: none;
+  }
+}
+
+// Img
+img {
+  max-width: 100%;
+}
+
+// Inputs inheritance
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}

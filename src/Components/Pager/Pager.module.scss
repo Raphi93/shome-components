@@ -1,0 +1,191 @@
+@use '../../styles/abstracts' as *;
+
+:root {
+  /* Pager tokens (theme override friendly) */
+  --pager-surface: var(--color-gray-200);
+  --pager-border: var(--color-gray-300);
+  --pager-text: var(--color-gray-900);
+  --pager-muted-text: var(--color-gray-700);
+  --pager-current-surface: var(--color-primary-dark);
+  --pager-current-text: var(--color-text-inverted);
+
+  --pager-select-surface: var(--input-background, var(--color-white));
+  --pager-select-text: var(--input-color, var(--color-gray-900));
+  --pager-select-border: var(--input-border, var(--color-gray-300));
+  --pager-select-chevron: var(--input-placeholder-color, #6c7a86);
+}
+
+// Pagination
+.pagination {
+  display: flex;
+  min-height: calc(var(--spacing) * 5);
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  box-shadow: inset 0 0 0 rem(1px) var(--color-gray-300);
+  background-color: var(--pager-surface);
+  border-radius: var(--border-radius);
+  padding: 0 calc(var(--spacing) * 0.5);
+
+  margin-bottom: calc(var(--spacing) * 2);
+}
+
+// TODO:
+// .credit-overview-transactions + .pagination,
+// .credit-overview + .pagination {
+//   max-width: $credits-overview-widht;
+//   border-top-left-radius: 0;
+//   border-top-right-radius: 0;
+//   transform: translateY(rem(-1px));
+// }
+
+//.grid-responsive +.pagination {
+.connected {
+  box-shadow: 0 0 0 rem(1px) var(--color-gray-300);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  max-width: 100%;
+}
+
+
+.current,
+.current:hover {
+  cursor: default;
+  background-color: var(--color-primary-dark);
+  color: var(--color-text-inverted);
+  box-shadow: none;
+}
+
+
+// Buttons
+// Buttons
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: calc(var(--spacing) * 2.5);
+  padding-top: calc(var(--spacing) * 0.5);
+
+  &>* {
+    margin-bottom: calc(var(--spacing) * 0.5);
+  }
+
+  button {
+    &:not(:last-child) {
+      margin-right: calc(var(--spacing) * 0.5);
+    }
+  }
+
+  .first-page-button,
+  .previous-page-button,
+  .next-page-button,
+  .last-page-button {
+
+    &.disabled,
+    &:disabled {
+      background-color: var(--button-color, #a9b3c0);
+      color: var(--color-gray-300, #ffffff);
+      border: 1px solid var(--color-gray-300);
+      cursor: default;
+    }
+  }
+
+  .page-number-button {
+
+    &.disabled,
+    &:disabled {
+      background-color: var(--button-background-color, #a9b3c0);
+      color: var(--button-color, #ffffff);
+      box-shadow: none;
+      cursor: default;
+    }
+  }
+
+  :global .icon {
+    font-size: var(--font-size-small);
+    line-height: calc(var(--spacing) * 3);
+  }
+}
+
+.current,
+.current:hover {
+  cursor: default;
+  background-color: var(--pager-current-surface);
+  color: var(--pager-current-text);
+  box-shadow: none;
+}
+
+.ellipsis {
+  width: calc(var(--spacing) * 3);
+  height: calc(var(--spacing) * 4);
+  text-align: center;
+  margin-right: calc(var(--spacing) * 0.5);
+  line-height: calc(var(--spacing) * 4);
+}
+
+// Page size
+.page-size {
+  align-self: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+  padding: calc(var(--spacing) * 0.5) 0;
+  padding-left: calc(var(--spacing) * 0.5);
+  margin-right: var(--spacing);
+
+  &::before {
+    content: '';
+    display: block;
+
+    width: 0;
+    height: 0;
+    border-width: calc(var(--spacing) * 0.5) calc(var(--spacing) * 0.5) 0;
+    border-style: solid;
+    border-color: var(--pager-select-chevron) transparent transparent;
+    pointer-events: none;
+    position: absolute;
+    top: rem(19px);
+    right: rem(8px);
+  }
+
+  label {
+    margin-right: var(--spacing);
+  }
+
+  select {
+    border: rem(1px) solid var(--color-gray-300);
+    border-radius: var(--border-radius);
+    color: var(--input-color, var(--color-black));
+    background-color: var(--input-background, var(--color-white));
+    line-height: calc(var(--spacing) * 3.5);
+    height: calc(var(--spacing) * 4);
+    min-width: calc(var(--spacing) * 7.5);
+    padding-left: var(--spacing);
+    padding-right: calc(var(--spacing) * 2);
+    appearance: none;
+
+    &:active,
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary-dark);
+      box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
+    }
+  }
+}
+
+// Info
+.info {
+  margin-left: auto;
+  align-self: center;
+  padding: calc(var(--spacing) * 0.5) 0;
+  padding-right: calc(var(--spacing) * 0.5);
+  color: var(--pager-text);
+}
+
+// Phone portrait and down - up to 575px
+@include phoneP() {
+  // Buttons
+  .buttons {
+    width: 100%;
+    margin-right: 0;
+  }
+}
