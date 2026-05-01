@@ -1,6 +1,6 @@
 {
   "name": "@raphi93/shome-components",
-  "version": "1.4.15",
+  "version": "1.4.22",
   "description": "Small React + TypeScript component library with CSS variable theming.",
   "author": "RHUG",
   "license": "MIT",
@@ -23,7 +23,8 @@
       "require": "./dist/cjs/index.js",
       "default": "./dist/esm/index.js"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./dist/styles.css",
+    "./index.css": "./dist/esm/index.css"
   },
   "sideEffects": [
     "**/*.css",
@@ -50,16 +51,26 @@
     "css-variables"
   ],
   "peerDependencies": {
-    "react":            ">=18",
-    "react-dom":        ">=18",
-    "react-router-dom": ">=6.0.0",
-    "react-i18next":    ">=16.0.0",
-    "i18next":          ">=25.0.0"
+    "i18next": ">=25.0.0",
+    "next": ">=14",
+    "react": ">=18",
+    "react-dom": ">=18",
+    "react-i18next": ">=16.0.0",
+    "react-router-dom": ">=6.0.0"
   },
   "peerDependenciesMeta": {
-    "react-router-dom": { "optional": true },
-    "react-i18next":    { "optional": true },
-    "i18next":          { "optional": true }
+    "next": {
+      "optional": true
+    },
+    "react-router-dom": {
+      "optional": true
+    },
+    "react-i18next": {
+      "optional": true
+    },
+    "i18next": {
+      "optional": true
+    }
   },
   "dependencies": {
     "classnames": "^2.5.1",
@@ -118,6 +129,7 @@
     "lowlight": "^3.3.0",
     "next": "^16.2.2",
     "postcss": "^8.5.8",
+    "postcss-import": "^16.1.1",
     "postcss-modules": "^6.0.1",
     "react": "^19.2.4",
     "react-datepicker": "^9.1.0",

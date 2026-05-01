@@ -1,60 +1,92 @@
 import typescript from '@rollup/plugin-typescript';
-import nodeResolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
 import dts from 'rollup-plugin-dts';
 import postcss from 'rollup-plugin-postcss';
+import postcssImport from 'postcss-import';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import preserveDirectives from 'rollup-preserve-directives';
+import pkg from './package.json' with { type: 'json' };
 
-// Only these need to be singletons / share context with the host app.
-// Everything else gets bundled into the dist so consumers don't need to install it.
-const EXTERNAL = [
+const peerExternals = Object.keys(pkg.peerDependencies || {});
+
+const hardcodedExternals = [
   'react',
   'react-dom',
   'react/jsx-runtime',
   'react-router-dom',
   'react-i18next',
   'i18next',
-  'next',
+  /^next(\/.*)?$/,
+  /^@fortawesome\/.*/,
 ];
 
-const external = (id) =>
-  EXTERNAL.some((p) => id === p || id.startsWith(p + '/'));
+const isExternal = (id) =>
+  hardcodedExternals.some((e) => (e instanceof RegExp ? e.test(id) : e === id)) ||
+  peerExternals.includes(id);
 
-// Silence Dart Sass legacy-js-api deprecation warning emitted by rollup-plugin-postcss
-const sassOptions = {
-  extensions: ['.css', '.scss'],
-  use: [['sass', { silenceDeprecations: ['legacy-js-api'] }]],
-};
+const tsPlugin = () => typescript({
+  tsconfig: './tsconfig.json',
+  declaration: false,
+  declarationMap: false,
+  exclude: ['src/stories/**/*', '**/*.stories.*'],
+});
 
-const jsPlugins = [
-  preserveDirectives(),
+const resolvePlugins = [
   nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'], browser: true }),
   commonjs(),
-  typescript({
-    tsconfig: './tsconfig.json',
-    declaration: false,
-    declarationMap: false,
-    exclude: ['src/stories/**/*', '**/*.stories.*'],
-  }),
-  postcss(sassOptions),
 ];
 
+const postcssPlugin = (extract) => postcss({
+  extensions: ['.css', '.scss'],
+  use: [['sass', { silenceDeprecations: ['legacy-js-api'] }]],
+  extract,
+  sourceMap: true,
+  minimize: false,
+  plugins: [postcssImport()],
+  modules: {
+    auto: (id) => /\.module\.(css|scss)$/.test(id),
+    generateScopedName: '[name]_[local]__[hash:base64:6]',
+  },
+});
+
 export default [
-  // JS build
+  // ESM — CSS extracted to dist/esm/index.css
   {
     input: 'src/index.ts',
-    output: [
-      { file: 'dist/cjs/index.js', format: 'cjs', sourcemap: false },
-      { file: 'dist/esm/index.js', format: 'esm', sourcemap: false },
+    output: { file: pkg.module, format: 'esm', sourcemap: true },
+    external: isExternal,
+    plugins: [
+      preserveDirectives(),
+      ...resolvePlugins,
+      tsPlugin(),
+      postcssPlugin('index.css'),
     ],
-    external,
-    plugins: jsPlugins,
   },
-  // DTS build
+  // CJS — no CSS (ESM is what Next.js/bundlers use)
+  {
+    input: 'src/index.ts',
+    output: { file: pkg.main, format: 'cjs', sourcemap: true },
+    external: isExternal,
+    plugins: [
+      preserveDirectives(),
+      ...resolvePlugins,
+      tsPlugin(),
+      postcss({
+        extensions: ['.css', '.scss'],
+        use: [['sass', { silenceDeprecations: ['legacy-js-api'] }]],
+        inject: false,
+        modules: {
+          auto: (id) => /\.module\.(css|scss)$/.test(id),
+          generateScopedName: '[name]_[local]__[hash:base64:6]',
+        },
+      }),
+    ],
+  },
+  // Types
   {
     input: 'src/index.ts',
     output: [{ file: 'dist/index.d.ts', format: 'esm' }],
-    external: (id) => external(id) || /\.(css|scss)$/.test(id),
+    external: [/\.css$/, /\.scss$/],
     plugins: [dts()],
   },
 ];
