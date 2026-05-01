@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 
 import type { ChatBotMessage, ChatBotProps } from './ChatBot.types';
@@ -9,8 +8,7 @@ import { ChatBotMessages } from './ChatBotMessage';
 import { useChatIndexDb } from './useChatIndexDb';
 
 import styles from './ChatBox.module.scss';
-import { TextareaAutoheight } from '../FieldWrapper';
-import { Button } from '../Button';
+import { TextAreaChat } from '../FieldWrapper';
 
 function normalizeAndSort(list: ChatBotMessage[]) {
   return [...list]
@@ -153,27 +151,18 @@ export function ChatBot({
         <div className={styles['chat-box-buttons']}>{chatButtomChildren}</div>
 
         <div className={styles['chat-box-messages']}>
-          <div className={styles['chat-box-messages-text-area']}>
-            <TextareaAutoheight
-              key={taKey}
-              placeholder={t('Type your message...')}
-              startRows={2}
-              value={userMessageLast.text ?? ''}
-              onChange={e => {
-                const t = e.target.value;
-                setUserMessageLast(prev => ({ ...prev, text: t, sender: 'user' }));
-              }}
-            />
-          </div>
-
-          <div className={styles['chat-box-messages-send-button']}>
-            <Button
-              icon={faPaperPlane}
-              IconClassName={styles['icon-send']}
-              style={{ width: '35px', height: '35px', borderRadius: '50%' }}
-              onClick={handleSendMessage}
-            />
-          </div>
+          <TextAreaChat
+            key={taKey}
+            isWrapped={false}
+            placeholder={t('Type your message...')}
+            value={userMessageLast.text ?? ''}
+            onChange={e => {
+              const val = e.target.value;
+              setUserMessageLast(prev => ({ ...prev, text: val, sender: 'user' }));
+            }}
+            onSend={() => handleSendMessage()}
+            sendButtonTitle={t('Send')}
+          />
         </div>
       </div>
     </div>

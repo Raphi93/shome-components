@@ -1,11 +1,11 @@
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react-vite';
+import { MemoryRouter } from 'react-router-dom';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../src/Styles/index.scss';
 
 // ─── CSS theme files in public/Theme/ ────────────────────────────────────────
 const CSS_THEMES = [
   { value: 'none',               title: '— Base only —'         },
-  { value: 'Light',              title: 'Light'                 },
-  { value: 'Dark',               title: 'Dark'                  },
   { value: 'SmartHome',          title: 'SmartHome'             },
   { value: 'Corporate',          title: 'Corporate'             },
   { value: 'ExecutiveSuite',     title: 'Executive Suite'       },
@@ -46,7 +46,6 @@ function applyThemeCss(name: string): void {
 }
 
 const preview: Preview = {
-  // Enable autodocs for every story — generates a Docs page from JSDoc + argTypes
   tags: ['autodocs'],
 
   parameters: {
@@ -58,6 +57,9 @@ const preview: Preview = {
       },
       expanded: true,
     },
+
+    // ── Accessibility ──────────────────────────────────────────────────────
+    a11y: { test: 'todo' },
 
     // ── Backgrounds (drives dark-mode toggle) ──────────────────────────────
     backgrounds: {
@@ -76,6 +78,7 @@ const preview: Preview = {
     // ── Docs ───────────────────────────────────────────────────────────────
     docs: {
       toc: true,
+      extractComponentDescription: () => '',
     },
 
     // ── Actions ────────────────────────────────────────────────────────────
@@ -91,9 +94,13 @@ const preview: Preview = {
       document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 
       // 2. Inject selected CSS theme file
-      applyThemeCss(context.globals['cssTheme'] ?? 'Light');
+      applyThemeCss(context.globals['cssTheme'] ?? 'none');
 
-      return Story(context);
+      return (
+        <MemoryRouter>
+          <Story />
+        </MemoryRouter>
+      );
     },
   ],
 
@@ -102,7 +109,7 @@ const preview: Preview = {
     cssTheme: {
       name:         'Theme',
       description:  'Select a CSS theme from public/Theme/',
-      defaultValue: 'Light',
+      defaultValue: 'none',
       toolbar: {
         icon:         'paintbrush',
         items:        CSS_THEMES,

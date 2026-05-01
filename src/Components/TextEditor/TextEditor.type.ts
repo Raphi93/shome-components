@@ -22,7 +22,12 @@ export type ToolbarItem =
   | 'table'
   | 'undo' | 'redo'
   | 'fullscreen'
-  | 'image';
+  | 'image'
+  | 'magicWand'
+  | 'formatSelect'
+  | 'viewMode'
+  | 'emoji'
+  | 'more';
 
 export interface FontOption {
   label: string;
@@ -37,6 +42,14 @@ export interface TextEditorProps {
   placeholder?: string;
   readOnly?: boolean;
   className?: string;
+  id?: string;
+
+  /**
+   * Lock the editor to a single format and hide the format picker.
+   * When omitted both HTML and Markdown are available.
+   * @example onlyFormat="html"
+   */
+  onlyFormat?: TextEditorFormat;
 
   /**
    * Toolbar items to hide. All items are shown by default.
@@ -56,10 +69,9 @@ export interface TextEditorProps {
   colors?: string[];
 
   /**
-   * Show emoji picker button.
-   * @default false
+   * Optional brand key used to expose a brand font together with the standard fonts.
    */
-  emoji?: boolean;
+  brand?: string;
 
   /**
    * Minimum height of the editor content area in px.
@@ -78,4 +90,9 @@ export interface TextEditorProps {
    * @default false
    */
   wordCount?: boolean;
+
+  /**
+   * Optional callback for the magic wand action in the toolbar.
+   */
+  onMagicWandClick?: () => void;
 }

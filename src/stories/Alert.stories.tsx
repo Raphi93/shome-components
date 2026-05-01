@@ -133,3 +133,41 @@ export const DisabledConfirm: Story = {
     );
   },
 };
+
+export const Interactive: Story = {
+  name: 'Interactive (tracks result)',
+  render: () => {
+    const [open, setOpen] = useState(false);
+    const [result, setResult] = useState<string>('–');
+    return (
+      <div style={{ padding: '1rem' }}>
+        <Trigger label="Open dialog" onClick={() => setOpen(true)} />
+        <p style={{ marginTop: '0.75rem', fontSize: '0.875rem' }}>
+          Last action: <strong>{result}</strong>
+        </p>
+        <Alert
+          isOpened={open}
+          setIsOpened={setOpen}
+          title="Confirm action"
+          text="Do you want to proceed with this operation?"
+          icon={faTriangleExclamation}
+          confirmTitlle="Yes, proceed"
+          cancelTitle="No, cancel"
+          confirmButtonHandler={() => { setResult('Confirmed'); setOpen(false); }}
+          cancelButtonHandler={() => { setResult('Cancelled'); setOpen(false); }}
+        />
+      </div>
+    );
+  },
+};
+
+export const Closed: Story = {
+  render: args => (
+    <div style={{ padding: '1rem', maxWidth: '420px' }}>
+      <p style={{ fontSize: '0.875rem', color: '#666' }}>
+        Alert is currently closed. Set <code>isOpened</code> to true in the Controls panel.
+      </p>
+      <Alert {...args} isOpened={false} setIsOpened={() => undefined} />
+    </div>
+  ),
+};

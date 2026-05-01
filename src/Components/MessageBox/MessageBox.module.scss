@@ -12,8 +12,9 @@
   border-radius: var(--border-radius);
   z-index: 0;
   display: block;
-  background: var(--color-white);
-  box-shadow: 0 0 0 rem(1px) var(--color-gray-300), var(--shadow-00);
+  background: var(--color-background, var(--color-white));
+  color: var(--color-text);
+  box-shadow: 0 0 0 rem(1px) var(--color-border, var(--color-gray-300)), var(--shadow-00);
   margin-bottom: calc(var(--spacing) * 2);
   padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 3);
   padding-left: calc(var(--spacing) * 7.5);
@@ -50,7 +51,7 @@
     text-align: center;
     height: 100%;
     width: calc(var(--spacing) * 6);
-    box-shadow: 0 0 0 rem(1px) var(--color-gray-300);
+    box-shadow: 0 0 0 rem(1px) var(--color-border, var(--color-gray-300));
     z-index: 2;
   }
 
@@ -102,12 +103,13 @@
     z-index: 1;
     position: relative;
     width: 100%;
+    color: var(--color-text);
 
     &::before {
       content: '';
       display: block;
-      background: var(--color-gray-200);
-      box-shadow: 0 0 0 rem(1px) var(--color-gray-300);
+      background: var(--color-surface, var(--color-gray-200));
+      box-shadow: 0 0 0 rem(1px) var(--color-border, var(--color-gray-300));
       position: absolute;
       top: calc(var(--spacing) * -1.5);
       left: calc(var(--spacing) * -2);
@@ -176,6 +178,7 @@
 
   font-size: rem(24px);
   line-height: 1;
+  color: var(--color-text-inverted);
 
   // ensure the svg behaves nicely
   svg {

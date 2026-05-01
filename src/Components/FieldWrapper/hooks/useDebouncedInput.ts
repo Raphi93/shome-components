@@ -41,7 +41,10 @@ export function useDebouncedInput({
   );
 
   useEffect(() => {
-    if (value !== undefined) {
+    // Skip NaN: React converts empty number inputs to NaN before passing it as
+    // `value`. Without this guard, setInternalValue(NaN) would reset the field
+    // while the user is still typing, making the default value disappear.
+    if (value !== undefined && !(typeof value === 'number' && isNaN(value))) {
       setInternalValue(value);
     }
   }, [value]);

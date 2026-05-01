@@ -14,6 +14,7 @@
   --text-editor-focus:            var(--input-focus-outline-color, var(--color-primary));
   --text-editor-blockquote:       var(--color-brand, var(--color-primary));
   --text-editor-select-surface:   var(--input-background, var(--color-white));
+  --text-editor-link:             var(--color-blue, #2563eb);
 }
 
 .container {
@@ -41,6 +42,23 @@
 }
 
 // ── Toolbar ───────────────────────────────────────────────────────────────────
+
+.toolbarWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.toolbarSecondRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing) * 0.15);
+  padding-top: calc(var(--spacing) * 0.3);
+  margin-top: calc(var(--spacing) * 0.3);
+  border-top: rem(1px) solid var(--text-editor-border);
+  width: 100%;
+}
 
 .toolbar {
   display: flex;

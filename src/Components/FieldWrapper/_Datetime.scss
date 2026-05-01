@@ -34,16 +34,20 @@
 /* Single calendar icon */
 .calendarIcon {
   position: absolute;
-  top: 11px;
+  top: calc(var(--spacing) * 2.5);
+  transform: translateY(-50%);
   right: 13px;
   color: var(--input-color);
+  cursor: pointer;
 }
 
-/* When filter enabled you were reusing this slot */
+/* When filter enabled — same vertical centering as calendarIcon */
 .filterIcon {
   position: absolute;
-  top: 11px;
+  top: calc(var(--spacing) * 2.5);
+  transform: translateY(-50%);
   right: 90px;
+  cursor: pointer;
 }
 
 /* Filter select wrapper (absolut rechts oben) */
@@ -83,18 +87,20 @@
   width: 100%;
 }
 
-/* Overlay labels inside each input (absolut, wie du’s wolltest) */
+/* Overlay labels inside each input — vertically centred */
 .betweenLabelFrom {
   position: absolute;
   left: 105px;
-  top: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   pointer-events: none;
 }
 
 .betweenLabelTo {
   position: absolute;
   left: 105px;
-  top: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   pointer-events: none;
 }
 
@@ -116,6 +122,8 @@
 }
 
 .dateDirtyIcon.dateDirtyIcon {
+  top: calc(var(--spacing) * 2.5);
+  transform: translateY(-50%);
   right: 30px;
   color: var(--input-color);
 }

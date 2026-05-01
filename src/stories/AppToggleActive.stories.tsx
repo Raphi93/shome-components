@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { AppToggleActive } from '../Components/AppToggleActive/AppToggleActive';
 
 const meta: Meta<typeof AppToggleActive> = {
-  title: 'Inputs/Toggle',
+  title: 'Inputs/AppToggleActive',
   component: AppToggleActive,
   tags: ['autodocs'],
   args: {

@@ -47,17 +47,6 @@
   max-width: 100%;
 }
 
-
-.current,
-.current:hover {
-  cursor: default;
-  background-color: var(--color-primary-dark);
-  color: var(--color-text-inverted);
-  box-shadow: none;
-}
-
-
-// Buttons
 // Buttons
 .buttons {
   display: flex;
@@ -82,9 +71,9 @@
 
     &.disabled,
     &:disabled {
-      background-color: var(--button-color, #a9b3c0);
-      color: var(--color-gray-300, #ffffff);
-      border: 1px solid var(--color-gray-300);
+      background-color: var(--pager-surface);
+      color: var(--pager-muted-text);
+      border: 1px solid var(--pager-border);
       cursor: default;
     }
   }
@@ -93,8 +82,8 @@
 
     &.disabled,
     &:disabled {
-      background-color: var(--button-background-color, #a9b3c0);
-      color: var(--button-color, #ffffff);
+      background-color: var(--pager-current-surface);
+      color: var(--pager-current-text);
       box-shadow: none;
       cursor: default;
     }

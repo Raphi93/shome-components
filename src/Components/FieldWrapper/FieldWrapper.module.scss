@@ -357,7 +357,7 @@
 .dirtyInputIcon {
   position: absolute;
   z-index: 1;
-  top: 50%;
+  top: calc(var(--spacing) * 2.5);
   transform: translateY(-50%);
   right: rem(8px);
   width: 26px;
@@ -438,7 +438,7 @@
 
 .passwordInputBtn {
   right: 10px;
-  top: 50%;
+  top: calc(var(--spacing) * 2.5);
   transform: translateY(-50%);
   position: absolute;
   cursor: pointer;
@@ -452,4 +452,75 @@
 // body prefix (0,1,1) beats react-datepicker's own .react-datepicker-popper (0,1,0)
 body :global(.react-datepicker-popper) {
   z-index: 4;
+}
+
+/* =============================================================================
+   TextAreaChat
+   ============================================================================= */
+
+.textAreaChatWrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: calc(var(--spacing) * 0.75);
+  width: 100%;
+  border: rem(1px) solid var(--input-border, var(--color-gray-400));
+  border-radius: var(--border-radius);
+  background: var(--input-background, var(--color-white));
+  padding: calc(var(--spacing) * 0.5);
+  transition: border-color var(--transition-duration-base), box-shadow var(--transition-duration-base);
+
+  &:focus-within {
+    border-color: var(--color-primary-dark);
+    box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
+  }
+}
+
+.textAreaChatDisabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.textAreaChatInput {
+  @include base-text;
+
+  flex: 1;
+  min-height: calc(var(--spacing) * 4);
+  max-height: calc(var(--spacing) * 24);
+  overflow-y: auto;
+  resize: none;
+  border: none;
+  background: transparent;
+  color: var(--input-color, var(--color-gray-900));
+  outline: none;
+  padding: calc(var(--spacing) * 0.25) calc(var(--spacing) * 0.5);
+  line-height: 1.5;
+
+  &::placeholder {
+    color: var(--input-placeholder-color, var(--color-text-light));
+  }
+}
+
+.textAreaChatSendBtn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--spacing) * 4);
+  height: calc(var(--spacing) * 4);
+  border: none;
+  border-radius: 50%;
+  background: var(--button-background-color, var(--color-primary-base));
+  color: var(--button-color, var(--color-white));
+  cursor: pointer;
+  transition: background var(--transition-duration-base), opacity var(--transition-duration-base);
+  font-size: rem(14px);
+
+  &:hover:not(:disabled) {
+    opacity: 0.85;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
 }

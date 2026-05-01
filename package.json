@@ -91,6 +91,7 @@
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-typescript": "^12.3.0",
     "@storybook/addon-a11y": "^10.3.4",
+    "@storybook/addon-docs": "^10.3.6",
     "@storybook/react-vite": "^10.3.4",
     "@tiptap/extension-code-block-lowlight": "^3.22.2",
     "@tiptap/extension-color": "^3.22.2",

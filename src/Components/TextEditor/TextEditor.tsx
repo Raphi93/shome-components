@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import { useTranslation } from 'react-i18next';
 import Placeholder from '@tiptap/extension-placeholder';
@@ -21,16 +21,40 @@ import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { createLowlight, all } from 'lowlight';
 import { Markdown } from 'tiptap-markdown';
 
-const lowlight = createLowlight(all);
-import { faCode, faEye, faExpand, faCompress } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { TextEditorToolbar } from './TextEditorToolbar';
-import type { TextEditorFormat, TextEditorProps } from './TextEditor.type';
+import { formatHtml } from './TextEditorToolbar.utils';
+import type { FontOption, TextEditorFormat, TextEditorProps, ToolbarItem } from './TextEditor.type';
 export type { TextEditorFormat, TextEditorProps };
 export type { FontOption, ToolbarItem } from './TextEditor.type';
+export type { TextEditorView } from './TextEditor.type';
 
 import s from './TextEditor.module.scss';
+
+const lowlight = createLowlight(all);
+
+// ─── GlobalStyle: preserves inline style= on all block/mark nodes ─────────────
+const GlobalStyle = Extension.create({
+  name: 'globalStyle',
+  addGlobalAttributes() {
+    return [
+      {
+        types: [
+          'paragraph', 'heading', 'bulletList', 'orderedList', 'listItem',
+          'blockquote', 'table', 'tableRow', 'tableCell', 'tableHeader',
+          'bold', 'italic', 'strike', 'underline', 'link', 'highlight',
+          'superscript', 'subscript',
+        ],
+        attributes: {
+          style: {
+            default: null,
+            parseHTML: (el) => (el as HTMLElement).getAttribute('style') || null,
+            renderHTML: (attrs) => (attrs.style ? { style: attrs.style } : {}),
+          },
+        },
+      },
+    ];
+  },
+});
 
 // ─── Custom Image extension (adds style support) ──────────────────────────────
 
@@ -74,6 +98,54 @@ const FontSize = Extension.create({
   },
 });
 
+// ─── Brand font system ────────────────────────────────────────────────────────
+
+type BrandFontAsset = { path: string; fileName: string; fontName: string };
+
+const BRAND_FONTS: Record<string, BrandFontAsset> = {
+  audi:    { path: '/Fonts/AudiType/AudiTypeVF-Variable.ttf',                          fileName: 'AudiTypeVF-Variable.ttf',                    fontName: 'AudiTypeVF-Variable' },
+  renault: { path: '/Fonts/NouvelR/NouvelR-Variable.ttf',                              fileName: 'NouvelR-Variable.ttf',                       fontName: 'NouvelR-Variable' },
+  kgm:     { path: '/Fonts/Montserrat/Montserrat-VariableFont_wght.ttf',               fileName: 'Montserrat-VariableFont_wght.ttf',            fontName: 'Montserrat-VariableFont_wght' },
+  honda:   { path: '/Fonts/Inter/Inter-Variable.ttf',                                  fileName: 'Inter-Variable.ttf',                         fontName: 'Inter-Variable' },
+  hyundai: { path: '/Fonts/Hyundai/HyundaiSansHeadOfficeText-Variable.ttf',            fileName: 'HyundaiSansHeadOfficeText-Variable.ttf',     fontName: 'HyundaiSansHeadOfficeText-Variable' },
+  huntu:   { path: '/Fonts/Hyundai/HyundaiSansHeadOfficeText-Variable.ttf',            fileName: 'HyundaiSansHeadOfficeText-Variable.ttf',     fontName: 'HyundaiSansHeadOfficeText-Variable' },
+};
+
+const STANDARD_FONT_OPTIONS: FontOption[] = [
+  { label: 'Default',         value: '' },
+  { label: 'Arial',           value: 'Arial, sans-serif' },
+  { label: 'Helvetica',       value: 'Helvetica, Arial, sans-serif' },
+  { label: 'Verdana',         value: 'Verdana, Geneva, sans-serif' },
+  { label: 'Tahoma',          value: 'Tahoma, Geneva, sans-serif' },
+  { label: 'Trebuchet MS',    value: '"Trebuchet MS", Helvetica, sans-serif' },
+  { label: 'Georgia',         value: 'Georgia, serif' },
+  { label: 'Times New Roman', value: '"Times New Roman", Times, serif' },
+  { label: 'Courier New',     value: '"Courier New", Courier, monospace' },
+  { label: 'Outfit',          value: 'Outfit, sans-serif' },
+];
+
+const normalizeBrand = (brand?: string) => (brand ?? '').trim().toLowerCase();
+
+const getDefaultFonts = (brand?: string): FontOption[] => {
+  const brandFont = BRAND_FONTS[normalizeBrand(brand)];
+  if (!brandFont) return STANDARD_FONT_OPTIONS;
+  return [
+    STANDARD_FONT_OPTIONS[0],
+    { label: brandFont.fontName, value: brandFont.fontName },
+    ...STANDARD_FONT_OPTIONS.slice(1),
+  ];
+};
+
+const ensureBrandFontFace = (font?: BrandFontAsset) => {
+  if (!font || typeof document === 'undefined') return;
+  const styleId = `text-editor-font-${font.fontName}`;
+  if (document.getElementById(styleId)) return;
+  const style = document.createElement('style');
+  style.id = styleId;
+  style.textContent = `@font-face { font-family: '${font.fontName}'; src: url('${font.path}') format('truetype'); font-display: swap; }`;
+  document.head.appendChild(style);
+};
+
 // ─── TextEditor ───────────────────────────────────────────────────────────────
 
 export function TextEditor({
@@ -81,27 +153,45 @@ export function TextEditor({
   onChange,
   format = 'html',
   onFormatChange,
+  onlyFormat,
   placeholder = '',
   readOnly = false,
+  id,
   className,
   hide = [],
   fonts,
   colors,
-  emoji = false,
+  brand,
   minHeight = 120,
   maxHeight,
   wordCount = false,
+  onMagicWandClick,
 }: TextEditorProps) {
   const { t } = useTranslation();
-  const [currentFormat, setCurrentFormat] = useState<TextEditorFormat>(format);
+  const [currentFormat, setCurrentFormat] = useState<TextEditorFormat>(onlyFormat ?? format);
   const [viewMode, setViewMode]           = useState<'visual' | 'source'>('visual');
   const [sourceValue, setSourceValue]     = useState('');
   const [fullscreen, setFullscreen]       = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const normalizedBrand  = normalizeBrand(brand);
+  const resolvedBrandFont = BRAND_FONTS[normalizedBrand];
+
+  const resolvedFonts = useMemo(() => {
+    const defaultFonts = getDefaultFonts(brand);
+    if (!fonts || fonts.length === 0) return defaultFonts;
+    const seen = new Set<string>();
+    return [...defaultFonts, ...fonts].filter((item) => {
+      const key = `${item.label}__${item.value}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }, [brand, fonts]);
+
   const mdStorage = (editor: ReturnType<typeof useEditor>) =>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (editor?.storage as any)?.markdown as { getMarkdown: () => string; parseMarkdown: (s: string) => unknown } | undefined;
+    (editor?.storage as any)?.markdown as { getMarkdown: () => string; parser: { parse: (s: string) => unknown } } | undefined;
 
   const getOutput = (editor: ReturnType<typeof useEditor>): string => {
     if (!editor) return '';
@@ -112,6 +202,7 @@ export function TextEditor({
 
   const editor = useEditor({
     extensions: [
+      GlobalStyle,
       StarterKit.configure({ codeBlock: false }),
       CodeBlockLowlight.configure({ lowlight }),
       Placeholder.configure({ placeholder }),
@@ -142,7 +233,20 @@ export function TextEditor({
   });
 
   useEffect(() => { editor?.setEditable(!readOnly); }, [editor, readOnly]);
-  useEffect(() => { setCurrentFormat(format); }, [format]);
+  useEffect(() => { if (!onlyFormat) setCurrentFormat(format); }, [format, onlyFormat]);
+
+  // Sync external value changes into the editor (controlled component)
+  useEffect(() => {
+    if (!editor || viewMode === 'source') return;
+    const current = getOutput(editor);
+    if (value !== current) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (editor.commands as any).setContent(value, { emitUpdate: false });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editor, value]);
+
+  useEffect(() => { ensureBrandFontFace(resolvedBrandFont); }, [resolvedBrandFont]);
 
   // Close fullscreen on Escape
   useEffect(() => {
@@ -165,14 +269,15 @@ export function TextEditor({
 
   const enterSource = () => {
     if (!editor) return;
-    setSourceValue(getOutput(editor));
+    const output = getOutput(editor);
+    setSourceValue(currentFormat === 'html' ? formatHtml(output) : output);
     setViewMode('source');
   };
 
   const exitSource = () => {
     if (!editor) return;
     if (currentFormat === 'markdown') {
-      editor.commands.setContent(mdStorage(editor)?.parseMarkdown(sourceValue) as string);
+      editor.commands.setContent(mdStorage(editor)?.parser.parse(sourceValue) as string);
     } else {
       editor.commands.setContent(sourceValue);
     }
@@ -181,13 +286,13 @@ export function TextEditor({
   };
 
   // Word / char count
-  const text   = editor?.getText() ?? '';
-  const words  = text.trim() ? text.trim().split(/\s+/).length : 0;
-  const chars  = text.length;
+  const text  = editor?.getText() ?? '';
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  const chars = text.length;
 
-  // CSS custom properties for min/max height
-  const contentStyle: React.CSSProperties = {
+  const contentStyle: CSSProperties = {
     ['--te-min-h' as string]: `${minHeight}px`,
+    ['--te-font-primary' as string]: resolvedBrandFont?.fontName ?? 'Outfit, Arial, sans-serif',
     ...(maxHeight ? { ['--te-max-h' as string]: `${maxHeight}px` } : {}),
   };
 
@@ -201,51 +306,28 @@ export function TextEditor({
     <div className={containerClass} ref={containerRef}>
       {!readOnly && (
         <div className={s.header}>
-          {viewMode === 'visual' && (
-            <TextEditorToolbar
-              editor={editor}
-              hide={hide}
-              fonts={fonts}
-              colors={colors}
-              emoji={emoji}
-              fullscreen={fullscreen}
-              onFullscreen={() => setFullscreen((f) => !f)}
-            />
-          )}
-
-          <div className={s.controls}>
-            <select
-              className={s.formatSelect}
-              value={currentFormat}
-              onChange={(e) => handleFormatChange(e.target.value as TextEditorFormat)}
-            >
-              <option value="html">{t('HTML')}</option>
-              <option value="markdown">{t('Markdown')}</option>
-            </select>
-
-            <button
-              type="button"
-              className={`${s.viewToggle}${viewMode === 'source' ? ` ${s.active}` : ''}`}
-              onClick={viewMode === 'visual' ? enterSource : exitSource}
-            >
-              <FontAwesomeIcon icon={viewMode === 'visual' ? faCode : faEye} />
-            </button>
-
-            <button
-              type="button"
-              className={s.viewToggle}
-              onClick={() => setFullscreen((f) => !f)}
-            >
-              <FontAwesomeIcon icon={fullscreen ? faCompress : faExpand} />
-            </button>
-          </div>
+          <TextEditorToolbar
+            editor={editor}
+            hide={hide}
+            fonts={resolvedFonts}
+            colors={colors}
+            fullscreen={fullscreen}
+            onFullscreen={() => setFullscreen((f) => !f)}
+            onMagicWandClick={onMagicWandClick}
+            format={currentFormat}
+            onFormatChange={handleFormatChange}
+            onlyFormat={onlyFormat}
+            viewMode={viewMode}
+            onToggleViewMode={viewMode === 'visual' ? enterSource : exitSource}
+          />
         </div>
       )}
 
       {viewMode === 'visual' ? (
-        <EditorContent editor={editor} className={s.editorContent} style={contentStyle} />
+        <EditorContent editor={editor} className={s.editorContent} style={contentStyle} id={id} />
       ) : (
         <textarea
+          id={id}
           className={s.source}
           value={sourceValue}
           onChange={(e) => setSourceValue(e.target.value)}

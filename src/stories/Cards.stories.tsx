@@ -1,88 +1,234 @@
+import { useState, type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Cards } from '../Components/Cards/Cards';
-import { faArrowTrendUp, faUsers, faBoxes, faDollarSign } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
 
-const meta: Meta<typeof Cards> = {
+import { Cards, CardContent, CardExpander, CardIcon, CardImage } from '../Components/Cards';
+
+const iconColors = [
+  'primary', 'red', 'green', 'blue', 'orange', 'yellow', 'brand', 'white', 'black',
+] as const;
+
+type IconColor = (typeof iconColors)[number];
+
+type CardsStoryArgs = ComponentProps<typeof Cards> & {
+  iconColor: IconColor;
+  expander: boolean;
+};
+
+const contentStyle = {
+  display: 'flex',
+  flexDirection: 'column' as const,
+  gap: '0.5rem',
+  padding: '0.5rem',
+};
+
+const meta: Meta<CardsStoryArgs> = {
   title: 'Layout/Cards',
   component: Cards,
   tags: ['autodocs'],
-  args: {
-    title:       'Card title',
-    description: 'A short description of this card.',
-  },
   argTypes: {
-    title:       { control: 'text' },
-    description: { control: 'text' },
+    link:        { control: 'boolean' },
+    expander:    { control: 'boolean' },
+    isRightIcon: { control: 'boolean' },
+    noImage:     { control: 'boolean' },
+    maxwidth:    { control: 'text' },
+    iconColor:   { control: 'select', options: iconColors },
+  },
+  args: {
+    maxwidth:  '30rem',
+    iconColor: 'primary',
+    expander:  false,
   },
 };
 export default meta;
 
-type Story = StoryObj<typeof Cards>;
+type Story = StoryObj<CardsStoryArgs>;
 
-export const Default: Story = {};
-
-export const NoDescription: Story = {
-  args: { title: 'Total orders', description: undefined },
-  render: (args) => (
-    <Cards {...args}>
-      <div style={{ fontSize: '2.5rem', fontWeight: 700, lineHeight: 1 }}>1,284</div>
-    </Cards>
-  ),
-};
-
-export const StatCard: Story = {
-  name: 'Stat / KPI card',
-  render: () => (
-    <Cards title="Monthly revenue">
-      <div style={{ display: 'flex', alignItems: 'flex-end', gap: '0.5rem' }}>
-        <span style={{ fontSize: '2rem', fontWeight: 700 }}>CHF 48,320</span>
-        <span style={{ fontSize: '0.85rem', color: 'var(--color-success, #22c55e)', marginBottom: '0.3rem' }}>
-          <FontAwesomeIcon icon={faArrowTrendUp} /> +12.4%
-        </span>
-      </div>
-      <p style={{ margin: '0.5rem 0 0', fontSize: '0.8rem', opacity: 0.6 }}>vs. last month</p>
-    </Cards>
-  ),
-};
-
-export const DashboardGrid: Story = {
-  name: '4-column KPI dashboard',
-  render: () => {
-    const kpis = [
-      { title: 'Users',    value: '3,842',  change: '+5.2%',  icon: faUsers,       positive: true  },
-      { title: 'Orders',   value: '12,483', change: '+18.1%', icon: faBoxes,       positive: true  },
-      { title: 'Revenue',  value: '€94k',   change: '+8.7%',  icon: faDollarSign,  positive: true  },
-      { title: 'Returned', value: '142',    change: '-2.1%',  icon: faArrowTrendUp, positive: false },
-    ];
+export const Card: Story = {
+  args: {
+    noImage:     false,
+    link:        false,
+    isRightIcon: false,
+    maxwidth:    '30rem',
+    iconColor:   'primary',
+    expander:    false,
+  },
+  render: args => {
+    const [open, setOpen] = useState(false);
     return (
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }}>
-        {kpis.map(({ title, value, change, icon, positive }) => (
-          <Cards key={title} title={title}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-              <span style={{ fontSize: '1.75rem', fontWeight: 700 }}>{value}</span>
-              <FontAwesomeIcon icon={icon} style={{ fontSize: '1.25rem', opacity: 0.4 }} />
-            </div>
-            <span style={{ fontSize: '0.8rem', color: positive ? 'var(--color-success, #22c55e)' : 'var(--color-danger, #ef4444)' }}>
-              {change} this month
-            </span>
+      <div style={{ padding: '1rem' }}>
+        {args.noImage ? (
+          <Cards noImage={args.noImage} link={args.link} isRightIcon={args.isRightIcon} maxwidth={args.maxwidth}>
+            <CardContent>
+              <div style={contentStyle}>
+                <h3>Card</h3>
+                <p>This card can show all variants.</p>
+              </div>
+            </CardContent>
           </Cards>
-        ))}
+        ) : args.expander ? (
+          <Cards
+            noImage={args.noImage}
+            link={args.link}
+            isRightIcon={args.isRightIcon}
+            maxwidth={args.maxwidth}
+            setValue={{ value: open, setValue: () => setOpen(prev => !prev) }}
+          >
+            <CardIcon icon={faGear} fontSize="2rem" iconColor={args.iconColor} />
+            <CardContent>
+              <div style={contentStyle}>
+                <h3>Expandable card</h3>
+                <p>Click the arrow to open more content.</p>
+              </div>
+            </CardContent>
+            <CardExpander>
+              <div style={contentStyle}>
+                <p>This is the expandable content area.</p>
+                <p>You can place additional details here.</p>
+              </div>
+            </CardExpander>
+          </Cards>
+        ) : (
+          <Cards noImage={args.noImage} link={args.link} isRightIcon={args.isRightIcon} maxwidth={args.maxwidth}>
+            <CardIcon icon={faGear} fontSize="5rem" iconColor={args.iconColor} />
+            <CardContent>
+              <div style={contentStyle}>
+                <h3>Card</h3>
+                <p>This card only contains content.</p>
+              </div>
+            </CardContent>
+          </Cards>
+        )}
       </div>
     );
   },
 };
 
-export const WithChildren: Story = {
-  name: 'With custom content',
-  render: () => (
-    <Cards title="Activity">
-      <ul style={{ margin: 0, padding: '0 0 0 1.2rem', fontSize: '0.875rem', lineHeight: '1.8' }}>
-        <li>User John Doe registered</li>
-        <li>Invoice #4892 paid</li>
-        <li>New order placed (#9021)</li>
-        <li>Report exported</li>
-      </ul>
-    </Cards>
+export const WithoutImage: Story = {
+  args: { noImage: true },
+  render: args => (
+    <div style={{ padding: '1rem' }}>
+      <Cards noImage={args.noImage} link={args.link} isRightIcon={args.isRightIcon} maxwidth={args.maxwidth}>
+        <CardContent>
+          <div style={contentStyle}>
+            <h3>Card without image</h3>
+            <p>This card only contains content.</p>
+          </div>
+        </CardContent>
+      </Cards>
+    </div>
   ),
+};
+
+export const WithImage: Story = {
+  args: { noImage: false },
+  render: args => (
+    <div style={{ padding: '1rem' }}>
+      <Cards noImage={args.noImage} link={args.link} isRightIcon={args.isRightIcon} maxwidth={args.maxwidth}>
+        <CardImage src="https://placehold.co/160x100" alt="Preview" height="6rem" width="auto" />
+        <CardContent>
+          <div style={contentStyle}>
+            <h3>Card with image</h3>
+            <p>This card shows an image and content.</p>
+          </div>
+        </CardContent>
+      </Cards>
+    </div>
+  ),
+};
+
+export const WithIcon: Story = {
+  args: { noImage: false, iconColor: 'primary' },
+  render: args => (
+    <div style={{ padding: '1rem' }}>
+      <Cards noImage={args.noImage} link={args.link} isRightIcon={args.isRightIcon} maxwidth={args.maxwidth}>
+        <CardIcon icon={faGear} fontSize="2rem" iconColor={args.iconColor} />
+        <CardContent>
+          <div style={contentStyle}>
+            <h3>Card with icon</h3>
+            <p>This card uses an icon instead of an image.</p>
+          </div>
+        </CardContent>
+      </Cards>
+    </div>
+  ),
+};
+
+export const LinkStyle: Story = {
+  args: { noImage: true, link: true },
+  render: args => (
+    <div style={{ padding: '1rem' }}>
+      <Cards noImage={args.noImage} link={args.link} isRightIcon={args.isRightIcon} maxwidth={args.maxwidth}>
+        <CardContent>
+          <div style={contentStyle}>
+            <h3>Link card</h3>
+            <p>This card uses the link styling.</p>
+          </div>
+        </CardContent>
+      </Cards>
+    </div>
+  ),
+};
+
+export const WithExpander: Story = {
+  args: { noImage: false, iconColor: 'primary' },
+  render: args => {
+    const [open, setOpen] = useState(false);
+    return (
+      <div style={{ padding: '1rem' }}>
+        <Cards
+          noImage={args.noImage}
+          link={args.link}
+          isRightIcon={args.isRightIcon}
+          maxwidth={args.maxwidth}
+          setValue={{ value: open, setValue: () => setOpen(prev => !prev) }}
+        >
+          <CardIcon icon={faGear} fontSize="2rem" iconColor={args.iconColor} />
+          <CardContent>
+            <div style={contentStyle}>
+              <h3>Expandable card</h3>
+              <p>Click the arrow to open more content.</p>
+            </div>
+          </CardContent>
+          <CardExpander>
+            <div style={contentStyle}>
+              <p>This is the expandable content area.</p>
+              <p>You can place additional details here.</p>
+            </div>
+          </CardExpander>
+        </Cards>
+      </div>
+    );
+  },
+};
+
+export const WithExpanderRightIcon: Story = {
+  args: { noImage: false, isRightIcon: true, iconColor: 'primary' },
+  render: args => {
+    const [open, setOpen] = useState(false);
+    return (
+      <div style={{ padding: '1rem' }}>
+        <Cards
+          noImage={args.noImage}
+          link={args.link}
+          isRightIcon={args.isRightIcon}
+          maxwidth={args.maxwidth}
+          setValue={{ value: open, setValue: () => setOpen(prev => !prev) }}
+        >
+          <CardIcon icon={faGear} fontSize="2rem" iconColor={args.iconColor} />
+          <CardContent>
+            <div style={contentStyle}>
+              <h3>Right icon expander</h3>
+              <p>The icon area is aligned differently.</p>
+            </div>
+          </CardContent>
+          <CardExpander>
+            <div style={contentStyle}>
+              <p>Expanded details on a card with right-aligned icon mode.</p>
+            </div>
+          </CardExpander>
+        </Cards>
+      </div>
+    );
+  },
 };

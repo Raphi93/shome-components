@@ -207,6 +207,7 @@ export function Button({
         href={link}
         target={target}
         rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+        aria-disabled={disabledButton}
       >
         {inner}
       </a>
