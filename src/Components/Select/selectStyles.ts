@@ -8,7 +8,7 @@ export const getMultiSelectStyles = (color?: string, colorActive?: string) => {
       ...provided,
       zIndex: 100,
       backgroundColor: 'var(--input-background, #ffffff)',
-      color: 'var(--input-color, inherit)',
+      color: 'var(--color-text, inherit)',
     }),
     option: (provided: CSSObjectWithLabel, state: any) => ({
       ...provided,
@@ -19,7 +19,7 @@ export const getMultiSelectStyles = (color?: string, colorActive?: string) => {
         : state.isFocused
         ? 'var(--color-primary-light, #addcff)'
         : 'var(--input-background, #ffffff)',
-      color: state.isSelected ? '#ffffff' : 'var(--input-color, inherit)',
+      color: state.isSelected ? '#ffffff' : 'var(--color-text, inherit)',
     }),
     control: (provided: CSSObjectWithLabel, state: ControlProps<TSelectOption>) => ({
       ...provided,
@@ -27,7 +27,7 @@ export const getMultiSelectStyles = (color?: string, colorActive?: string) => {
       backgroundColor: state.isDisabled ? 'var(--color-gray-200)' : 'var(--input-background, #ffffff)',
       boxShadow: state.isFocused ? '0 0 0 2px var(--input-focus-outline-color)' : provided.borderColor,
       borderColor: state.isFocused ? 'var(--color-primary-dark)' : 'var(--color-gray-400)',
-      color: 'var(--input-color, inherit)',
+      color: 'var(--color-text, inherit)',
       paddingTop: '1px',
       paddingBottom: '1px',
     }),
@@ -70,7 +70,7 @@ export const getMultiSelectTheme = (theme: Theme, colorActive?: string, color?: 
 
 export const getMultiselectBorderLabelStyles = (isFocused?: boolean, colorActive?: string) => {
   return {
-    color: isFocused ? `var(${colorActive || '--color-label-active'})` : `var(--color-gray-400)`,
+    color: isFocused ? `var(${colorActive || '--color-label-active'})` : `var(--color-text)`,
     transition: 'all 200ms ease-in-out',
     opacity: '1',
     top: '0',

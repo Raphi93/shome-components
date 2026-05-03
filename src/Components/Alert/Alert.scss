@@ -16,10 +16,10 @@
 
 .alert-container {
     position: fixed;
-    background-color: var(--color-mod-nav-theme-contrast);
+    background-color: var(--color-background);
     /* border-radius: var(--border-radius-large); */
     box-shadow: var(--shadow-00);
-    z-index: 96;
+    z-index: 999999999;
     padding: 1.2rem;
     display: flex;
     flex-direction: column;
