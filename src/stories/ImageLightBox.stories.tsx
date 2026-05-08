@@ -24,7 +24,7 @@ export const Interactive: Story = {
     const [selected, setSelected] = useState<ImageDto | null>(null);
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div style={{width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative'}}>
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
           {IMAGES.map((img) => (
             <img
@@ -37,7 +37,7 @@ export const Interactive: Story = {
             />
           ))}
         </div>
-        <p style={{ margin: 0, fontSize: '0.8rem', opacity: 0.6 }}>Click any image to open the lightbox</p>
+        <p style={{ margin: 0, fontSize: '0.8rem', opacity: 0.6,  }}>Click any image to open the lightbox</p>
 
         {selected && (
           <ImageLightBox
@@ -59,7 +59,7 @@ export const SingleImage: Story = {
     const [open, setOpen] = useState(false);
     const image = IMAGES[0];
     return (
-      <div>
+      <div style={{width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative'}}>
         <Button text="Open image" color="primary" onClick={() => setOpen(true)} />
         {open && (
           <ImageLightBox
