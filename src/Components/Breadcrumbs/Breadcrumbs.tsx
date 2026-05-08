@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useMemo } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import type { ElementType } from 'react';
 
+import { getConfiguredLinkComponent } from '../../linkConfig';
 import { NavigationItem } from '../../types';
 import { usePageContext } from '../../context';
 
@@ -12,14 +12,22 @@ export type { BreadCrumb } from './Breadcrumbs.type';
 
 import style from './Breadcrumbs.module.scss';
 
-export function Breadcrumbs({ crumbs }: { crumbs: BreadCrumb[] }) {
+export function Breadcrumbs({
+  crumbs,
+  linkComponent,
+}: {
+  crumbs: BreadCrumb[];
+  /** Override the element used to render crumb links. Defaults to the globally configured component or 'a'. */
+  linkComponent?: ElementType;
+}) {
+  const LinkEl = linkComponent ?? getConfiguredLinkComponent();
   return (
     <div className={style.breadcrumbs}>
       {crumbs.map((crumb, index) => {
         return (
           <span key={index}>
             {crumb.link ? (
-              <Link href={crumb.link}>{crumb.name}</Link>
+              <LinkEl href={crumb.link}>{crumb.name}</LinkEl>
             ) : (
               <span className={style.currentItem}>{crumb.name}</span>
             )}
@@ -30,12 +38,15 @@ export function Breadcrumbs({ crumbs }: { crumbs: BreadCrumb[] }) {
   );
 }
 
+/**
+ * @param pathname - Current URL pathname (e.g. from usePathname() in Next.js or useLocation().pathname in React Router)
+ */
 export function useAutomaticBreadcrumbs(
   navigationItems: NavigationItem[],
+  pathname: string,
   currentPageName?: string,
   rootPageName?: string
 ): BreadCrumb[] {
-  const pathname = usePathname();
   const { pageTitle } = usePageContext();
   currentPageName ??= pageTitle ?? undefined;
 

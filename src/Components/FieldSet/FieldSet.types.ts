@@ -12,7 +12,7 @@ import React from 'react';
 export type FieldSetHeaderColor = 'default' | 'primary' | 'secondary' | 'color-background';
 
 /** HTML heading tag used to render the FieldSet title. */
-export type FieldSetTitleTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+export type FieldSetTitleTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'span';
 
 // ─── Column sizes ─────────────────────────────────────────────────────────────
 

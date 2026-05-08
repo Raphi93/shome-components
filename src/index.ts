@@ -7,3 +7,4 @@ export * from './context';
 export * from './hooks';
 export * from './service';
 export * from './translations/shomeTranslations';
+export { configureLinkComponent } from './linkConfig';

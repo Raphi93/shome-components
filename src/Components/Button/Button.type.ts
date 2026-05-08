@@ -44,6 +44,10 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   expanderValue?: boolean;
   link?: string | null;
   target?: '_self' | '_blank';
+  /** Override the element used to render `link`. Defaults to the globally configured component or 'a'. */
+  linkComponent?: React.ElementType;
+  /** Passed through to linkComponent (e.g. Next.js Link prefetch={false}) */
+  prefetch?: boolean;
   border?: boolean;
   isLoading?: boolean | null;
   small?: boolean;

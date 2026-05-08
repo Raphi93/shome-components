@@ -5,6 +5,7 @@ import { faChevronDown, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 
+import { getConfiguredLinkComponent } from '../../linkConfig';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../Tooltip';
 import type { ButtonColor, ButtonProps } from './Button.type';
 export { EnumButtonColor } from './Button.type';
@@ -96,6 +97,8 @@ export function Button({
   expanderValue = false,
   link = null,
   target = '_self',
+  linkComponent,
+  prefetch,
   border = false,
   isLoading = null,
   children = null,
@@ -199,18 +202,20 @@ export function Button({
   let buttonEl: ReactNode;
 
   if (link) {
+    const LinkEl = linkComponent ?? getConfiguredLinkComponent();
     const anchorProps = props as React.AnchorHTMLAttributes<HTMLAnchorElement>;
     buttonEl = (
-      <a
+      <LinkEl
         {...anchorProps}
         {...commonProps}
         href={link}
         target={target}
         rel={target === '_blank' ? 'noopener noreferrer' : undefined}
         aria-disabled={disabledButton}
+        {...(prefetch !== undefined ? { prefetch } : {})}
       >
         {inner}
-      </a>
+      </LinkEl>
     );
   } else if (tooltip) {
     const divProps = props as React.HTMLAttributes<HTMLDivElement>;

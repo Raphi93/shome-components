@@ -1,72 +1,84 @@
 'use client';
 
-import { ChangeEventHandler, ReactNode, useEffect, useRef } from 'react';
+import React, { ChangeEventHandler, CSSProperties, ReactNode, useEffect, useRef } from 'react';
 import clx from 'classnames';
 
-
-import { useLabelInput } from './hooks/useLabelInput';
 import { FieldSetCommonFields, FieldWrapper } from './FieldWrapper';
+import { useLabelInput } from './hooks/useLabelInput';
+import { UseFormRegister } from '../../types';
 
 import style from './FieldWrapper.module.scss';
-import React from 'react';
-import { UseFormRegister } from '../../types';
-import { useScreenWidth } from '../../hooks/useScreenWidth';
+
+export interface TextareaAutoheightProps extends FieldSetCommonFields {
+  value?: string;
+  defaultValue?: string;
+  id?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  /** Minimum visible rows (default: 2) */
+  startRows?: number;
+  /** Maximum height in px before scrolling kicks in (default: 400) */
+  maxHeight?: number;
+  isWrapped?: boolean;
+  onChange?: ChangeEventHandler<HTMLTextAreaElement>;
+  register?: UseFormRegister;
+  children?: ReactNode;
+  hasBorderLabel?: boolean;
+  styles?: CSSProperties;
+  autofocus?: boolean;
+  autoComplete?: string;
+}
 
 export function TextareaAutoheight({
   label,
   isRequired = false,
   description,
-  defaultValue,
   value,
+  defaultValue,
   id,
   placeholder,
   disabled = false,
+  startRows = 2,
+  maxHeight = 400,
   isWrapped = true,
-  startRows,
   onChange,
   register,
   children,
   errorText,
-  hasBorderLabel,
   cssClass,
-}: {
-  defaultValue?: string;
-  value?: string;
-  id?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  startRows?: number;
-  isWrapped?: boolean;
-  children?: ReactNode;
-  onChange?: ChangeEventHandler<HTMLTextAreaElement>;
-  register?: UseFormRegister;
-  hasBorderLabel?: boolean;
-} & FieldSetCommonFields) {
-  const registered = register && id ? register(id, { onChange }) : { ref: undefined };
+  hasBorderLabel,
+  styles,
+  autofocus = false,
+  autoComplete,
+}: TextareaAutoheightProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const formRef = registered.ref;
-  const { screenWidth } = useScreenWidth();
+  const registered = register && id ? register(id, { onChange }) : { ref: undefined };
+  const formRef = (registered as { ref?: ((el: HTMLTextAreaElement | null) => void) | null }).ref;
+
+  function adjustHeight() {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    const next = Math.min(el.scrollHeight, maxHeight);
+    el.style.height = `${next}px`;
+    el.style.overflowY = el.scrollHeight > maxHeight ? 'auto' : 'hidden';
+  }
 
   useEffect(() => {
-    if (textareaRef.current) {
-      const minHeight = startRows ? startRows * 24 : 40;
-
-      textareaRef.current.style.height =
-        textareaRef.current.scrollHeight > minHeight ? textareaRef.current.scrollHeight + 'px' : minHeight + 'px';
-    }
-  }, [screenWidth, startRows]);
+    adjustHeight();
+  }, [value, maxHeight]);
 
   const textarea = (
     <textarea
       data-testid="text-area"
       onChange={onChange}
       {...registered}
-      ref={(elm) => {
-        (textareaRef as any).current = elm;
-        formRef && formRef(elm);
+      ref={(el) => {
+        (textareaRef as React.MutableRefObject<HTMLTextAreaElement | null>).current = el;
+        if (formRef) formRef(el);
       }}
-      rows={startRows ?? 1}
       id={id}
+      rows={startRows}
       className={clx(
         {
           [style.borderLabelInput]: hasBorderLabel,
@@ -74,21 +86,18 @@ export function TextareaAutoheight({
           [style.input]: !hasBorderLabel,
         },
         style.textarea,
-        style['textarea-autoheight']
+        style['textarea-autoheight'],
       )}
       required={isRequired}
       defaultValue={defaultValue}
       value={value}
       disabled={disabled}
       placeholder={!hasBorderLabel ? placeholder : ''}
-      onInput={(e) => {
-        const input = e.target as HTMLTextAreaElement;
-        if (input) {
-          input.style.height = 'auto';
-          input.style.height = input.scrollHeight + 'px';
-        }
-      }}
-    ></textarea>
+      autoFocus={autofocus}
+      autoComplete={autoComplete}
+      style={styles}
+      onInput={adjustHeight}
+    />
   );
 
   const { borderLabelInput: textAreaWithLabel } = useLabelInput({
@@ -112,13 +121,19 @@ export function TextareaAutoheight({
         </div>
       );
     }
-
     return textAreaWithLabel;
   }
 
   if (isWrapped) {
     return (
-      <FieldWrapper errorText={errorText} label={label} description={description} isRequired={isRequired} labelFor={id}>
+      <FieldWrapper
+        errorText={errorText}
+        label={label}
+        description={description}
+        isRequired={isRequired}
+        labelFor={id}
+        cssClass={cssClass}
+      >
         {textarea}
         {children}
       </FieldWrapper>

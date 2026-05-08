@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEventHandler, CSSProperties, FocusEventHandler, JSX, ReactNode, useState } from 'react';
+import { ChangeEventHandler, CSSProperties, FocusEventHandler, JSX, ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import clx from 'classnames';
 
@@ -598,6 +598,9 @@ export function Textarea({
   autofocus = false,
   hasBorderLabel,
   autoComplete,
+  autoHeight = false,
+  rows,
+  maxHeight,
 }: {
   /**
    *  `TextArea` default value
@@ -631,31 +634,60 @@ export function Textarea({
   register?: UseFormRegister;
   hasBorderLabel?: boolean;
   autoComplete?: string;
+  /** Auto-grow height as the user types */
+  autoHeight?: boolean;
+  /** Minimum visible rows when autoHeight is enabled (default: 2) */
+  rows?: number;
+  /** Maximum height in px before scrolling kicks in when autoHeight is enabled (default: 400) */
+  maxHeight?: number;
 } & FieldSetCommonFields) {
   const registered = register && id ? register(id, { onChange }) : {};
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  function adjustHeight() {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    const max = maxHeight ?? 400;
+    const next = Math.min(el.scrollHeight, max);
+    el.style.height = `${next}px`;
+    el.style.overflowY = el.scrollHeight > max ? 'auto' : 'hidden';
+  }
+
+  useEffect(() => {
+    if (autoHeight) adjustHeight();
+  }, [value, autoHeight, maxHeight]);
 
   const textarea = (
     <textarea
       onChange={onChange}
       {...registered}
+      ref={(el) => {
+        (textareaRef as React.MutableRefObject<HTMLTextAreaElement | null>).current = el;
+        const formRef = (registered as { ref?: ((e: HTMLTextAreaElement | null) => void) | null }).ref;
+        if (formRef) formRef(el);
+      }}
       id={id}
+      rows={autoHeight ? (rows ?? 2) : undefined}
       className={clx(
         {
           [style.borderLabelInput]: hasBorderLabel,
           [style.active]: value && hasBorderLabel,
           [style.input]: !hasBorderLabel,
         },
-        style.textarea
+        style.textarea,
+        autoHeight && style['textarea-autoheight'],
       )}
       required={isRequired}
       defaultValue={defaultValue}
       value={value}
       disabled={disabled}
       placeholder={!hasBorderLabel ? placeholder : ''}
-      style={{ height: 'auto', ...styles }}
+      style={autoHeight ? styles : { height: 'auto', ...styles }}
       autoFocus={autofocus}
       autoComplete={autoComplete}
-    ></textarea>
+      onInput={autoHeight ? adjustHeight : undefined}
+    />
   );
 
   const { borderLabelInput: textAreaWithLabel } = useLabelInput({

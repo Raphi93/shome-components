@@ -1,14 +1,14 @@
 'use client';
 
 import React, { ForwardedRef, forwardRef } from 'react';
-import Link from 'next/link';
 
+import { getConfiguredLinkComponent } from '../../linkConfig';
 import type { ActionWrapperProps } from './ActionElement.type';
 export type { ActionAttributes, ActionWrapperProps } from './ActionElement.type';
 
 export const ActionWrapper = forwardRef(
   (props: ActionWrapperProps, ref: ForwardedRef<any>) => {
-    const { link, isExternalLink, onClick, type, children, defaultsTo, testId, onKeyDown, ...rest } = props;
+    const { link, isExternalLink, linkComponent, prefetch, onClick, type, children, defaultsTo, testId, onKeyDown, ...rest } = props;
     const restWithTestId = { ...rest, ...(testId ? { 'data-testid': testId } : {}) };
 
     if (link) {
@@ -19,12 +19,17 @@ export const ActionWrapper = forwardRef(
           </a>
         );
       }
+      const LinkEl = linkComponent ?? getConfiguredLinkComponent();
       return (
-        <Link href={link} legacyBehavior>
-          <a ref={ref as any} onClick={onClick as any} {...restWithTestId}>
-            {children}
-          </a>
-        </Link>
+        <LinkEl
+          href={link}
+          ref={ref}
+          onClick={onClick}
+          {...(prefetch !== undefined ? { prefetch } : {})}
+          {...restWithTestId}
+        >
+          {children}
+        </LinkEl>
       );
     }
 
