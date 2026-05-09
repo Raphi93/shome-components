@@ -174,11 +174,11 @@ export function ImageLightBox({
                 onTouchEnd={handleTouchEnd}
             >
                 <div className={`${styles['lightbox-toper']} ${isMobile ? styles['is-mobile'] : ''}`}>
-                    <div className={styles['lightbox-filename']}>
-                        {selectedImageState.imageId}
-                        {selectedImageState.format ? `.${selectedImageState.format}` : ''}
-                    </div>
-                    <div className={styles['lightbox-actions']}>
+                    <div className={styles['lightbox-toper-top']}>
+                        <div className={styles['lightbox-filename']}>
+                            {selectedImageState.imageId}
+                            {selectedImageState.format ? `.${selectedImageState.format}` : ''}
+                        </div>
                         {hasFavorit && (
                             <button
                                 className={`${styles['favorit-btn']} ${isFavorit ? styles['is-favorit'] : ''}`}
@@ -188,10 +188,12 @@ export function ImageLightBox({
                                 <FontAwesomeIcon icon={isFavorit ? faStar : faStarOutline} />
                             </button>
                         )}
+                    </div>
+                    {children && (
                         <div className={styles['lightbox-children']}>
                             {children}
                         </div>
-                    </div>
+                    )}
                 </div>
 
                 <div className={styles['lightbox-main']}>
