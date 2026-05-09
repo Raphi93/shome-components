@@ -9,4 +9,7 @@ export interface ImageCardProps {
   onDelete?: () => void;
   onDownload?: () => void;
   onFullScreen?: () => void;
+  hasFavorit?: boolean;
+  isFavorit?: boolean;
+  isFavoritClicked?: () => void;
 }

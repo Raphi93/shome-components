@@ -20,4 +20,7 @@ export interface ImageLightBoxProps {
   selectedImage: ImageDto;
   setSelectedImageParent?: (image: ImageDto) => void;
   onClose: () => void;
+  hasFavorit?: boolean;
+  isFavorit?: boolean;
+  isFavoritClicked?: () => void;
 }

@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faStarOutline } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import type { ImageCardProps } from './ImageCard.type';
 export type { ImageCardMediaType, ImageCardProps } from './ImageCard.type';
@@ -15,6 +18,9 @@ export function ImageCard({
   filename,
   model,
   onFullScreen,
+  hasFavorit,
+  isFavorit,
+  isFavoritClicked,
 }: ImageCardProps) {
   const { t } = useTranslation();
   const [imageError, setImageError] = useState(false);
@@ -75,6 +81,16 @@ export function ImageCard({
 
   return (
     <div className={styles['image-card-container']}>
+      {hasFavorit && (
+        <button
+          className={`${styles['favorit-btn']} ${isFavorit ? styles['is-favorit'] : ''}`}
+          onClick={(e) => { e.stopPropagation(); isFavoritClicked?.(); }}
+          title={isFavorit ? t('Remove from favourites') : t('Add to favourites')}
+        >
+          <FontAwesomeIcon icon={isFavorit ? faStar : faStarOutline} />
+        </button>
+      )}
+
       <div className={styles['image-content']}>
         {typeMapper[type]}
       </div>

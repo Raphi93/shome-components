@@ -25,6 +25,8 @@ export type ShomeTranslationKeys =
   | 'Image'
   | 'Document'
   | 'Iframe'
+  | 'Add to favourites'
+  | 'Remove from favourites'
   // ChatBot
   | 'Type your message...'
   // Pager
@@ -80,6 +82,8 @@ export const shomeTranslations: ShomeTranslations = {
     'Image': 'Bild',
     'Document': 'Dokument',
     'Iframe': 'Eingebetteter Inhalt',
+    'Add to favourites': 'Zu Favoriten hinzufügen',
+    'Remove from favourites': 'Aus Favoriten entfernen',
     // ChatBot
     'Type your message...': 'Nachricht eingeben...',
     // Pager
@@ -131,6 +135,8 @@ export const shomeTranslations: ShomeTranslations = {
     'Image': 'Image',
     'Document': 'Document',
     'Iframe': 'Iframe',
+    'Add to favourites': 'Add to favourites',
+    'Remove from favourites': 'Remove from favourites',
     'Type your message...': 'Type your message...',
     'First page': 'First page',
     'Previous page': 'Previous page',
@@ -175,6 +181,8 @@ export const shomeTranslations: ShomeTranslations = {
     'Image': 'Image',
     'Document': 'Document',
     'Iframe': 'Contenu intégré',
+    'Add to favourites': 'Ajouter aux favoris',
+    'Remove from favourites': 'Retirer des favoris',
     'Type your message...': 'Tapez votre message...',
     'First page': 'Première page',
     'Previous page': 'Page précédente',
@@ -219,6 +227,8 @@ export const shomeTranslations: ShomeTranslations = {
     'Image': 'Immagine',
     'Document': 'Documento',
     'Iframe': 'Contenuto incorporato',
+    'Add to favourites': 'Aggiungi ai preferiti',
+    'Remove from favourites': 'Rimuovi dai preferiti',
     'Type your message...': 'Scrivi il tuo messaggio...',
     'First page': 'Prima pagina',
     'Previous page': 'Pagina precedente',
@@ -263,6 +273,8 @@ export const shomeTranslations: ShomeTranslations = {
     'Image': 'Imagen',
     'Document': 'Documento',
     'Iframe': 'Contenido incrustado',
+    'Add to favourites': 'Añadir a favoritos',
+    'Remove from favourites': 'Quitar de favoritos',
     'Type your message...': 'Escribe tu mensaje...',
     'First page': 'Primera página',
     'Previous page': 'Página anterior',

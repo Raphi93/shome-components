@@ -1,7 +1,8 @@
 'use client';
 
 import { JSX, useEffect, useRef, useState } from 'react';
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faStarOutline } from '@fortawesome/free-regular-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -24,6 +25,9 @@ export function ImageLightBox({
     onClose,
     children,
     setSelectedImageParent,
+    hasFavorit,
+    isFavorit,
+    isFavoritClicked,
 }: ImageLightBoxProps) {
     const { t } = useTranslation();
     const isMobile = usePhonePortraitAndBelowMediaQuery();
@@ -174,8 +178,19 @@ export function ImageLightBox({
                         {selectedImageState.imageId}
                         {selectedImageState.format ? `.${selectedImageState.format}` : ''}
                     </div>
-                    <div className={styles['lightbox-children']}>
-                        {children}
+                    <div className={styles['lightbox-actions']}>
+                        {hasFavorit && (
+                            <button
+                                className={`${styles['favorit-btn']} ${isFavorit ? styles['is-favorit'] : ''}`}
+                                onClick={(e) => { e.stopPropagation(); isFavoritClicked?.(); }}
+                                title={isFavorit ? t('Remove from favourites') : t('Add to favourites')}
+                            >
+                                <FontAwesomeIcon icon={isFavorit ? faStar : faStarOutline} />
+                            </button>
+                        )}
+                        <div className={styles['lightbox-children']}>
+                            {children}
+                        </div>
                     </div>
                 </div>
 
