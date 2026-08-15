@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { SidebarItem } from './SidebarItem';
@@ -15,9 +15,6 @@ export type { SidebarProps } from './Sidebar.type';
 export { useIsOverflow, LabelNameWithTooltip } from './SidebarLabel';
 
 import './Sidebar.scss';
-
-const normalize = (p: string) => p.replace(/\/+$/, "");
-
 
 export function Sidebar({
   className,
@@ -39,7 +36,6 @@ export function Sidebar({
   brandName,
 }: SidebarProps) {
   const { t } = useTranslation();
-  useMemo(() => normalize(`${location.pathname}${location.search}`), [location.pathname, location.search]);
 
   const [parentClick, setParentClick] = useState("");
   const [parentExpander, setParentExpander] = useState(false);

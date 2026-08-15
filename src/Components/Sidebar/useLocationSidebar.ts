@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { NavigationItem } from '../../types';
 
@@ -117,6 +117,23 @@ function findBest(menu: NavigationItem[], path: string, search: string): Best | 
   return best;
 }
 
+// Builds a stable structural fingerprint of the menu's links so the effect
+// below can depend on "did the menu's shape actually change" rather than on
+// object identity. Consumers that (reasonably) rebuild their menu array on
+// every render — e.g. `menu={getMenu(t, roles)}` without memoizing — would
+// otherwise re-run this effect (and its setState calls) on every render,
+// which visibly manifests as constant re-rendering of the sidebar/logo.
+function menuFingerprint(menu: NavigationItem[] | null): string {
+  if (!menu?.length) return "";
+  const parts: string[] = [];
+  const visit = (node: NavigationItem) => {
+    parts.push(node.link ?? "");
+    node.children?.forEach(visit);
+  };
+  menu.forEach(visit);
+  return parts.join("|");
+}
+
 export function useLocationSidebar(menu: NavigationItem[] | null): Result {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -131,30 +148,42 @@ export function useLocationSidebar(menu: NavigationItem[] | null): Result {
   const [leafClick, setLeafClick] = useState("");
   const [pathClicks, setPathClicks] = useState<string[]>([]);
 
+  const menuRef = useRef(menu);
+  menuRef.current = menu;
+
+  const menuKey = useMemo(() => menuFingerprint(menu), [menu]);
+
   useEffect(() => {
-    if (!menu?.length) return;
+    const currentMenu = menuRef.current;
+    if (!currentMenu?.length) return;
 
     const path = pathname || "/";
-    let best = findBest(menu, path, search);
+    let best = findBest(currentMenu, path, search);
 
     if (best === null) {
-      const trimmedPath = trimDynamicSubPath(menu, path);
-      best = findBest(menu, trimmedPath, search);
+      const trimmedPath = trimDynamicSubPath(currentMenu, path);
+      best = findBest(currentMenu, trimmedPath, search);
     }
 
     if (best === null) {
-      setParentClick("");
-      setChildClick("");
-      setLeafClick("");
-      setPathClicks([]);
+      setParentClick((prev) => (prev === "" ? prev : ""));
+      setChildClick((prev) => (prev === "" ? prev : ""));
+      setLeafClick((prev) => (prev === "" ? prev : ""));
+      setPathClicks((prev) => (prev.length === 0 ? prev : []));
       return;
     }
 
-    setPathClicks(best.names);
-    setParentClick(best.names[0] ?? "");
-    setChildClick(best.names[1] ?? "");
-    setLeafClick(best.names[best.names.length - 1] ?? "");
-  }, [pathname, search, menu]);
+    const names = best.names;
+    setPathClicks((prev) =>
+      prev.length === names.length && prev.every((v, i) => v === names[i]) ? prev : names
+    );
+    setParentClick((prev) => (prev === (names[0] ?? "") ? prev : names[0] ?? ""));
+    setChildClick((prev) => (prev === (names[1] ?? "") ? prev : names[1] ?? ""));
+    setLeafClick((prev) => {
+      const next = names[names.length - 1] ?? "";
+      return prev === next ? prev : next;
+    });
+  }, [pathname, search, menuKey]);
 
   return { parentClick, childClick, leafClick, pathClicks };
 }

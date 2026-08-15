@@ -1,7 +1,7 @@
 .header-content {
   /* Header's own tokens — default to the shared chrome colors, individually overridable */
-  --header-icon-bg: var(--color-mod-nav-theme-header-color);
-  --header-title-color: var(--color-mod-nav-theme-header-color);
+  --header-icon-bg: var(--color-header-fg);
+  --header-title-color: var(--color-header-fg);
   --header-subtitle-color: var(--color-text);
   --header-env-color: var(--color-primary);
 

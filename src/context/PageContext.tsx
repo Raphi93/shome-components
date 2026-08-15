@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 import { Message } from "..";
 
 export type MessageType = "info" | "success" | "warning" | "error";
@@ -16,8 +16,16 @@ export const PageProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
   const [pageTitle, setPageTitle] = useState<string | null>(null);
   const [message, setMessage] = useState<Message | null>(null);
 
+  // Stable reference: PageProvider wraps the entire app's content, so an
+  // unmemoized value object here would re-render every consumer (and
+  // everything below them) on every single render of this provider.
+  const value = useMemo(
+    () => ({ pageTitle, setPageTitle, message, setMessage }),
+    [pageTitle, setPageTitle, message, setMessage]
+  );
+
   return (
-    <PageContext.Provider value={{ pageTitle, setPageTitle, message, setMessage }}>
+    <PageContext.Provider value={value}>
       {children}
     </PageContext.Provider>
   );

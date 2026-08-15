@@ -288,11 +288,11 @@
    --nav-current-module-color: var(--color-primary-strong);
 
    /* Base default: light chrome on light mode */
-   --color-mod-nav-theme-header: var(--color-white);
-   --color-mod-nav-theme-header-color: var(--color-primary-strong);
+   --color-header-bg: var(--color-white);
+   --color-header-fg: var(--color-primary-strong);
 
-   --color-mod-nav-theme: var(--color-primary-strong);
-   --color-mod-nav-theme-contrast: var(--color-white);
+   --color-sidebar-bg: var(--color-primary-strong);
+   --color-sidebar-fg: var(--color-white);
 
    /* Backgrounds (aliases) */
    --color-card-background: var(--color-background);
@@ -304,11 +304,11 @@
    /* Sidebar */
    --color-sidebar-text: var(--color-white);
    --color-sidebar-selected: var(--color-primary-soft);
-   --color-sidebar-selected-text: var(--color-white);
+   --color-sidebar-selected-text: var(--color-text);
    --color-sidebar-env-text: var(--color-gray-400);
 
-   --sidebar-level-0-color: var(--color-gray-900);
-   --sidebar-level-1-color: var(--color-black);
+   --color-sidebar-submenu-bg: var(--color-gray-900);
+   --color-sidebar-submenu-bg-deep: var(--color-black);
    --color-sidebar-selected-child: var(--color-gray-800);
    --color-sidebar-selected-subchild: var(--color-gray-700);
 
@@ -497,18 +497,18 @@
    --nav-toggle-color:         var(--color-gray-50);
    --nav-current-module-color: var(--color-gray-50);
 
-   --color-mod-nav-theme-header:       var(--color-black);
-   --color-mod-nav-theme-header-color: var(--color-gray-50);
-   --color-mod-nav-theme:              var(--color-gray-900);
-   --color-mod-nav-theme-contrast:     var(--color-gray-50);
+   --color-header-bg:       var(--color-black);
+   --color-header-fg: var(--color-gray-50);
+   --color-sidebar-bg:              var(--color-gray-900);
+   --color-sidebar-fg:     var(--color-gray-50);
 
    /* Sidebar */
-   --sidebar-level-0-color: #000000;
-   --sidebar-level-1-color: #000000;
+   --color-sidebar-submenu-bg: #000000;
+   --color-sidebar-submenu-bg-deep: #000000;
 
    --color-sidebar-text:          var(--color-gray-100);
    --color-sidebar-selected:      var(--color-primary-soft);
-   --color-sidebar-selected-text: var(--color-white);
+   --color-sidebar-selected-text: var(--color-text);
    --color-sidebar-env-text:      var(--color-gray-500);
 
    --color-sidebar-selected-child:          var(--color-gray-800);

@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { getConfiguredLinkComponent } from '../../linkConfig';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../Tooltip';
 
 import { SidebarChildItem } from "./SidebarChildItem";
@@ -123,6 +123,8 @@ export function SidebarItem({
       <img src={iconImage ?? ""} alt={itemName} className="menu-icon-image" onClick={() => toggleParent()} />
     );
 
+  const LinkEl = getConfiguredLinkComponent();
+
   const wrappedIcon = !expanded ? (
     <Tooltip>
       <TooltipTrigger asChild className="tooltip-menus" onClick={() => toggleParent()}>{iconElement}</TooltipTrigger>
@@ -144,11 +146,11 @@ export function SidebarItem({
               {item.icon && item.icon !== "" && wrappedIcon}
             </a>
           ) : (
-            <Link to={item.link} onClick={(e) => {
+            <LinkEl href={item.link} onClick={(e: React.MouseEvent) => {
               toggleParent();
             }}>
               {item.icon && item.icon !== "" && wrappedIcon}
-            </Link>
+            </LinkEl>
           )
         ) : (
 
@@ -168,9 +170,9 @@ export function SidebarItem({
                   <LabelNameWithTooltip itemName={itemName} rights={item.svg} t={t} />
                 </a>
               ) : (
-                <Link to={item.link} className="menu-link">
+                <LinkEl href={item.link} className="menu-link">
                   <LabelNameWithTooltip itemName={itemName} rights={item.svg} t={t} />
-                </Link>
+                </LinkEl>
               )
             ) : (
               <div

@@ -119,24 +119,24 @@
   --scrollbar-color-active: var(--color-primary);
 
   /* Navigation (module/header chrome) */
-  --color-mod-nav-theme:              var(--color-primary);
-  --color-mod-nav-theme-contrast:     var(--color-white);
-  --color-mod-nav-theme-header:       var(--color-white);
-  --color-mod-nav-theme-header-color: var(--color-primary);
+  --color-sidebar-bg:              var(--color-primary);
+  --color-sidebar-fg:     var(--color-primary-contrast);
+  --color-header-bg:       var(--color-white);
+  --color-header-fg: var(--color-primary);
 
   /* Sidebar */
-  --sidebar-level-0-color: var(--color-gray-900);
-  --sidebar-level-1-color: var(--color-black);
+  --color-sidebar-submenu-bg: var(--color-primary-strong);
+  --color-sidebar-submenu-bg-deep: var(--color-primary);
 
-  --color-sidebar-text:                   var(--color-white);
-  --color-sidebar-sub-menu:               var(--color-gray-800);
+  --color-sidebar-text:                   var(--color-primary-contrast);
+  --color-sidebar-mobile-panel-bg:               var(--color-primary-strong);
   --color-sidebar-selected:                var(--color-primary-soft);
-  --color-sidebar-selected-text:           var(--color-white);
-  --color-sidebar-selected-child:          var(--color-gray-800);
-  --color-sidebar-selected-child-text:     var(--color-white);
-  --color-sidebar-selected-subchild:       var(--color-gray-700);
-  --color-sidebar-selected-subchild-text:  var(--color-white);
-  --color-sidebar-env-text:                var(--color-gray-400);
+  --color-sidebar-selected-text:           var(--color-text);
+  --color-sidebar-selected-child:          var(--color-primary-strong);
+  --color-sidebar-selected-child-text:     var(--color-primary-contrast);
+  --color-sidebar-selected-subchild:       var(--color-primary);
+  --color-sidebar-selected-subchild-text:  var(--color-primary-contrast);
+  --color-sidebar-env-text:                var(--color-primary-contrast);
 
   /* Grid (library Grid component; sHome-web's own GridDynamic uses its own
      --grid-head-* aliases, defined at the app level, not here) */
@@ -148,17 +148,22 @@
   --filter-icon:          invert(0);
   --filter-icon-selected: invert(0);
 
+  /* Sidebar logo image (assumed white/light source asset, made for a dark
+     or colored sidebar). Themes with a light sidebar background must flip
+     this to invert(1) so the logo stays visible. */
+  --filter-sidebar-logo: invert(0);
+
   /* ── Per-component tokens ──
      Every component below owns its tokens (also defined inline in its own
      stylesheet as a safe default). Mapped here centrally so a consuming app
      can override one component without touching its file. */
-  --header-icon-bg:       var(--color-mod-nav-theme-header-color);
-  --header-title-color:   var(--color-mod-nav-theme-header-color);
+  --header-icon-bg:       var(--color-header-fg);
+  --header-title-color:   var(--color-header-fg);
   --header-subtitle-color: var(--color-text);
   --header-env-color:     var(--color-primary);
 
-  --layout-sidebar-bg:      var(--color-mod-nav-theme);
-  --layout-header-bg:       var(--color-mod-nav-theme-header);
+  --layout-sidebar-bg:      var(--color-sidebar-bg);
+  --layout-header-bg:       var(--color-header-bg);
   --layout-scrollbar-color: var(--color-sidebar-selected);
 
   --tooltip-bg:         var(--color-overlay-dark);
@@ -359,25 +364,27 @@
   --filter-icon:          invert(1);
   --filter-icon-selected: invert(1);
 
+  --filter-sidebar-logo: invert(0);
+
   /* Navigation */
-  --color-mod-nav-theme:              var(--color-gray-900);
-  --color-mod-nav-theme-contrast:     var(--color-gray-50);
-  --color-mod-nav-theme-header:       var(--color-black);
-  --color-mod-nav-theme-header-color: var(--color-gray-50);
+  --color-sidebar-bg:              var(--color-primary);
+  --color-sidebar-fg:     var(--color-primary-contrast);
+  --color-header-bg:       var(--color-black);
+  --color-header-fg: var(--color-primary);
 
   /* Sidebar */
-  --sidebar-level-0-color: #000000;
-  --sidebar-level-1-color: #000000;
+  --color-sidebar-submenu-bg: var(--color-primary-strong);
+  --color-sidebar-submenu-bg-deep: var(--color-primary);
 
-  --color-sidebar-text:                   var(--color-gray-100);
-  --color-sidebar-sub-menu:               var(--color-gray-900);
+  --color-sidebar-text:                   var(--color-primary-contrast);
+  --color-sidebar-mobile-panel-bg:               var(--color-primary-strong);
   --color-sidebar-selected:                var(--color-primary-soft);
-  --color-sidebar-selected-text:           var(--color-white);
-  --color-sidebar-selected-child:          var(--color-gray-800);
-  --color-sidebar-selected-child-text:     var(--color-white);
-  --color-sidebar-selected-subchild:       var(--color-gray-700);
-  --color-sidebar-selected-subchild-text:  var(--color-white);
-  --color-sidebar-env-text:                var(--color-gray-500);
+  --color-sidebar-selected-text:           var(--color-text);
+  --color-sidebar-selected-child:          var(--color-primary-strong);
+  --color-sidebar-selected-child-text:     var(--color-primary-contrast);
+  --color-sidebar-selected-subchild:       var(--color-primary);
+  --color-sidebar-selected-subchild-text:  var(--color-primary-contrast);
+  --color-sidebar-env-text:                var(--color-primary-contrast);
 
   /* Grid */
   --color-grid-hover:          rgba(255, 255, 255, 0.06);

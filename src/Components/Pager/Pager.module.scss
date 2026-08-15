@@ -22,7 +22,7 @@
   align-items: flex-start;
   flex-wrap: wrap;
   width: 100%;
-  box-shadow: inset 0 0 0 rem(1px) var(--color-gray-300);
+  box-shadow: inset 0 0 0 rem(1px) var(--pager-border);
   background-color: var(--pager-surface);
   border-radius: var(--border-radius);
   padding: 0 calc(var(--spacing) * 0.5);
@@ -41,7 +41,7 @@
 
 //.grid-responsive +.pagination {
 .connected {
-  box-shadow: 0 0 0 rem(1px) var(--color-gray-300);
+  box-shadow: 0 0 0 rem(1px) var(--pager-border);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   max-width: 100%;
@@ -141,10 +141,10 @@
   }
 
   select {
-    border: rem(1px) solid var(--color-gray-300);
+    border: rem(1px) solid var(--pager-select-border);
     border-radius: var(--border-radius);
-    color: var(--input-color, var(--color-black));
-    background-color: var(--input-background, var(--color-white));
+    color: var(--pager-select-text);
+    background-color: var(--pager-select-surface);
     line-height: calc(var(--spacing) * 3.5);
     height: calc(var(--spacing) * 4);
     min-width: calc(var(--spacing) * 7.5);

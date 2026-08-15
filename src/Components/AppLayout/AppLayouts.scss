@@ -1,7 +1,7 @@
 :root {
   /* AppLayout's own tokens — default to the shared chrome colors, individually overridable */
-  --layout-sidebar-bg: var(--color-mod-nav-theme);
-  --layout-header-bg: var(--color-mod-nav-theme-header);
+  --layout-sidebar-bg: var(--color-sidebar-bg);
+  --layout-header-bg: var(--color-header-bg);
   --layout-scrollbar-color: var(--color-sidebar-selected);
 
   --scrollbar-size: 0.3rem;

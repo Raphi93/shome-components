@@ -112,12 +112,12 @@ $nav-actions-color: var(--color-gray-800);
 
 //header toggle svg color, button style
 
-$nav-toggle-color: var(--color-mod-nav-theme-contrast);
+$nav-toggle-color: var(--color-sidebar-fg);
 $nav-toggle-border-radius: var(--nav-border-radius) rem(20px) rem(20px) var(--nav-border-radius);
 
 //module nav current item svg color
 
-$nav-current-module-color: var(--color-mod-nav-theme-contrast);
+$nav-current-module-color: var(--color-sidebar-fg);
 
 :root {
   // 8px grid baseline spacing

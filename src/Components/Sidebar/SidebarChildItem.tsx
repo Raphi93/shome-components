@@ -2,10 +2,10 @@
 
 
 import React, { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { getConfiguredLinkComponent } from '../../linkConfig';
 import { LabelNameWithTooltip } from './SidebarLabel';
 import { NavigationItem } from '../../types';
 
@@ -97,14 +97,19 @@ export function SidebarChildItem({
               <LabelNameWithTooltip itemName={node.name} rights={node.svg} t={t} />
             </a>
           ) : (
-            <Link
-              href={node.link}
-              className={`menu-link`}
-              onClick={(e) => e.stopPropagation()}
-              style={{ width: `calc(var(--sidebar-extended-width) - 5.40rem - ${level !== 0 ? level * 0.5 : 0}rem)` }}
-            >
-              <LabelNameWithTooltip itemName={node.name} rights={node.svg} t={t} />
-            </Link>
+            (() => {
+              const LinkEl = getConfiguredLinkComponent();
+              return (
+                <LinkEl
+                  href={node.link}
+                  className={`menu-link`}
+                  onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                  style={{ width: `calc(var(--sidebar-extended-width) - 5.40rem - ${level !== 0 ? level * 0.5 : 0}rem)` }}
+                >
+                  <LabelNameWithTooltip itemName={node.name} rights={node.svg} t={t} />
+                </LinkEl>
+              );
+            })()
           )
         ) : (
           <div className={`menu-link`}>

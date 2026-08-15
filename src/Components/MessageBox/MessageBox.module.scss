@@ -22,8 +22,7 @@
   color: var(--color-text);
   box-shadow: 0 0 0 rem(1px) var(--msgbox-border, var(--color-gray-300)), var(--shadow-00);
   margin-bottom: calc(var(--spacing) * 2);
-  padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 3);
-  padding-left: calc(var(--spacing) * 7.5);
+  padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 5) calc(var(--spacing) * 1.5) calc(var(--spacing) * 7.5);
   position: relative;
   transform-origin: top left;
 
@@ -77,11 +76,17 @@
     &::after {
       background: var(--color-primary-soft);
     }
+    .typeIcon {
+      color: var(--color-primary-strong);
+    }
   }
 
   &.success {
     &::after {
       background: var(--color-success-soft);
+    }
+    .typeIcon {
+      color: var(--color-success-strong);
     }
   }
 
@@ -89,11 +94,17 @@
     &::after {
       background: var(--color-warning);
     }
+    .typeIcon {
+      color: var(--color-text-inverted);
+    }
   }
 
   &.error {
     &::after {
       background: var(--color-danger);
+    }
+    .typeIcon {
+      color: var(--color-text-inverted);
     }
   }
 
@@ -172,8 +183,8 @@
 .typeIcon {
   position: absolute;
   left: calc(var(--spacing) * 6 / 2); // centered on the stripe
-  top: calc(var(--spacing) * 1.2);
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   z-index: 4;
 
   width: rem(30px);
@@ -219,8 +230,8 @@
   position: absolute;
   text-align: center;
   padding: calc(var(--spacing) * 0.5) var(--spacing);
-  top: 0;
-  right: 0;
+  top: calc(var(--spacing) * 0.5);
+  right: calc(var(--spacing) * 0.5);
   z-index: 5;
   cursor: pointer;
   color: var(--color-text);

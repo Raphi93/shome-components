@@ -4,10 +4,10 @@
 // SidebarSubChild.tsx
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Link from "next/link";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faArrowLeft, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getConfiguredLinkComponent } from '../../linkConfig';
 import { Tooltip, TooltipContent, TooltipTrigger } from "../Tooltip/Tooltip";
 import { NavigationItem } from '../../types';
 
@@ -92,6 +92,8 @@ export function SidebarSubChild({
 
   const className = !isMobile ? `submenu-full ${isSubChild ? "is-visible" : "not-visible"}` : `submenu-full-mobile ${isSubChild ? "is-visible" : "not-visible"}`;
 
+  const LinkEl = getConfiguredLinkComponent();
+
   return (
     <div className={className}>
       <div className="submenu-full-header">
@@ -130,10 +132,10 @@ export function SidebarSubChild({
             {child.name}
           </a>
         ) : (
-          <Link href={child.link ?? ""} className={'submenu-full-title' + (isChildSelected ? " selected" : "")} onClick={() => setChildClick && setChildClick(child.name)}>
+          <LinkEl href={child.link ?? ""} className={'submenu-full-title' + (isChildSelected ? " selected" : "")} onClick={() => setChildClick && setChildClick(child.name)}>
             {child.icon && iconElement}
             {child.name}
-          </Link>
+          </LinkEl>
         )}
         <ul>
           {subChild?.map((item) => {
@@ -152,9 +154,9 @@ export function SidebarSubChild({
                     {item.name}
                   </a>
                 ) : (
-                  <Link href={item.link ?? ""} className={cls}>
+                  <LinkEl href={item.link ?? ""} className={cls}>
                     {item.name}
-                  </Link>
+                  </LinkEl>
                 )}
               </li>
             );
