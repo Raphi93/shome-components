@@ -21,6 +21,13 @@
 /* ── 01) LIGHT MODE (default) ──────────────────────────────────────────────── */
 
 :root {
+  /* Tells the browser to render native form chrome (select dropdown
+     popups, scrollbars, date pickers) accordingly — without this the
+     popup stays browser-default-light even under [data-theme="dark"].
+     Overridable like every other token. */
+  --color-scheme: light;
+  color-scheme: var(--color-scheme);
+
   /* Neutrals — fixed scale, 50 = lightest, 900 = darkest, same meaning in both modes */
   --color-white: #ffffff;
   --color-black: #0a0a0a;
@@ -293,6 +300,9 @@
 
 :root[data-theme="dark"],
 [data-theme="dark"] {
+  --color-scheme: dark;
+  color-scheme: var(--color-scheme);
+
   /* Primary flips: white by default on a dark background */
   --color-primary:          var(--color-gray-50);
   --color-primary-strong:   var(--color-white);

@@ -7,27 +7,27 @@ export const getMultiSelectStyles = (color?: string, colorActive?: string) => {
     menu: (provided: CSSObjectWithLabel) => ({
       ...provided,
       zIndex: 100,
-      backgroundColor: 'var(--input-background, #ffffff)',
-      color: 'var(--color-text, inherit)',
+      backgroundColor: 'var(--select-menu-bg)',
+      color: 'var(--select-text)',
     }),
     option: (provided: CSSObjectWithLabel, state: any) => ({
       ...provided,
       cursor: 'pointer',
       minHeight: '40px',
       backgroundColor: state.isSelected
-        ? 'var(--color-primary-strong)'
+        ? 'var(--select-option-selected-bg)'
         : state.isFocused
-        ? 'var(--color-primary-soft, #addcff)'
-        : 'var(--input-background, #ffffff)',
-      color: state.isSelected ? '#ffffff' : 'var(--color-text, inherit)',
+        ? 'var(--select-option-focused-bg)'
+        : 'var(--select-option-bg)',
+      color: state.isSelected ? 'var(--select-option-selected-text)' : 'var(--select-text)',
     }),
     control: (provided: CSSObjectWithLabel, state: ControlProps<TSelectOption>) => ({
       ...provided,
       cursor: 'pointer',
-      backgroundColor: state.isDisabled ? 'var(--color-gray-100)' : 'var(--input-background, #ffffff)',
+      backgroundColor: state.isDisabled ? 'var(--select-control-bg-disabled)' : 'var(--select-control-bg)',
       boxShadow: state.isFocused ? '0 0 0 2px var(--input-focus-outline-color)' : provided.borderColor,
-      borderColor: state.isFocused ? 'var(--color-primary-strong)' : 'var(--color-gray-400)',
-      color: 'var(--color-text, inherit)',
+      borderColor: state.isFocused ? 'var(--select-control-border-focused)' : 'var(--select-control-border)',
+      color: 'var(--select-text)',
       paddingTop: '1px',
       paddingBottom: '1px',
     }),
@@ -35,21 +35,21 @@ export const getMultiSelectStyles = (color?: string, colorActive?: string) => {
       ...provided,
       marginTop: '8px',
       height: '20px',
-      backgroundColor: colorActive ? colorActive : 'var(--color-primary)',
+      backgroundColor: colorActive ? colorActive : 'var(--select-multi-value-bg)',
     }),
     multiValueLabel: (provided: CSSObjectWithLabel) => ({
       ...provided,
       display: 'flex',
       alignItems: 'center',
-      color: 'white',
+      color: 'var(--select-multi-value-text)',
     }),
     multiValueRemove: (provided: CSSObjectWithLabel) => ({
       ...provided,
-      color: 'white',
+      color: 'var(--select-multi-value-remove-text)',
 
       ':hover': {
-        backgroundColor: color ? color : 'var(--color-primary-strong)',
-        color: 'white',
+        backgroundColor: color ? color : 'var(--select-multi-value-remove-hover-bg)',
+        color: 'var(--select-multi-value-remove-hover-text)',
       },
     }),
   };

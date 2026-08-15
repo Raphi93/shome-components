@@ -19,6 +19,11 @@
 }
 
 .select {
+  /* Select's own token — defaults to the shared palette, individually
+     overridable. Drives the native dropdown popup's light/dark chrome
+     (browsers don't infer this from background-color alone). */
+  --select-color-scheme: var(--color-scheme);
+
   position: relative;
   display: flex;
   flex-direction: column;
@@ -30,6 +35,7 @@
 
   select {
     cursor: pointer;
+    color-scheme: var(--select-color-scheme);
 
     &::-ms-expand {
       display: none;

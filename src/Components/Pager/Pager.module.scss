@@ -13,6 +13,7 @@
   --pager-select-text: var(--input-color, var(--color-gray-900));
   --pager-select-border: var(--input-border, var(--color-gray-300));
   --pager-select-chevron: var(--input-placeholder-color, #6c7a86);
+  --pager-select-color-scheme: var(--color-scheme);
 }
 
 // Pagination
@@ -145,6 +146,7 @@
     border-radius: var(--border-radius);
     color: var(--pager-select-text);
     background-color: var(--pager-select-surface);
+    color-scheme: var(--pager-select-color-scheme);
     line-height: calc(var(--spacing) * 3.5);
     height: calc(var(--spacing) * 4);
     min-width: calc(var(--spacing) * 7.5);

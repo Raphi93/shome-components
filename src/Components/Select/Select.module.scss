@@ -1,6 +1,24 @@
 /* Select's own tokens — default to the shared palette, individually overridable */
 :root {
   --select-label-color: var(--input-label-color, var(--color-gray-800));
+
+  /* react-select (multi/creatable select) — every color routed through a
+     token so a theme (see Base.css) can set every single one explicitly. */
+  --select-menu-bg: var(--input-background, var(--color-white));
+  --select-text: var(--color-text);
+  --select-option-bg: var(--input-background, var(--color-white));
+  --select-option-focused-bg: var(--color-primary-soft);
+  --select-option-selected-bg: var(--color-primary-strong);
+  --select-option-selected-text: var(--color-primary-contrast);
+  --select-control-bg: var(--input-background, var(--color-white));
+  --select-control-bg-disabled: var(--color-gray-100);
+  --select-control-border: var(--color-gray-400);
+  --select-control-border-focused: var(--color-primary-strong);
+  --select-multi-value-bg: var(--color-primary);
+  --select-multi-value-text: var(--color-primary-contrast);
+  --select-multi-value-remove-text: var(--color-primary-contrast);
+  --select-multi-value-remove-hover-bg: var(--color-primary-strong);
+  --select-multi-value-remove-hover-text: var(--color-primary-contrast);
 }
 
 .label {

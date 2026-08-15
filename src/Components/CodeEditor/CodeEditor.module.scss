@@ -16,6 +16,7 @@
   --ce-statusbar:    #007acc;
   --ce-statusbar-text: #ffffff;
   --ce-border:       #3c3c3c;
+  --ce-select-color-scheme: dark;
   --ce-icon:         #858585;
   --ce-icon-hover:   #cccccc;
   --ce-modified:     #e8a838;
@@ -181,6 +182,7 @@
   border:       none;
   background:   var(--ce-tab-bg);
   color:        var(--ce-tab-text);
+  color-scheme: var(--ce-select-color-scheme);
   font-size:    12px;
   cursor:       pointer;
   border-left:  1px solid var(--ce-border);
