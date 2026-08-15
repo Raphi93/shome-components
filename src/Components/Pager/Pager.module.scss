@@ -2,11 +2,11 @@
 
 :root {
   /* Pager tokens (theme override friendly) */
-  --pager-surface: var(--color-gray-200);
+  --pager-surface: var(--color-gray-100);
   --pager-border: var(--color-gray-300);
   --pager-text: var(--color-gray-900);
   --pager-muted-text: var(--color-gray-700);
-  --pager-current-surface: var(--color-primary-dark);
+  --pager-current-surface: var(--color-primary-strong);
   --pager-current-text: var(--color-text-inverted);
 
   --pager-select-surface: var(--input-background, var(--color-white));
@@ -155,7 +155,7 @@
     &:active,
     &:focus {
       outline: none;
-      border-color: var(--color-primary-dark);
+      border-color: var(--color-primary-strong);
       box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
     }
   }

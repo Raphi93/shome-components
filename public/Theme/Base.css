@@ -1,10 +1,13 @@
 /* =============================================================================
-   BASE.css (single file)
-   - Core (no colors)
-   - Default colors (light)
-   - Component aliases (uses tokens)
-   - Dark mode overrides (ONLY colors + aliases)
-   - Themes will be separate css files later
+   BASE.css — the default theme for sHome-web.
+   Mirrors @raphi93/shome-components' `_colors.scss` token names exactly, so a
+   consuming app only ever has to override --color-primary / --color-secondary
+   (and, for a special case, one individual component token) to re-theme.
+   - 01) Core (no colors)
+   - 02) Default colors (light)
+   - 03) Component aliases (uses tokens above)
+   - 04) Dark mode overrides (ONLY colors + aliases)
+   Other themes are separate css files that override the same token names.
    ============================================================================= */
 
 
@@ -106,8 +109,8 @@
    --scrollbar-size: 0.375rem;
 
    /* Icons */
-   --clickableDownSymbol: ;
-   --clickableUpSymbol: ;
+   --clickableDownSymbol: ;
+   --clickableUpSymbol: ;
 
    /* Grid / Container */
    --main-max-width: 1600px;
@@ -152,60 +155,68 @@
 
 
 /* =============================================================================
-   02) COLOR TOKENS (DEFAULT / LIGHT)
+   02) COLOR TOKENS (DEFAULT / LIGHT) — same names as _colors.scss
    ============================================================================= */
 
 :root {
-   /* Overlays */
-   --color-overlay-dark: #00000080;
-   --color-overlay-dar-opaque: #999;
-   /* keeping original name */
-   --color-overlay-light: #ffffff80;
+   /* Overlay */
+   --color-overlay-dark: rgba(0, 0, 0, 0.5);
 
-   /* Neutrals */
-   --color-white: #fff;
-   --color-black: #212121;
+   /* Neutrals — 50 = lightest, 900 = darkest, fixed meaning in both modes */
+   --color-white: #ffffff;
+   --color-black: #0a0a0a;
 
-   --color-gray-100: #fafafa;
-   --color-gray-200: #f7f7f7;
-   --color-gray-250: #f2f2f2;
-   --color-gray-275: #e5e5e5;
-   --color-gray-300: #e0e0e0;
-   --color-gray-400: #bdbdbd;
-   --color-gray-500: #9e9e9e;
-   --color-gray-600: #707070;
-   --color-gray-700: #616161;
-   --color-gray-800: #424242;
-   --color-gray-900: #212121;
+   --color-gray-50:  #fafafa;
+   --color-gray-100: #f5f5f5;
+   --color-gray-200: #e5e5e5;
+   --color-gray-300: #d4d4d4;
+   --color-gray-400: #a3a3a3;
+   --color-gray-500: #737373;
+   --color-gray-600: #525252;
+   --color-gray-700: #404040;
+   --color-gray-800: #262626;
+   --color-gray-900: #171717;
 
-   /* Semantic */
-   --color-positive: #82bc3c;
-   --color-positive-dark: #5a8229;
-   --color-positive-light: #93c853;
-   --color-positive-rgb: 130, 188, 60;
-
-   --color-negative: #d64856;
-   --color-negative-dark: #ab2633;
-   --color-negative-light: #dd6571;
-   --color-negative-rgb: 214, 72, 86;
-
-   --color-warning: #ffc000;
-   --color-warning-dark: #e6ad00;
-   --color-warning-light: #ffd34d;
-   --color-warning-rgb: 255, 192, 0;
-
-   /* Named */
+   /* Named (charts, one-off accents) */
    --color-red: #db111d;
    --color-blue: #0f89dc;
-   --color-blue-dark: #0d6efd;
    --color-green: #00a368;
    --color-purple: #884dd3;
-   --color-orange: #ffc000;
+   --color-orange: #f59e0b;
    --color-yellow: #ffd966;
-   --color-peach: #feb8a4;
 
-   /* Charts / Reports */
-   --color-chart-bar: var(--color-primary-dark);
+   /* ── Primary — the single brand/interactive color. Black by default. ── */
+   --color-primary:          var(--color-gray-900);
+   --color-primary-strong:   var(--color-black);
+   --color-primary-soft:     var(--color-gray-100);
+   --color-primary-contrast: var(--color-white);
+   --color-primary-rgb:      23, 23, 23;
+
+   /* ── Secondary — neutral counterpart to primary ── */
+   --color-secondary:          var(--color-gray-600);
+   --color-secondary-strong:   var(--color-gray-700);
+   --color-secondary-soft:     var(--color-gray-100);
+   --color-secondary-contrast: var(--color-white);
+   --color-secondary-rgb:      82, 82, 82;
+
+   /* ── Status — kept colorful on purpose ── */
+   --color-success: #16a34a;
+   --color-success-strong: #15803d;
+   --color-success-soft: #dcfce7;
+   --color-success-rgb: 22, 163, 74;
+
+   --color-danger: #dc2626;
+   --color-danger-strong: #b91c1c;
+   --color-danger-soft: #fee2e2;
+   --color-danger-rgb: 220, 38, 38;
+
+   --color-warning: #f59e0b;
+   --color-warning-strong: #b45309;
+   --color-warning-soft: #fef3c7;
+   --color-warning-rgb: 245, 158, 11;
+
+   /* Charts / Reports (sHome-web only) */
+   --color-chart-bar: var(--color-primary-strong);
 
    --color-reports-green: #c6efce;
    --color-reports-red: #ffc7ce;
@@ -221,28 +232,13 @@
    --color-reports-accent-orange: #F36A20;
    --color-reports-accent-red: #E15759;
 
-   /* Brand / Primary */
-   --color-brand: #6592CC;
-   --color-brand-rgb: 31, 106, 156;
-   --color-brand-contrast: #fefeff;
-
-   --color-primary-darkest: #00467a;
-   --color-primary-dark: #044680;
-   --color-primary-semidark: #0072c6;
-   --color-primary: #6592CC;
-   --color-primary-light: #B7D2EC;
-   --color-primary-base: #0072c6;
-
-   --color-primary-rgb: 0, 114, 198;
-   --color-primary-contrast: #e5f2ff;
-
    /* =========================
      THEME REQUIRED TOKENS
      (Pflicht für Themes)
      ========================= */
    --color-background: var(--color-white);
-   --color-surface: var(--color-gray-100);
-   --color-border: var(--color-gray-275);
+   --color-surface: var(--color-gray-50);
+   --color-border: var(--color-gray-200);
    --color-text: var(--color-gray-900);
    --color-text-muted: var(--color-gray-600);
 
@@ -254,8 +250,8 @@
    --input-placeholder-color: var(--color-text-muted);
 
    /* Focus / press */
-   --input-focus-outline-color: var(--color-brand);
-   --color-press-effect: var(--color-primary-semidark);
+   --input-focus-outline-color: var(--color-primary);
+   --color-press-effect: var(--color-primary-strong);
    --color-label-active: var(--color-press-effect);
 
    /* Scrollbar colors */
@@ -264,11 +260,11 @@
    --scrollbar-color-active: var(--color-primary);
 
    /* Shadows */
-   --color-box-shadow: rgba(29, 34, 41, 0.1);
-   --shadow-00: 0 0.1875rem 0.3125rem 0 #2f365c1a;
-   --shadow-01: 0 0.0625rem 0.3125rem 0 #2f365c33;
-   --shadow-02: 0 0.1875rem 0.625rem 0.1875rem #2f365c33;
-   --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem #2f365c33;
+   --color-box-shadow: rgba(23, 23, 23, 0.1);
+   --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(23, 23, 23, 0.10);
+   --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(23, 23, 23, 0.20);
+   --shadow-02: 0 0.1875rem 0.625rem 0.1875rem rgba(23, 23, 23, 0.20);
+   --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(23, 23, 23, 0.20);
    --shadow-neon: 0 0 0.25rem rgba(var(--color-primary-rgb), 0.25),
       0 0 0.75rem rgba(var(--color-primary-rgb), 0.18),
       0 0 1.5rem rgba(var(--color-primary-rgb), 0.12);
@@ -276,7 +272,7 @@
 
 
 /* =============================================================================
-   03) COMPONENT ALIASES (uses tokens above)
+   03) COMPONENT ALIASES (uses tokens above) — sHome-web app-chrome layer
    ============================================================================= */
 
 :root {
@@ -285,131 +281,127 @@
    --nav-line-color: var(--color-border);
    --nav-border-line: 0.0625rem solid var(--nav-line-color);
 
-   --nav-actions-color: var(--color-primary-dark);
-   --nav-toggle-color: var(--color-primary-dark);
+   --nav-actions-color: var(--color-primary-strong);
+   --nav-toggle-color: var(--color-primary-strong);
    --nav-toggle-border-radius: 0;
 
-   --nav-current-module-color: var(--color-primary-dark);
+   --nav-current-module-color: var(--color-primary-strong);
 
-   /* IMPORTANT: base header is white */
+   /* Base default: light chrome on light mode */
    --color-mod-nav-theme-header: var(--color-white);
-   --color-mod-nav-theme-header-color: var(--color-primary-dark);
+   --color-mod-nav-theme-header-color: var(--color-primary-strong);
 
-   --color-mod-nav-theme: var(--color-primary-dark);
-   --color-mod-nav-theme-variant-1: var(--color-brand);
-   --color-mod-nav-theme-variant-2: var(--color-white);
+   --color-mod-nav-theme: var(--color-primary-strong);
    --color-mod-nav-theme-contrast: var(--color-white);
 
    /* Backgrounds (aliases) */
    --color-card-background: var(--color-background);
    --color-card-dashboard-background: linear-gradient(0deg,
-         #ffffff 0%,
-         #f4fbff 25%,
-         #d9f3fb 60%,
-         #9ed8ea 100%);
+         var(--color-white) 0%,
+         var(--color-gray-50) 60%,
+         var(--color-gray-100) 100%);
 
    /* Sidebar */
    --color-sidebar-text: var(--color-white);
-   --color-sidebar-selected: var(--color-brand);
+   --color-sidebar-selected: var(--color-primary-soft);
    --color-sidebar-selected-text: var(--color-white);
-   --color-sidebar-env-text: var(--color-brand);
+   --color-sidebar-env-text: var(--color-gray-400);
 
-   --sidebar-level-0-color: #073068;
-   --sidebar-level-1-color: #011B4A;
-   --color-sidebar-selected-child: #05579E;
-   --color-sidebar-selected-subchild: #0668BF;
+   --sidebar-level-0-color: var(--color-gray-900);
+   --sidebar-level-1-color: var(--color-black);
+   --color-sidebar-selected-child: var(--color-gray-800);
+   --color-sidebar-selected-subchild: var(--color-gray-700);
 
    --color-sidebar-selected-child-text: var(--color-white);
    --color-sidebar-selected-subchild-text: var(--color-white);
 
-   --sidebar-selected-submenu-hover: var(--color-primary-dark);
+   --sidebar-selected-submenu-hover: var(--color-primary-strong);
 
-   --filter-icon: invert(1);
-   --filter-icon-selected: invert(1);
+   --filter-icon: invert(0);
+   --filter-icon-selected: invert(0);
 
    /* Checkbox */
-   --checkbox-color-checked-brand: var(--color-brand);
+   --checkbox-color-checked-brand: var(--color-primary);
    --checkbox-color-checked-check: var(--color-white);
 
    /* Buttons */
-   --button-color: var(--color-white, #ffffff);
-   --button-color-hover: var(--color-white, #ffffff);
-   --button-background-color: var(--color-primary-dark, #044680);
-   --button-background-color-hover: var(--color-brand, #6592CC);
+   --button-color: var(--color-primary-contrast, #ffffff);
+   --button-color-hover: var(--color-primary-contrast, #ffffff);
+   --button-background-color: var(--color-primary, #171717);
+   --button-background-color-hover: var(--color-primary-strong, #0a0a0a);
 
-   --button-color-secondary: var(--color-white, #ffffff);
-   --button-color-hover-secondary: var(--color-white, #ffffff);
-   --button-background-color-secondary: var(--color-brand, #6592CC);
-   --button-background-color-hover-secondary: var(--color-primary-dark, #044680);
+   --button-color-secondary: var(--color-secondary-contrast, #ffffff);
+   --button-color-hover-secondary: var(--color-secondary-contrast, #ffffff);
+   --button-background-color-secondary: var(--color-secondary, #525252);
+   --button-background-color-hover-secondary: var(--color-secondary-strong, #404040);
 
-   --button-background-color-light-rgb: rgba(var(--color-primary-rgb, 101, 146, 204), 0.3);
-   --button-color-light: var(--color-primary-dark, #044680);
-   --button-color-hover-light: var(--color-white, #ffffff);
-   --button-background-color-hover-light: var(--color-primary, #6592CC);
+   --button-background-color-light-rgb: rgba(var(--color-primary-rgb, 23, 23, 23), 0.1);
+   --button-color-light: var(--color-primary, #171717);
+   --button-color-hover-light: var(--color-primary-contrast, #ffffff);
+   --button-background-color-hover-light: var(--color-primary, #171717);
 
-   --button-background-color-light-rgb-secondary: rgba(var(--color-brand-rgb, 101, 146, 204), 0.3);
-   --button-color-light-secondary: var(--color-brand, #6592CC);
+   --button-background-color-light-rgb-secondary: rgba(var(--color-secondary-rgb, 82, 82, 82), 0.1);
+   --button-color-light-secondary: var(--color-secondary-strong, #404040);
    --button-color-hover-light-secondary: var(--color-white, #ffffff);
-   --button-background-color-hover-light-secondary: var(--color-brand, #6592CC);
+   --button-background-color-hover-light-secondary: var(--color-secondary, #525252);
 
    --button-color-success: var(--color-white, #ffffff);
    --button-color-hover-success: var(--color-white, #ffffff);
-   --button-background-color-success: var(--color-positive, #198754);
-   --button-background-color-hover-success: var(--color-positive-dark, #166e3a);
+   --button-background-color-success: var(--color-success, #16a34a);
+   --button-background-color-hover-success: var(--color-success-strong, #15803d);
 
    --button-color-warning: var(--color-white, #ffffff);
    --button-color-hover-warning: var(--color-white, #ffffff);
-   --button-background-color-warning: var(--color-warning, #ffc107);
-   --button-background-color-hover-warning: var(--color-warning-dark, #cc9a06);
+   --button-background-color-warning: var(--color-warning, #f59e0b);
+   --button-background-color-hover-warning: var(--color-warning-strong, #b45309);
 
    --button-color-danger: var(--color-white, #ffffff);
    --button-color-hover-danger: var(--color-white, #ffffff);
-   --button-background-color-danger: var(--color-negative, #dc3545);
-   --button-background-color-hover-danger: var(--color-negative-dark, #b02a37);
+   --button-background-color-danger: var(--color-danger, #dc2626);
+   --button-background-color-hover-danger: var(--color-danger-strong, #b91c1c);
 
    --button-color-info: var(--color-white, #ffffff);
    --button-color-hover-info: var(--color-white, #ffffff);
-   --button-background-color-info: var(--color-blue-dark, #0d6efd);
+   --button-background-color-info: var(--color-blue, #0f89dc);
    --button-background-color-hover-info: #0b5ed7;
 
-   --button-background-color-light-rgb-success: rgba(var(--color-positive-rgb, 25, 135, 84), 0.3);
-   --button-color-light-success: var(--color-positive-dark, #146c43);
+   --button-background-color-light-rgb-success: rgba(var(--color-success-rgb, 22, 163, 74), 0.3);
+   --button-color-light-success: var(--color-success-strong, #15803d);
    --button-color-hover-light-success: var(--color-white, #ffffff);
-   --button-background-color-hover-light-success: var(--color-positive, #198754);
+   --button-background-color-hover-light-success: var(--color-success, #16a34a);
 
-   --button-background-color-light-rgb-danger: rgba(var(--color-negative-rgb, 220, 53, 69), 0.3);
-   --button-color-light-danger: var(--color-negative-dark, #842029);
+   --button-background-color-light-rgb-danger: rgba(var(--color-danger-rgb, 220, 38, 38), 0.3);
+   --button-color-light-danger: var(--color-danger-strong, #b91c1c);
    --button-color-hover-light-danger: var(--color-white, #ffffff);
-   --button-background-color-hover-light-danger: var(--color-negative, #dc3545);
+   --button-background-color-hover-light-danger: var(--color-danger, #dc2626);
 
-   --button-background-color-light-rgb-warning: rgba(var(--color-warning-rgb, 255, 193, 7), 0.3);
-   --button-color-light-warning: var(--color-warning-dark, #997404);
+   --button-background-color-light-rgb-warning: rgba(var(--color-warning-rgb, 245, 158, 11), 0.3);
+   --button-color-light-warning: var(--color-warning-strong, #b45309);
    --button-color-hover-light-warning: var(--color-white, #ffffff);
-   --button-background-color-hover-light-warning: var(--color-warning, #ffc107);
+   --button-background-color-hover-light-warning: var(--color-warning, #f59e0b);
 
    --button-background-color-light-rgb-info: rgba(13, 110, 253, 0.3);
    --button-color-light-info: #084298;
    --button-color-hover-light-info: var(--color-white, #ffffff);
-   --button-background-color-hover-light-info: var(--color-blue-dark, #0d6efd);
+   --button-background-color-hover-light-info: var(--color-blue, #0f89dc);
 
-   /* Grid */
+   /* Grid (sHome-web GridDynamic) */
    --grid-head-color: var(--color-white);
-   --grid-head-background: var(--color-primary-dark);
-   --grid-head-background-active: var(--color-brand);
-   --grid-head-hover: var(--color-primary-semidark);
+   --grid-head-background: var(--color-primary-strong);
+   --grid-head-background-active: var(--color-primary);
+   --grid-head-hover: var(--color-primary);
 
    --grid-head-color-secondary: var(--color-black);
    --grid-head-background-secondary: var(--color-gray-300);
 
-   --color-grid-hover: var(--color-gray-250);
-   --color-grid-selected-hover: var(--color-brand);
-   --color-grid-selected: var(--color-gray-275);
+   --color-grid-hover: var(--color-gray-100);
+   --color-grid-selected-hover: var(--color-primary);
+   --color-grid-selected: var(--color-gray-200);
 
-      --progressbar-color: linear-gradient(90deg,
-         #ffffff 0%,
-         #f4fbff 25%,
-         #d9f3fb 60%,
-         #9ed8ea 100%);
+   --progressbar-color: linear-gradient(90deg,
+         var(--color-gray-900) 0%,
+         var(--color-gray-700) 50%,
+         var(--color-gray-500) 100%);
 
    --progressbar-text-color: var(--color-text);
 }
@@ -418,84 +410,64 @@
 /* =============================================================================
    04) DARK MODE (ONLY overrides)
    - usage: <html data-theme="dark">
-   - themes will be separate CSS files later
    ============================================================================= */
 
 :root[data-theme="dark"] {
-   /* Overlays */
+   /* Overlay */
    --color-overlay-dark: rgba(0, 0, 0, 0.6);
-   --color-overlay-light: rgba(255, 255, 255, 0.08);
-   --color-overlay-dar-opaque: #111;
 
-   /* Neutrals (dark scale — 100 = darkest, 900 = lightest) */
+   /* Neutrals — same fixed scale as light mode, only the semantic aliases below change */
    --color-white: #ffffff;
    --color-black: #000000;
 
-   --color-gray-100: #14161a;
-   --color-gray-200: #1a1d23;
-   --color-gray-250: #20242b;
-   --color-gray-275: #272c35;
-   --color-gray-300: #2f3540;
-   --color-gray-400: #434d5c;
-   --color-gray-500: #697585;
-   --color-gray-600: #8a97a8;
-   --color-gray-700: #b0bcc9;
-   --color-gray-800: #d4dae3;
-   --color-gray-900: #f2f5f8;
+   /* ── Primary flips: white by default on a dark background ── */
+   --color-primary:          var(--color-gray-50);
+   --color-primary-strong:   var(--color-white);
+   --color-primary-soft:     var(--color-gray-800);
+   --color-primary-contrast: var(--color-black);
+   --color-primary-rgb:      250, 250, 250;
 
-   /* Brand / Primary */
-   --color-brand:          #6ea8fe;
-   --color-brand-contrast: #060a12;
-   --color-brand-rgb:      110, 168, 254;
+   /* Secondary */
+   --color-secondary:          var(--color-gray-400);
+   --color-secondary-strong:   var(--color-gray-300);
+   --color-secondary-soft:     var(--color-gray-800);
+   --color-secondary-contrast: var(--color-black);
+   --color-secondary-rgb:      163, 163, 163;
 
-   --color-primary-darkest:  #071526;
-   --color-primary-dark:     #0d2444;
-   --color-primary-semidark: #1e4a9a;
-   --color-primary:          #5b8ff5;
-   --color-primary-light:    #8db4ff;
-   --color-primary-base:     #5b8ff5;
+   /* Status — tuned for dark backgrounds */
+   --color-success: #4ade80;
+   --color-success-strong: #22c55e;
+   --color-success-soft: rgba(74, 222, 128, 0.14);
+   --color-success-rgb: 74, 222, 128;
 
-   --color-primary-rgb:      91, 143, 245;
-   --color-primary-contrast: #060a12;
+   --color-danger: #f87171;
+   --color-danger-strong: #ef4444;
+   --color-danger-soft: rgba(248, 113, 113, 0.14);
+   --color-danger-rgb: 248, 113, 113;
 
-   /* Accent (fallback for themes that need it) */
-   --color-accent:     #7c8cf8;
-   --color-accent-rgb: 124, 140, 248;
-
-   /* Semantic (tuned for dark) */
-   --color-positive:      #4fd18b;
-   --color-positive-dark: #32a36a;
-   --color-positive-light:#7ae3ad;
-   --color-positive-rgb:  79, 209, 139;
-
-   --color-negative:      #ff6b7a;
-   --color-negative-dark: #d94a58;
-   --color-negative-light:#ff909b;
-   --color-negative-rgb:  255, 107, 122;
-
-   --color-warning:       #ffd166;
-   --color-warning-dark:  #e3b64f;
-   --color-warning-light: #ffe3a3;
-   --color-warning-rgb:   255, 209, 102;
+   --color-warning: #fbbf24;
+   --color-warning-strong: #f59e0b;
+   --color-warning-soft: rgba(251, 191, 36, 0.14);
+   --color-warning-rgb: 251, 191, 36;
 
    /* =========================
      THEME REQUIRED TOKENS
      ========================= */
-   --color-background: #111318;
-   --color-surface:    var(--color-gray-100);
-   --color-border:     var(--color-gray-275);
-   --color-text:       var(--color-gray-900);
-   --color-text-muted: var(--color-gray-600);
+   --color-background: #0a0a0a;
+   --color-surface:    var(--color-gray-900);
+   --color-border:     var(--color-gray-700);
+   --color-text:       var(--color-gray-50);
+   --color-text-muted: var(--color-gray-400);
 
    /* Inputs */
-   --input-background:        var(--color-gray-100);
+   --input-background:        var(--color-gray-900);
    --input-color:             var(--color-white);
-   --input-border:            var(--color-gray-400);
-   --input-label-color:       var(--color-gray-900);
+   --input-border:            var(--color-gray-600);
+   --input-label-color:       var(--color-gray-50);
    --input-placeholder-color: var(--color-text-muted);
 
    /* Focus / press */
-   --input-focus-outline-color: var(--color-brand);
+   --input-focus-outline-color: var(--color-primary);
    --color-press-effect:        var(--color-white);
    --color-label-active:        var(--color-press-effect);
 
@@ -506,9 +478,9 @@
    --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(0, 0, 0, 0.50);
    --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(0, 0, 0, 0.50);
    --shadow-neon:
-      0 0 0.5rem  rgba(var(--color-brand-rgb), 0.35),
-      0 0 1.25rem rgba(var(--color-brand-rgb), 0.22),
-      0 0 2.5rem  rgba(var(--color-brand-rgb), 0.12);
+      0 0 0.5rem  rgba(var(--color-primary-rgb), 0.35),
+      0 0 1.25rem rgba(var(--color-primary-rgb), 0.22),
+      0 0 2.5rem  rgba(var(--color-primary-rgb), 0.12);
 
    /* Scrollbar */
    --scrollbar-color:        rgba(255, 255, 255, 0.16);
@@ -521,72 +493,73 @@
 
    /* Navigation */
    --nav-line-color:           var(--color-border);
-   --nav-actions-color:        var(--color-gray-900);
-   --nav-toggle-color:         var(--color-gray-900);
-   --nav-current-module-color: var(--color-gray-900);
+   --nav-actions-color:        var(--color-gray-50);
+   --nav-toggle-color:         var(--color-gray-50);
+   --nav-current-module-color: var(--color-gray-50);
 
-   --color-mod-nav-theme-header:       var(--color-primary-darkest);
-   --color-mod-nav-theme-header-color: var(--color-gray-900);
-   --color-mod-nav-theme:              var(--color-primary-darkest);
-   --color-mod-nav-theme-variant-1:    var(--color-brand);
-   --color-mod-nav-theme-variant-2:    var(--color-gray-100);
-   --color-mod-nav-theme-contrast:     var(--color-gray-900);
+   --color-mod-nav-theme-header:       var(--color-black);
+   --color-mod-nav-theme-header-color: var(--color-gray-50);
+   --color-mod-nav-theme:              var(--color-gray-900);
+   --color-mod-nav-theme-contrast:     var(--color-gray-50);
 
    /* Sidebar */
-   --sidebar-level-0-color: #0b1220;
-   --sidebar-level-1-color: #070b18;
+   --sidebar-level-0-color: #000000;
+   --sidebar-level-1-color: #000000;
 
-   --color-sidebar-text:          var(--color-gray-900);
-   --color-sidebar-selected:      var(--color-brand);
-   --color-sidebar-selected-text: var(--color-primary-contrast);
-   --color-sidebar-env-text:      var(--color-brand);
+   --color-sidebar-text:          var(--color-gray-100);
+   --color-sidebar-selected:      var(--color-primary-soft);
+   --color-sidebar-selected-text: var(--color-white);
+   --color-sidebar-env-text:      var(--color-gray-500);
 
-   --color-sidebar-selected-child:          #1b3f86;
-   --color-sidebar-selected-subchild:       #2b66d4;
+   --color-sidebar-selected-child:          var(--color-gray-800);
+   --color-sidebar-selected-subchild:       var(--color-gray-700);
    --color-sidebar-selected-child-text:     var(--color-white);
    --color-sidebar-selected-subchild-text:  var(--color-white);
 
-   --sidebar-selected-submenu-hover: var(--color-primary-semidark);
+   --sidebar-selected-submenu-hover: var(--color-primary);
 
    /* Buttons */
-   --button-background-color:       var(--color-primary-darkest);
-   --button-background-color-hover: var(--color-brand);
+   --button-background-color:       var(--color-primary);
+   --button-background-color-hover: var(--color-primary-strong);
+   --button-color:                  var(--color-primary-contrast);
+   --button-color-hover:            var(--color-primary-contrast);
 
-   --button-color-light:                      var(--color-gray-900);
+   --button-background-color-secondary:       var(--color-secondary);
+   --button-background-color-hover-secondary: var(--color-secondary-strong);
+
+   --button-color-light:                      var(--color-primary);
    --button-background-color-light-rgb:       rgba(var(--color-primary-rgb), 0.20);
-   --button-background-color-light-rgb-secondary: rgba(var(--color-primary-rgb), 0.20);
-   --button-color-light-secondary:            var(--color-brand);
+   --button-background-color-light-rgb-secondary: rgba(var(--color-secondary-rgb), 0.20);
+   --button-color-light-secondary:            var(--color-secondary-contrast);
 
    /* Cards */
    --color-card-background: rgba(255, 255, 255, 0.06);
    --color-card-dashboard-background: linear-gradient(180deg,
-         var(--color-gray-200) 0%,
-         var(--color-gray-250) 40%,
-         var(--color-gray-275) 100%);
+         var(--color-gray-900) 0%,
+         var(--color-gray-800) 40%,
+         var(--color-gray-700) 100%);
 
    /* Grid */
-   --grid-head-color:             rgba(242, 246, 255, 0.95);
-   --grid-head-background:        var(--color-primary-darkest);
-   --grid-head-background-active: rgba(var(--color-brand-rgb), 0.24);
-   --grid-head-hover:             rgba(var(--color-accent-rgb), 0.18);
+   --grid-head-color:             rgba(250, 250, 250, 0.95);
+   --grid-head-background:        var(--color-gray-900);
+   --grid-head-background-active: rgba(var(--color-primary-rgb), 0.24);
+   --grid-head-hover:             rgba(var(--color-primary-rgb), 0.18);
 
-   --color-grid-hover:          rgba(var(--color-brand-rgb), 0.06);
-   --color-grid-selected-hover: rgba(var(--color-accent-rgb), 0.10);
-   --color-grid-selected:       rgba(var(--color-brand-rgb), 0.08);
+   --color-grid-hover:          rgba(var(--color-primary-rgb), 0.06);
+   --color-grid-selected-hover: rgba(var(--color-primary-rgb), 0.10);
+   --color-grid-selected:       rgba(var(--color-primary-rgb), 0.08);
    --grid-surface:  rgba(14, 16, 22, 0.80);
    --pager-surface: rgba(255, 255, 255, 0.05);
 
    --progressbar-color: linear-gradient(90deg,
-         var(--color-primary-darkest) 0%,
-         var(--color-primary-dark)    40%,
-         var(--color-primary-semidark)80%,
-         var(--color-brand)           100%);
+         var(--color-gray-700) 0%,
+         var(--color-gray-500) 50%,
+         var(--color-gray-300) 100%);
    --progressbar-text-color: var(--color-text);
 }
 
 
 :root {
-   --color-brand-accent: transparent;
    --dashboard-special-hover: none;
 }
 

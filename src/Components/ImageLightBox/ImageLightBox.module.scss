@@ -1,4 +1,8 @@
 .lightbox-overlay {
+  /* ImageLightBox's own tokens — default to the shared palette, individually overridable */
+  --lightbox-bg: var(--color-card-dashboard-background);
+  --lightbox-favorite-color: var(--color-warning);
+
   position: fixed;
   left: var(--sidebar-width);
   right: 0;
@@ -27,7 +31,7 @@
   z-index: 1000;
   padding: 1rem;
   border-radius: var(--border-radius);
-  background: var(--color-card-dashboard-background, #fff);
+  background: var(--lightbox-bg, #fff);
   min-width: 350px;
   max-width: 90vw;
   max-height: 90vh;
@@ -96,13 +100,13 @@
   transition: color 0.15s ease, transform 0.15s ease, background 0.15s ease;
 
   &:hover {
-    color: #f5a623;
-    background: rgba(245, 166, 35, 0.1);
+    color: var(--lightbox-favorite-color);
+    background: rgba(var(--color-warning-rgb), 0.1);
     transform: scale(1.15);
   }
 
   &.is-favorit {
-    color: #f5a623;
+    color: var(--lightbox-favorite-color);
   }
 }
 
@@ -167,7 +171,7 @@
 .lightbox-prev:hover,
 .lightbox-next:hover {
   opacity: 1;
-  color: var(--color-primary-dark);
+  color: var(--color-primary-strong);
 }
 
 .lightbox-zoom-badge {

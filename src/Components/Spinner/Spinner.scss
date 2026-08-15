@@ -1,4 +1,8 @@
 .loader-container{
+  /* Spinner's own tokens — default to the shared palette, individually overridable */
+  --spinner-color-1: var(--color-primary);
+  --spinner-color-2: var(--color-primary-strong);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,7 +54,7 @@
 
 /* items */
 .item-1{
-  background-color:var(--color-brand);
+  background-color:var(--spinner-color-1);
   top: 45px;
   left: 45px;
   border-top-left-radius: 100%;
@@ -60,7 +64,7 @@
 }
 
 .item-2{
-  background-color: var(--color-primary-dark);
+  background-color: var(--spinner-color-2);
   top: 45px;
   right: 45px;
   border-top-right-radius: 100%;
@@ -70,7 +74,7 @@
 }
 
 .item-3{
-  background-color: var(--color-brand);
+  background-color: var(--spinner-color-1);
   bottom: 45px;
   left: 45px;
   border-bottom-left-radius: 100%;
@@ -80,7 +84,7 @@
 }
 
 .item-4{
-  background-color: var(--color-primary-dark);
+  background-color: var(--spinner-color-2);
   bottom: 45px;
   right: 45px;
   border-bottom-right-radius: 100%;

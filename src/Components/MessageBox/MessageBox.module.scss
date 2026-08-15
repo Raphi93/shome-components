@@ -7,14 +7,20 @@
 .warning,
 .message,
 .success {
+  /* MessageBox's own tokens — default to the shared palette, individually overridable */
+  --msgbox-bg: var(--color-background);
+  --msgbox-border: var(--color-border);
+  --msgbox-link: var(--color-primary);
+  --msgbox-link-hover: var(--color-text);
+
   @include base-text;
   scroll-margin-top: var(--module-header-height);
   border-radius: var(--border-radius);
   z-index: 0;
   display: block;
-  background: var(--color-background, var(--color-white));
+  background: var(--msgbox-bg, var(--color-white));
   color: var(--color-text);
-  box-shadow: 0 0 0 rem(1px) var(--color-border, var(--color-gray-300)), var(--shadow-00);
+  box-shadow: 0 0 0 rem(1px) var(--msgbox-border, var(--color-gray-300)), var(--shadow-00);
   margin-bottom: calc(var(--spacing) * 2);
   padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 3);
   padding-left: calc(var(--spacing) * 7.5);
@@ -51,7 +57,7 @@
     text-align: center;
     height: 100%;
     width: calc(var(--spacing) * 6);
-    box-shadow: 0 0 0 rem(1px) var(--color-border, var(--color-gray-300));
+    box-shadow: 0 0 0 rem(1px) var(--msgbox-border, var(--color-gray-300));
     z-index: 2;
   }
 
@@ -61,7 +67,7 @@
     h4 {
       &:hover {
         &::before {
-          background: var(--color-gray-200);
+          background: var(--color-gray-100);
         }
       }
     }
@@ -69,13 +75,13 @@
 
   &.message {
     &::after {
-      background: var(--color-primary-light);
+      background: var(--color-primary-soft);
     }
   }
 
   &.success {
     &::after {
-      background: var(--color-positive-light);
+      background: var(--color-success-soft);
     }
   }
 
@@ -87,7 +93,7 @@
 
   &.error {
     &::after {
-      background: var(--color-negative);
+      background: var(--color-danger);
     }
   }
 
@@ -108,8 +114,8 @@
     &::before {
       content: '';
       display: block;
-      background: var(--color-surface, var(--color-gray-200));
-      box-shadow: 0 0 0 rem(1px) var(--color-border, var(--color-gray-300));
+      background: var(--color-surface, var(--color-gray-100));
+      box-shadow: 0 0 0 rem(1px) var(--msgbox-border, var(--color-gray-300));
       position: absolute;
       top: calc(var(--spacing) * -1.5);
       left: calc(var(--spacing) * -2);
@@ -137,12 +143,12 @@
   }
 
   a {
-    color: var(--color-primary-base);
+    color: var(--msgbox-link);
     text-decoration: underline;
     cursor: pointer;
 
     &:hover {
-      color: var(--color-text);
+      color: var(--msgbox-link-hover);
       text-decoration: none;
     }
 
@@ -220,6 +226,6 @@
   color: var(--color-text);
 
   &:hover {
-    color: var(--color-primary-base);
+    color: var(--msgbox-link);
   }
 }

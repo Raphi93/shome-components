@@ -1,9 +1,14 @@
 .chat-container {
+  /* ChatBot's own tokens — default to the shared palette, individually overridable */
+  --chat-bg: var(--color-card-dashboard-background);
+  --chat-bubble-bg: var(--color-card-background);
+  --chat-user-color: var(--color-primary);
+
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
-  background: var(--color-card-dashboard-background);
+  background: var(--chat-bg);
   border-radius: var(--border-radius-large);
   padding: 1.5rem;
   overflow: hidden;
@@ -13,7 +18,7 @@
   flex: 1;
   min-height: 0;
   width: 100%;
-  background-color: var(--color-card-background);
+  background-color: var(--chat-bubble-bg);
   border-radius: var(--border-radius);
   padding: 1rem;
   overflow-y: auto;
@@ -87,7 +92,7 @@
   max-width: 70%;
   min-width: 30%;
   border-radius: var(--border-radius);
-  background: var(--color-card-dashboard-background);
+  background: var(--chat-bg);
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -110,7 +115,7 @@
 
 .chat-message-user-name {
   font-weight: bold;
-  color: var(--color-brand);
+  color: var(--chat-user-color);
   font-size: 1.5rem;
 }
 
@@ -123,7 +128,7 @@
 
 .chat-message-voice-icon {
   font-size: 1.5rem;
-  color: var(--color-brand);
+  color: var(--chat-user-color);
   cursor: pointer;
 }
 
@@ -131,7 +136,7 @@
   font-size: 1rem;
   color: var(--color-text);
   padding: 1rem;
-  background-color: var(--color-card-background);
+  background-color: var(--chat-bubble-bg);
   border-radius: var(--border-radius);
 }
 

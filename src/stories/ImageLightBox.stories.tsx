@@ -32,7 +32,7 @@ export const Interactive: Story = {
               src={img.href}
               onClick={() => setSelected(img)}
               style={{ width: 160, height: 120, objectFit: 'cover', borderRadius: 'var(--border-radius)', cursor: 'pointer', border: '2px solid transparent', transition: 'border-color 0.2s' }}
-              onMouseEnter={(e) => ((e.target as HTMLImageElement).style.borderColor = 'var(--color-brand)')}
+              onMouseEnter={(e) => ((e.target as HTMLImageElement).style.borderColor = 'var(--color-primary)')}
               onMouseLeave={(e) => ((e.target as HTMLImageElement).style.borderColor = 'transparent')}
             />
           ))}

@@ -3,16 +3,16 @@
 :root {
   --text-editor-surface:          var(--color-background, var(--color-white));
   --text-editor-border:           var(--color-border, var(--color-gray-300));
-  --text-editor-toolbar-surface:  var(--color-surface, var(--color-gray-200));
-  --text-editor-btn-hover:        var(--color-gray-275);
-  --text-editor-btn-active-bg:    var(--color-brand, var(--color-primary));
-  --text-editor-btn-active-color: var(--color-brand-contrast, var(--color-white));
-  --text-editor-source-surface:   var(--color-surface, var(--color-gray-100));
+  --text-editor-toolbar-surface:  var(--color-surface, var(--color-gray-100));
+  --text-editor-btn-hover:        var(--color-gray-200);
+  --text-editor-btn-active-bg:    var(--color-primary, var(--color-primary));
+  --text-editor-btn-active-color: var(--color-primary-contrast, var(--color-white));
+  --text-editor-source-surface:   var(--color-surface, var(--color-gray-50));
   --text-editor-text:             var(--color-text);
   --text-editor-text-muted:       var(--color-text-muted, var(--color-gray-600));
-  --text-editor-code-surface:     var(--color-surface, var(--color-gray-100));
+  --text-editor-code-surface:     var(--color-surface, var(--color-gray-50));
   --text-editor-focus:            var(--input-focus-outline-color, var(--color-primary));
-  --text-editor-blockquote:       var(--color-brand, var(--color-primary));
+  --text-editor-blockquote:       var(--color-primary, var(--color-primary));
   --text-editor-select-surface:   var(--input-background, var(--color-white));
   --text-editor-link:             var(--color-blue, #2563eb);
 }
@@ -321,7 +321,7 @@
         content: '';
         position: absolute;
         inset: 0;
-        background: rgba(var(--color-brand-rgb, 0,114,198), 0.12);
+        background: rgba(var(--color-primary-rgb, 0,114,198), 0.12);
         pointer-events: none;
       }
     }
@@ -644,7 +644,7 @@
 
   &:hover, &.dragging {
     border-color: var(--text-editor-btn-active-bg);
-    background:   rgba(var(--color-brand-rgb, 0,114,198), 0.05);
+    background:   rgba(var(--color-primary-rgb, 0,114,198), 0.05);
   }
 }
 

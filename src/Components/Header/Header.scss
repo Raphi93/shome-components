@@ -1,4 +1,10 @@
 .header-content {
+  /* Header's own tokens — default to the shared chrome colors, individually overridable */
+  --header-icon-bg: var(--color-mod-nav-theme-header-color);
+  --header-title-color: var(--color-mod-nav-theme-header-color);
+  --header-subtitle-color: var(--color-text);
+  --header-env-color: var(--color-primary);
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -36,7 +42,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-mod-nav-theme-header-color);
+  background-color: var(--header-icon-bg);
   flex-shrink: 0;
 }
 
@@ -84,17 +90,17 @@
 .header-title {
   font-size: 1.1rem;
   font-weight: bold;
-  color: var(--color-mod-nav-theme-header-color);
+  color: var(--header-title-color);
 }
 
 .header-subtitles {
   font-size: 1rem;
-  color: var(--color-black);
+  color: var(--header-subtitle-color);
 }
 
 .header-env-titles {
   font-size: 1.1rem;
-  color: var(--color-brand);
+  color: var(--header-env-color);
   font-weight: bold;
   max-width: 100%;
 }

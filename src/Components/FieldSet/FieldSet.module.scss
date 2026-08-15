@@ -26,7 +26,7 @@
   --fs-pad:     calc(var(--spacing, 1rem) * 2);  // card padding
   --fs-bg:      var(--color-white, #fff);
   --fs-border:  var(--color-gray-300, #e0e0e0);
-  --fs-head-bg: var(--color-gray-200, #f7f7f7);
+  --fs-head-bg: var(--color-gray-100, #f7f7f7);
   --fs-head-fg: var(--color-text, #111);
   --fs-shadow:  var(--shadow-02, 0 2px 8px rgba(0, 0, 0, 0.12));
   --fs-color-bg: var(--color-card-dashboard-background, #fff); // for header color variant "color"
@@ -38,7 +38,7 @@
   --fs-bg:      var(--color-gray-800, #424242);
   --fs-border:  var(--color-gray-600, #707070);
   --fs-head-bg: var(--color-gray-700, #616161);
-  --fs-head-fg: var(--color-gray-100, #fafafa);
+  --fs-head-fg: var(--color-gray-50, #fafafa);
 }
 
 // ─── Base ─────────────────────────────────────────────────────────────────────
@@ -87,7 +87,7 @@
     width:         100%;
     margin:        0;
     padding:       0.5rem 1rem;
-    border-bottom: 2px solid rgba(var(--color-brand-rgb, 0, 114, 198), 0.3);
+    border-bottom: 2px solid rgba(var(--color-primary-rgb, 0, 114, 198), 0.3);
     border-radius: 0;
     min-height:    unset;
     background:    transparent;
@@ -195,12 +195,12 @@
 }
 
 .header-primary {
-  background: var(--color-primary-dark, #121a2a);
+  background: var(--color-primary-strong, #121a2a);
   color: var(--color-white, #fff);
 }
 
 .header-secondary {
-  background: var(--color-brand, #2d2d2d);
+  background: var(--color-primary, #2d2d2d);
   color: var(--color-white, #fff);
 }
 

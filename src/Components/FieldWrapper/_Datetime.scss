@@ -181,17 +181,17 @@ html[data-theme="dark"] .react-datepicker__day {
 }
 
 html[data-theme="dark"] .react-datepicker__day:hover {
-  background: rgba(var(--color-brand-rgb, 0, 230, 255), 0.8);
+  background: rgba(var(--color-primary-rgb, 0, 230, 255), 0.8);
 }
 
 html[data-theme="dark"] .react-datepicker__day--selected,
 html[data-theme="dark"] .react-datepicker__day--keyboard-selected {
-  background: var(--color-primary-dark);
+  background: var(--color-primary-strong);
   color: var(--color-white, #fff);
 }
 
 html[data-theme="dark"] .react-datepicker__day--today {
-  outline: 2px solid rgba(var(--color-brand-rgb, 0, 230, 255), 0.9);
+  outline: 2px solid rgba(var(--color-primary-rgb, 0, 230, 255), 0.9);
   outline-offset: -2px;
 }
 

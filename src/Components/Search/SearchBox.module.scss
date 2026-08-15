@@ -1,6 +1,13 @@
 @use '../../styles/abstracts' as *;
 @use '../MessageBox/MessageBox.module' as message;
 
+/* Search's own tokens — default to the shared palette, individually overridable */
+:root {
+  --search-icon-color: var(--color-gray-500);
+  --search-close-color: var(--button-background-color, var(--color-primary));
+  --search-close-color-hover: var(--button-background-color-hover, var(--color-primary-strong));
+}
+
 .container {
   margin-bottom: calc(var(--spacing) * 2);
 }
@@ -15,7 +22,7 @@
 
     position: absolute;
     background-color: var(--input-background, var(--color-white));
-    color: var(--input-placeholder-color, var(--color-text-light));
+    color: var(--input-placeholder-color, var(--color-text-muted));
     opacity: 0.6;
 
     transform: translateY(-50%);
@@ -65,20 +72,20 @@
     box-shadow: none;
 
     &::placeholder {
-      color: var(--input-placeholder-color, var(--color-text-light));
+      color: var(--input-placeholder-color, var(--color-text-muted));
     }
 
     &:focus,
     &:focus-visible {
       outline: none;
-      border-color: var(--color-primary-dark);
+      border-color: var(--color-primary-strong);
       box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
     }
 
     &:disabled {
       pointer-events: none;
-      color: var(--color-text-light);
-      background: var(--color-gray-200);
+      color: var(--color-text-muted);
+      background: var(--color-gray-100);
     }
 
     /* Autofill override (Chrome/WebKit) */
@@ -133,10 +140,10 @@
     right: 15px;
     top: 5px;
 
-    color: var(--button-background-color);
+    color: var(--search-close-color);
 
     &:hover {
-      color: var(--button-background-color-hover);
+      color: var(--search-close-color-hover);
     }
   }
 
@@ -167,7 +174,7 @@
     transform: translateY(-50%);
 
     font-size: rem(20px);
-    color: var(--color-gray-500);
+    color: var(--search-icon-color);
   }
 
   .queryButtonIcon::before {

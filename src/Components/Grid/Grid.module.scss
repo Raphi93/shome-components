@@ -3,31 +3,31 @@
 :root {
   /* Header colors (existing API) */
   --grid-head-color: var(--color-text-inverted);
-  --grid-head-background: var(--color-primary-dark);
-  --grid-head-hover: var(--color-primary-deep-dark);
-  --grid-head-background-active: var(--color-primary-dark);
+  --grid-head-background: var(--color-primary-strong);
+  --grid-head-hover: var(--color-primary-strong);
+  --grid-head-background-active: var(--color-primary-strong);
   --grid-head-color-active: var(--color-text-inverted);
 
   /* Grid tokens (theme override friendly) */
   --grid-surface: var(--color-white);
   --grid-border: var(--color-gray-300);
-  --grid-header-surface: var(--color-gray-250);
-  --grid-sorted-column-surface: var(--color-gray-200);
-  --grid-sticky-col-surface: var(--color-gray-200);
+  --grid-header-surface: var(--color-gray-100);
+  --grid-sorted-column-surface: var(--color-gray-100);
+  --grid-sticky-col-surface: var(--color-gray-100);
 
-  --grid-row-hover-surface: var(--color-grid-hover, var(--color-gray-250));
-  --grid-row-selected-surface: var(--color-grid-selected, var(--color-primary-light));
+  --grid-row-hover-surface: var(--color-grid-hover, var(--color-gray-100));
+  --grid-row-selected-surface: var(--color-grid-selected, var(--color-primary-soft));
   --grid-row-selected-hover-surface: var(--color-grid-selected-hover, var(--color-blue));
   --grid-row-selected-hover-color: var(--grid-row-selected-hover-color);
 }
 
 .inverted {
-  --grid-head-background-active: var(--color-primary-light);
+  --grid-head-background-active: var(--color-primary-soft);
   .grid th {
     @include sub-subheading;
 
     background-color: var(--grid-row-selected-hover-color);
-    color: var(--color-primary-dark);
+    color: var(--color-primary-strong);
     font-weight: 400;
   }
 }
@@ -414,7 +414,7 @@
 
     &:hover {
       cursor: pointer;
-      background: var(--color-primary-darkest);
+      background: var(--color-primary-strong);
     }
 
     .switch-date-icon {

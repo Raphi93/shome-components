@@ -89,7 +89,7 @@ export function SearchTextBox({
               isActiveDuringAnimation
                 ? {
                     outline: 'none',
-                    borderColor: 'var(--color-primary-dark)',
+                    borderColor: 'var(--color-primary-strong)',
                     boxShadow: '0 0 0 2px var(--input-focus-outline-color)',
                   }
                 : {}

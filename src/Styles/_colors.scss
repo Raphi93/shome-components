@@ -1,246 +1,405 @@
 /* =============================================================================
-   COLORS — Light defaults + Dark mode override
+   COLORS — the standard/default design tokens for @raphi93/shome-components.
+   This file is self-sufficient: every token a component reads is assigned a
+   real default here, so the library looks correct even without a consuming
+   app loading anything else on top.
+
+   Default scheme: black & white. Light mode = white surfaces, near-black
+   text/primary. Dark mode = near-black surfaces, near-white text/primary.
+   Status colors (success/danger/warning) stay colorful — grayscale-only
+   error states would hurt usability.
+
+   Every token here is a plain CSS custom property, so a consuming app can
+   override any single one (globally via :root, or scoped to a component)
+   without touching this file. Apps that want a fully different look load
+   their own stylesheet after this one and redefine the tokens they care
+   about — see shome-web's `Theme/*.css` files for that pattern.
+
    Dark mode: <html data-theme="dark"> or <body data-theme="dark">
    ============================================================================= */
 
-/* ── 01) LIGHT MODE ─────────────────────────────────────────────────────────── */
+/* ── 01) LIGHT MODE (default) ──────────────────────────────────────────────── */
 
 :root {
-  /* Overlays */
-  --color-overlay-dark:        rgba(0, 0, 0, 0.5);
-  --color-overlay-dar-opaque:  #999999;
-  --color-overlay-light:       rgba(255, 255, 255, 0.5);
+  /* Neutrals — fixed scale, 50 = lightest, 900 = darkest, same meaning in both modes */
+  --color-white: #ffffff;
+  --color-black: #0a0a0a;
 
-  /* B&W */
-  --color-white: #fff;
-  --color-black: #212121;
+  --color-gray-50:  #fafafa;
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #e5e5e5;
+  --color-gray-300: #d4d4d4;
+  --color-gray-400: #a3a3a3;
+  --color-gray-500: #737373;
+  --color-gray-600: #525252;
+  --color-gray-700: #404040;
+  --color-gray-800: #262626;
+  --color-gray-900: #171717;
 
-  /* Gray scale */
-  --color-gray-100: #fafafa;
-  --color-gray-200: #f7f7f7;
-  --color-gray-250: #f2f2f2;
-  --color-gray-275: #e5e5e5;
-  --color-gray-300: #e0e0e0;
-  --color-gray-400: #bdbdbd;
-  --color-gray-500: #9e9e9e;
-  --color-gray-600: #707070;
-  --color-gray-700: #616161;
-  --color-gray-800: #424242;
-  --color-gray-900: #212121;
-
-  /* Brand / Primary */
-  --color-primary-darkest:   #00467a;
-  --color-primary-dark:      #044680;
-  --color-primary-semidark:  #0072c6;
-  --color-primary:           #6592CC;
-  --color-primary-light:     #B7D2EC;
-  --color-primary-base:      #0072c6;
-  --color-primary-rgb:       0, 114, 198;
-  --color-primary-contrast:  #e5f2ff;
-
-  --color-brand:             #6592CC;
-  --color-brand-rgb:         101, 146, 204;
-  --color-brand-contrast:    #fefeff;
-
-  /* Semantic */
-  --color-positive:          #82bc3c;
-  --color-positive-dark:     #5a8229;
-  --color-positive-light:    #93c853;
-  --color-positive-rgb:      130, 188, 60;
-
-  --color-negative:          #d64856;
-  --color-negative-dark:     #ab2633;
-  --color-negative-light:    #dd6571;
-  --color-negative-rgb:      214, 72, 86;
-
-  --color-warning:           #ffc000;
-  --color-warning-dark:      #e6ad00;
-  --color-warning-light:     #ffd34d;
-  --color-warning-rgb:       255, 192, 0;
-
-  /* Named */
+  /* Extra named colors (charts, one-off accents — not part of the semantic system) */
   --color-red:    #db111d;
   --color-blue:   #0f89dc;
-  --color-blue-dark: #0d6efd;
   --color-green:  #00a368;
   --color-purple: #884dd3;
-  --color-orange: #ffc000;
+  --color-orange: #f59e0b;
   --color-yellow: #ffd966;
-  --color-peach:  #feb8a4;
 
-  /* ── Abstraction tokens (REQUIRED — override these in dark mode) ── */
+  /* Screen overlay */
+  --color-overlay-dark: rgba(0, 0, 0, 0.5);
 
-  --color-background:  var(--color-white);
-  --color-surface:     var(--color-gray-200);
-  --color-border:      var(--color-gray-275);
-  --color-text:        var(--color-gray-900);
-  --color-text-light:  var(--color-gray-600);
-  --color-text-muted:  var(--color-gray-600);
+  /* ── Primary — the single brand/interactive color. Black by default. ── */
+  --color-primary:          var(--color-gray-900);
+  --color-primary-strong:   var(--color-black);
+  --color-primary-soft:     var(--color-gray-100);
+  --color-primary-contrast: var(--color-white);
+  --color-primary-rgb:      23, 23, 23;
+
+  /* ── Secondary — neutral counterpart to primary, for lower-emphasis actions ── */
+  --color-secondary:          var(--color-gray-600);
+  --color-secondary-strong:   var(--color-gray-700);
+  --color-secondary-soft:     var(--color-gray-100);
+  --color-secondary-contrast: var(--color-white);
+  --color-secondary-rgb:      82, 82, 82;
+
+  /* ── Status — kept colorful on purpose ── */
+  --color-success:        #16a34a;
+  --color-success-strong: #15803d;
+  --color-success-soft:   #dcfce7;
+  --color-success-rgb:    22, 163, 74;
+
+  --color-danger:        #dc2626;
+  --color-danger-strong:  #b91c1c;
+  --color-danger-soft:    #fee2e2;
+  --color-danger-rgb:     220, 38, 38;
+
+  --color-warning:        #f59e0b;
+  --color-warning-strong: #b45309;
+  --color-warning-soft:   #fef3c7;
+  --color-warning-rgb:    245, 158, 11;
+
+  /* ── Required tokens (override these when building a theme) ── */
+  --color-background:   var(--color-white);
+  --color-surface:      var(--color-gray-50);
+  --color-border:       var(--color-gray-200);
+  --color-text:         var(--color-gray-900);
+  --color-text-muted:   var(--color-gray-600);
   --color-text-inverted: var(--color-white);
 
-  --color-disabled:      var(--color-gray-300);
-  --color-disabled-dark: var(--color-gray-500);
+  /* Card / surfaces */
+  --color-card-background: var(--color-background);
+  --color-card-dashboard-background: linear-gradient(0deg,
+      var(--color-white)  0%,
+      var(--color-gray-50) 60%,
+      var(--color-gray-100) 100%);
 
-  /* Input tokens */
-  --input-background:        var(--color-white);
-  --input-color:             var(--color-gray-900);
-  --input-border:            var(--color-gray-400);
-  --input-label-color:       var(--color-gray-800);
-  --input-placeholder-color: var(--color-text-muted);
-  --input-focus-outline-color: var(--color-brand);
+  /* Focus / press */
+  --color-press-effect: var(--color-primary-strong);
+  --color-label-active: var(--color-press-effect);
+
+  /* Inputs */
+  --input-background:          var(--color-white);
+  --input-color:                var(--color-gray-900);
+  --input-border:                var(--color-gray-400);
+  --input-label-color:          var(--color-gray-800);
+  --input-placeholder-color:    var(--color-text-muted);
+  --input-focus-outline-color:  var(--color-primary);
 
   /* Shadows */
-  --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(47, 54, 92, 0.10);
-  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(47, 54, 92, 0.20);
-  --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(47, 54, 92, 0.20);
-  --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(47, 54, 92, 0.20);
-  --shadow-neon: 0 0 0.25rem  rgba(var(--color-primary-rgb), 0.25),
-                 0 0 0.75rem  rgba(var(--color-primary-rgb), 0.18),
-                 0 0 1.5rem   rgba(var(--color-primary-rgb), 0.12);
+  --shadow-00: 0 0.1875rem 0.3125rem 0 rgba(23, 23, 23, 0.10);
+  --shadow-01: 0 0.0625rem 0.3125rem 0 rgba(23, 23, 23, 0.20);
+  --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(23, 23, 23, 0.20);
+  --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(23, 23, 23, 0.20);
+  --shadow-neon: 0 0 0.25rem rgba(var(--color-primary-rgb), 0.25),
+                 0 0 0.75rem rgba(var(--color-primary-rgb), 0.18),
+                 0 0 1.5rem  rgba(var(--color-primary-rgb), 0.12);
 
   /* Scrollbar */
   --scrollbar-color:        var(--color-gray-400);
   --scrollbar-color-hover:  var(--color-gray-500);
   --scrollbar-color-active: var(--color-primary);
 
-  /* Navigation */
-  --color-mod-nav-theme:            var(--color-primary-dark);
-  --color-mod-nav-theme-variant-1:  var(--color-brand);
-  --color-mod-nav-theme-variant-2:  var(--color-white);
-  --color-mod-nav-theme-contrast:   var(--color-white);
-  --color-mod-nav-theme-header:     var(--color-white);
-  --color-mod-nav-theme-header-color: var(--color-primary-dark);
+  /* Navigation (module/header chrome) */
+  --color-mod-nav-theme:              var(--color-primary);
+  --color-mod-nav-theme-contrast:     var(--color-white);
+  --color-mod-nav-theme-header:       var(--color-white);
+  --color-mod-nav-theme-header-color: var(--color-primary);
 
-  /* Grid */
-  --color-grid-hover:          var(--color-gray-250);
-  --color-grid-selected-hover: var(--color-blue);
-  --color-grid-selected:       var(--color-gray-275);
+  /* Sidebar */
+  --sidebar-level-0-color: var(--color-gray-900);
+  --sidebar-level-1-color: var(--color-black);
 
-  /* Surfaces */
-  --color-card-background:    var(--color-background);
-  --color-press-effect:       var(--color-primary-semidark);
-  --color-label-active:       var(--color-press-effect);
+  --color-sidebar-text:                   var(--color-white);
+  --color-sidebar-sub-menu:               var(--color-gray-800);
+  --color-sidebar-selected:                var(--color-primary-soft);
+  --color-sidebar-selected-text:           var(--color-white);
+  --color-sidebar-selected-child:          var(--color-gray-800);
+  --color-sidebar-selected-child-text:     var(--color-white);
+  --color-sidebar-selected-subchild:       var(--color-gray-700);
+  --color-sidebar-selected-subchild-text:  var(--color-white);
+  --color-sidebar-env-text:                var(--color-gray-400);
 
-  /* Buttons */
-  --button-color:                    var(--color-white);
-  --button-color-hover:              var(--color-white);
-  --button-background-color:         var(--color-primary-dark);
-  --button-background-color-hover:   var(--color-brand);
-  --button-color-secondary:          var(--color-white);
-  --button-background-color-secondary:       var(--color-brand);
-  --button-background-color-hover-secondary: var(--color-primary-dark);
+  /* Grid (library Grid component; sHome-web's own GridDynamic uses its own
+     --grid-head-* aliases, defined at the app level, not here) */
+  --color-grid-hover:          var(--color-gray-100);
+  --color-grid-selected:       var(--color-gray-200);
+  --color-grid-selected-hover: var(--color-primary-soft);
 
-  --button-background-color-light-rgb:       rgba(var(--color-primary-rgb), 0.3);
-  --button-color-light:              var(--color-primary-dark);
-  --button-color-hover-light:        var(--color-white);
-  --button-background-color-hover-light: var(--color-primary);
+  /* Icons */
+  --filter-icon:          invert(0);
+  --filter-icon-selected: invert(0);
+
+  /* ── Per-component tokens ──
+     Every component below owns its tokens (also defined inline in its own
+     stylesheet as a safe default). Mapped here centrally so a consuming app
+     can override one component without touching its file. */
+  --header-icon-bg:       var(--color-mod-nav-theme-header-color);
+  --header-title-color:   var(--color-mod-nav-theme-header-color);
+  --header-subtitle-color: var(--color-text);
+  --header-env-color:     var(--color-primary);
+
+  --layout-sidebar-bg:      var(--color-mod-nav-theme);
+  --layout-header-bg:       var(--color-mod-nav-theme-header);
+  --layout-scrollbar-color: var(--color-sidebar-selected);
+
+  --tooltip-bg:         var(--color-overlay-dark);
+  --tooltip-color:      var(--color-white);
+  --tooltip-focus-ring: var(--color-primary);
+
+  --alert-overlay-bg:        var(--color-overlay-dark);
+  --alert-bg:                var(--color-background);
+  --alert-cancel-bg:         var(--color-gray-300);
+  --alert-cancel-color:      var(--color-black);
+  --alert-cancel-bg-hover:   var(--color-gray-500);
+  --alert-cancel-color-hover: var(--color-white);
+
+  --msgbox-bg:         var(--color-background);
+  --msgbox-border:     var(--color-border);
+  --msgbox-link:       var(--color-primary);
+  --msgbox-link-hover: var(--color-text);
+
+  --breadcrumb-color:      var(--color-gray-600);
+  --breadcrumb-hover-bg:   var(--color-gray-200);
+  --breadcrumb-focus-ring: var(--color-primary);
+
+  --chat-bg:         var(--color-card-dashboard-background);
+  --chat-bubble-bg:  var(--color-card-background);
+  --chat-user-color: var(--color-primary);
+
+  --imgcard-bg:             var(--color-card-dashboard-background);
+  --imgcard-favorite-color: var(--color-warning);
+
+  --lightbox-bg:             var(--color-card-dashboard-background);
+  --lightbox-favorite-color: var(--color-warning);
+
+  --spinner-color-1: var(--color-primary);
+  --spinner-color-2: var(--color-primary-strong);
+
+  --toggle-on-color:        var(--color-success);
+  --toggle-off-color:       var(--color-danger-soft);
+  --toggle-thumb-color:     var(--color-white);
+  --toggle-secondary-border: var(--color-gray-800);
+
+  --select-label-color: var(--input-label-color);
+
+  --search-icon-color:        var(--color-gray-500);
+  --search-close-color:       var(--button-background-color);
+  --search-close-color-hover: var(--button-background-color-hover);
+
+  --card-border:      var(--color-border);
+  --card-icon-color:  var(--color-primary);
+
+  /* ── Buttons ──
+     Every variant follows the same 4-slot pattern: fill / text / fill-hover / text-hover.
+     "light" variants are a soft/tinted version of the same color for secondary emphasis.
+     "transparent" is a no-fill button that only shows color on hover. */
+
+  --button-color:                    var(--color-primary-contrast);
+  --button-color-hover:              var(--color-primary-contrast);
+  --button-background-color:         var(--color-primary);
+  --button-background-color-hover:   var(--color-primary-strong);
+
+  --button-color-secondary:                    var(--color-secondary-contrast);
+  --button-color-hover-secondary:              var(--color-secondary-contrast);
+  --button-background-color-secondary:         var(--color-secondary);
+  --button-background-color-hover-secondary:   var(--color-secondary-strong);
+
+  --button-color-success:                  var(--color-white);
+  --button-color-hover-success:            var(--color-white);
+  --button-background-color-success:       var(--color-success);
+  --button-background-color-hover-success: var(--color-success-strong);
+
+  --button-color-danger:                  var(--color-white);
+  --button-color-hover-danger:            var(--color-white);
+  --button-background-color-danger:       var(--color-danger);
+  --button-background-color-hover-danger: var(--color-danger-strong);
+
+  --button-color-warning:                  var(--color-white);
+  --button-color-hover-warning:            var(--color-white);
+  --button-background-color-warning:       var(--color-warning);
+  --button-background-color-hover-warning: var(--color-warning-strong);
+
+  --button-color-info:                  var(--color-white);
+  --button-color-hover-info:            var(--color-white);
+  --button-background-color-info:       var(--color-blue);
+  --button-background-color-hover-info: #0b5ed7;
+
+  /* Light (soft/tinted) variants */
+  --button-background-color-light-rgb:           rgba(var(--color-primary-rgb), 0.10);
+  --button-color-light:                          var(--color-primary);
+  --button-color-hover-light:                    var(--color-primary-contrast);
+  --button-background-color-hover-light:         var(--color-primary);
+
+  --button-background-color-light-rgb-secondary: rgba(var(--color-primary-rgb), 0.10);
+  --button-color-light-secondary:                var(--color-gray-700);
+  --button-color-hover-light-secondary:          var(--color-white);
+  --button-background-color-hover-light-secondary: var(--color-gray-600);
+
+  --button-background-color-light-rgb-success:   rgba(var(--color-success-rgb), 0.12);
+  --button-color-light-success:                  var(--color-success-strong);
+  --button-color-hover-light-success:            var(--color-white);
+  --button-background-color-hover-light-success: var(--color-success);
+
+  --button-background-color-light-rgb-danger:    rgba(var(--color-danger-rgb), 0.12);
+  --button-color-light-danger:                   var(--color-danger-strong);
+  --button-color-hover-light-danger:             var(--color-white);
+  --button-background-color-hover-light-danger:  var(--color-danger);
+
+  --button-background-color-light-rgb-warning:   rgba(var(--color-warning-rgb), 0.12);
+  --button-color-light-warning:                  var(--color-warning-strong);
+  --button-color-hover-light-warning:            var(--color-white);
+  --button-background-color-hover-light-warning: var(--color-warning);
+
+  --button-background-color-light-rgb-info:      rgba(13, 110, 253, 0.12);
+  --button-color-light-info:                     #084298;
+  --button-color-hover-light-info:               var(--color-white);
+  --button-background-color-hover-light-info:    var(--color-blue);
+
+  /* Transparent (no fill, color only on hover) */
+  --button-color-transparent:                    var(--color-primary);
+  --button-background-color-transparent:         transparent;
+  --button-color-hover-transparent:               var(--color-primary-contrast);
+  --button-background-color-hover-transparent:    var(--color-primary);
+  --button-background-color-transparent-light:    transparent;
+  --button-background-color-hover-light-transparent: var(--color-primary-soft);
 }
 
 
-/* ── 02) DARK MODE ───────────────────────────────────────────────────────────── */
+/* ── 02) DARK MODE (overrides only) ─────────────────────────────────────────── */
 
 :root[data-theme="dark"],
 [data-theme="dark"] {
-  /* Overlays */
-  --color-overlay-dark:       rgba(0, 0, 0, 0.6);
-  --color-overlay-dar-opaque: #111;
-  --color-overlay-light:      rgba(255, 255, 255, 0.08);
+  /* Primary flips: white by default on a dark background */
+  --color-primary:          var(--color-gray-50);
+  --color-primary-strong:   var(--color-white);
+  --color-primary-soft:     var(--color-gray-800);
+  --color-primary-contrast: var(--color-black);
+  --color-primary-rgb:      250, 250, 250;
 
-  /* Gray scale — inverted (100 = darkest, 900 = lightest) */
-  --color-gray-100: #14161a;
-  --color-gray-200: #1a1d23;
-  --color-gray-250: #20242b;
-  --color-gray-275: #272c35;
-  --color-gray-300: #2f3540;
-  --color-gray-400: #434d5c;
-  --color-gray-500: #697585;
-  --color-gray-600: #8a97a8;
-  --color-gray-700: #b0bcc9;
-  --color-gray-800: #d4dae3;
-  --color-gray-900: #f2f5f8;
+  /* Status — tuned for dark backgrounds */
+  --color-success:        #4ade80;
+  --color-success-strong: #22c55e;
+  --color-success-soft:   rgba(74, 222, 128, 0.14);
+  --color-success-rgb:    74, 222, 128;
 
-  /* Brand / Primary */
-  --color-brand:            #6ea8fe;
-  --color-brand-rgb:        110, 168, 254;
-  --color-brand-contrast:   #060a12;
+  --color-danger:        #f87171;
+  --color-danger-strong:  #ef4444;
+  --color-danger-soft:    rgba(248, 113, 113, 0.14);
+  --color-danger-rgb:     248, 113, 113;
 
-  --color-primary-darkest:  #071526;
-  --color-primary-dark:     #0d2444;
-  --color-primary-semidark: #1e4a9a;
-  --color-primary:          #5b8ff5;
-  --color-primary-light:    #8db4ff;
-  --color-primary-base:     #5b8ff5;
-  --color-primary-rgb:      91, 143, 245;
-  --color-primary-contrast: #060a12;
+  --color-warning:        #fbbf24;
+  --color-warning-strong: #f59e0b;
+  --color-warning-soft:   rgba(251, 191, 36, 0.14);
+  --color-warning-rgb:    251, 191, 36;
 
-  /* Semantic */
-  --color-positive:          #4fd18b;
-  --color-positive-dark:     #32a36a;
-  --color-positive-light:    #7ae3ad;
-  --color-positive-rgb:      79, 209, 139;
+  /* Overlay */
+  --color-overlay-dark: rgba(0, 0, 0, 0.6);
 
-  --color-negative:          #ff6b7a;
-  --color-negative-dark:     #d94a58;
-  --color-negative-light:    #ff909b;
-  --color-negative-rgb:      255, 107, 122;
+  /* Required tokens */
+  --color-background:    #0a0a0a;
+  --color-surface:       var(--color-gray-900);
+  --color-border:        var(--color-gray-700);
+  --color-text:          var(--color-gray-50);
+  --color-text-muted:    var(--color-gray-400);
+  --color-text-inverted: var(--color-black);
 
-  --color-warning:           #ffd166;
-  --color-warning-dark:      #e3b64f;
-  --color-warning-light:     #ffe3a3;
-  --color-warning-rgb:       255, 209, 102;
+  /* Card / surfaces */
+  --color-card-background: rgba(255, 255, 255, 0.06);
+  --color-card-dashboard-background: linear-gradient(180deg,
+      var(--color-gray-900) 0%,
+      var(--color-gray-800) 60%,
+      var(--color-gray-700) 100%);
 
-  /* Abstraction tokens (dark) */
-  --color-background:  #111318;
-  --color-surface:     var(--color-gray-200);
-  --color-border:      var(--color-gray-300);
-  --color-text:        var(--color-gray-900);
-  --color-text-light:  var(--color-gray-600);
-  --color-text-muted:  var(--color-gray-600);
-  --color-text-inverted: #060a12;
+  /* Focus / press */
+  --color-press-effect: var(--color-white);
+  --color-label-active: var(--color-press-effect);
 
-  /* Input tokens */
-  --input-background:          var(--color-gray-200);
-  --input-color:               var(--color-gray-900);
-  --input-border:              var(--color-gray-400);
-  --input-label-color:         var(--color-gray-900);
-  --input-placeholder-color:   var(--color-text-muted);
-  --input-focus-outline-color: var(--color-brand);
+  /* Inputs */
+  --input-background:        var(--color-gray-900);
+  --input-color:              var(--color-white);
+  --input-border:              var(--color-gray-600);
+  --input-label-color:        var(--color-gray-50);
+  --input-placeholder-color:  var(--color-text-muted);
+  --input-focus-outline-color: var(--color-primary);
 
   /* Shadows */
   --shadow-00: 0 0.1875rem 0.3125rem 0    rgba(0, 0, 0, 0.40);
   --shadow-01: 0 0.0625rem 0.3125rem 0    rgba(0, 0, 0, 0.50);
   --shadow-02: 0 0.1875rem 0.625rem  0.1875rem rgba(0, 0, 0, 0.50);
   --shadow-03: 0 0.3125rem 1.4375rem 0.4375rem rgba(0, 0, 0, 0.50);
-  --shadow-neon: 0 0 0.5rem  rgba(var(--color-brand-rgb), 0.35),
-                 0 0 1.25rem rgba(var(--color-brand-rgb), 0.22),
-                 0 0 2.5rem  rgba(var(--color-brand-rgb), 0.12);
+  --shadow-neon: 0 0 0.5rem  rgba(var(--color-primary-rgb), 0.35),
+                 0 0 1.25rem rgba(var(--color-primary-rgb), 0.22),
+                 0 0 2.5rem  rgba(var(--color-primary-rgb), 0.12);
 
   /* Scrollbar */
   --scrollbar-color:        rgba(255, 255, 255, 0.16);
   --scrollbar-color-hover:  rgba(255, 255, 255, 0.28);
   --scrollbar-color-active: var(--color-primary);
 
+  /* Icons */
+  --filter-icon:          invert(1);
+  --filter-icon-selected: invert(1);
+
   /* Navigation */
-  --color-mod-nav-theme:              var(--color-primary-darkest);
-  --color-mod-nav-theme-variant-1:    var(--color-brand);
-  --color-mod-nav-theme-variant-2:    var(--color-gray-200);
-  --color-mod-nav-theme-contrast:     var(--color-gray-900);
-  --color-mod-nav-theme-header:       var(--color-primary-darkest);
-  --color-mod-nav-theme-header-color: var(--color-gray-900);
+  --color-mod-nav-theme:              var(--color-gray-900);
+  --color-mod-nav-theme-contrast:     var(--color-gray-50);
+  --color-mod-nav-theme-header:       var(--color-black);
+  --color-mod-nav-theme-header-color: var(--color-gray-50);
+
+  /* Sidebar */
+  --sidebar-level-0-color: #000000;
+  --sidebar-level-1-color: #000000;
+
+  --color-sidebar-text:                   var(--color-gray-100);
+  --color-sidebar-sub-menu:               var(--color-gray-900);
+  --color-sidebar-selected:                var(--color-primary-soft);
+  --color-sidebar-selected-text:           var(--color-white);
+  --color-sidebar-selected-child:          var(--color-gray-800);
+  --color-sidebar-selected-child-text:     var(--color-white);
+  --color-sidebar-selected-subchild:       var(--color-gray-700);
+  --color-sidebar-selected-subchild-text:  var(--color-white);
+  --color-sidebar-env-text:                var(--color-gray-500);
 
   /* Grid */
-  --color-grid-hover:          rgba(var(--color-brand-rgb), 0.06);
-  --color-grid-selected-hover: rgba(var(--color-brand-rgb), 0.10);
-  --color-grid-selected:       rgba(var(--color-brand-rgb), 0.08);
-
-  /* Surfaces */
-  --color-card-background: rgba(255, 255, 255, 0.06);
-  --color-press-effect:     var(--color-white);
-  --color-label-active:     var(--color-press-effect);
+  --color-grid-hover:          rgba(255, 255, 255, 0.06);
+  --color-grid-selected:       rgba(255, 255, 255, 0.10);
+  --color-grid-selected-hover: rgba(255, 255, 255, 0.16);
 
   /* Buttons */
-  --button-background-color:       var(--color-primary-darkest);
-  --button-background-color-hover: var(--color-brand);
-  --button-color-light:            var(--color-gray-900);
-  --button-background-color-light-rgb: rgba(var(--color-primary-rgb), 0.20);
+  --button-background-color:         var(--color-primary);
+  --button-background-color-hover:   var(--color-primary-strong);
+  --button-color:                    var(--color-primary-contrast);
+  --button-color-hover:              var(--color-primary-contrast);
+
+  --button-background-color-light-rgb:           rgba(var(--color-primary-rgb), 0.16);
+  --button-color-light:                          var(--color-primary);
+  --button-color-hover-light:                    var(--color-primary-contrast);
+  --button-background-color-hover-light:         var(--color-primary);
+
+  --button-background-color-light-rgb-secondary: rgba(var(--color-primary-rgb), 0.14);
+  --button-color-light-secondary:                var(--color-gray-300);
+
+  --button-color-transparent:                    var(--color-primary);
+  --button-color-hover-transparent:               var(--color-primary-contrast);
+  --button-background-color-hover-transparent:    var(--color-primary);
+  --button-background-color-hover-light-transparent: var(--color-primary-soft);
 }

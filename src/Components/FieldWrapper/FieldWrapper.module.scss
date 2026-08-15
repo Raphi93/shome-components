@@ -8,7 +8,7 @@
 
 // Variables
 :root {
-  --input-focus-outline-color: var(--color-primary-light);
+  --input-focus-outline-color: var(--color-primary-soft);
 }
 
 /* =============================================================================
@@ -36,19 +36,19 @@
   color: var(--input-color, var(--color-gray-900));
 
   &::placeholder {
-    color: var(--input-placeholder-color, var(--color-text-light));
+    color: var(--input-placeholder-color, var(--color-text-muted));
   }
 
   &:focus {
     outline: none;
-    border-color: var(--color-primary-dark);
+    border-color: var(--color-primary-strong);
     box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
   }
 
   &:disabled {
     pointer-events: none;
-    color: var(--color-text-light);
-    background: var(--color-gray-200);
+    color: var(--color-text-muted);
+    background: var(--color-gray-100);
   }
 }
 
@@ -145,7 +145,7 @@
   }
 
   .required {
-    color: var(--color-negative);
+    color: var(--color-danger);
     font-weight: 600;
     margin-left: calc(var(--spacing) * 0.5);
   }
@@ -177,7 +177,7 @@
 }
 
 .field-description {
-  color: var(--color-text-light);
+  color: var(--color-text-muted);
   font-style: italic;
   width: 100%;
   transform: translateY(var(--baseline-offset-base));
@@ -203,7 +203,7 @@
   }
 
   .field-description {
-    color: var(--color-text-light);
+    color: var(--color-text-muted);
     font-style: italic;
     width: 100%;
     transform: translateY(var(--baseline-offset-base));
@@ -255,7 +255,7 @@
     position: absolute;
     z-index: 2;
 
-    color: var(--input-label-color, var(--color-text-light));
+    color: var(--input-label-color, var(--color-text-muted));
     opacity: 0.6;
 
     transform: translateY(-50%);
@@ -285,7 +285,7 @@
   }
 
   .disabledBorderLabel {
-    background-color: var(--color-gray-200);
+    background-color: var(--color-gray-100);
   }
 
   .staticBorderLabel {
@@ -332,7 +332,7 @@
   }
 
   .required {
-    color: var(--color-negative);
+    color: var(--color-danger);
     font-weight: 600;
     margin-left: calc(var(--spacing) * 0.5);
   }
@@ -470,7 +470,7 @@ body :global(.react-datepicker-popper) {
   transition: border-color var(--transition-duration-base), box-shadow var(--transition-duration-base);
 
   &:focus-within {
-    border-color: var(--color-primary-dark);
+    border-color: var(--color-primary-strong);
     box-shadow: 0 0 0 rem(2px) var(--input-focus-outline-color);
   }
 }
@@ -496,7 +496,7 @@ body :global(.react-datepicker-popper) {
   line-height: 1.5;
 
   &::placeholder {
-    color: var(--input-placeholder-color, var(--color-text-light));
+    color: var(--input-placeholder-color, var(--color-text-muted));
   }
 }
 
@@ -509,7 +509,7 @@ body :global(.react-datepicker-popper) {
   height: calc(var(--spacing) * 4);
   border: none;
   border-radius: 50%;
-  background: var(--button-background-color, var(--color-primary-base));
+  background: var(--button-background-color, var(--color-primary));
   color: var(--button-color, var(--color-white));
   cursor: pointer;
   transition: background var(--transition-duration-base), opacity var(--transition-duration-base);

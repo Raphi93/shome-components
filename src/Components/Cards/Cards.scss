@@ -1,4 +1,8 @@
 .cards{
+    /* Cards' own tokens — default to the shared palette, individually overridable */
+    --card-border: var(--color-border);
+    --card-icon-color: var(--color-primary);
+
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -27,7 +31,7 @@
     height: auto;
     max-width: 100rem;
     border-radius: var(--border-radius);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--card-border, var(--color-border));
     box-shadow: var(--shadow-01);
 }
 
@@ -39,7 +43,7 @@
     height: auto;
     max-width: 100rem;
     border-radius: var(--border-radius) var(--border-radius) 0 0;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--card-border, var(--color-border));
 }
 
 .image-container{
@@ -81,7 +85,7 @@
 }
 
 .content-container-image{
-    border-left: 1px solid var(--color-border);
+    border-left: 1px solid var(--card-border, var(--color-border));
     width: 100%;
 }
 
@@ -93,7 +97,7 @@
 
 .expander-container {
     width: 100%;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--card-border, var(--color-border));
     border-top: none;
     border-radius: 0 0 var(--border-radius) var(--border-radius);
     max-height: 0;
@@ -110,7 +114,7 @@
 
 
 .iconCard{
-    color: var(--color-mod-nav-theme);
+    color: var(--card-icon-color);
 }
 
 .imageCard{
@@ -118,11 +122,11 @@
 }
 
 .pdc-card-red{
-    color: var(--color-negative);
+    color: var(--color-danger);
 }
 
 .pdc-card-green{
-    color: var(--color-positive);
+    color: var(--color-success);
 }
 
 .pdc-card-blue{
@@ -138,11 +142,11 @@
 }
 
 .pdc-card-brand{
-    color: var(--color-brand);
+    color: var(--color-primary);
 }
 
 .pdc-card-primary{
-    color: var(--color-primary-dark);
+    color: var(--color-primary-strong);
 }
 
 .pdc-card-black{

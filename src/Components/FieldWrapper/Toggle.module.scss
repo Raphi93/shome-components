@@ -80,8 +80,8 @@
     margin-left: var(--spacing);
     margin-right: var(--spacing);
     position: relative;
-    border: rem(2px) solid var(--color-positive);
-    background: var(--color-positive);
+    border: rem(2px) solid var(--color-success);
+    background: var(--color-success);
 
     &::before {
       content: '';
@@ -112,8 +112,8 @@
     }
 
     .toggle {
-      border: rem(2px) solid var(--color-positive);
-      background: var(--color-positive);
+      border: rem(2px) solid var(--color-success);
+      background: var(--color-success);
     }
   }
 
@@ -125,8 +125,8 @@
   .toggle {
     margin-left: 0;
     margin-right: var(--spacing);
-    border: rem(2px) solid var(--color-negative-light);
-    background: var(--color-negative-light);
+    border: rem(2px) solid var(--color-danger-soft);
+    background: var(--color-danger-soft);
   }
 }
 
@@ -152,7 +152,7 @@
       background: var(--color-white);
 
       &::before {
-        background: var(--color-brand, var(--color-primary));
+        background: var(--color-primary, var(--color-primary));
       }
     }
   }
@@ -160,19 +160,19 @@
   &.toggle-active {
     input + .inner {
       .toggle {
-        border: rem(2px) solid var(--color-negative-light);
+        border: rem(2px) solid var(--color-danger-soft);
         background: var(--color-white);
 
         &::before {
-          background: var(--color-negative-light);
+          background: var(--color-danger-soft);
         }
       }
     }
     input:checked + .inner {
       .toggle {
-        border: rem(2px) solid var(--color-positive);
+        border: rem(2px) solid var(--color-success);
         &::before {
-          background: var(--color-positive);
+          background: var(--color-success);
         }
       }
     }

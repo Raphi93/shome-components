@@ -15,18 +15,18 @@ export const getMultiSelectStyles = (color?: string, colorActive?: string) => {
       cursor: 'pointer',
       minHeight: '40px',
       backgroundColor: state.isSelected
-        ? 'var(--color-primary-dark)'
+        ? 'var(--color-primary-strong)'
         : state.isFocused
-        ? 'var(--color-primary-light, #addcff)'
+        ? 'var(--color-primary-soft, #addcff)'
         : 'var(--input-background, #ffffff)',
       color: state.isSelected ? '#ffffff' : 'var(--color-text, inherit)',
     }),
     control: (provided: CSSObjectWithLabel, state: ControlProps<TSelectOption>) => ({
       ...provided,
       cursor: 'pointer',
-      backgroundColor: state.isDisabled ? 'var(--color-gray-200)' : 'var(--input-background, #ffffff)',
+      backgroundColor: state.isDisabled ? 'var(--color-gray-100)' : 'var(--input-background, #ffffff)',
       boxShadow: state.isFocused ? '0 0 0 2px var(--input-focus-outline-color)' : provided.borderColor,
-      borderColor: state.isFocused ? 'var(--color-primary-dark)' : 'var(--color-gray-400)',
+      borderColor: state.isFocused ? 'var(--color-primary-strong)' : 'var(--color-gray-400)',
       color: 'var(--color-text, inherit)',
       paddingTop: '1px',
       paddingBottom: '1px',
@@ -35,7 +35,7 @@ export const getMultiSelectStyles = (color?: string, colorActive?: string) => {
       ...provided,
       marginTop: '8px',
       height: '20px',
-      backgroundColor: colorActive ? colorActive : 'var(--color-brand)',
+      backgroundColor: colorActive ? colorActive : 'var(--color-primary)',
     }),
     multiValueLabel: (provided: CSSObjectWithLabel) => ({
       ...provided,
@@ -48,7 +48,7 @@ export const getMultiSelectStyles = (color?: string, colorActive?: string) => {
       color: 'white',
 
       ':hover': {
-        backgroundColor: color ? color : 'var(--color-primary-dark)',
+        backgroundColor: color ? color : 'var(--color-primary-strong)',
         color: 'white',
       },
     }),
@@ -61,8 +61,8 @@ export const getMultiSelectTheme = (theme: Theme, colorActive?: string, color?: 
     borderRadius: 'var(--border-radius)',
     colors: {
       ...theme.colors,
-      primary25: colorActive ? colorActive : 'var(--color-brand)',
-      primary: color ? color : 'var(--color-primary-dark)',
+      primary25: colorActive ? colorActive : 'var(--color-primary)',
+      primary: color ? color : 'var(--color-primary-strong)',
       primary50: pressColor ? pressColor : 'var(--color-press-effect)',
     },
   } as any;

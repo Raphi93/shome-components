@@ -1,10 +1,14 @@
 .image-card-container {
+  /* ImageCard's own tokens — default to the shared palette, individually overridable */
+  --imgcard-bg: var(--color-card-dashboard-background);
+  --imgcard-favorite-color: var(--color-warning);
+
   position: relative;
   width: 100%;
   height: 100%;
   max-width: 50rem;
   border-radius: var(--border-radius);
-  background: var(--color-card-dashboard-background, #fff);
+  background: var(--imgcard-bg, #fff);
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-02);
@@ -33,7 +37,7 @@
   height: 2rem;
   border: none;
   border-radius: 999px;
-  background: var(--color-card-dashboard-background, #fff);
+  background: var(--imgcard-bg, #fff);
   color: var(--color-text-muted, #aaa);
   box-shadow: var(--shadow-02);
   cursor: pointer;
@@ -46,13 +50,13 @@
   }
 
   &:hover {
-    color: #f5a623;
+    color: var(--imgcard-favorite-color);
     transform: scale(1.15);
   }
 
   &.is-favorit {
     opacity: 1;
-    color: #f5a623;
+    color: var(--imgcard-favorite-color);
   }
 }
 

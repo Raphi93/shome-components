@@ -62,8 +62,8 @@ const JSON_SAMPLE = `{
 `;
 
 const CSS_SAMPLE = `:root {
-  --color-brand:      #0072c6;
-  --color-brand-rgb:  0, 114, 198;
+  --color-primary:      #0072c6;
+  --color-primary-rgb:  0, 114, 198;
   --border-radius:    8px;
   --spacing:          1rem;
 }

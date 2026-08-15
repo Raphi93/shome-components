@@ -1,8 +1,13 @@
 @use '../../Styles/abstracts' as *;
 
 .tooltipContent {
-  background-color: var(--color-overlay-dark);
-  color: var(--color-white);
+  /* Tooltip's own tokens — default to the shared palette, individually overridable */
+  --tooltip-bg: var(--color-overlay-dark);
+  --tooltip-color: var(--color-white);
+  --tooltip-focus-ring: var(--color-primary);
+
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-color);
   font-size: var(--font-size-smaller);
   padding: rem(4px) rem(8px);
   border-radius: var(--border-radius);
@@ -14,7 +19,7 @@
 }
 
 .trigger:focus-visible {
-  outline: rem(2px) solid var(--button-background-color-hover);
+  outline: rem(2px) solid var(--tooltip-focus-ring);
   outline-offset: rem(2px);
   border-radius: var(--border-radius);
 }

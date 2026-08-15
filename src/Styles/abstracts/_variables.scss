@@ -104,7 +104,7 @@ $nav-module-width: 4rem;
 $nav-border-radius: $spacing;
 
 //line in navigations
-$nav-line-color: var(--color-gray-275);
+$nav-line-color: var(--color-border);
 $nav-border-line: rem(1px) solid var(--nav-line-color);
 
 //header actions svg color
@@ -210,11 +210,6 @@ $nav-current-module-color: var(--color-mod-nav-theme-contrast);
   --breakpoint-lg: #{$breakpoint-lg};
   --breakpoint-md: #{$breakpoint-md};
   --breakpoint-sm: #{$breakpoint-sm};
-
-  // Screen overlay color
-  --color-overlay-dark: rgba(0, 0, 0, 0.5);
-  --color-overlay-dar-opaque: #999999;
-  --color-overlay-light: rgba(255, 255, 255, 0.5);
 
   // Border radius
   --border-radius: 0.313rem;

@@ -2,6 +2,11 @@
 
 // Breadcrumbs
 .breadcrumbs {
+  /* Breadcrumbs' own tokens — default to the shared palette, individually overridable */
+  --breadcrumb-color: var(--color-gray-600);
+  --breadcrumb-hover-bg: var(--color-gray-200);
+  --breadcrumb-focus-ring: var(--color-primary);
+
   margin-bottom: calc(var(--spacing) * 2);
 
   span {
@@ -29,14 +34,14 @@
   }
 
   a {
-    color: var(--color-gray-600);
+    color: var(--breadcrumb-color);
     padding: rem(4px);
     &:hover {
-      background-color: var(--color-gray-275);
+      background-color: var(--breadcrumb-hover-bg);
       border-radius: var(--nav-border-radius);
     }
     &:focus {
-      outline: rem(2px) solid var(--button-background-color-hover);
+      outline: rem(2px) solid var(--breadcrumb-focus-ring);
       border-radius: var(--nav-border-radius);
     }
   }
