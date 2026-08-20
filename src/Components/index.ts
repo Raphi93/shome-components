@@ -21,6 +21,7 @@ export * from './Tooltip';
 export * from './ChatBot';
 export * from './ImageCard';
 export * from './ImageLightBox';
+export * from './LightColorPicker';
 export * from './CodeEditor';
 export * from './TextEditor';
 

@@ -1,0 +1,211 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-overlay-dark);
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.popup {
+  position: relative;
+  z-index: 1101;
+  width: 100%;
+  max-width: 26rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-02);
+  color: var(--color-text);
+  font-family: var(--font-family, system-ui, sans-serif);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Top bar ─────────────────────────────────────────────────────────── */
+
+.topBar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem 1rem 0;
+}
+
+/* ── Wheel + brightness ─────────────────────────────────────────────── */
+
+.body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stage {
+  flex: 0 0 auto;
+  width: 100%;
+  position: relative;
+  padding: 1.75rem 1.25rem 0;
+}
+
+.wheel {
+  width: min(100%, 17rem);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  border-radius: 50%;
+  position: relative;
+  touch-action: none;
+  cursor: grab;
+  box-shadow: var(--shadow-03);
+}
+
+.wheel:active {
+  cursor: grabbing;
+}
+
+.wheel.color {
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 62%),
+    conic-gradient(from 0deg,
+      #ff2d55 0deg,
+      #ff8a00 45deg,
+      #ffd60a 90deg,
+      #34c759 150deg,
+      #22d3c5 195deg,
+      #0a84ff 255deg,
+      #6a3df5 300deg,
+      #ff2d95 345deg,
+      #ff2d55 360deg);
+}
+
+.wheel.temperature {
+  background: linear-gradient(180deg,
+    #ff9d2e 0%,
+    #ffc26e 25%,
+    #ffe6bf 45%,
+    #fff8ef 55%,
+    #eef4fb 70%,
+    #cfe3fb 100%);
+}
+
+.pin {
+  position: absolute;
+  /* Box stays at the clip-path's native 56×68 coordinate space — the visual
+     size is scaled via transform so the path's curves never get clipped. */
+  width: 3.5rem;
+  height: 4.25rem;
+  transform: translate(-50%, -100%) scale(0.72);
+  transform-origin: 50% 100%;
+  clip-path: path("M28,0 C12.5,0 0,12.5 0,28 C0,46 28,68 28,68 C28,68 56,46 56,28 C56,12.5 43.5,0 28,0 Z");
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.7rem;
+  pointer-events: none;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.pinIcon {
+  color: rgba(30, 24, 15, 0.82);
+  font-size: 1.3rem;
+}
+
+.brightnessColumn {
+  position: absolute;
+  right: 1rem;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brightnessLabel {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-text);
+}
+
+.brightnessSlider {
+  position: relative;
+  width: 2.75rem;
+  height: 9rem;
+  border-radius: 999px;
+  background: rgba(var(--color-primary-rgb), 0.08);
+  box-shadow: inset 0 0 0 1px rgba(var(--color-primary-rgb), 0.14);
+  overflow: hidden;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.brightnessFill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, #ffffff 0%, #e4e4e4 100%);
+  border-radius: inherit;
+}
+
+.brightnessIcon {
+  position: absolute;
+  left: 50%;
+  bottom: 0.7rem;
+  transform: translateX(-50%);
+  color: rgba(40, 40, 40, 0.75);
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+/* ── Mode switch ─────────────────────────────────────────────────────── */
+
+.modeSwitch {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 1.5rem 0 1.5rem 1.25rem;
+  padding: 0.4rem;
+  background: rgba(var(--color-primary-rgb), 0.08);
+  border-radius: 999px;
+}
+
+.modeButton {
+  width: 2.2rem;
+  height: 2.2rem;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 0;
+}
+
+.modeButton.active {
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+.swatch {
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 999px;
+}
+
+.swatchColor {
+  background: conic-gradient(from 0deg,
+    #ff2d55 0deg, #ff8a00 45deg, #ffd60a 90deg, #34c759 150deg,
+    #22d3c5 195deg, #0a84ff 255deg, #6a3df5 300deg, #ff2d95 345deg, #ff2d55 360deg);
+}
+
+.swatchTemperature {
+  background: linear-gradient(135deg, #ff9d2e 0%, #fff8ef 55%, #cfe3fb 100%);
+}

@@ -20,6 +20,11 @@ export type ShomeTranslationKeys =
   | 'Ok'
   | 'Cancel'
   | 'Logo'
+  // LightColorPicker
+  | 'Save'
+  | 'Done'
+  | 'Color'
+  | 'Color temperature'
   // Media
   | 'No image'
   | 'Image'
@@ -77,6 +82,11 @@ export const shomeTranslations: ShomeTranslations = {
     'Ok': 'Ok',
     'Cancel': 'Abbrechen',
     'Logo': 'Logo',
+    // LightColorPicker
+    'Save': 'Speichern',
+    'Done': 'Fertig',
+    'Color': 'Farbe',
+    'Color temperature': 'Farbtemperatur',
     // Media
     'No image': 'Kein Bild',
     'Image': 'Bild',
@@ -131,6 +141,10 @@ export const shomeTranslations: ShomeTranslations = {
     'Ok': 'Ok',
     'Cancel': 'Cancel',
     'Logo': 'Logo',
+    'Save': 'Save',
+    'Done': 'Done',
+    'Color': 'Color',
+    'Color temperature': 'Color temperature',
     'No image': 'No image',
     'Image': 'Image',
     'Document': 'Document',
@@ -177,6 +191,10 @@ export const shomeTranslations: ShomeTranslations = {
     'Ok': 'Ok',
     'Cancel': 'Annuler',
     'Logo': 'Logo',
+    'Save': 'Enregistrer',
+    'Done': 'Terminé',
+    'Color': 'Couleur',
+    'Color temperature': 'Température de couleur',
     'No image': 'Aucune image',
     'Image': 'Image',
     'Document': 'Document',
@@ -223,6 +241,10 @@ export const shomeTranslations: ShomeTranslations = {
     'Ok': 'Ok',
     'Cancel': 'Annulla',
     'Logo': 'Logo',
+    'Save': 'Salva',
+    'Done': 'Fatto',
+    'Color': 'Colore',
+    'Color temperature': 'Temperatura colore',
     'No image': 'Nessuna immagine',
     'Image': 'Immagine',
     'Document': 'Documento',
@@ -269,6 +291,10 @@ export const shomeTranslations: ShomeTranslations = {
     'Ok': 'Ok',
     'Cancel': 'Cancelar',
     'Logo': 'Logo',
+    'Save': 'Guardar',
+    'Done': 'Listo',
+    'Color': 'Color',
+    'Color temperature': 'Temperatura de color',
     'No image': 'Sin imagen',
     'Image': 'Imagen',
     'Document': 'Documento',
