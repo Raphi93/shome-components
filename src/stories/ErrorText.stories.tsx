@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ErrorText } from '../Components/ErrorText/ErrorText';
+import { ErrorText } from '../components/ErrorText/ErrorText';
 
 const meta: Meta<typeof ErrorText> = {
   title: 'Feedback/ErrorText',

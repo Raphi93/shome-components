@@ -1,10 +1,10 @@
 import './Styles/index.scss';
-import './Components';
+import './components';
 
 export * from './types';
-export * from './Components';
+export * from './components';
 export * from './context';
 export * from './hooks';
-export * from './service';
+export * from './utils';
 export * from './translations/shomeTranslations';
-export { configureLinkComponent } from './linkConfig';
+export { configureLinkComponent } from './utils/linkConfig';

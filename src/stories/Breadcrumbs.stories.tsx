@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Breadcrumbs } from '../Components/Breadcrumbs/Breadcrumbs';
-import type { BreadCrumb } from '../Components/Breadcrumbs/Breadcrumbs';
+import { Breadcrumbs } from '../components/Breadcrumbs/Breadcrumbs';
+import type { BreadCrumb } from '../components/Breadcrumbs/Breadcrumbs';
 
 const meta: Meta<typeof Breadcrumbs> = {
   title: 'Navigation/Breadcrumbs',

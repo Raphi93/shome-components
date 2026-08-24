@@ -1,0 +1,52 @@
+@use '../../Styles/abstracts' as *;
+
+// Breadcrumbs
+.breadcrumbs {
+  /* Breadcrumbs' own tokens — default to the shared palette, individually overridable */
+  --breadcrumb-color: var(--color-gray-600);
+  --breadcrumb-hover-bg: var(--color-gray-200);
+  --breadcrumb-focus-ring: var(--color-primary);
+
+  margin-bottom: calc(var(--spacing) * 2);
+
+  span {
+    &:last-child {
+      &::after {
+        display: none;
+      }
+      & a {
+        text-decoration: none;
+      }
+    }
+    &::after {
+      content: '';
+      display: inline-block;
+      width: rem(10px);
+      height: rem(10px);
+
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: rotate(180deg);
+      opacity: 0.6;
+      margin-left: rem(4px);
+      margin-right: rem(4px);
+    }
+  }
+
+  a {
+    color: var(--breadcrumb-color);
+    padding: rem(4px);
+    &:hover {
+      background-color: var(--breadcrumb-hover-bg);
+      border-radius: var(--nav-border-radius);
+    }
+    &:focus {
+      outline: rem(2px) solid var(--breadcrumb-focus-ring);
+      border-radius: var(--nav-border-radius);
+    }
+  }
+
+  .currentItem {
+    @include main-heading($offset: true);
+  }
+}

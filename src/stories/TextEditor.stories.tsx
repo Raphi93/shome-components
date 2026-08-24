@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { TextEditor } from '../Components/TextEditor/TextEditor';
-import type { TextEditorFormat } from '../Components/TextEditor/TextEditor';
+import { TextEditor } from '../components/TextEditor/TextEditor';
+import type { TextEditorFormat } from '../components/TextEditor/TextEditor';
 
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 

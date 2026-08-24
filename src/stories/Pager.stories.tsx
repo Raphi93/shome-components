@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Pager, SUPPORTED_PAGE_SIZES } from '../Components/Pager/Pager';
+import { Pager, SUPPORTED_PAGE_SIZES } from '../components/Pager/Pager';
 
 const meta: Meta<typeof Pager> = {
   title: 'Navigation/Pager',

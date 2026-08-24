@@ -1,13 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import {
-  FieldWrapper,
-  StringInput,
-  PasswordInput,
-  NumberInput,
-  Textarea,
-  Value,
-} from '../Components/FieldWrapper/FieldWrapper';
+import { FieldWrapper } from '../components/FieldWrapper/FieldWrapper';
+import { StringInput } from '../components/StringInput/StringInput';
+import { PasswordInput } from '../components/PasswordInput/PasswordInput';
+import { NumberInput } from '../components/NumberInput/NumberInput';
+import { Textarea } from '../components/Textarea/Textarea';
+import { Value } from '../components/Value/Value';
 
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 

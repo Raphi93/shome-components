@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { CodeEditor } from '../Components/CodeEditor';
-import type { CodeEditorTab } from '../Components/CodeEditor';
+import { CodeEditor } from '../components/CodeEditor';
+import type { CodeEditorTab } from '../components/CodeEditor';
 
 const meta: Meta<typeof CodeEditor> = {
   title: 'Components/CodeEditor',

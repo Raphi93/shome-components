@@ -1,0 +1,202 @@
+.lightbox-overlay {
+  /* ImageLightBox's own tokens — default to the shared palette, individually overridable */
+  --lightbox-bg: var(--color-card-dashboard-background);
+  --lightbox-favorite-color: var(--color-warning);
+
+  position: fixed;
+  left: var(--sidebar-width);
+  right: 0;
+  top: calc(var(--nav-height) + 1px);
+  bottom: 0;
+  background-color: var(--color-overlay-dark);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: calc(var(--nav-height) + 1px);
+  padding-top: calc(var(--nav-height) + 1px);
+  z-index: 998;
+}
+
+.lightbox-overlay.is-mobile {
+  top: calc(var(--nav-height, 0px) + 1px);
+  left: 0;
+}
+
+.lightbox-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  background: var(--lightbox-bg, #fff);
+  min-width: 350px;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.lightbox-toper {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border, #ccc);
+  background: var(--color-card-background, #fff);
+  padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+  color: var(--color-text, #111);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.lightbox-toper.is-mobile {
+  margin-bottom: 0.75rem;
+}
+
+.lightbox-toper-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 2rem;
+}
+
+.lightbox-filename {
+  font-size: 1rem;
+  color: var(--color-text, #111);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.lightbox-children {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.favorit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text-muted, #aaa);
+  cursor: pointer;
+  font-size: 1.05rem;
+  transition: color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    color: var(--lightbox-favorite-color);
+    background: rgba(var(--color-warning-rgb), 0.1);
+    transform: scale(1.15);
+  }
+
+  &.is-favorit {
+    color: var(--lightbox-favorite-color);
+  }
+}
+
+.lightbox-main {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.lightbox-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(90vh - 7rem);
+  object-fit: contain;
+  border-radius: var(--border-radius);
+  border: 0px solid transparent;
+}
+
+
+.lightbox-video,
+.lightbox-audio {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(90vh - 7rem);
+}
+
+.lightbox-prev,
+.lightbox-next {
+  z-index: 1001;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--color-overlay-dark);
+  border: none;
+  color: var(--color-white, #fff);
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 999px;
+  opacity: 0.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-prev {
+  left: 0.5rem;
+}
+
+.lightbox-next {
+  right: 0.5rem;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  opacity: 1;
+  color: var(--color-primary-strong);
+}
+
+.lightbox-zoom-badge {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  background: var(--color-overlay-dark);
+  color: var(--color-white, #fff);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0.85;
+  z-index: 2;
+}
+
+.noImage {
+  min-width: 20rem;
+  min-height: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius);
+  border: 1px dashed var(--color-border, #ccc);
+  background: var(--color-card-background, #fff);
+  color: var(--color-text, #111);
+}

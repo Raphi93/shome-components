@@ -3,8 +3,8 @@ import {
   faCheck, faTrash, faPlus, faSave, faGear, faHeart,
   faChevronDown, faArrowRight, faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
-import { Button } from '../Components/Button/Button';
-import { EnumButtonColor } from '../Components/Button/Button.type';
+import { Button } from '../components/Button/Button';
+import { EnumButtonColor } from '../types/Button.types';
 
 // ─── Meta ────────────────────────────────────────────────────────────────────
 

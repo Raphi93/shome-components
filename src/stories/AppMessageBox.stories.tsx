@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { AppMessageBox } from '../Components/AppMessageBox/AppMessageBox';
-import { Button } from '../Components/Button/Button';
-import type { NotificationType } from '../Components/MessageBox/MessageBox.type';
+import { AppMessageBox } from '../components/AppMessageBox/AppMessageBox';
+import { Button } from '../components/Button/Button';
+import type { NotificationType } from '../types/MessageBox.types';
 
 const TYPES: NotificationType[] = ['success', 'message', 'warning', 'error'];
 

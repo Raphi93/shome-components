@@ -1,0 +1,85 @@
+.screw {
+  --screw-size: 22px; 
+  --screw-face-light: #5a5a5a;
+  --screw-face-dark: #1a1d22;
+  --screw-slot: var(--color-black, #000);
+  --screw-outer-glow: rgba(0, 0, 0, 0.6);
+  --screw-edge-highlight: rgba(255, 255, 255, 0.1);
+
+  --screw-slot-w: calc(var(--screw-size) * 0.64);
+  --screw-slot-h: calc(var(--screw-size) * 0.09);
+  --screw-slot-radius: calc(var(--screw-size) * 0.09);
+
+  --screw-offset: calc(var(--screw-size) * 0.27);
+  --screw-offset-circle: calc(var(--screw-size) * 0.59);
+
+  position: absolute;
+  width: var(--screw-size);
+  height: var(--screw-size);
+  background: radial-gradient(circle, var(--screw-face-light) 30%, var(--screw-face-dark) 90%);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 3px var(--color-black, #000),
+    0 2px 3px var(--screw-edge-highlight),
+    0 0 8px var(--screw-outer-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  filter: contrast(1.2) brightness(0.85);
+  transition: transform 1s ease-out;
+  z-index: 1;
+}
+
+.screw::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,.1) 10%, transparent 90%);
+  mix-blend-mode: overlay;
+  opacity: .4;
+  filter: contrast(1.3) brightness(0.8) blur(.4px);
+}
+
+.screw::before {
+  content: "";
+  position: absolute;
+  width: var(--screw-slot-w);
+  height: var(--screw-slot-h);
+  background: var(--screw-slot);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: var(--screw-slot-radius);
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.screw.cross::after {
+  content: "";
+  position: absolute;
+  width: var(--screw-slot-h);
+  height: var(--screw-slot-w);
+  background: var(--screw-slot);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: var(--screw-slot-radius);
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.screw.rotated::before { transform: translate(-50%, -50%) rotate(20deg); }
+.screw.cross.rotated::after { transform: translate(-50%, -50%) rotate(20deg); }
+
+.top-left { top: var(--screw-offset); left: var(--screw-offset); }
+.top-right { top: var(--screw-offset); right: var(--screw-offset); }
+.bottom-left { bottom: var(--screw-offset); left: var(--screw-offset); }
+.bottom-right { bottom: var(--screw-offset); right: var(--screw-offset); }
+
+.top-left-circle { top: var(--screw-offset-circle); left: var(--screw-offset-circle); }
+.top-right-circle { top: var(--screw-offset-circle); right: var(--screw-offset-circle); }
+.bottom-left-circle { bottom: var(--screw-offset-circle); left: var(--screw-offset-circle); }
+.bottom-right-circle { bottom: var(--screw-offset-circle); right: var(--screw-offset-circle); }
+
+.screw:hover { transform: rotate(180deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .screw { transition: none; }
+}

@@ -4,7 +4,7 @@ import {
   LangDatePicker,
   LangDateTimePicker,
   LangTimePicker,
-} from '../Components/MultiDatePickers/DatePickers';
+} from '../components/MultiDatePickers/DatePickers';
 
 const meta: Meta = {
   title: 'Inputs/DatePicker',

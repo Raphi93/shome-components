@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Select } from '../Components/Select/Select';
-import type { TSelectOption, SingleValue, MultiValue } from '../Components/Select/Select';
+import { Select } from '../components/Select/Select';
+import type { TSelectOption, SingleValue, MultiValue } from '../components/Select/Select';
 
 const COUNTRIES: TSelectOption[] = [
   { value: 'ch', label: 'Switzerland' },

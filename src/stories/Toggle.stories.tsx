@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { ToggleActive, ToggleOptions } from '../Components/FieldWrapper/Toggle';
+import { ToggleActive, ToggleOptions } from '../components/Toggle/Toggle';
 
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 

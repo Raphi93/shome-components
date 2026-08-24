@@ -1,0 +1,255 @@
+@use '../../Styles/abstracts' as *;
+
+/* react-datepicker tokens — default to the shared palette, individually
+   overridable (see Base.css for the full light+dark reference values). */
+:root {
+  --datepicker-bg: var(--color-background, var(--color-white));
+  --datepicker-border: var(--color-border);
+  --datepicker-header-bg: var(--color-surface);
+  --datepicker-header-border: var(--color-border);
+  --datepicker-nav-arrow: var(--color-text-muted);
+  --datepicker-select-color-scheme: light;
+  --datepicker-day-hover-bg: var(--color-primary-soft);
+  --datepicker-day-selected-bg: var(--color-primary-strong);
+  --datepicker-day-selected-text: var(--color-primary-contrast);
+  --datepicker-day-today-outline: var(--color-primary);
+  --datepicker-day-outside-text: var(--color-text-muted);
+  --datepicker-today-button-bg: var(--color-surface);
+  --datepicker-today-button-border: var(--color-border);
+  --datepicker-today-button-text: var(--color-text);
+}
+
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  --datepicker-bg: rgba(0, 0, 0, 0.8);
+  --datepicker-border: rgba(255, 255, 255, 0.14);
+  --datepicker-header-bg: rgba(0, 0, 0, 0.7);
+  --datepicker-header-border: rgba(0, 0, 0, 0.8);
+  --datepicker-nav-arrow: rgba(255, 255, 255, 0.55);
+  --datepicker-select-color-scheme: dark;
+  --datepicker-day-hover-bg: var(--color-primary-soft);
+  --datepicker-day-selected-bg: var(--color-primary-strong);
+  --datepicker-day-selected-text: var(--color-primary-contrast);
+  --datepicker-day-today-outline: rgba(var(--color-primary-rgb), 0.9);
+  --datepicker-day-outside-text: rgba(255, 255, 255, 0.6);
+  --datepicker-today-button-bg: rgba(0, 0, 0, 0.8);
+  --datepicker-today-button-border: rgba(0, 0, 0, 0.8);
+  --datepicker-today-button-text: rgba(255, 255, 255, 0.9);
+}
+
+.datetime-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+
+  input {
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      z-index: 1;
+    }
+  }
+}
+
+.datetime-wrap[data-type='date'] {
+  input {
+    &::-webkit-calendar-picker-indicator {
+      width: 11px;
+      height: 11px;
+      position: absolute;
+      right: 13px;
+      top: 9px;
+    }
+  }
+}
+
+.js-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Single calendar icon */
+.calendarIcon {
+  position: absolute;
+  top: calc(var(--spacing) * 2.5);
+  transform: translateY(-50%);
+  right: 13px;
+  color: var(--input-color);
+  cursor: pointer;
+}
+
+/* When filter enabled — same vertical centering as calendarIcon */
+.filterIcon {
+  position: absolute;
+  top: calc(var(--spacing) * 2.5);
+  transform: translateY(-50%);
+  right: 90px;
+  cursor: pointer;
+}
+
+/* Filter select wrapper (absolut rechts oben) */
+.filterPicklist {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 10;
+}
+
+/* --- BETWEEN layout: two inputs side-by-side --- */
+.betweenRow {
+  display: flex;
+  flex-direction: row;
+  gap: 0px; /* wenn du eine Linie willst -> 0, sonst z.B. 8px */
+  width: calc(100% - 75px);
+  gap: 0.5rem;
+}
+
+/* each column must be relative because we place absolute labels/icons inside */
+.betweenCol {
+  position: relative;
+  flex: 1;
+}
+
+.betweenColFirst {
+  position: relative;
+  flex: 1;
+}
+
+/* react-datepicker wraps input in .react-datepicker-wrapper -> make it stretch */
+.betweenCol :global(.react-datepicker-wrapper) {
+  width: 100%;
+}
+
+.betweenColFirst :global(.react-datepicker-wrapper) {
+  width: 100%;
+}
+
+/* Overlay labels inside each input — vertically centred */
+.betweenLabelFrom {
+  position: absolute;
+  left: 105px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.betweenLabelTo {
+  position: absolute;
+  left: 105px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Calendar icons inside each between input */
+.calendarIconBetweenFrom {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 13px;
+  cursor: pointer;
+}
+
+.calendarIconBetweenTo {
+  position: absolute;
+  top: 50%;
+  right: 90px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.dateDirtyIcon.dateDirtyIcon {
+  top: calc(var(--spacing) * 2.5);
+  transform: translateY(-50%);
+  right: 30px;
+  color: var(--input-color);
+}
+
+/* ================================
+   react-datepicker — themed via tokens (both light and dark)
+   ================================ */
+.react-datepicker-popper,
+.react-datepicker {
+  background: var(--datepicker-bg);
+  border: 1px solid var(--datepicker-border);
+  border-radius: var(--border-radius, 10px);
+  overflow: hidden;
+  box-shadow: var(--shadow-02, 0 10px 30px rgba(0, 0, 0, 0.35));
+  color: var(--input-color);
+}
+
+.react-datepicker__header {
+  background: var(--datepicker-header-bg);
+  border-bottom: 1px solid var(--datepicker-header-border);
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  color: var(--input-color);
+}
+
+.react-datepicker__month-dropdown-container,
+.react-datepicker__year-dropdown-container {
+  margin: 0 6px;
+}
+
+.react-datepicker__month-read-view--down-arrow,
+.react-datepicker__year-read-view--down-arrow {
+  border-top-color: var(--datepicker-nav-arrow);
+}
+
+.react-datepicker__month-select,
+.react-datepicker__year-select {
+  color-scheme: var(--datepicker-select-color-scheme);
+  background: var(--datepicker-bg);
+  color: var(--input-color);
+  border: 1px solid var(--datepicker-border);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: var(--datepicker-nav-arrow);
+}
+
+.react-datepicker__day {
+  border-radius: 8px;
+}
+
+.react-datepicker__day:hover {
+  background: var(--datepicker-day-hover-bg);
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background: var(--datepicker-day-selected-bg);
+  color: var(--datepicker-day-selected-text);
+}
+
+.react-datepicker__day--today {
+  outline: 2px solid var(--datepicker-day-today-outline);
+  outline-offset: -2px;
+}
+
+.react-datepicker__day--outside-month,
+.react-datepicker__day--disabled {
+  color: var(--datepicker-day-outside-text);
+}
+
+.react-datepicker__day--disabled:hover {
+  background: transparent;
+}
+
+.react-datepicker__today-button {
+  background: var(--datepicker-today-button-bg);
+  border-top: 1px solid var(--datepicker-today-button-border);
+  color: var(--datepicker-today-button-text);
+  font-weight: 600;
+}
+
+.react-datepicker__triangle {
+  display: none;
+}
+

@@ -1,6 +1,6 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
 
-import { ActionReducer } from '../Components/Grid/stateReducer';
+import { ActionReducer } from '../utils/Grid.stateReducer';
 
 type TGridContext = {
   multiSelect: boolean;

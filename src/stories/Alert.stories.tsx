@@ -3,8 +3,8 @@ import { useState } from 'react';
 import {
   faTriangleExclamation, faTrash, faCircleInfo, faCircleCheck,
 } from '@fortawesome/free-solid-svg-icons';
-import { Alert } from '../Components/Alert/Alert';
-import { Button } from '../Components/Button/Button';
+import { Alert } from '../components/Alert/Alert';
+import { Button } from '../components/Button/Button';
 
 const meta: Meta<typeof Alert> = {
   title: 'Feedback/Alert',

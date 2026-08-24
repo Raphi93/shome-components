@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Screw, ScrewCircle } from '../Components/Screw/Screw';
-import type { ScrewSize } from '../Components/Screw/Screw';
+import { Screw, ScrewCircle } from '../components/Screw/Screw';
+import type { ScrewSize } from '../components/Screw/Screw';
 
 const SIZES: ScrewSize[] = ['xs', 'sm', 'md', 'lg', 'xlg'];
 

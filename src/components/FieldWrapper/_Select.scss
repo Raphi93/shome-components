@@ -1,0 +1,44 @@
+@use '../../Styles/abstracts' as *;
+
+@mixin select-arrow() {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 17px;
+
+  width: 0;
+  height: 0;
+  align-self: flex-start;
+  transform: translate(rem(-19px), rem(17px));
+  border-width: rem(4px) rem(4px) 0;
+  border-style: solid;
+  border-color: #6c7a86 transparent transparent;
+
+  margin-right: rem(-8px);
+  pointer-events: none;
+}
+
+.select {
+  /* Select's own token — defaults to the shared palette, individually
+     overridable. Drives the native dropdown popup's light/dark chrome
+     (browsers don't infer this from background-color alone). */
+  --select-color-scheme: var(--color-scheme);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  &::after {
+    @include select-arrow;
+  }
+
+  select {
+    cursor: pointer;
+    color-scheme: var(--select-color-scheme);
+
+    &::-ms-expand {
+      display: none;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { ThreeStateCheckbox } from '../Components/FieldWrapper/ThreeStateCheckbox/ThreeStateCheckbox';
-import type { CheckedState } from '../Components/FieldWrapper/ThreeStateCheckbox/ThreeStateCheckbox';
+import { ThreeStateCheckbox } from '../components/ThreeStateCheckbox/ThreeStateCheckbox';
+import type { CheckedState } from '../components/ThreeStateCheckbox/ThreeStateCheckbox';
 
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 

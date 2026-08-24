@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ImageCard } from '../Components/ImageCard/ImageCard';
-import type { ImageCardMediaType } from '../Components/ImageCard/ImageCard';
+import { ImageCard } from '../components/ImageCard/ImageCard';
+import type { ImageCardMediaType } from '../components/ImageCard/ImageCard';
 
 const TYPES: ImageCardMediaType[] = ['image', 'video', 'audio', 'document', 'base64', 'iframe'];
 

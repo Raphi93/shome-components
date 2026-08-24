@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Sidebar } from '../Components/Sidebar/Sidebar';
+import { Sidebar } from '../components/Sidebar/Sidebar';
 import type { NavigationItem } from '../types';
 
 const NAV: NavigationItem[] = [

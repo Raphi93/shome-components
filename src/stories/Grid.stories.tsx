@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Grid, GridBody, PagedGrid, EmptyGrid } from '../Components/Grid/Grid';
-import { GridHead } from '../Components/Grid/GridHead';
-import { GridColumn } from '../Components/Grid/GridColumn';
-import { Button } from '../Components/Button/Button';
+import { Grid, GridBody } from '../components/Grid/Grid';
+import { PagedGrid } from '../components/PagedGrid/PagedGrid';
+import { EmptyGrid } from '../components/EmptyGrid/EmptyGrid';
+import { GridHead } from '../components/GridHead/GridHead';
+import { GridColumn } from '../components/GridColumn/GridColumn';
+import { Button } from '../components/Button/Button';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 // ─── Sample data ──────────────────────────────────────────────────────────────

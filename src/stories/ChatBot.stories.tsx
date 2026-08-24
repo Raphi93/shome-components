@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState, useCallback } from 'react';
-import { ChatBot } from '../Components/ChatBot/ChatBot';
-import type { ChatBotMessage } from '../Components/ChatBot/ChatBot';
+import { ChatBot } from '../components/ChatBot/ChatBot';
+import type { ChatBotMessage } from '../components/ChatBot/ChatBot';
 
 const meta: Meta = {
   title: 'UI/ChatBot',

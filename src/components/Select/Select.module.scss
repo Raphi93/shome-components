@@ -1,0 +1,90 @@
+/* Select's own tokens — default to the shared palette, individually overridable */
+:root {
+  --select-label-color: var(--input-label-color, var(--color-gray-800));
+
+  /* react-select (multi/creatable select) — every color routed through a
+     token so a theme (see Base.css) can set every single one explicitly. */
+  --select-menu-bg: var(--input-background, var(--color-white));
+  --select-text: var(--color-text);
+  --select-option-bg: var(--input-background, var(--color-white));
+  --select-option-focused-bg: var(--color-primary-soft);
+  --select-option-selected-bg: var(--color-primary-strong);
+  --select-option-selected-text: var(--color-primary-contrast);
+  --select-control-bg: var(--input-background, var(--color-white));
+  --select-control-bg-disabled: var(--color-gray-100);
+  --select-control-border: var(--color-gray-400);
+  --select-control-border-focused: var(--color-primary-strong);
+  --select-multi-value-bg: var(--color-primary);
+  --select-multi-value-text: var(--color-primary-contrast);
+  --select-multi-value-remove-text: var(--color-primary-contrast);
+  --select-multi-value-remove-hover-bg: var(--color-primary-strong);
+  --select-multi-value-remove-hover-text: var(--color-primary-contrast);
+}
+
+.label {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  display: block;
+  color: var(--select-label-color);
+  margin-bottom: 5px;
+}
+
+.required {
+  color: var(--color-danger);
+  margin-left: 0.25rem;
+}
+
+.selectDirtyIcon {
+  right: 40px;
+}
+
+.clearableSelectDirtyIcon {
+  right: 60px;
+  top: 6px;
+}
+
+.description {
+  color: var(--color-text-muted);
+  font-style: italic;
+  transform: translateY(0.34375rem);
+}
+
+.chevronDown {
+  width: 36px;
+  height: 36px;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+
+  .chevronArrow {
+    width: 8px;
+    height: 8px;
+    display: block;
+    border-bottom: 2px solid var(--color-text-muted);
+    border-left: 2px solid var(--color-text-muted);
+    transform: rotate(-45deg);
+    opacity: 0.6;
+    transition: all 300ms ease-in-out;
+  }
+
+  &:hover {
+    .chevronArrow {
+      opacity: 1;
+    }
+  }
+}
+
+.iconLabel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: inherit;
+}
+
+.iconLabel :global(svg) {
+  color: inherit;
+  fill: currentColor;
+}
+
+

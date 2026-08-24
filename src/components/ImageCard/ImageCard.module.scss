@@ -1,0 +1,122 @@
+.image-card-container {
+  /* ImageCard's own tokens — default to the shared palette, individually overridable */
+  --imgcard-bg: var(--color-card-dashboard-background);
+  --imgcard-favorite-color: var(--color-warning);
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 50rem;
+  border-radius: var(--border-radius);
+  background: var(--imgcard-bg, #fff);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-02);
+  padding: 1rem;
+  aspect-ratio: 1 / 1.3;
+
+  overflow: hidden;
+
+  gap: 1rem;
+
+  &:hover {
+    box-shadow: var(--shadow-neon);
+    transform: scale(1.05);
+  }
+}
+
+.favorit-btn {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--imgcard-bg, #fff);
+  color: var(--color-text-muted, #aaa);
+  box-shadow: var(--shadow-02);
+  cursor: pointer;
+  font-size: 0.95rem;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease, transform 0.15s ease;
+
+  .image-card-container:hover & {
+    opacity: 1;
+  }
+
+  &:hover {
+    color: var(--imgcard-favorite-color);
+    transform: scale(1.15);
+  }
+
+  &.is-favorit {
+    opacity: 1;
+    color: var(--imgcard-favorite-color);
+  }
+}
+
+.image-content {
+  flex: 1 1 auto;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  border-radius: var(--border-radius);
+
+  img,
+  video,
+  iframe {
+    max-width: 100%;
+    max-height: 100%;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    border: 0;
+    border-radius: inherit;
+    display: block;
+  }
+
+  audio {
+    width: 90%;
+    max-width: 100%;
+  }
+
+  a {
+    padding: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-text, #111);
+  }
+}
+
+.noImage {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.image-name {
+  flex: 0 0 auto;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+  word-break: break-word;
+  line-height: 1.2;
+  color: var(--color-text, #111);
+}

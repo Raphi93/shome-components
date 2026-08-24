@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Textarea } from '../Components/FieldWrapper/FieldWrapper';
+import { Textarea } from '../components/Textarea/Textarea';
 
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 

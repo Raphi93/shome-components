@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { NumberInput } from '../Components/FieldWrapper/FieldWrapper';
+import { NumberInput } from '../components/NumberInput/NumberInput';
 
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 

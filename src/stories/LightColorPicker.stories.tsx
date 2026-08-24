@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { LightColorPicker } from '../Components/LightColorPicker/LightColorPicker';
-import { Button } from '../Components/Button/Button';
+import { LightColorPicker } from '../components/LightColorPicker/LightColorPicker';
+import { Button } from '../components/Button/Button';
 
 const meta: Meta = {
   title: 'Media/LightColorPicker',

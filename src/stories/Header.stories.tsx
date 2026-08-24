@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Header } from '../Components/Header/Header';
-import { Button } from '../Components/Button/Button';
+import { Header } from '../components/Header/Header';
+import { Button } from '../components/Button/Button';
 import { faBell, faGear } from '@fortawesome/free-solid-svg-icons';
 
 const meta: Meta<typeof Header> = {

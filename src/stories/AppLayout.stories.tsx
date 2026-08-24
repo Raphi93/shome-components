@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { AppLayout } from '../Components/AppLayout/AppLayout';
+import { AppLayout } from '../components/AppLayout/AppLayout';
 import type { NavigationItem } from '../types';
 
 const NAV: NavigationItem[] = [

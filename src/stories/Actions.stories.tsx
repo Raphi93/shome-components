@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ActionWrapper } from '../Components/Actions/ActionElement';
+import { ActionWrapper } from '../components/Actions/ActionElement';
 
 const meta: Meta<typeof ActionWrapper> = {
   title: 'Utility/ActionWrapper',

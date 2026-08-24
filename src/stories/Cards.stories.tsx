@@ -2,7 +2,7 @@ import { useState, type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 
-import { Cards, CardContent, CardExpander, CardIcon, CardImage } from '../Components/Cards';
+import { Cards, CardContent, CardExpander, CardIcon, CardImage } from '../components/Cards';
 
 const iconColors = [
   'primary', 'red', 'green', 'blue', 'orange', 'yellow', 'brand', 'white', 'black',

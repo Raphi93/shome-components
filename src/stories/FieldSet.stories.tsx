@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { FieldSet, FieldSetColumn, sizeMapper } from '../Components/FieldSet/FieldSet';
-import { StringInput } from '../Components/FieldWrapper/FieldWrapper';
+import { FieldSet, FieldSetColumn, sizeMapper } from '../components/FieldSet/FieldSet';
+import { StringInput } from '../components/StringInput/StringInput';
 
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 

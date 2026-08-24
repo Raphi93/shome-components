@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Tooltip, TooltipTrigger, TooltipContent } from '../Components/Tooltip/Tooltip';
+import { Tooltip, TooltipTrigger, TooltipContent } from '../components/Tooltip/Tooltip';
 
 const PLACEMENTS = [
   'top', 'top-start', 'top-end',

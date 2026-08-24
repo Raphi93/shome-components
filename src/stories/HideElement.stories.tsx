@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { HideElement } from '../Components/HideElement/HideElement';
+import { HideElement } from '../components/HideElement/HideElement';
 
 const meta: Meta<typeof HideElement> = {
   title: 'Utility/HideElement',

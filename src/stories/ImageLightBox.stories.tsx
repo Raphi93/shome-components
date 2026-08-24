@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { ImageLightBox } from '../Components/ImageLightBox/ImageLightBox';
-import type { ImageDto } from '../Components/ImageLightBox/ImageLightBox';
-import { Button } from '../Components/Button/Button';
+import { ImageLightBox } from '../components/ImageLightBox/ImageLightBox';
+import type { ImageDto } from '../components/ImageLightBox/ImageLightBox';
+import { Button } from '../components/Button/Button';
 
 const IMAGES: ImageDto[] = [
   { imageId: '1', jobId: 'j1', userId: 'u1', isActive: true, href: 'https://picsum.photos/seed/1/800/600', format: 'jpg' },

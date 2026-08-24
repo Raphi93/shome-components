@@ -1,0 +1,28 @@
+// Tooltip global styles (used when CSS modules are not available / for direct SCSS import)
+
+.tooltip-content {
+  --tooltip-bg: var(--color-overlay-dark);
+  --tooltip-color: var(--color-white);
+  --tooltip-focus-ring: var(--color-primary);
+
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-color);
+  font-size: var(--font-size-smaller, 0.75rem);
+  border-radius: var(--border-radius, 12px);
+  box-sizing: border-box;
+  padding: 0.35rem 0.5rem;
+  width: max-content;
+  max-width: calc(100vw - var(--spacing, 1rem));
+  z-index: 1000;
+  box-shadow: var(--shadow-02);
+}
+
+.tooltip-trigger {
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 0.125rem solid var(--tooltip-focus-ring);
+    outline-offset: 0.125rem;
+    border-radius: var(--border-radius, 12px);
+  }
+}

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Checkbox } from '../Components/FieldWrapper/Checkbox';
+import { Checkbox } from '../components/Checkbox/Checkbox';
 
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 

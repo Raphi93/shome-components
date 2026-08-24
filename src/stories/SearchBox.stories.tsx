@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { SearchTextBox, SearchTextBoxWithHelp, Help } from '../Components/Search/SearchBox';
+import { SearchTextBox, SearchTextBoxWithHelp, Help } from '../components/SearchBox/SearchBox';
 
 const meta: Meta<typeof SearchTextBox> = {
   title: 'Inputs/SearchBox',

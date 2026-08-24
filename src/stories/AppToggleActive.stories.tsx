@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { AppToggleActive } from '../Components/AppToggleActive/AppToggleActive';
+import { AppToggleActive } from '../components/AppToggleActive/AppToggleActive';
 
 const meta: Meta<typeof AppToggleActive> = {
   title: 'Inputs/AppToggleActive',
